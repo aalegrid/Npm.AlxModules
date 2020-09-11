@@ -1,0 +1,11 @@
+{
+  "name": "alxnpm-mod-module-switcher",
+  "version": "1.0.0",
+  "description": "Module Switcher",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Alegrid",
+  "license": "ISC"
+}

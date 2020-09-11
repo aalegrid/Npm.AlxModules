@@ -1,0 +1,14 @@
+{
+  "name": "alxnpm-mod-object-picker",
+  "version": "1.0.1",
+  "description": "Object Picker",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Alegrid",
+  "license": "ISC",
+  "devDependencies": {
+    "alxnpm-mod-module": "^1.0.2"
+  }
+}
