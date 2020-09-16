@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-login",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Login module",
   "main": "script.js",
   "scripts": {
@@ -9,9 +9,9 @@
   "author": "Alex Alegrid",
   "license": "ISC",
   "devDependencies": {
-    "alxnpm-mod-module": "^1.0.2",
+    "alxnpm-mod-module": "^1.0.3",
     "alxnpm-mod-api": "^1.0.0",
     "alxnpm-mod-loader": "^1.0.4",
-    "alxnpm-mod-helper": "^1.0.0"
+    "alxnpm-mod-helper": "^1.0.4"
   }
 }

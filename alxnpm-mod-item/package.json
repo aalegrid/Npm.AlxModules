@@ -1,7 +1,7 @@
 {
-  "name": "alxnpm-mod-helper",
+  "name": "alxnpm-mod-item",
   "version": "1.0.4",
-  "description": "Helper functions",
+  "description": "Item",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

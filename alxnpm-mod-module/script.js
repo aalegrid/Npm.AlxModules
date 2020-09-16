@@ -2,7 +2,7 @@ export class Module {
     constructor(moduleId, className, htmlElement, options) {
         this._moduleId = moduleId;
         this._className = className;
-        this._htmlElement = htmlElement; 
+        this._htmlElement = htmlElement;
         this._options = options || {};
         this.alertBox;
         this.modules;
@@ -46,10 +46,6 @@ export class Module {
         this.htmlElement.innerHTML = content;
     }
 
-    get wrapperContent() {
-        return this.htmlElement.querySelector(".module-wrapper").innerHTML;
-    }
-
     get header() {
         return document.querySelector("header");
     }
@@ -65,47 +61,53 @@ export class Module {
         document.querySelector("footer").innerHTML = footer;
     }
 
+    get wrapperContent() {
+        return this.htmlElement.querySelector(".module-wrapper").innerHTML;
+    }
+
     set wrapperContent(content) {
         this.htmlElement.querySelector(".module-wrapper").innerHTML = content;
         this.alertBox = this.htmlElement.querySelector(".alert-box p");
         this.form = this.htmlElement.querySelector("form");
 
+        this.startup(this.options.startup);
+
         console.log(`Module(${this.moduleId}) CONTENT SET`);
-        console.log(`Content: ${content.length > 50 ? content.replace(/(\r\n|\n|\r)/gm, "").substring(0,50) + "..." : content.replace(/(\r\n|\n|\r)/gm, "")}`);
-        console.log(`Alert Box: ${this.alertBox}`);
-        console.log(`Form: ${this.form}`);
-        console.log("------------------------------------------------------------------------------")
+        console.log(`Content: ${content.length > 50 ? content.replace(/(\r\n|\n|\s|\r)/gm, "").substring(0, 50) + "..." : content.replace(/(\r\n|\n|\r)/gm, "")}`);
+        // console.log(`Alert Box: ${this.alertBox}`);
+        // console.log(`Form: ${this.form}`);
+        // console.log("------------------------------------------------------------------------------")
 
         const _this = this;
-        if(this.alertBox) {
-            var mutationObserver = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                  console.log(`Alert from module(${_this.moduleId}): ${mutation.target.innerHTML}`);
-                  if(mutation.target.innerHTML === "401: Unauthorized"){
-                    console.log(`401: Unauthorized detected from Module(${_this.moduleId}) -- invoking exit()`)
-                    console.log(`Module data:`)
-                    console.log(_this);
-                    _this.exit(_this.options.exit);
-                  }
+        if (this.alertBox) {
+            var mutationObserver = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    console.log(`Alert from module(${_this.moduleId}): ${mutation.target.innerHTML}`);
+                    if (mutation.target.innerHTML === "401: Unauthorized") {
+                        console.log(`401: Unauthorized detected from Module(${_this.moduleId}) -- invoking exit()`)
+                        console.log(`Module data:`)
+                        console.log(_this);
+                        _this.exit(_this.options.exit);
+                    }
                 });
-              });
-            
-              mutationObserver.observe(this.alertBox, {
+            });
+
+            mutationObserver.observe(this.alertBox, {
                 attributes: true,
                 characterData: true,
                 childList: true,
                 subtree: true,
                 attributeOldValue: true,
                 characterDataOldValue: true
-              });
+            });
         }
 
 
     }
 
 
-    init(){
-        if(!this.htmlElement) {
+    init() {
+        if (!this.htmlElement) {
             throw `htmlElement for Module(${this.moduleId}) does not exist.`
         }
 
@@ -119,34 +121,42 @@ export class Module {
         let wrapper = document.createElement("div");
         wrapper.classList.add("module-wrapper");
 
-        if(this.options.animation) {
+        if (this.options.animation) {
             wrapper.setAttribute("data-animation", this.options.animation);
         }
         else {
-            wrapper.setAttribute("data-animation", "slide"); 
+            wrapper.setAttribute("data-animation", "slide");
         }
         this.htmlElement.appendChild(wrapper);
-            
+
     }
 
-    show(){
+    show() {
         this.htmlElement.style.display = "block";
-        if(this.options.autoScroll !== false) {
-        window.scroll(200,0);
+        if (this.options.autoScroll !== false) {
+            window.scroll(200, 0);
         }
-        
+
     }
 
-    hide(){
+    hide() {
         this.htmlElement.style.display = "none";
     }
 
     clear() {
         this.htmlElement.querySelector(".module-wrapper").innerHTML = "";
-    } 
-    
+    }
+
     exit(action) {
-        action();
-     }
+        if (typeof (action) === 'function') {
+            action();
+        }
+    }
+
+    startup(action) {
+        if (typeof (action) === 'function') {
+            action();
+        }
+    }
 
 }

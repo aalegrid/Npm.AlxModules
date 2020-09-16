@@ -98,12 +98,17 @@ export class Login extends Module {
 
         Helper.removeLocalStorageData(`${this.options.appId}_user`);
         Helper.removeLocalStorageData(`${this.options.appId}_items`);
+        Helper.removeLocalStorageData(`${this.options.appId}_openItems`);
+        Helper.removeLocalStorageData(`${this.options.appId}_nodeCollapse`);
+        Helper.removeLocalStorageData(`${this.options.appId}_nodeSort`);
+        Helper.removeLocalStorageData(`${this.options.appId}_noteCollapse`);
+
         sessionStorage.removeItem("token");
+
         this.render();
         this.show();
 
     }
-
 
     start(startup) {
        startup();
