@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-object-picker",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Object Picker",
   "main": "script.js",
   "scripts": {
@@ -9,6 +9,6 @@
   "author": "Alex Alegrid",
   "license": "ISC",
   "devDependencies": {
-    "alxnpm-mod-module": "^1.0.2"
+    "alxnpm-mod-module": "^1.0.6"
   }
 }

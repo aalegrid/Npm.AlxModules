@@ -1,7 +1,10 @@
-import { Module } from 'alxnpm-mod-module'
-import { data } from './data.js'
+//import { Module } from 'alxnpm-mod-module'
 
-export class ObjectPicker extends Module {
+let Module = require('alxnpm-mod-module')
+
+import {data} from './data.js'
+
+export default class ObjectPicker extends Module {
     constructor(moduleId, className, htmlElement, options) {
         super(moduleId, className, htmlElement, options);
     }

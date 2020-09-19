@@ -1,11 +1,19 @@
 {
   "name": "alxnpm-mod-item",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "description": "Item",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alex Alegrid",
-  "license": "ISC"
+  "license": "ISC",
+  "Dependencies": {
+    "alxnpm-mod-module": "^1.0.6",
+    "alxnpm-mod-api": "^1.0.2",
+    "alxnpm-mod-loader": "^1.0.6",
+    "alxnpm-mod-helper": "^1.0.6",
+    "alxnpm-mod-module-switcher": "^1.0.2",
+    "alxnpm-mod-object-picker": "^1.0.4"
+  }
 }

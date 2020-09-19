@@ -1,7 +1,9 @@
-import { Module } from '../alxnpm-mod-module/script.js'
+//import { Module } from '../alxnpm-mod-module/script.js'
 import { data } from './data.js';
 
-export class Modal extends Module {
+let Module = require('alxnpm-mod-module')
+
+export default class Modal extends Module {
     constructor(moduleId, className, htmlElement, options) {
         super(moduleId, className, htmlElement, options);
 

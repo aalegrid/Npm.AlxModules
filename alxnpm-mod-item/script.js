@@ -1,13 +1,15 @@
-import { Module } from 'alxnpm-mod-module'
-import { API } from 'alxnpm-mod-api';
-import { Loader } from 'alxnpm-mod-loader';
-import { Helper } from 'alxnpm-mod-helper';
-import { ObjectPicker } from 'alxnpm-mod-object-picker';
-import { ModuleSwitcher } from 'alxnpm-mod-module-switcher';
+//import { Module } from 'alxnpm-mod-module';
+import API from 'alxnpm-mod-api';
+import Loader from 'alxnpm-mod-loader';
+import Helper from 'alxnpm-mod-helper';
+import ObjectPicker from 'alxnpm-mod-object-picker';
+import ModuleSwitcher from 'alxnpm-mod-module-switcher';
 
-import { data } from './data.js';
+let Module = require('alxnpm-mod-module')
 
-export class Item extends Module {
+import {data} from './data.js';
+
+export default class Item extends Module {
     constructor(moduleId, className, htmlElement, options) {
         super(moduleId, className, htmlElement, options);
         this.api = new API(this.options.apiUrl);
@@ -852,10 +854,10 @@ export class Item extends Module {
         return a.title.localeCompare(b.title);
     }
 
-    prioritySort = (a, b) => { return a.priority > b.priority ? 1 : a.priority === b.priority ? 0 : -1 }
+    prioritySort(a, b){ return a.priority > b.priority ? 1 : a.priority === b.priority ? 0 : -1 }
 
-    statusSort = (a, b) => { return a.status > b.status ? 1 : a.status === b.status ? 0 : -1 }
+    statusSor(a, b){ return a.status > b.status ? 1 : a.status === b.status ? 0 : -1 }
 
-    nodeSort = (a, b) => { return a.nodes.length > b.nodes.length ? 1 : a.nodes.length === b.nodes.length ? 0 : -1 }
+    nodeSort(a, b){ return a.nodes.length > b.nodes.length ? 1 : a.nodes.length === b.nodes.length ? 0 : -1 }
 
 }

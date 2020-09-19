@@ -1,4 +1,4 @@
-export class API {
+export default class API {
     constructor(baseUrl) {
         this._baseUrl = baseUrl;
     }

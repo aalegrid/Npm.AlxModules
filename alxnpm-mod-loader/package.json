@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-loader",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Provides a spinning image while data is fetched",
   "main": "script.js",
   "scripts": {

@@ -1,11 +1,12 @@
-import { Module } from 'alxnpm-mod-module';
-import { API } from 'alxnpm-mod-api';
-import { Loader } from 'alxnpm-mod-loader';
-import { Helper } from 'alxnpm-mod-helper';
+//import { Module } from 'alxnpm-mod-module';
+import  API  from 'alxnpm-mod-api';
+import  Loader  from 'alxnpm-mod-loader';
+import  Helper  from 'alxnpm-mod-helper';
+let Module = require('alxnpm-mod-module')
 
-import { data } from './data.js';
+import {data} from './data.js';
 
-export class Login extends Module {
+export default class Login extends Module {
     constructor(moduleId, className, htmlElement, options) {
         super(moduleId, className, htmlElement, options);
         this.api = new API(this.options.apiUrl);

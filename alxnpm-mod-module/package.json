@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-module",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Base module",
   "main": "script.js",
   "scripts": {

@@ -1,6 +1,6 @@
 const defaultHtml = '<div class="loading-mask"></div><div class="loading-box"><div class="loading-image"></div></div>';
 
-export class Loader {
+export default class Loader {
     constructor(loaderId = 'loader', loaderHtml = defaultHtml) {
         this._loaderHtml = loaderHtml;
         this._loaderId = loaderId;

@@ -1,5 +1,5 @@
 
-export class ModuleSwitcher {
+export default class ModuleSwitcher {
     constructor(options) {
         this._options = options || {};
         this.init();

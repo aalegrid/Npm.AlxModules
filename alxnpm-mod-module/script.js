@@ -1,4 +1,4 @@
-export class Module {
+class Module {
     constructor(moduleId, className, htmlElement, options) {
         this._moduleId = moduleId;
         this._className = className;
@@ -160,3 +160,6 @@ export class Module {
     }
 
 }
+
+
+module.exports = Module;
