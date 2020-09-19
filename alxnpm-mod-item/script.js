@@ -856,7 +856,7 @@ export default class Item extends Module {
 
     prioritySort(a, b){ return a.priority > b.priority ? 1 : a.priority === b.priority ? 0 : -1 }
 
-    statusSor(a, b){ return a.status > b.status ? 1 : a.status === b.status ? 0 : -1 }
+    statusSort(a, b){ return a.status > b.status ? 1 : a.status === b.status ? 0 : -1 }
 
     nodeSort(a, b){ return a.nodes.length > b.nodes.length ? 1 : a.nodes.length === b.nodes.length ? 0 : -1 }
 
