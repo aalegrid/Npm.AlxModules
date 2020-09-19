@@ -1,7 +1,8 @@
-import { Module } from '../alxnpm-mod-module/script.js'
-import { API } from '../alxnpm-mod-api/script.js';
-import { Loader } from '../alxnpm-mod-loader/script.js';
-import { Helper } from '../alxnpm-mod-helper/script.js';
+import { Module } from 'alxnpm-mod-module';
+import { API } from 'alxnpm-mod-api';
+import { Loader } from 'alxnpm-mod-loader';
+import { Helper } from 'alxnpm-mod-helper';
+
 import { data } from './data.js';
 
 export class Login extends Module {

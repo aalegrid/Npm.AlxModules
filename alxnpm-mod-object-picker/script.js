@@ -1,5 +1,5 @@
-import { data } from './data.js';
-import { Module } from '../alxnpm-mod-module/script.js'
+import { Module } from 'alxnpm-mod-module'
+import { data } from './data.js'
 
 export class ObjectPicker extends Module {
     constructor(moduleId, className, htmlElement, options) {

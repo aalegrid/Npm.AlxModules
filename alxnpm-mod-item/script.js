@@ -1,17 +1,16 @@
-import { Module } from '../alxnpm-mod-module/script.js'
-import { API } from '../alxnpm-mod-api/script.js';
-import { Loader } from '../alxnpm-mod-loader/script.js';
-import { Helper } from '../alxnpm-mod-helper/script.js';
-import { AppConfig } from '../appConfig.js';
-import { ObjectPicker } from '../alxnpm-mod-object-picker/script.js';
-import { ModuleSwitcher } from '../alxnpm-mod-module-switcher/script.js';
+import { Module } from 'alxnpm-mod-module'
+import { API } from 'alxnpm-mod-api';
+import { Loader } from 'alxnpm-mod-loader';
+import { Helper } from 'alxnpm-mod-helper';
+import { ObjectPicker } from 'alxnpm-mod-object-picker';
+import { ModuleSwitcher } from 'alxnpm-mod-module-switcher';
 
 import { data } from './data.js';
 
 export class Item extends Module {
     constructor(moduleId, className, htmlElement, options) {
         super(moduleId, className, htmlElement, options);
-        this.api = new API(AppConfig.apiUrl);
+        this.api = new API(this.options.apiUrl);
         this.switcher = new ModuleSwitcher();
         this.loader = new Loader();
         this.sortField;
@@ -417,7 +416,7 @@ export class Item extends Module {
                 _this.htmlElement.querySelector(".nodes-list table").classList.toggle("hide");
                 this.classList.toggle("fa-minus-square");
                 this.classList.toggle("fa-plus-square");
-                Helper.setLocalStorageData(`${AppConfig.appId}_nodeCollapse`, this.classList.value);
+                Helper.setLocalStorageData(`${_this.options.appId}_nodeCollapse`, this.classList.value);
             }, false);
         }
 
@@ -429,7 +428,7 @@ export class Item extends Module {
             _this.htmlElement.querySelector(".notes-list table").classList.toggle("hide");
             this.classList.toggle("fa-minus-square");
             this.classList.toggle("fa-plus-square");
-            Helper.setLocalStorageData(`${AppConfig.appId}_noteCollapse`, this.classList.value);
+            Helper.setLocalStorageData(`${_this.options.appId}_noteCollapse`, this.classList.value);
         }, false);
 
     }
@@ -539,7 +538,7 @@ export class Item extends Module {
     }
 
     setNodeSort() {
-        let nodeSort = Helper.getLocalStorageData(`${AppConfig.appId}_nodeSort`);
+        let nodeSort = Helper.getLocalStorageData(`${this.options.appId}_nodeSort`);
         if (nodeSort) {
             this.sortField = nodeSort.sortField;
             if (nodeSort.reverse) {
@@ -549,7 +548,7 @@ export class Item extends Module {
     }
 
     setNodeCollapse() {
-        let collapse = Helper.getLocalStorageData(`${AppConfig.appId}_nodeCollapse`);
+        let collapse = Helper.getLocalStorageData(`${this.options.appId}_nodeCollapse`);
         if (collapse) {
             this.htmlElement.querySelector(".nodes-list .collapse i").classList = collapse;
             if (collapse === "fal fa-plus-square") {
@@ -559,7 +558,7 @@ export class Item extends Module {
     }
 
     setNoteCollapse() {
-        let collapse = Helper.getLocalStorageData(`${AppConfig.appId}_noteCollapse`);
+        let collapse = Helper.getLocalStorageData(`${this.options.appId}_noteCollapse`);
         if (collapse) {
             this.htmlElement.querySelector(".notes-list .collapse i").classList = collapse;
             if (collapse === "fal fa-plus-square") {
@@ -570,7 +569,7 @@ export class Item extends Module {
 
     saveQuick(item) {
         let savedItem = item,
-            user = Helper.getUser(AppConfig.appId);
+            user = Helper.getUser(this.options.appId);
         if (user) {
             savedItem.modifiedBy = user.id;
         }
@@ -605,7 +604,7 @@ export class Item extends Module {
             savedItem = item, url, method,
             isAdd = typeof item.id === 'undefined',
             isResponseJson,
-            user = Helper.getUser(AppConfig.appId);
+            user = Helper.getUser(this.options.appId);
 
         //ADD - POST
         if (isAdd) {
@@ -617,7 +616,7 @@ export class Item extends Module {
             }
             savedItem.dateCreated = new Date();
             savedItem.metas = [];
-            savedItem.domain = AppConfig.appDomain;
+            savedItem.domain = this.options.appDomain;
             if (item.parentId) {
                 savedItem.parentId = item.parentId;
             }
@@ -808,7 +807,7 @@ export class Item extends Module {
                         sortField: _this.sortField,
                         reverse: this.classList.contains("reverse") ? "reverse" : ""
                     }
-                    Helper.setLocalStorageData(`${AppConfig.appId}_nodeSort`, nodeSort);
+                    Helper.setLocalStorageData(`${_this.options.appId}_nodeSort`, nodeSort);
                 }, false);
             });
         }

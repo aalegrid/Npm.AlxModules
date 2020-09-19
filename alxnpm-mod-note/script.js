@@ -1,15 +1,14 @@
-import { Module } from '../alxnpm-mod-module/script.js'
-import { API } from '../alxnpm-mod-api/script.js';
-import { Loader } from '../alxnpm-mod-loader/script.js';
-import { Helper } from '../alxnpm-mod-helper/script.js';
-import { AppConfig } from '../appConfig.js';
+import { Module } from 'alxnpm-mod-module';
+import { API } from 'alxnpm-mod-api';
+import { Loader } from 'alxnpm-mod-loader';
+import { Helper } from 'alxnpm-mod-helper';
 
 import { data } from './data.js';
 
 export class Note extends Module {
     constructor(moduleId, className, htmlElement, options) {
         super(moduleId, className, htmlElement, options);
-        this.api = new API(AppConfig.apiUrl);
+        this.api = new API(this.options.apiUrl);
         this.loader = new Loader();
 
         // ------------ Options Format -------------
@@ -105,7 +104,7 @@ export class Note extends Module {
                 form.value.value = "file";
                 var reader = new FileReader();
                 form.querySelector(".filename").innerHTML = file.name;
-                const binaryData = `${AppConfig.appId}_binarydata`;
+                const binaryData = `${_this.options.appId}_binarydata`;
                 reader.onload = function (e) {
                   var dataUrl = reader.result;
                   Helper.setLocalStorageData(binaryData, dataUrl);
@@ -121,7 +120,7 @@ export class Note extends Module {
         this.form.querySelector(".clear-binary").addEventListener("click", function (e) {
             _this.htmlElement.querySelector(".binary-data").src = "";
             form.querySelector(".filename").innerHTML = "";
-            const binaryDataKey = `${AppConfig.appId}_binarydata`;
+            const binaryDataKey = `${_this.options.appId}_binarydata`;
             Helper.removeLocalStorageData(binaryDataKey);
             this.style.display = "none";
         });
@@ -145,7 +144,7 @@ export class Note extends Module {
             method,
             isAdd = typeof note.id === 'undefined',
             isResponseJson,
-            binaryDataKey = `${AppConfig.appId}_binarydata`,
+            binaryDataKey = `${this.options.appId}_binarydata`,
             binaryData = Helper.getLocalStorageData(binaryDataKey);
 
         //ADD - POST
@@ -221,10 +220,11 @@ export class Note extends Module {
     }
 
     cameraSuccess(imageData) {
+        let _this = this;
         // var image = document.getElementById('myImage');
         // image.src = "data:image/jpeg;base64," + imageData;
         this.form.querySelector(".filename").innerHTML = "CameraImage";
-        const binaryData = `${AppConfig.appId}_binarydata`;
+        const binaryData = `${_this.options.appId}_binarydata`;
           Helper.setLocalStorageData(binaryData, dataUrl);
           _this.htmlElement.querySelector(".binary-data").src = imageData;
           _this.htmlElement.querySelector(".clear-binary").style.display = "block";
