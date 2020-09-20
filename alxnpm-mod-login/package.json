@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-login",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Login module",
   "main": "script.js",
   "scripts": {

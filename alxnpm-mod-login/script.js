@@ -104,6 +104,7 @@ export default class Login extends Module {
         Helper.removeLocalStorageData(`${this.options.appId}_nodeCollapse`);
         Helper.removeLocalStorageData(`${this.options.appId}_nodeSort`);
         Helper.removeLocalStorageData(`${this.options.appId}_noteCollapse`);
+        Helper.removeLocalStorageData(`${this.options.appId}_listSort`);
 
         sessionStorage.removeItem("token");
 
