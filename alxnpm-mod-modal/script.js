@@ -80,7 +80,7 @@ export default class Modal extends Module {
 
     removeConfirmAction(action){
         let ok = this.htmlElement.querySelector(".ok");
-        ok.removeEventListener('click', action);
+        ok.removeEventListener('click', action, false);
     }
 
 
