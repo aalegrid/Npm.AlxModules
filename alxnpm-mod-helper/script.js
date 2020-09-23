@@ -77,11 +77,11 @@ export default class Helper {
 
         if (value.title) {
 
-            let link = `<a href="javascript:void(0)" class="list-item" data-itemid="${value.id}">${value.title}</a>`;
+          let link = `<a href="javascript:void(0)" class="list-item" data-itemid="${value.id}">${value.title}</a>`;
 
           if (value.nodes.length) {
             html += `<li><span class="parent">${link}</span>`;
-          } 
+          }
 
           else {
             //html += '<li>' + item + '</li>';
@@ -119,12 +119,12 @@ export default class Helper {
             color = "",
             link = `<a href="javascript:void(0)" class="list-item" data-itemid="${value.id}"><i class="fal fa-edit"></i></a>`;
 
-            icon = renderIcon ? (value.icon ? `<i class="${value.icon}"></i>` : "") : "";
-            color = renderColor ? (value.color ? ` style="background-color:${value.color}"` : "") : "";
+          icon = renderIcon ? (value.icon ? `<i class="${value.icon}"></i>` : "") : "";
+          color = renderColor ? (value.color ? ` style="background-color:${value.color}"` : "") : "";
 
           if (value.nodes.length) {
             html += `<li${color}><span class="parent" data-itemid="${value.id}">${icon}<span class="title">${value.title}</span></span>${link}`;
-          } 
+          }
 
           else {
             //html += '<li>' + item + '</li>';
@@ -150,15 +150,15 @@ export default class Helper {
 
   static updateTree(array, id, item) {
 
-    let items = array; 
+    let items = array;
 
     let parseAsTree = data => {
 
       data.every(function (value) {
 
-        if(parseInt(value.id) === parseInt(id)) {
-           value = item;
-           return false;
+        if (parseInt(value.id) === parseInt(id)) {
+          value = item;
+          return false;
         }
 
 
@@ -172,6 +172,17 @@ export default class Helper {
 
     return items;
 
+  }
+
+  static clearLocalDataStorage(prefix) {
+    Helper.removeLocalStorageData(`${prefix}_user`);
+    Helper.removeLocalStorageData(`${prefix}_items`);
+    Helper.removeLocalStorageData(`${prefix}_openItems`);
+    Helper.removeLocalStorageData(`${prefix}_nodeCollapse`);
+    Helper.removeLocalStorageData(`${prefix}_noteCollapse`);
+    Helper.removeLocalStorageData(`${prefix}_nodeSort`);
+    Helper.removeLocalStorageData(`${prefix}_listSort`);
+    sessionStorage.removeItem("token");
   }
 
 }
