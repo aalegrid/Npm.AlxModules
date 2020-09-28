@@ -221,7 +221,7 @@ export default class List extends Module {
                     <a href="javascript:void(0)" class="list-item main-item" data-itemid="${value.id}">
                         ${image}
                         <span class="info">
-                            <span class="title">${value.title ? Helper.trim(20, value.title) : 'Untitled'}</span>
+                            <span class="title">${value.title ? value.title : 'Untitled'}</span>
                             <span class="meta-data">
                                 ${statusPrioritySpan}
                                 <span class="last-modified">${value.dateModified ? Helper.formatDate(value.dateModified) : Helper.formatDate(value.dateCreated)}</span>

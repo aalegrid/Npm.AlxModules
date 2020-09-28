@@ -267,9 +267,9 @@ export default class Item extends Module {
                     notesTbody = this.htmlElement.querySelector(".notes-list table tbody");
 
                 notes.forEach(function (value) {
-                    let icon = value.binaryData ? `<img class="thumb-preview" src=${value.binaryData} />` : `<i class="${_this.options.noteIcon} note-icon"></i>`;
+                    let icon = value.binaryData ? '<i class="far fa-file-image"></i>' : `<i class="${_this.options.noteIcon}"></i>`;
                     notesHtml += `<tr data-noteid="${value.id}">
-                         <td><a href='javascript:void(0)' title='${value.id}' class='note-item' data-noteid="${value.id}">${icon}</a></td>
+                         <td>${icon}</td>
                          <td><a href='javascript:void(0)' title='${value.id}' class='note-item' data-noteid="${value.id}">${value.name ? Helper.trim(35, value.name) : 'Untitled'}</a></td>
                          <td><a href='javascript:void(0)' title='${value.id}' class='delete-note' data-noteid="${value.id}"><i class='far fa-trash'></i></a></td>
                          </tr>`;
@@ -432,8 +432,6 @@ export default class Item extends Module {
             this.classList.toggle("fa-plus-square");
             Helper.setLocalStorageData(`${_this.options.appId}_noteCollapse`, this.classList.value);
         }, false);
-
-        /* #endregion */
 
     }
 
