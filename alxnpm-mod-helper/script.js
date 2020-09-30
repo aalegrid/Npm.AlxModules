@@ -182,6 +182,17 @@ export default class Helper {
 
   }
 
+  static clearLocalDataStorage(prefix) {
+    Helper.removeLocalStorageData(`${prefix}_user`);
+    Helper.removeLocalStorageData(`${prefix}_items`);
+    Helper.removeLocalStorageData(`${prefix}_openItems`);
+    Helper.removeLocalStorageData(`${prefix}_nodeCollapse`);
+    Helper.removeLocalStorageData(`${prefix}_noteCollapse`);
+    Helper.removeLocalStorageData(`${prefix}_nodeSort`);
+    Helper.removeLocalStorageData(`${prefix}_listSort`);
+    sessionStorage.removeItem("token");
+  }
+
   static getItemMetaImage(metas) {
     if (!metas.length) {
       return null;

@@ -149,9 +149,6 @@ export default class Item extends Module {
             }, false);
         }
 
-        this.footer.querySelector(".logout").addEventListener("click", function () {
-            _this.exit(_this.options.exit);
-        }, false);
 
         /* #endregion */
 

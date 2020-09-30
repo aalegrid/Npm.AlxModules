@@ -3,7 +3,6 @@ export let data = {
     template: `
     
     <div class="item">
-
     <div class="alert-box" style="display:none">
         <a href="javascript:void(0)" onclick="this.parentElement.style.display = 'none'">
             <i class="fal fa-times"></i>
@@ -11,7 +10,6 @@ export let data = {
         <p></p>
         <div class="arrow-down"></div>
     </div>
-
     <div class="nodes-list">
         <div class="nodes-header">
             <h3 class="collapse"><i class="fal fa-minus-square"></i> {nodeName}s <span class="nodes-count"></span></h3>
@@ -33,13 +31,15 @@ export let data = {
                     <th class="nodes">
                         <span data-sort="nodes">{nodeName}s</span>
                     </th>
+                    <th class="control" style="text-align: right">
+                        Control
+                    </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
     </div>
-
     <div class="notes-list">
         <div class="notes-header">
             <h3 class="collapse"><i class="fal fa-minus-square"></i> Notes <span class="notes-count"></span></h3>
@@ -49,7 +49,6 @@ export let data = {
             <tbody></tbody>
         </table>
     </div>
-
     <form method="post">
         <div class="row">
             <div class="col-25">
@@ -67,7 +66,14 @@ export let data = {
                 <textarea name="description" id="description" rows="6"></textarea>
             </div>
         </div>
-
+        <div class="row row-content">
+            <div class="col-25">
+                <label for="content">Content</label>
+            </div>
+            <div class="col-75">
+                <textarea name="content" id="content" rows="6"></textarea>
+            </div>
+        </div>
         <div class="row row-datedue">
             <div class="col-25">
                 <label for="dateDue">Due</label>
@@ -76,7 +82,6 @@ export let data = {
                 <input type="date" name="dateDue" id="dateDue" />
             </div>
         </div>
-
         <div class="row row-priority">
             <div class="col-25">
                 <label>Priority</label>
@@ -89,7 +94,6 @@ export let data = {
                 </div>
             </div>
         </div>
-
         <div class="row row-status">
             <div class="col-25">
                 <label>Status</label>
@@ -102,7 +106,6 @@ export let data = {
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-25">
                 <label for="icon">Icon</label>
@@ -129,12 +132,27 @@ export let data = {
                 <div id="colorPicker" style="display:none;"></div>
             </div>
         </div>
+        <div class="row row-control">
+            <div class="col-25">
+                <label for="control">Control</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="control" id="control" />
+            </div>
+        </div>
+        <div class="row row-tag">
+            <div class="col-25">
+                <label for="tag">Tag</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="tag" id="tag" />
+            </div>
+        </div>
         <div class="row">
             <button type="submit"><i class="fal fa-check"></i> Save</button>
         </div>
     </form>
 </div>
-
     `,
 
     header : `
@@ -162,9 +180,6 @@ export let data = {
         </li>
         <li class="add-note">
             <a href="javascript:void(0)"><i class=""></i></a>
-        </li>
-        <li class="logout">
-            <a href="javascript:void(0)"><i class="fal fa-sign-out"></i></a>
         </li>
     </ul>
     

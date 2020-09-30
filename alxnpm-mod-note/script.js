@@ -51,10 +51,6 @@ export default class Note extends Module {
             _this.options.listModule.show();
         }, false);
 
-        this.footer.querySelector(".logout").addEventListener("click", function(){
-            _this.exit(_this.options.exit);
-        }, false);
-
         let form = this.form;
 
         if(note.name) {

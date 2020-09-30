@@ -1,10 +1,11 @@
+import Img from './alex.png'
 
 export let data = {
 
     template: `
 
     <div class="login-form">
-    <h3>Login</h3>
+
     <div class="alert-box" style="display:none">
         <a href="javascript:void(0)" onclick="this.parentElement.style.display = 'none'"><i class="fal fa-times"></i></a>
         <p></p>
@@ -12,6 +13,8 @@ export let data = {
     </div>
     <form method="post">
 
+    <fieldset>
+      <legend>Login</legend>
         <div class="row">
             <div class="col-25">
                 <label for="email">Email</label>
@@ -33,7 +36,7 @@ export let data = {
         <div class="row">
             <button type="submit"><i class="fal fa-sign-in"></i> Sign-in</button>
         </div>
-
+       </fieldset>
     </form>
 
   </div   
@@ -43,7 +46,10 @@ export let data = {
     header : `
     
     <ul>
-        <li class="page-title">{appName}</li>
+        <li class="page-title">
+            <span class="img"><img src="${Img}"/></span>
+            <span class="app-name">{appName}</span>
+        </li>
     </ul>
 
     `,

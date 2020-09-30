@@ -1,3 +1,4 @@
+//import { Module } from 'alxnpm-mod-module'
 import API from 'alxnpm-mod-api';
 import Loader from 'alxnpm-mod-loader';
 import Helper from 'alxnpm-mod-helper';
@@ -264,7 +265,7 @@ export default class List extends Module {
                     sortField: _this.sortField,
                     reverse: this.classList.contains("reverse") ? "reverse" : ""
                 }
-                Helper.setLocalStorageData(`${this.options.appId}_listSort`, listSort);
+                Helper.setLocalStorageData(`${_this.options.appId}_listSort`, listSort);
 
             }, false);
         });

@@ -248,11 +248,28 @@ button[type="submit"] {
   }
 }
 
+.login {
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+
+    a {
+      i {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
 header,
 footer,
 .page-header,
 .page-footer {
-  background: .gradient(@color-hue, @dark-hue) [];
   color: @color-white;
   font-size: 1.25em;
   position: fixed;
@@ -346,27 +363,11 @@ footer,
   border-top: 1px solid @color-black;
 }
 
-.login {
-  .user-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style-type: none;
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-    font-size: 0.85rem;
-
-    a {
-      i {
-        font-weight: 500;
-      }
-    }
-  }
-}
-
 
 body {
   &.app-project {
+    header, 
+    footer,
     .page-header,
     .page-footer {
       background: #0054a6;
@@ -374,6 +375,8 @@ body {
     }
   }
   &.app-note {
+    header, 
+    footer,
     .page-header,
     .page-footer {
       background: rgb(159, 191, 20);
@@ -386,6 +389,8 @@ body {
   }
 
   &.app-list {
+    header, 
+    footer,
     .page-header,
     .page-footer {
       background: rgb(155, 147, 161);
@@ -397,6 +402,8 @@ body {
     }
   }
   &.app-board {
+    header, 
+    footer,
     .page-header,
     .page-footer {
       background: rgb(45, 18, 65);
