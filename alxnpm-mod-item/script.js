@@ -227,7 +227,7 @@ export default class Item extends Module {
             this.htmlElement.querySelector(".row-tag").style.display = "none";
         }
 
-        if (this.options.domain === "list" && item.tag && item.tag.includes("list-add")) {
+        if (this.options.appDomain === "list" && item.tag && item.tag.includes("list-add")) {
             this.htmlElement.querySelector("table thead .control").style.display = "block";
         }
         else {
@@ -484,7 +484,7 @@ export default class Item extends Module {
                 nodes.forEach(function (value) {
                     let statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
                         priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle"),
-                        iconOrCheckBox = _this.options.domain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` :   `<i class="${_this.options.nodeIcon}"></i>`;
+                        iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` :   `<i class="${_this.options.nodeIcon}"></i>`;
  
                     nodesHtml += `<tr data-nodeid="${value.id}">
                         <td>${iconOrCheckBox}</td>
@@ -500,14 +500,14 @@ export default class Item extends Module {
                         nodesHtml += `<td>${value.nodes.length}</td>`;
                     }
 
-                    if (_this.options.domain === "list" && item.tag && item.tag.includes("list-add")) {
+                    if (_this.options.appDomain === "list" && item.tag && item.tag.includes("list-add")) {
                         nodesHtml += `<td style="text-align:right">${value.control}</td>`;
                     }
                     nodesHtml += `<td><a href='javascript:void(0)' class='delete-node' data-nodeid="${value.id}"><i class='far fa-trash'></i></a></td>
                             </tr>`;
                 });
 
-                if (this.options.domain === "list" && item.tag && item.tag.includes("list-add")) {
+                if (this.options.appDomain === "list" && item.tag && item.tag.includes("list-add")) {
 
                     let total = Helper.listAdd(item.nodes);
 

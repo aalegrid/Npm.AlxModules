@@ -36,7 +36,7 @@ export default class List extends Module {
         this.header = data.header.replace(/{appName}/g, this.options.appName);
         this.footer = data.footer;
         // domain = list is treeview
-        this.wrapperContent = this.options.domain === "list" ? data.templateTreeView : data.templateList;
+        this.wrapperContent = this.options.appDomain === "list" ? data.templateTreeView : data.templateList;
 
         document.querySelector("main").classList.remove("board-mode");
 
@@ -96,11 +96,11 @@ export default class List extends Module {
         this.items = items;
         let _this = this,
             list = this.sortItems(items),
-            container = this.options.domain === "list" ? this.htmlElement.querySelector(".treeview")
+            container = this.options.appDomain === "list" ? this.htmlElement.querySelector(".treeview")
                 : this.htmlElement.querySelector("table tbody");
 
         // ---------------- TREEVIEW -----------------------
-        if (this.options.domain === "list") {
+        if (this.options.appDomain === "list") {
             container.innerHTML = Helper.formatAsTreeForMyLists(list, true, true);
 
             let parents = this.htmlElement.querySelectorAll(".treeview .parent");
@@ -160,7 +160,7 @@ export default class List extends Module {
                 }, false);
             });
 
-            if (this.options.domain === "board") {
+            if (this.options.appDomain === "board") {
                 let boards = this.htmlElement.querySelectorAll(".board-item");
 
                 boards.forEach(function (item) {
@@ -175,7 +175,7 @@ export default class List extends Module {
             }
         }
 
-        if (this.options.domain === "note" || this.options.domain === "board") {
+        if (this.options.appDomain === "note" || this.options.appDomain === "board") {
             this.htmlElement.querySelector(".count-sort").setAttribute("data-sort", "meta");
         }
 
@@ -194,9 +194,9 @@ export default class List extends Module {
                 statusPrioritySpan = "",
                 todoCount = "",
                 children = _this.options.children === "nodes" ? value.nodes : value.metas,
-                countLink = `<a href="javascript:void(0)" class="${_this.options.domain === 'board' ? 'board' : 'list'}-item list-count" data-itemid="${value.id}"><span class="count">${children ? children.length : "0"}</span></a>`;
+                countLink = `<a href="javascript:void(0)" class="${_this.options.appDomain === 'board' ? 'board' : 'list'}-item list-count" data-itemid="${value.id}"><span class="count">${children ? children.length : "0"}</span></a>`;
 
-            if (_this.options.domain === "project") {
+            if (_this.options.appDomain === "project") {
                 let statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
                     priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle");
                 status = `<i class="fal fa-${statusIcon}"></i>`;
