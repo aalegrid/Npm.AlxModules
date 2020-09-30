@@ -1,36 +1,48 @@
-    .component {
-      position: relative;
-    }
+.animate {
+  -webkit-animation-name: animateleft;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animateleft;
+  animation-duration: 0.4s;
+}
 
-    .component {
-      -webkit-animation-name: animateleft;
-      -webkit-animation-duration: 0.4s;
-      animation-name: animateleft;
-      animation-duration: 0.4s;
-    }
+.component {
+  position: relative;
+}
 
+.component {
+  .animate();
+}
 
-  @-webkit-keyframes animateleft {
-    from {
-      //left: -300px;
-      left: -300px;
-      opacity: 0;
-    }
-    to {
-      // left: 0;
-      left: 0;
-      opacity: 1;
-    }
+[data-behavior="module"] {
+  .module-wrapper {
+    position: relative;
   }
-  
-  @keyframes animateleft {
-    from {
-      left: -300px;
-      opacity: 0;
-    }
-    to {
-      left: 0;
-      opacity: 1;
-    }
+
+  [data-animation="slide"] {
+    .animate();
   }
-  
+}
+
+@-webkit-keyframes animateleft {
+  from {
+    //left: -300px;
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    // left: 0;
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animateleft {
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
