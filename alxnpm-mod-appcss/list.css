@@ -1,0 +1,197 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Italic.ttf") format("ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Bold.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-BoldItalic.ttf") format("ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Thin.ttf") format("ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-ThinItalic.ttf") format("ttf");
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Light.ttf") format("ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-LightItalic.ttf") format("ttf");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-MediumItalic.ttf") format("ttf");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Black.ttf") format("ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-BlackItalic.ttf") format("ttf");
+  font-weight: 900;
+  font-style: italic;
+}
+/*
+rgba(155, 147, 161, 1) 0%,
+rgba(209, 191, 214, 1) 100%
+*/
+.button {
+  border-radius: 2px;
+  background-color: #fff;
+  border: 1px solid #9b9090;
+  color: #9b9090;
+  padding: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.button i {
+  font-weight: 500 !important;
+}
+.button:hover {
+  border-color: #000;
+  color: #000;
+}
+.badge {
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 0.2rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.35rem;
+  position: relative;
+  top: -2px;
+  min-width: 1.25rem;
+}
+div.list table thead tr {
+  background-color: #ebebeb;
+}
+div.list table thead tr th {
+  border-right: 1px dotted #9b9090;
+}
+div.list table thead tr th i {
+  cursor: pointer;
+  display: block;
+}
+div.list table thead tr th:last-child {
+  border-right: none;
+}
+div.list table tr td:first-child,
+div.list table tr td:nth-child(2),
+div.list table tr td:last-child,
+div.list table tr th:first-child,
+div.list table tr th:nth-child(2),
+div.list table tr th:last-child {
+  text-align: center;
+}
+div.list table tr td:nth-child(3),
+div.list table tr th:nth-child(3) {
+  text-align: left;
+}
+div.list table tr td a.list-item {
+  display: inline-flex;
+  text-decoration: none;
+  color: #000;
+  width: 100%;
+}
+div.list table tr td a.list-item img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.25rem;
+  display: inline-block;
+  padding: 3px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+div.list table tr td a.list-item .info {
+  display: block;
+}
+div.list table tr td a.list-item .info .title {
+  font-weight: 500;
+  display: block;
+}
+div.list table tr td a.list-item .info .meta-data {
+  display: block;
+  font-size: 0.8rem;
+  color: #9b9090;
+  display: flex;
+}
+div.list table tr td a.list-item .info .meta-data i {
+  margin-right: 0.25rem;
+}
+div.list table tr td a.list-item .info .meta-data .todo-count {
+  color: #000;
+  border-left: 1px solid #9b9090;
+  margin-left: 0.25rem;
+  padding-left: 0.25rem;
+}
+div.list table tr td a.list-item .info .meta-data .todo-count span {
+  font-weight: 600;
+}
+div.list table tr td .count {
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 0.2rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.35rem;
+  position: relative;
+  top: -2px;
+  min-width: 1.25rem;
+}

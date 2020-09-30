@@ -142,7 +142,7 @@ export default class Helper {
 
         if (value.nodes.length) {
           html += '<ul class="nodes">';
-          parseAsTree(value.nodes);
+          parseAsTree(value.nodes.sort(_this.titleSort));
           html += '</ul></li>';
         }
 
@@ -182,17 +182,6 @@ export default class Helper {
 
   }
 
-  static clearLocalDataStorage(prefix) {
-    Helper.removeLocalStorageData(`${prefix}_user`);
-    Helper.removeLocalStorageData(`${prefix}_items`);
-    Helper.removeLocalStorageData(`${prefix}_openItems`);
-    Helper.removeLocalStorageData(`${prefix}_nodeCollapse`);
-    Helper.removeLocalStorageData(`${prefix}_noteCollapse`);
-    Helper.removeLocalStorageData(`${prefix}_nodeSort`);
-    Helper.removeLocalStorageData(`${prefix}_listSort`);
-    sessionStorage.removeItem("token");
-  }
-
   static getItemMetaImage(metas) {
     if (!metas.length) {
       return null;
@@ -208,5 +197,58 @@ export default class Helper {
     });
     return image;
   }
+
+  static listAdd(nodes) {
+    let numOr0 = n => isNaN(n) ? 0 : n,
+      total = 0
+
+    for (var i = 0; i < nodes.length; i++) {
+      total += nodes[i].control ? parseFloat(nodes[i].control) : 0;  // Iterate over your first array and then grab the second element add the values up
+    }
+
+    return total;
+  }
+
+  static titleSort(a, b) {
+    if (!a.title) {
+      // Change this values if you want to put `null` values at the end of the array
+      return -1;
+    }
+
+    if (!b.title) {
+      // Change this values if you want to put `null` values at the end of the array
+      return +1;
+    }
+    return a.title.localeCompare(b.title);
+  }
+
+  static colorSort(a, b) {
+    if (!a.color) {
+      return -1;
+    }
+    if (!b.color) {
+      return +1;
+    }
+    return a.color.localeCompare(b.color);
+  }
+
+  static iconSort(a, b) {
+    if (!a.icon) {
+      return -1;
+    }
+    if (!b.icon) {
+      return +1;
+    }
+    return a.icon.localeCompare(b.icon);
+  }
+  
+  static prioritySort(a, b) { return a.priority > b.priority ? 1 : a.priority === b.priority ? 0 : -1 }
+
+  static statusSort(a, b) { return a.status > b.status ? 1 : a.status === b.status ? 0 : -1 }
+
+  static nodeSort(a, b) { return a.nodes.length > b.nodes.length ? 1 : a.nodes.length === b.nodes.length ? 0 : -1 }
+
+  static metaSort(a, b) { return a.metas.length > b.metas.length ? 1 : a.metas.length === b.metas.length ? 0 : -1 }
+
 
 }

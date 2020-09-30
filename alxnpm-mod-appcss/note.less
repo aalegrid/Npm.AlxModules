@@ -1,0 +1,42 @@
+div.note {
+    img {
+      padding: 10px;
+      line-height: 1.42857143;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+      -webkit-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+    }
+    form {
+      display: block;
+    }
+    .view {
+      display: none;
+    }
+
+    &.view {
+      form {
+        display: none;
+      }
+      .view {
+        display: block;
+        div {
+          padding: 0.5rem;
+        }
+        .name {
+          font-weight: 500;
+        }
+
+        .value {
+          // border: 1px solid @color-gray;
+        }
+
+        img {
+          margin-top: 0.5rem;
+          width: 50%;
+        }
+      }
+    }
+  }

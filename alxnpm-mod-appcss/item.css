@@ -1,0 +1,193 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Italic.ttf") format("ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Bold.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-BoldItalic.ttf") format("ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Thin.ttf") format("ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-ThinItalic.ttf") format("ttf");
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Light.ttf") format("ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-LightItalic.ttf") format("ttf");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-MediumItalic.ttf") format("ttf");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Black.ttf") format("ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-BlackItalic.ttf") format("ttf");
+  font-weight: 900;
+  font-style: italic;
+}
+/*
+rgba(155, 147, 161, 1) 0%,
+rgba(209, 191, 214, 1) 100%
+*/
+.button {
+  border-radius: 2px;
+  background-color: #fff;
+  border: 1px solid #9b9090;
+  color: #9b9090;
+  padding: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.button i {
+  font-weight: 500 !important;
+}
+.button:hover {
+  border-color: #000;
+  color: #000;
+}
+.badge {
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 0.2rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.35rem;
+  position: relative;
+  top: -2px;
+  min-width: 1.25rem;
+}
+div[class$="-list"] [class$="-header"] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+div[class$="-list"] [class$="-header"] [class$="-count"] {
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 0.2rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.35rem;
+  position: relative;
+  top: -2px;
+  min-width: 1.25rem;
+}
+div[class$="-list"] [class$="-header"] [class^="add-"] {
+  font-size: 1.5rem;
+}
+div[class$="-list"] [class$="-header"] .collapse i {
+  font-size: 0.85rem;
+  font-weight: 400;
+  padding-right: 0.25rem;
+}
+div[class$="-list"] [class$="-header"] a {
+  color: #000;
+}
+div[class$="-list"] table {
+  margin-bottom: 1.5rem;
+}
+div[class$="-list"] table th {
+  font-size: 0.75rem;
+}
+div[class$="-list"] table th:first-child,
+div[class$="-list"] table th:nth-child(2) {
+  text-align: left;
+  padding-left: 0;
+}
+div[class$="-list"] table td {
+  text-align: center;
+  vertical-align: top;
+}
+div[class$="-list"] table td:first-child,
+div[class$="-list"] table td:nth-child(2) {
+  text-align: left;
+  padding-left: 0;
+}
+div[class$="-list"] table td:last-child {
+  padding-right: 0;
+}
+div[class$="-list"] table td [class$="-item"] {
+  font-size: 0.9rem;
+  display: inline-block;
+}
+div[class$="-list"] table td img.thumb-preview {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.25rem;
+  display: inline-block;
+  padding: 3px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+div[class$="-list"] table td .note-icon {
+  margin-left: 0.5rem;
+}
+div[class$="-list"] table tr.list-add td:nth-child(4) {
+  text-align: right;
+}
+div[class$="-list"] table.hide {
+  display: none;
+}

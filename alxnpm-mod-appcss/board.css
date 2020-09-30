@@ -1,0 +1,157 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Italic.ttf") format("ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Bold.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-BoldItalic.ttf") format("ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Thin.ttf") format("ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-ThinItalic.ttf") format("ttf");
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Light.ttf") format("ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-LightItalic.ttf") format("ttf");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-MediumItalic.ttf") format("ttf");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Black.ttf") format("ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-BlackItalic.ttf") format("ttf");
+  font-weight: 900;
+  font-style: italic;
+}
+/*
+rgba(155, 147, 161, 1) 0%,
+rgba(209, 191, 214, 1) 100%
+*/
+.button {
+  border-radius: 2px;
+  background-color: #fff;
+  border: 1px solid #9b9090;
+  color: #9b9090;
+  padding: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.button i {
+  font-weight: 500 !important;
+}
+.button:hover {
+  border-color: #000;
+  color: #000;
+}
+.badge {
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 0.2rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.35rem;
+  position: relative;
+  top: -2px;
+  min-width: 1.25rem;
+}
+main.board-mode {
+  background-color: #000;
+  min-height: 90vh;
+}
+.board .board-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.board .board-items .board-item {
+  flex: 48%;
+  max-width: 48%;
+  margin-bottom: 0.75rem;
+}
+.board .board-items .board-item:nth-child(odd) {
+  margin-right: 0.75rem;
+}
+.board .board-items .board-item.note {
+  padding: 0.5rem;
+  max-height: 12rem;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  background-color: yellow;
+}
+.board .board-items .board-item.note .header {
+  text-align: center;
+  font-weight: bold;
+}
+.board .board-items .board-item.image .header {
+  display: none;
+}
+.board .board-items .board-item.image img {
+  padding: 0.5rem;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}

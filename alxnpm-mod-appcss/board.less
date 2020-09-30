@@ -1,0 +1,59 @@
+@import "variables_mixins.less";
+
+main.board-mode {
+  background-color: @color-black;
+  min-height: 90vh;
+}
+
+.board {
+    .board-items {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .board-item {
+        flex: 48%;
+        max-width: 48%;
+        margin-bottom: 0.75rem;
+
+        &:nth-child(odd) {
+          margin-right: 0.75rem;
+        }
+
+        &.note {
+          padding: 0.5rem;
+          max-height: 12rem;
+          overflow-y: auto;
+          border: 1px solid #ddd;
+          border-radius: 0.25rem;
+          background-color: @color-white;
+          font-family: 'Caveat', cursive;
+          font-size:1.1rem;
+          line-height: 1.1rem;
+          background-color: yellow;
+
+          .header {
+            text-align: center;
+            font-weight: bold;
+          }
+        }
+
+        &.image {
+          .header {
+            display: none;
+          }
+
+          img {
+            padding: 0.5rem;
+            line-height: 1.42857143;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            -webkit-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+          }
+        }
+      }
+    }
+  }

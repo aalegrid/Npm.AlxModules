@@ -7,7 +7,8 @@ import ModuleSwitcher from 'alxnpm-mod-module-switcher';
 
 let Module = require('alxnpm-mod-module')
 
-import {data} from './data.js';
+import { data } from './data.js';
+
 
 export default class Item extends Module {
     constructor(moduleId, className, htmlElement, options) {
@@ -27,12 +28,12 @@ export default class Item extends Module {
 
     render(node) {
 
-        let  item = node || {},
+        let item = node || {},
             _this = this,
             isAdd = typeof item.id === 'undefined';
 
         data.template = data.template.replace(/{nodeName}/g, this.options.nodeName);
-        
+
         this.wrapperContent = data.template;
         this.header = data.header;
         this.footer = data.footer;
@@ -62,7 +63,7 @@ export default class Item extends Module {
         }
 
         if (this.options.nodeSingleLevelOnly) {
-            if(parseInt(item.parentId) !== 0) {
+            if (parseInt(item.parentId) !== 0) {
                 this.htmlElement.querySelector(".nodes-list").style.display = "none";
             }
         }
@@ -110,7 +111,7 @@ export default class Item extends Module {
 
         }, false);
 
-        this.header.querySelector(".page-title").innerHTML = item.title ? Helper.trim(32, item.title) : `New ${this.options.nodeName}`;
+        this.header.querySelector(".page-title").innerHTML = item.title ? Helper.trim(32, item.title) : `New Item`;
 
         this.header.querySelector(".delete-item a").addEventListener("click", function () {
             _this.options.modalModule.header = "Delete";
@@ -181,6 +182,14 @@ export default class Item extends Module {
         item.title && (form.title.value = item.title);
         item.description && (form.description.value = item.description);
 
+        if (this.options.fields.includes("content")) {
+            item.content && (form.content.value = item.content);
+        }
+
+        else {
+            this.htmlElement.querySelector(".row-content").style.display = "none";
+        }
+
         if (this.options.fields.includes("dateDue")) {
             item.dateDue = item.dateDue || new Date().toISOString();
             item.dateDue && (form.dateDue.value = item.dateDue.split('T')[0]);
@@ -203,6 +212,29 @@ export default class Item extends Module {
         }
         else {
             this.htmlElement.querySelector(".row-status").style.display = "none";
+        }
+
+        if (this.options.fields.includes("control")) {
+            item.control && (form.control.value = item.control);
+        }
+
+        else {
+            this.htmlElement.querySelector(".row-control").style.display = "none";
+        }
+
+        if (this.options.fields.includes("tag")) {
+            item.tag && (form.tag.value = item.tag);
+        }
+
+        else {
+            this.htmlElement.querySelector(".row-tag").style.display = "none";
+        }
+
+        if (this.options.domain === "list" && item.tag && item.tag.includes("list-add")) {
+            this.htmlElement.querySelector("table thead .control").style.display = "block";
+        }
+        else {
+            this.htmlElement.querySelector("table thead .control").style.display = "none";
         }
 
         item.icon && (form.icon.value = item.icon);
@@ -253,10 +285,10 @@ export default class Item extends Module {
 
             this.htmlElement.querySelector(".notes-count").innerHTML = item.metas ? item.metas.length : "0";
 
-            if(!item.metas || !item.metas.length) {
+            if (!item.metas || !item.metas.length) {
                 this.htmlElement.querySelector(".notes-header .collapse i").style.display = "none";
             }
-            
+
 
             let notes = item.metas.sort(function (a, b) {
                 return a.name.localeCompare(b.name);
@@ -438,12 +470,15 @@ export default class Item extends Module {
     }
 
     bindNodes(item) {
+
         let _this = this;
 
         this.htmlElement.querySelector(".nodes-count").innerHTML = item.nodes ? item.nodes.length : "0";
-        if(!item.nodes || !item.nodes.length) {
+
+        if (!item.nodes || !item.nodes.length) {
             this.htmlElement.querySelector(".nodes-header .collapse i").style.display = "none";
         }
+
         if (item.nodes.length) {
             let nodesHtml = "",
                 nodesTbody = this.htmlElement.querySelector(".nodes-list table tbody"),
@@ -451,10 +486,11 @@ export default class Item extends Module {
             if (nodes) {
                 nodes.forEach(function (value) {
                     let statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
-                        priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle");
-
+                        priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle"),
+                        iconOrCheckBox = _this.options.domain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` :   `<i class="${_this.options.nodeIcon}"></i>`;
+ 
                     nodesHtml += `<tr data-nodeid="${value.id}">
-                        <td><i class="${_this.options.nodeIcon}"></i></td>
+                        <td>${iconOrCheckBox}</td>
                         <td><a href='javascript:void(0)' class='node-item' data-nodeid="${value.id}">${value.title}</a></td>`;
                     if (_this.options.fields.includes("priority")) {
                         nodesHtml += `<td><a href='javascript:void(0)' class='node-priority-click' data-nodeid="${value.id}" data-nodepriority="${value.priority}"><i class="fal fa-${priorityIcon}"></i></a></td>`;
@@ -466,9 +502,27 @@ export default class Item extends Module {
                     if (_this.options.nodeCount) {
                         nodesHtml += `<td>${value.nodes.length}</td>`;
                     }
+
+                    if (_this.options.domain === "list" && item.tag && item.tag.includes("list-add")) {
+                        nodesHtml += `<td style="text-align:right">${value.control}</td>`;
+                    }
                     nodesHtml += `<td><a href='javascript:void(0)' class='delete-node' data-nodeid="${value.id}"><i class='far fa-trash'></i></a></td>
                             </tr>`;
                 });
+
+                if (this.options.domain === "list" && item.tag && item.tag.includes("list-add")) {
+
+                    let total = Helper.listAdd(item.nodes);
+
+                    nodesHtml += `<tr class="list-add">
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td>${total}</td>
+                            <td></td>
+                            </tr>`
+
+                }
 
                 nodesTbody.innerHTML = nodesHtml;
             }
@@ -651,6 +705,18 @@ export default class Item extends Module {
             savedItem.status = this.htmlElement.querySelector(".status-btn-group a[class='selected']").getAttribute("data-value");
         }
 
+        if (this.options.fields.includes("content")) {
+            savedItem.content = form.content.value;
+        }
+
+        if (this.options.fields.includes("tag")) {
+            savedItem.tag = form.tag.value;
+        }
+
+        if (this.options.fields.includes("control")) {
+            savedItem.control = form.control.value;
+        }
+
         this.loader.show();
         //request(url, method, body, isTokenRequest, isBodyStringify, isResponseJson)
         this.api.request(url, method, savedItem, false, true, isResponseJson)
@@ -764,7 +830,7 @@ export default class Item extends Module {
                 let _items = Helper.updateTree(this.options.listModule.items, newItem.id, newItem);
                 this.options.listModule.items = _items;
                 this.htmlElement.querySelector(".notes-count").innerHTML = newItem.metas ? newItem.metas.length : "0";
-                if(!newItem.metas || !newItem.metas.length) {
+                if (!newItem.metas || !newItem.metas.length) {
                     this.htmlElement.querySelector(".notes-header .collapse i").style.display = "none";
                 }
 
@@ -821,15 +887,15 @@ export default class Item extends Module {
     sortItems(items) {
 
         switch (this.sortField) {
-            case "title": items.sort(this.titleSort);
+            case "title": items.sort(Helper.titleSort);
                 break;
-            case "status": items.sort(this.statusSort);
+            case "status": items.sort(Helper.statusSort);
                 break;
-            case "priority": items.sort(this.prioritySort);
+            case "priority": items.sort(Helper.prioritySort);
                 break;
-            case "nodes": items.sort(this.nodeSort);
+            case "nodes": items.sort(Helper.nodeSort);
                 break;
-            default: items.sort(this.titleSort);
+            default: items.sort(Helper.titleSort);
         }
 
         let sortElem = this.htmlElement.querySelector(`[data-sort='${this.sortField}']`);
@@ -843,23 +909,5 @@ export default class Item extends Module {
         return items;
     };
 
-    titleSort(a, b) {
-        if (!a.title) {
-            // Change this values if you want to put `null` values at the end of the array
-            return -1;
-        }
-
-        if (!b.title) {
-            // Change this values if you want to put `null` values at the end of the array
-            return +1;
-        }
-        return a.title.localeCompare(b.title);
-    }
-
-    prioritySort(a, b){ return a.priority > b.priority ? 1 : a.priority === b.priority ? 0 : -1 }
-
-    statusSort(a, b){ return a.status > b.status ? 1 : a.status === b.status ? 0 : -1 }
-
-    nodeSort(a, b){ return a.nodes.length > b.nodes.length ? 1 : a.nodes.length === b.nodes.length ? 0 : -1 }
 
 }

@@ -1,0 +1,32 @@
+div.note img {
+  padding: 10px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+div.note form {
+  display: block;
+}
+div.note .view {
+  display: none;
+}
+div.note.view form {
+  display: none;
+}
+div.note.view .view {
+  display: block;
+}
+div.note.view .view div {
+  padding: 0.5rem;
+}
+div.note.view .view .name {
+  font-weight: 500;
+}
+div.note.view .view img {
+  margin-top: 0.5rem;
+  width: 50%;
+}

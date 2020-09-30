@@ -10,11 +10,12 @@ export default class Board extends Module {
 
     render(item) {
 
+        let _this = this;
         this.wrapperContent = data.template;
         this.header = data.header;
         this.footer = data.footer;
 
-        document.querySelector("main").classList.add("board");
+        document.querySelector("main").classList.add("board-mode");
 
         this.header.querySelector(".back a").addEventListener("click", function () {
             _this.hide();

@@ -1,0 +1,197 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Italic.ttf") format("ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Bold.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-BoldItalic.ttf") format("ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Thin.ttf") format("ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-ThinItalic.ttf") format("ttf");
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Light.ttf") format("ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-LightItalic.ttf") format("ttf");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-MediumItalic.ttf") format("ttf");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Black.ttf") format("ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-BlackItalic.ttf") format("ttf");
+  font-weight: 900;
+  font-style: italic;
+}
+/*
+rgba(155, 147, 161, 1) 0%,
+rgba(209, 191, 214, 1) 100%
+*/
+.button {
+  border-radius: 2px;
+  background-color: #fff;
+  border: 1px solid #9b9090;
+  color: #9b9090;
+  padding: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.button i {
+  font-weight: 500 !important;
+}
+.button:hover {
+  border-color: #000;
+  color: #000;
+}
+.badge {
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 0.2rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.35rem;
+  position: relative;
+  top: -2px;
+  min-width: 1.25rem;
+}
+.treeview > ul {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+}
+.treeview > ul > li {
+  padding-bottom: 0 !important;
+}
+.treeview ul {
+  list-style-type: none;
+  /* Hide the nested list */
+  /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+}
+.treeview ul li {
+  padding: 0.3rem 0 0.3rem 1.1rem;
+  position: relative;
+  border-top: 1px dotted #ccc;
+}
+.treeview ul li img {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-right: 0.25rem;
+  display: inline-block;
+  padding: 2px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  top: 3px;
+}
+.treeview ul li i {
+  width: 1.3rem;
+  text-align: center;
+  position: relative;
+  top: 0.1rem;
+}
+.treeview ul li span {
+  /* Create the caret/arrow with a unicode, and style it */
+  /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+}
+.treeview ul li span.parent {
+  cursor: pointer;
+  user-select: none;
+  /* Prevent text selection */
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
+.treeview ul li span.parent::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0fe";
+  padding-right: 5px;
+  font-size: 0.75rem;
+}
+.treeview ul li span.open::before {
+  content: "\f146";
+}
+.treeview ul li a {
+  text-decoration: none;
+  color: #000;
+  position: absolute;
+  right: 1rem;
+}
+.treeview ul li a i {
+  top: 0;
+  color: #9b9090;
+}
+.treeview ul.nodes {
+  display: none;
+  padding-left: 0;
+}
+.treeview ul:last-child {
+  border-top: 0;
+}
+.treeview ul.open {
+  display: block;
+}

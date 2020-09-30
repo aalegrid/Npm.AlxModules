@@ -1,0 +1,116 @@
+@import "variables_mixins.less";
+
+.treeview {
+  > ul {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+
+    > li {
+      // border-bottom: 1px dotted#ccc;
+      padding-bottom: 0 !important;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+
+    li {
+      padding: 0.3rem 0 0.3rem 1.1rem;
+      position: relative;
+      border-top: 1px dotted#ccc;
+
+      img {
+        width: 1.3rem;
+        height: 1.3rem;
+        margin-right: 0.25rem;
+        display: inline-block;
+        padding: 2px;
+        line-height: 1.42857143;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        -webkit-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        position: relative;
+        top: 3px;
+      }
+
+      i {
+        width: 1.3rem;
+        text-align: center;
+        position: relative;
+        top: 0.1rem;
+      }
+
+      span {
+        &.parent {
+          cursor: pointer;
+          user-select: none; /* Prevent text selection */
+          display: inline-block;
+          margin-bottom: 0.3rem;
+        }
+        /* Create the caret/arrow with a unicode, and style it */
+        &.parent::before {
+          display: inline-block;
+          font-style: normal;
+          font-variant: normal;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+          font-family: "Font Awesome 5 Pro";
+          font-weight: 300;
+          content: "\f0fe";
+          padding-right: 5px;
+          font-size: 0.75rem;
+        }
+        /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+        &.open::before {
+          content: "\f146";
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: @color-black;
+        &.icon-link {
+          position: absolute;
+          right: 1rem;
+
+          i {
+            top: 0;
+            color: @color-gray;
+          }
+        }
+
+        &.text-link {
+          span.title {
+            padding-right: 3rem;
+            display: inline-block;
+          }
+        }
+        
+      }
+    }
+    /* Hide the nested list */
+    &.nodes {
+      display: none;
+      padding-left: 0;
+    }
+    &:last-child {
+      border-top: 0;
+    }
+    /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+    &.open {
+      display: block;
+
+      > li {
+        &:last-child {
+        }
+      }
+    }
+  }
+}
+
+
+

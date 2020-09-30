@@ -1,0 +1,102 @@
+@import "variables_mixins.less";
+
+div.list {
+    table {
+      thead {
+        tr {
+          background-color: #ebebeb;
+          th {
+            i {
+              cursor: pointer;
+              display: block;
+            }
+
+            border-right: 1px dotted @color-gray;
+
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+      tr {
+        td:first-child,
+        td:nth-child(2),
+        td:last-child,
+        th:first-child,
+        th:nth-child(2),
+        th:last-child {
+          text-align: center;
+        }
+
+        td:nth-child(3),
+        th:nth-child(3) {
+          text-align: left;
+        }
+
+        td {
+          // vertical-align: top;
+          a.list-item {
+            display: inline-flex;
+            text-decoration: none;
+            color: @color-black;
+            width: 100%;
+
+            img {
+              width: 2rem;
+              height: 2rem;
+              margin-right: 0.25rem;
+              display: inline-block;
+              padding: 3px;
+              line-height: 1.42857143;
+              background-color: #fff;
+              border: 1px solid #ddd;
+              border-radius: 2px;
+              -webkit-transition: all 0.2s ease-in-out;
+              -o-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out;
+            }
+
+            .info {
+              display: block;
+              
+              .title {
+                font-weight: 500;
+                display: block;
+               
+              }
+              .meta-data {
+                display: block;
+                font-size: 0.8rem;
+                color: @color-gray;
+                display: flex;
+               
+                i {
+                  margin-right: 0.25rem;
+                }
+                .date-modified {
+
+                }
+
+                .todo-count {
+                  color: @color-black;
+                  border-left: 1px solid @color-gray;
+                  margin-left: .25rem;
+                  padding-left: .25rem;
+                  
+
+                  span {
+                    font-weight: 600;
+                  }
+                }
+              }
+            }
+          }
+          .count {
+            .badge();
+          }
+        }
+      }
+    }
+
+  }

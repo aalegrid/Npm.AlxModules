@@ -84,9 +84,7 @@ export let data = {
         <li class="camera">
             <a href="javascript:void(0)"><i class="fal fa-camera"></i></a>
         </li>  
-        <li class="logout">
-            <a href="javascript:void(0)"><i class="fal fa-sign-out"></i></a>
-        </li>
+
     </ul>
     
     `

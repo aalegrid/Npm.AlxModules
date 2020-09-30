@@ -1,0 +1,49 @@
+@color-gray: #9b9090;
+@color-hue: rgba(209, 191, 214, 1);
+@dark-hue: rgba(155, 147, 161, 1);
+@color-black: #000;
+@color-white: #fff;
+@color-orange: #fdba41;
+@font-default: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+.gradient(@color1, @color2) {
+  background: linear-gradient(@color1, @color2);
+}
+
+.button {
+  border-radius: 2px;
+  background-color: @color-white;
+  border: 1px solid @color-gray;
+  color: @color-gray;
+  padding: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: @font-default;
+
+  i {
+    font-weight: 500 !important;
+  }
+}
+.button:hover {
+  border-color: @color-black;
+  color: @color-black;
+}
+
+.badge {
+  color: @color-white;
+  background-color: @color-black;
+  display: inline-block;
+  padding: 0.2rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.35rem;
+  position: relative;
+  top: -2px;
+  min-width: 1.25rem;
+}

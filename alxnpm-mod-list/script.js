@@ -1,7 +1,7 @@
-//import { Module } from 'alxnpm-mod-module'
 import API from 'alxnpm-mod-api';
 import Loader from 'alxnpm-mod-loader';
 import Helper from 'alxnpm-mod-helper';
+import ModuleSwitcher from 'alxnpm-mod-module-switcher';
 
 let Module = require('alxnpm-mod-module')
 
@@ -11,6 +11,7 @@ export default class List extends Module {
     constructor(moduleId, className, htmlElement, options) {
         super(moduleId, className, htmlElement, options);
         this.api = new API(this.options.apiUrl);
+        this.switcher = new ModuleSwitcher();
         this.loader = new Loader();
         this.sortField;
         this._items = [];
@@ -36,7 +37,7 @@ export default class List extends Module {
         // domain = list is treeview
         this.wrapperContent = this.options.domain === "list" ? data.templateTreeView : data.templateList;
 
-        document.querySelector("main").classList.remove("board-main");
+        document.querySelector("main").classList.remove("board-mode");
 
         floatingMenu && (floatingMenu.remove())
 
@@ -192,7 +193,7 @@ export default class List extends Module {
                 statusPrioritySpan = "",
                 todoCount = "",
                 children = _this.options.children === "nodes" ? value.nodes : value.metas,
-                countLink = `<a href="javascript:void(0)" class="${_this.options.domain === 'board' ? 'board' : 'list'}-item" data-itemid="${value.id}"><span class="count">${children ? children.length : "0"}</span></a>`;
+                countLink = `<a href="javascript:void(0)" class="${_this.options.domain === 'board' ? 'board' : 'list'}-item list-count" data-itemid="${value.id}"><span class="count">${children ? children.length : "0"}</span></a>`;
 
             if (_this.options.domain === "project") {
                 let statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
@@ -282,17 +283,17 @@ export default class List extends Module {
     sortItems(items) {
 
         switch (this.sortField) {
-            case "title": items.sort(this.titleSort);
+            case "title": items.sort(Helper.titleSort);
                 break;
-            case "color": items.sort(this.colorSort);
+            case "color": items.sort(Helper.colorSort);
                 break;
-            case "icon": items.sort(this.iconSort);
+            case "icon": items.sort(Helper.iconSort);
                 break;
-            case "node": items.sort(this.nodeSort);
+            case "node": items.sort(Helper.nodeSort);
                 break;
-            case "meta": items.sort(this.metaSort);
+            case "meta": items.sort(Helper.metaSort);
                 break;
-            default: items.sort(this.titleSort);
+            default: items.sort(Helper.titleSort);
         }
 
         let sortElem = this.htmlElement.querySelector(`[data-sort='${this.sortField}']`);
@@ -305,43 +306,5 @@ export default class List extends Module {
 
         return items;
     };
-
-
-    titleSort(a, b) {
-        if (!a.title) {
-            // Change this values if you want to put `null` values at the end of the array
-            return -1;
-        }
-
-        if (!b.title) {
-            // Change this values if you want to put `null` values at the end of the array
-            return +1;
-        }
-        return a.title.localeCompare(b.title);
-    }
-
-    colorSort(a, b) {
-        if (!a.color) {
-            return -1;
-        }
-        if (!b.color) {
-            return +1;
-        }
-        return a.color.localeCompare(b.color);
-    }
-
-    iconSort(a, b) {
-        if (!a.icon) {
-            return -1;
-        }
-        if (!b.icon) {
-            return +1;
-        }
-        return a.icon.localeCompare(b.icon);
-    }
-
-    nodeSort(a, b) { return a.nodes.length > b.nodes.length ? 1 : a.nodes.length === b.nodes.length ? 0 : -1 }
-
-    metaSort(a, b) { return a.metas.length > b.metas.length ? 1 : a.metas.length === b.metas.length ? 0 : -1 }
 
 }
