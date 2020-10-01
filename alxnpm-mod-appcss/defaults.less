@@ -342,15 +342,8 @@ header,
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   border-bottom: 1px solid @color-black;
-  i.fa-react {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 6rem;
-    position: absolute;
-    top: -2rem;
-    left: 4rem;
-    opacity: 0.2;
-  }
+  background: #666;
+  background: linear-gradient(#666, #000);
 }
 
 footer,
@@ -361,6 +354,8 @@ footer,
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   border-top: 1px solid @color-black;
+  background: #666;
+  background: linear-gradient(#666, #000);
 }
 
 
@@ -393,11 +388,11 @@ body {
     footer,
     .page-header,
     .page-footer {
-      background: rgb(155, 147, 161);
+      background: #666;
       background: linear-gradient(
         0deg,
-        rgba(155, 147, 161, 1) 0%,
-        rgba(209, 191, 214, 1) 100%
+        #000 0%,
+        #666 100%
       );
     }
   }

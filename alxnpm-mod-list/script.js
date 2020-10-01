@@ -14,7 +14,7 @@ export default class List extends Module {
         this.api = new API(this.options.apiUrl);
         this.switcher = new ModuleSwitcher();
         this.loader = new Loader();
-        this.sortField;
+        this.sortField = "title";
         this._items = [];
     }
 
@@ -34,6 +34,17 @@ export default class List extends Module {
         let _this = this, floatingMenu = document.querySelector(".floating-save-menu");
 
         this.header = data.header.replace(/{appName}/g, this.options.appName);
+
+        let user = Helper.getLocalStorageData(`${this.options.appId}_user`);
+
+        if(user) {
+            let li =  document.createElement("li");
+            li.classList.add("user-info");
+            this.header.querySelector("ul").appendChild(li);   
+            li.innerHTML = `Hello <i class="fas fa-user-astronaut"></i> ${user.firstName} ${user.lastName}`
+            
+        }
+
         this.footer = data.footer;
         // domain = list is treeview
         this.wrapperContent = this.options.appDomain === "list" ? data.templateTreeView : data.templateList;
@@ -52,18 +63,27 @@ export default class List extends Module {
             _this.options.itemModule.show();
 
         }, false);
+
+        this.footer.querySelector(".refresh a").addEventListener("click", function () {
+            _this.getItems();
+        }, false);
+
         this.setListSort();
         this.addSortLinks();
 
         if (this.options.cache) {
-
-            let _items = Helper.getLocalStorageData(`${this.options.appId}_items`);
-            if (_items) {
-                this.items = _items;
-                this.bind(_items);
-                return;
+            let items = Helper.getLocalStorageData(`${this.options.appId}_items`);
+            if (items) {
+                this.bind(items);
+            }
+            else {
+                this.getItems();  
             }
         }
+
+    }
+
+    getItems(){
 
         this.loader.show();
 
@@ -76,7 +96,7 @@ export default class List extends Module {
                     }
                     // Success
                     // console.log(response);
-                    this.items = response;
+                    //this.items = response;
                     this.bind(response);
                     this.loader.hide();
                 } else {
@@ -88,7 +108,6 @@ export default class List extends Module {
                 this.loader.hide();
                 Helper.showMessage(this.alertBox, error);
             });
-
     }
 
     bind(items) {
@@ -221,9 +240,11 @@ export default class List extends Module {
                     <td>${icon}</td>
                     <td>
                     <a href="javascript:void(0)" class="list-item main-item" data-itemid="${value.id}">
-                        ${image}
                         <span class="info">
-                            <span class="title">${value.title ? value.title : 'Untitled'}</span>
+                            <span class="title">
+                            ${image}
+                            <span>${value.title ? value.title : 'Untitled'}</span>
+                            </span>
                             <span class="meta-data">
                                 ${statusPrioritySpan}
                                 <span class="last-modified">${value.dateModified ? Helper.formatDate(value.dateModified) : Helper.formatDate(value.dateCreated)}</span>

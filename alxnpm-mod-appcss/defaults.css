@@ -33,6 +33,17 @@
   top: -2px;
   min-width: 1.25rem;
 }
+.img-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.25rem;
+  display: inline-block;
+  padding: 3px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
 body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -148,7 +159,7 @@ h3 {
 }
 .priority-btn-group a.selected,
 .status-btn-group a.selected {
-  background-color: #d1bfd6;
+  background-color: #000;
   color: #fff;
   border: 0;
 }
@@ -172,13 +183,13 @@ button:hover {
   color: #000;
 }
 button[type="submit"] {
-  background: #d1bfd6;
+  background: #000;
   color: #fff;
   float: right;
   border: 0;
 }
 button[type="submit"]:hover {
-  background: #9b93a1;
+  background: #666666;
   color: #fff;
 }
 .button-row {
@@ -187,7 +198,7 @@ button[type="submit"]:hover {
 .button-row a,
 .button-row button,
 .button-row .custom-file-upload {
-  background: #d1bfd6;
+  background: #000;
   color: #fff;
   float: none;
   flex-grow: 1;
@@ -206,7 +217,7 @@ button[type="submit"]:hover {
 .button-row a:hover,
 .button-row button:hover,
 .button-row .custom-file-upload:hover {
-  background: #9b93a1;
+  background: #666666;
   color: #fff;
   border-color: #000;
 }
@@ -379,16 +390,8 @@ header,
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   border-bottom: 1px solid #000;
-}
-header i.fa-react,
-.page-header i.fa-react {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 6rem;
-  position: absolute;
-  top: -2rem;
-  left: 4rem;
-  opacity: 0.2;
+  background: #666;
+  background: linear-gradient(#666, #000);
 }
 footer,
 .page-footer {
@@ -398,6 +401,8 @@ footer,
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   border-top: 1px solid #000;
+  background: #666;
+  background: linear-gradient(#666, #000);
 }
 body.app-project header,
 body.app-project footer,
@@ -417,8 +422,8 @@ body.app-list header,
 body.app-list footer,
 body.app-list .page-header,
 body.app-list .page-footer {
-  background: #9b93a1;
-  background: linear-gradient(0deg, #9b93a1 0%, #d1bfd6 100%);
+  background: #666;
+  background: linear-gradient(0deg, #000 0%, #666 100%);
 }
 body.app-board header,
 body.app-board footer,

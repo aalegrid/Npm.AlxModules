@@ -1,7 +1,22 @@
+.animate {
+  -webkit-animation-name: animateleft;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animateleft;
+  animation-duration: 0.4s;
+}
 .component {
   position: relative;
 }
 .component {
+  -webkit-animation-name: animateleft;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animateleft;
+  animation-duration: 0.4s;
+}
+[data-behavior="module"] .module-wrapper {
+  position: relative;
+}
+[data-behavior="module"] [data-animation="slide"] {
   -webkit-animation-name: animateleft;
   -webkit-animation-duration: 0.4s;
   animation-name: animateleft;

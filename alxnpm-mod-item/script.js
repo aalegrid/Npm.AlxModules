@@ -296,7 +296,7 @@ export default class Item extends Module {
                     notesTbody = this.htmlElement.querySelector(".notes-list table tbody");
 
                 notes.forEach(function (value) {
-                    let icon = value.binaryData ? `<img class="thumb-preview" src=${value.binaryData} />` : `<i class="${_this.options.noteIcon} note-icon"></i>`;
+                    let icon = value.binaryData ? `<img class="img-icon" src=${value.binaryData} />` : `<i class="${_this.options.noteIcon} note-icon"></i>`;
                     notesHtml += `<tr data-noteid="${value.id}">
                          <td><a href='javascript:void(0)' title='${value.id}' class='note-item' data-noteid="${value.id}">${icon}</a></td>
                          <td><a href='javascript:void(0)' title='${value.id}' class='note-item' data-noteid="${value.id}">${value.name ? Helper.trim(35, value.name) : 'Untitled'}</a></td>

@@ -1,4 +1,4 @@
-import Helper from 'alxnpm-mod-helper';
+import Helper from 'alxnpm-mod-helper'; 
 import { data } from './data.js';
 
 let Module = require('alxnpm-mod-module')

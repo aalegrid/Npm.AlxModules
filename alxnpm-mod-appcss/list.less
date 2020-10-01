@@ -43,39 +43,25 @@ div.list {
             width: 100%;
 
             img {
-              width: 2rem;
-              height: 2rem;
-              margin-right: 0.25rem;
-              display: inline-block;
-              padding: 3px;
-              line-height: 1.42857143;
-              background-color: #fff;
-              border: 1px solid #ddd;
-              border-radius: 2px;
-              -webkit-transition: all 0.2s ease-in-out;
-              -o-transition: all 0.2s ease-in-out;
-              transition: all 0.2s ease-in-out;
+              .img-icon();
             }
 
             .info {
               display: block;
               
               .title {
-                font-weight: 500;
-                display: block;
+                display: flex;
+                align-items: center;
                
               }
               .meta-data {
-                display: block;
                 font-size: 0.8rem;
                 color: @color-gray;
                 display: flex;
+                margin-top: .25rem;
                
                 i {
                   margin-right: 0.25rem;
-                }
-                .date-modified {
-
                 }
 
                 .todo-count {
@@ -84,7 +70,6 @@ div.list {
                   margin-left: .25rem;
                   padding-left: .25rem;
                   
-
                   span {
                     font-weight: 600;
                   }

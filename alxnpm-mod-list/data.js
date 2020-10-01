@@ -46,8 +46,8 @@ export let data = {
     </div>
 
     `,
-    
-    header : `
+
+    header: `
     
     <ul>
         <li class="page-title"><span class="img"><img src="${Img}"/></span><span class="app-name">{appName}</span></li>
@@ -55,11 +55,14 @@ export let data = {
     
     `,
 
-    footer : `
+    footer: `
     
     <ul>
         <li class="add-item">
             <a href="javascript:void(0)"><i class="fal fa-folder-plus"></i></a>
+        </li>
+        <li class="refresh">
+            <a href="javascript:void(0)"><i class="fal fa-sync"></i></a>
         </li>
         <li class="logout">
             <a href="javascript:void(0)"><i class="fal fa-sign-out"></i></a>

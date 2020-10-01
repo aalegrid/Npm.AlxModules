@@ -1,79 +1,3 @@
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-Regular.ttf") format("ttf");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-Italic.ttf") format("ttf");
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-Bold.ttf") format("ttf");
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-BoldItalic.ttf") format("ttf");
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-Thin.ttf") format("ttf");
-  font-weight: 100;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-ThinItalic.ttf") format("ttf");
-  font-weight: 100;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-Light.ttf") format("ttf");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-LightItalic.ttf") format("ttf");
-  font-weight: 300;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-Medium.ttf") format("ttf");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-MediumItalic.ttf") format("ttf");
-  font-weight: 500;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-Black.ttf") format("ttf");
-  font-weight: 900;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("fonts/Roboto-BlackItalic.ttf") format("ttf");
-  font-weight: 900;
-  font-style: italic;
-}
-/*
-rgba(155, 147, 161, 1) 0%,
-rgba(209, 191, 214, 1) 100%
-*/
 .button {
   border-radius: 2px;
   background-color: #fff;
@@ -108,6 +32,17 @@ rgba(209, 191, 214, 1) 100%
   position: relative;
   top: -2px;
   min-width: 1.25rem;
+}
+.img-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.25rem;
+  display: inline-block;
+  padding: 3px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
 }
 #loader .loading-mask {
   position: fixed;
@@ -259,7 +194,7 @@ rgba(209, 191, 214, 1) 100%
   animation-duration: 0.6s;
 }
 .modal-module .modal .header {
-  background-color: #9b93a1;
+  background-color: #666666;
   color: #fff;
   padding: 10px;
 }
@@ -462,7 +397,7 @@ h3 {
 }
 .priority-btn-group a.selected,
 .status-btn-group a.selected {
-  background-color: #d1bfd6;
+  background-color: #000;
   color: #fff;
   border: 0;
 }
@@ -486,13 +421,13 @@ button:hover {
   color: #000;
 }
 button[type="submit"] {
-  background: #d1bfd6;
+  background: #000;
   color: #fff;
   float: right;
   border: 0;
 }
 button[type="submit"]:hover {
-  background: #9b93a1;
+  background: #666666;
   color: #fff;
 }
 .button-row {
@@ -501,7 +436,7 @@ button[type="submit"]:hover {
 .button-row a,
 .button-row button,
 .button-row .custom-file-upload {
-  background: #d1bfd6;
+  background: #000;
   color: #fff;
   float: none;
   flex-grow: 1;
@@ -520,7 +455,7 @@ button[type="submit"]:hover {
 .button-row a:hover,
 .button-row button:hover,
 .button-row .custom-file-upload:hover {
-  background: #9b93a1;
+  background: #666666;
   color: #fff;
   border-color: #000;
 }
@@ -589,11 +524,22 @@ button[type="submit"]:hover {
   font-weight: 400;
   font-size: 1.5rem;
 }
+.login .user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.login .user-info a i {
+  font-weight: 500;
+}
 header,
 footer,
 .page-header,
 .page-footer {
-  background: linear-gradient(#d1bfd6, #9b93a1);
   color: #fff;
   font-size: 1.25em;
   position: fixed;
@@ -682,16 +628,8 @@ header,
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   border-bottom: 1px solid #000;
-}
-header i.fa-react,
-.page-header i.fa-react {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 6rem;
-  position: absolute;
-  top: -2rem;
-  left: 4rem;
-  opacity: 0.2;
+  background: #666;
+  background: linear-gradient(#666, #000);
 }
 footer,
 .page-footer {
@@ -701,43 +639,56 @@ footer,
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   border-top: 1px solid #000;
+  background: #666;
+  background: linear-gradient(#666, #000);
 }
-.login .user-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style-type: none;
-  margin-bottom: 0.75rem;
-  font-weight: 500;
-  font-size: 0.85rem;
-}
-.login .user-info a i {
-  font-weight: 500;
-}
+body.app-project header,
+body.app-project footer,
 body.app-project .page-header,
 body.app-project .page-footer {
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
+body.app-note header,
+body.app-note footer,
 body.app-note .page-header,
 body.app-note .page-footer {
   background: #9fbf14;
   background: linear-gradient(0deg, #9fbf14 49%, #00ff43 100%);
 }
+body.app-list header,
+body.app-list footer,
 body.app-list .page-header,
 body.app-list .page-footer {
-  background: #9b93a1;
-  background: linear-gradient(0deg, #9b93a1 0%, #d1bfd6 100%);
+  background: #666;
+  background: linear-gradient(0deg, #000 0%, #666 100%);
 }
+body.app-board header,
+body.app-board footer,
 body.app-board .page-header,
 body.app-board .page-footer {
   background: #2d1241;
   background: linear-gradient(0deg, #2d1241 0%, #721c8a 100%);
 }
+.animate {
+  -webkit-animation-name: animateleft;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animateleft;
+  animation-duration: 0.4s;
+}
 .component {
   position: relative;
 }
 .component {
+  -webkit-animation-name: animateleft;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animateleft;
+  animation-duration: 0.4s;
+}
+[data-behavior="module"] .module-wrapper {
+  position: relative;
+}
+[data-behavior="module"] [data-animation="slide"] {
   -webkit-animation-name: animateleft;
   -webkit-animation-duration: 0.4s;
   animation-name: animateleft;
@@ -804,22 +755,19 @@ div.list table tr td a.list-item img {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 2px;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
 }
 div.list table tr td a.list-item .info {
   display: block;
 }
 div.list table tr td a.list-item .info .title {
-  font-weight: 500;
-  display: block;
+  display: flex;
+  align-items: center;
 }
 div.list table tr td a.list-item .info .meta-data {
-  display: block;
   font-size: 0.8rem;
   color: #9b9090;
   display: flex;
+  margin-top: 0.25rem;
 }
 div.list table tr td a.list-item .info .meta-data i {
   margin-right: 0.25rem;
@@ -832,6 +780,9 @@ div.list table tr td a.list-item .info .meta-data .todo-count {
 }
 div.list table tr td a.list-item .info .meta-data .todo-count span {
   font-weight: 600;
+}
+div.list table tr td a.list-count {
+  display: unset;
 }
 div.list table tr td .count {
   color: #fff;
@@ -908,7 +859,7 @@ div[class$="-list"] table td [class$="-item"] {
   font-size: 0.9rem;
   display: inline-block;
 }
-div[class$="-list"] table td img.thumb-preview {
+div[class$="-list"] table td img.img-icon {
   width: 2rem;
   height: 2rem;
   margin-right: 0.25rem;
@@ -918,9 +869,6 @@ div[class$="-list"] table td img.thumb-preview {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 2px;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
 }
 div[class$="-list"] table td .note-icon {
   margin-left: 0.5rem;
@@ -982,18 +930,17 @@ div.note.view .view img {
   border-top: 1px dotted #ccc;
 }
 .treeview ul li img {
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 2rem;
+  height: 2rem;
   margin-right: 0.25rem;
   display: inline-block;
-  padding: 2px;
+  padding: 3px;
   line-height: 1.42857143;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 2px;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  width: 1.3rem;
+  height: 1.3rem;
   position: relative;
   top: 3px;
 }
