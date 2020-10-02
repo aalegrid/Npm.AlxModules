@@ -302,8 +302,10 @@ export default class List extends Module {
         }
     }
 
-    sortItems(items) {
+    sortItems(list) {
 
+        let items = list.sort(Helper.titleSort);
+        
         switch (this.sortField) {
             case "title": items.sort(Helper.titleSort);
                 break;
