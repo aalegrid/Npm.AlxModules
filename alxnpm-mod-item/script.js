@@ -141,7 +141,14 @@ export default class Item extends Module {
             _this.options.noteModule.show();
         }, false);
 
-        if (this.options.nodes) {
+        if(this.options.nodes) {
+            if(this.options.nodeSingleLevelOnly && parseInt(item.parentId)===0) {
+
+            }
+            else {
+                this.footer.querySelector(".add-node").style.display = "none"; 
+            }
+
             this.footer.querySelector(".add-node a").addEventListener("click", function () {
                 _this.hide();
                 _this.render({ parentId: item.id });
@@ -149,6 +156,9 @@ export default class Item extends Module {
             }, false);
         }
 
+        else {
+            this.footer.querySelector(".add-node").style.display = "none"; 
+        }
 
         /* #endregion */
 
