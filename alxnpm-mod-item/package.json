@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-item",
-  "version": "2.0.7",
+  "version": "3.0.0",
   "description": "Item",
   "main": "script.js",
   "scripts": {
@@ -9,11 +9,11 @@
   "author": "Alex Alegrid",
   "license": "ISC",
   "Dependencies": {
-    "alxnpm-mod-module": "^2.0.5",
-    "alxnpm-mod-api": "^2.0.5",
-    "alxnpm-mod-loader": "^2.0.5",
-    "alxnpm-mod-helper": "^2.0.5",
-    "alxnpm-mod-module-switcher": "^2.0.5",
-    "alxnpm-mod-object-picker": "^2.0.5"
+    "alxnpm-mod-module": "^3.0.0",
+    "alxnpm-mod-api": "^3.0.0",
+    "alxnpm-mod-loader": "^3.0.0",
+    "alxnpm-mod-helper": "^3.0.0",
+    "alxnpm-mod-module-switcher": "^3.0.0",
+    "alxnpm-mod-object-picker": "^3.0.0"
   }
 }
