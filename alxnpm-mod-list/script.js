@@ -16,6 +16,7 @@ export default class List extends Module {
         this.loader = new Loader();
         this.sortField = "title";
         this._items = [];
+        this.openItems = Helper.getLocalStorageData(`${this.options.appId}_openItems`) || [];
     }
 
     get items() {
@@ -138,7 +139,7 @@ export default class List extends Module {
                             _this.openItems.splice(index, 1);
                         }
                     }
-                    Helper.setLocalStorageData(`${this.options.appId}_openItems`, _this.openItems)
+                    Helper.setLocalStorageData(`${_this.options.appId}_openItems`, _this.openItems)
                 }, false);
             });
 
