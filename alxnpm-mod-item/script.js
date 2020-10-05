@@ -53,43 +53,23 @@ export default class Item extends Module {
             this.htmlElement.querySelector(".nodes-list table thead .nodes").style.display = "none";
         }
 
-        if (this.options.nodes) {
+        if (this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) {
             this.setNodeCollapse();
             this.setNodeSort();
+            this.footer.querySelector(".add-node a").addEventListener("click", function () {
+                _this.hide();
+                _this.render({ parentId: item.id });
+                _this.show();
+            }, false);
         }
         else {
             this.htmlElement.querySelector(".nodes-list").style.display = "none";
             this.footer.querySelector(".add-node").style.display = "none";
         }
-
-        if (this.options.nodeSingleLevelOnly) {
-            if (parseInt(item.parentId) !== 0) {
-                this.htmlElement.querySelector(".nodes-list").style.display = "none";
-            }
-        }
-
+   
         let form = this.form;
 
         this.setNoteCollapse();
-
-        /* #region Floating Menu */
-
-        let floatingMenu = document.querySelector(".floating-save-menu");
-        if (floatingMenu) {
-            floatingMenu.remove();
-        }
-
-        let floatingDiv = document.createElement("div");
-        floatingDiv.classList.add("floating-save-menu");
-        floatingDiv.innerHTML = `<a href="javascript:void(0)"><i class="fal fa-save"></i></a>`;
-        document.body.insertBefore(floatingDiv, document.body.childNodes[4]);
-
-        document.querySelector(".floating-save-menu a").addEventListener("click", function (e) {
-            e.preventDefault();
-            _this.htmlElement.querySelector("form button[type='submit']").click();
-        }, false);
-
-        /* #endregion */
 
         /* #region Set Header/Footer */
 
@@ -113,7 +93,12 @@ export default class Item extends Module {
 
         this.header.querySelector(".page-title").innerHTML = item.title ? Helper.trim(32, item.title) : `New Item`;
 
-        this.header.querySelector(".delete-item a").addEventListener("click", function () {
+        this.header.querySelector(".save a").addEventListener("click", function (e) {
+            e.preventDefault();
+            _this.htmlElement.querySelector("form button[type='submit']").click();
+        }, false);
+
+        this.footer.querySelector(".delete-item a").addEventListener("click", function () {
             _this.options.modalModule.header = "Delete";
             _this.options.modalModule.body = `Are you sure you want to delete '${item.title}'?`;
 
@@ -140,25 +125,6 @@ export default class Item extends Module {
             _this.options.noteModule.render({}, item.id);
             _this.options.noteModule.show();
         }, false);
-
-        if(this.options.nodes) {
-            if(this.options.nodeSingleLevelOnly && parseInt(item.parentId)===0) {
-
-            }
-            else {
-                this.footer.querySelector(".add-node").style.display = "none"; 
-            }
-
-            this.footer.querySelector(".add-node a").addEventListener("click", function () {
-                _this.hide();
-                _this.render({ parentId: item.id });
-                _this.show();
-            }, false);
-        }
-
-        else {
-            this.footer.querySelector(".add-node").style.display = "none"; 
-        }
 
         /* #endregion */
 
@@ -253,11 +219,10 @@ export default class Item extends Module {
 
         /* #region ADD */
         if (isAdd) {
-            this.footer.querySelector(".add-note").classList.add("disabled");
-            if (this.options.nodes) {
-                this.footer.querySelector(".add-node").classList.add("disabled");
-            }
-            this.header.querySelector(".delete-item").classList.add("disabled");
+            this.footer.querySelector(".add-note").classList.add("disabled"); 
+            this.footer.querySelector(".add-node").classList.add("disabled"); 
+            this.footer.querySelector(".delete-item").classList.add("disabled"); 
+            
             this.htmlElement.querySelector(".notes-list").style.display = "none";
             this.htmlElement.querySelector(".nodes-list").style.display = "none";
         }
@@ -273,7 +238,7 @@ export default class Item extends Module {
                 _this.options.noteModule.show();
             }, false);
 
-            if (this.options.nodes) {
+            if (this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) {
                 // Add add node button
                 this.htmlElement.querySelector(".add-node a").addEventListener("click", function () {
                     _this.hide();
@@ -359,7 +324,7 @@ export default class Item extends Module {
             _this.save(item);
         });
 
-        if (this.options.nodes) {
+        if (this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) {
             let nodeLinks = this.htmlElement.querySelectorAll(".node-item");
 
             if (nodeLinks) {
@@ -390,7 +355,8 @@ export default class Item extends Module {
             });
         }
 
-        if (this.options.nodes && item.nodes) {
+        if ((this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) && item.nodes) {
+
             this.addNodeSortLinks(item);
         }
 
@@ -452,7 +418,7 @@ export default class Item extends Module {
             }
         }
 
-        if (this.options.nodes) {
+        if (this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) {
             this.htmlElement.querySelector(".nodes-list .collapse i").addEventListener("click", function () {
                 _this.htmlElement.querySelector(".nodes-list table").classList.toggle("hide");
                 this.classList.toggle("fa-minus-square");
@@ -492,6 +458,10 @@ export default class Item extends Module {
                 nodes = this.sortItems(item.nodes);
             if (nodes) {
                 nodes.forEach(function (value) {
+
+                    if (value.tag === "hidden") {
+                        return;
+                    }
                     let statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
                         priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle"),
                         iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` :   `<i class="${_this.options.nodeIcon}"></i>`;

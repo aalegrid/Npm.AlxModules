@@ -162,8 +162,8 @@ export let data = {
                 <a href="javascript:void(0)"><i class="fal fa-arrow-left"></i></a>
             </li>
             <li class="page-title"></li>
-            <li class="delete-item">
-                <a href="javascript:void(0)" class="delete-item"><i class="fal fa-trash"></i></a>
+            <li class="save">
+                <a href="javascript:void(0)"><i class="fal fa-save"></i></a>
             </li>
         </ul>
     
@@ -180,6 +180,9 @@ export let data = {
         </li>
         <li class="add-note">
             <a href="javascript:void(0)"><i class=""></i></a>
+        </li>
+        <li class="delete-item">
+            <a href="javascript:void(0)"><i class="fal fa-trash"></i></a>
         </li>
     </ul>
     

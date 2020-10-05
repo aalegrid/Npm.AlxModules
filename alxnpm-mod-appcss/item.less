@@ -35,10 +35,7 @@ div[class$="-list"] {
       }
     }
 
-    td {
-      text-align: center;
-      vertical-align: top;
-      
+    td {      
       &:first-child,
       &:nth-child(2) {
         text-align: left;
@@ -55,7 +52,8 @@ div[class$="-list"] {
       }
 
       img.img-icon {
-        .img-icon();
+        position: relative;
+        top: 2px;
       }
 
       .note-icon {
@@ -75,3 +73,14 @@ div[class$="-list"] {
     margin-bottom: 1.5rem;
   }
 }
+
+// .notes-list {
+//   table {
+//     tr {
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//       height: 3rem;
+//     }
+//   }
+// }

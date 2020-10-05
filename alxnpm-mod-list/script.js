@@ -31,18 +31,18 @@ export default class List extends Module {
 
     render() {
 
-        let _this = this, floatingMenu = document.querySelector(".floating-save-menu");
+        let _this = this;
 
         this.header = data.header.replace(/{appName}/g, this.options.appName);
 
         let user = Helper.getLocalStorageData(`${this.options.appId}_user`);
 
-        if(user) {
-            let li =  document.createElement("li");
+        if (user) {
+            let li = document.createElement("li");
             li.classList.add("user-info");
-            this.header.querySelector("ul").appendChild(li);   
+            this.header.querySelector("ul").appendChild(li);
             li.innerHTML = `Hello <i class="fas fa-user-astronaut"></i> ${user.firstName} ${user.lastName}`
-            
+
         }
 
         this.footer = data.footer;
@@ -50,8 +50,6 @@ export default class List extends Module {
         this.wrapperContent = this.options.appDomain === "list" ? data.templateTreeView : data.templateList;
 
         document.querySelector("main").classList.remove("board-mode");
-
-        floatingMenu && (floatingMenu.remove())
 
         this.footer.querySelector(".logout a").addEventListener("click", function () {
             _this.exit(_this.options.exit);
@@ -77,13 +75,13 @@ export default class List extends Module {
                 this.bind(items);
             }
             else {
-                this.getItems();  
+                this.getItems();
             }
         }
 
     }
 
-    getItems(){
+    getItems() {
 
         this.loader.show();
 
@@ -206,6 +204,11 @@ export default class List extends Module {
 
         items.forEach(function (value, index) {
 
+
+            if (value.tag === "hidden") {
+                return;
+            }
+
             let icon = value.icon ? `<i class="${value.icon}">` : '',
                 image = "",
                 status = "",
@@ -305,7 +308,7 @@ export default class List extends Module {
     sortItems(list) {
 
         let items = list.sort(Helper.titleSort);
-        
+
         switch (this.sortField) {
             case "title": items.sort(Helper.titleSort);
                 break;

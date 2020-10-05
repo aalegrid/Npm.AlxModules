@@ -50,7 +50,9 @@ table {
 
     th,
     td {
-      padding: 0.75rem;
+      padding: .75rem;
+      text-align: center;
+      
       &:last-child {
         text-align: end !important;
       }
@@ -230,7 +232,7 @@ button[type="submit"] {
   position: fixed;
   position: fixed;
   bottom: 2rem;
-  right: 3.85rem;
+  right: 5.85rem;
   background-color: #fff;
   border-radius: 1.4rem;
   padding: 0.75rem 0.85rem;
@@ -329,6 +331,11 @@ footer,
     font-weight: 500;
     color: @color-white;
     text-decoration: none;
+
+    &.disabled {
+      color: #666;
+      pointer-events: none;
+    }
   }
 }
 

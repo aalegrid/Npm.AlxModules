@@ -114,6 +114,10 @@ export default class Helper {
 
       data.forEach(function (value) {
 
+        if(value.tag === "hidden") {
+          return;
+        }
+
         if (value.title) {
 
           let icon = "",
