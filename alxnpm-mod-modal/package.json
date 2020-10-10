@@ -1,7 +1,7 @@
   
 {
   "name": "alxnpm-mod-modal",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Modal",
   "main": "script.js",
   "scripts": {

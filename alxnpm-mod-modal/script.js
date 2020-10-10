@@ -62,10 +62,14 @@ export default class Modal extends Module {
         cancel = this.htmlElement.querySelector(".cancel");
 
         close.addEventListener("click", function(){
+            let ok = _this.htmlElement.querySelector(".ok");
+            ok.removeEventListener('click', _this.confirmFunction, false);
             _this.hide();
         }, false);
 
         cancel.addEventListener("click", function(){
+            let ok = _this.htmlElement.querySelector(".ok");
+            ok.removeEventListener('click', _this.confirmFunction, false);
             _this.hide();
         }, false);
 
@@ -73,6 +77,7 @@ export default class Modal extends Module {
     }
 
     setConfirmAction(action){
+        this.confirmFunction = action;
         let ok = this.htmlElement.querySelector(".ok");
         ok.addEventListener("click", action, false);
     }
