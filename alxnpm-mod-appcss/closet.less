@@ -1,0 +1,131 @@
+@import "variables_mixins.less";
+
+
+main.closet-mode {
+  margin-top: 3.55rem;
+  background-color: @color-black;
+  padding: 0;
+
+  #mainPanel {
+    // border: 1px solid red;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    .closet-container {
+      height: 88vh;
+      .area {
+        overflow: scroll;
+        position: relative;
+
+        .slider-bar {
+          position: fixed;
+          width: 100%;
+          display: none;
+          z-index: 5;
+
+          .slider {
+            -webkit-appearance: none;
+            width: 99%;
+            height: 16px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+          }
+          
+          .slider:hover {
+            opacity: 1;
+          }
+          
+          .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+          }
+          
+          .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+          }
+        }
+
+        .clothes {
+          position: relative;
+          display: flex;
+          height: 100%;
+          justify-content: space-between;
+          align-items: center;
+
+          // display: grid;
+          // grid-gap: 0;
+          // grid-template-columns: auto auto auto auto;
+
+          img {
+            margin: 150px 50px 50px 110px;
+            // border: 1px dashed blue;
+
+          }
+          img:last-child{
+            padding-right: 200px;
+          }
+
+          // .clothing-item {
+          //   border: 1px dashed blue;
+          //   background-size: contain;
+          //   background-position: center;
+          //   background-repeat: no-repeat;
+          //   padding: 100px;
+          //   margin: 100px 150px;
+          // }
+
+        }
+        
+      }
+
+      .area::-webkit-scrollbar {
+        display: none;
+      }
+
+      .area::-webkit-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+
+      &.show-area-sliders {
+        .slider-area {
+          display: block;
+        }
+      }
+
+      &.show-image-sliders {
+        .slider-image {
+          display: block;
+        }
+      }
+
+      &.show-area-lines {
+        .area {
+          border-bottom: 1px dashed #fff;
+        }
+        
+      }
+
+      &.hide-bottom {
+        [class$="Bottom"] {
+          display: none;
+        }
+        
+      }
+    }
+  }
+}
+
+
+

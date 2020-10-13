@@ -28,8 +28,11 @@
       a {
         text-decoration: none;
         color: #818181;
-        display: block;
         transition: 0.3s;
+        display: inline-block;
+        margin-right: 1.5rem;
+        position: relative;
+    
         &:hover {
           color: #f1f1f1;
         }
@@ -40,6 +43,25 @@
 
         &.disabled {
           opacity: .5;
+        }
+
+        &.selected::before {
+          font-style: normal;
+          font-variant: normal;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+          font-family: "Font Awesome 5 Pro";
+          font-weight: 300;
+          content: "\f00c";
+          padding-right: 5px;
+          font-size: 3rem;
+          position: absolute;
+          top: .5rem;
+          color: @color-white;
+        }
+
+        img {
+          height: 5rem;
         }
       }
     }

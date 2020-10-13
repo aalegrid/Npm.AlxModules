@@ -324,6 +324,7 @@ table tr th {
 table tr th,
 table tr td {
   padding: 0.75rem;
+  text-align: center;
 }
 table tr th:last-child,
 table tr td:last-child {
@@ -619,6 +620,13 @@ footer a,
   color: #fff;
   text-decoration: none;
 }
+header a.disabled,
+footer a.disabled,
+.page-header a.disabled,
+.page-footer a.disabled {
+  color: #666;
+  pointer-events: none;
+}
 header,
 .page-header {
   left: 0;
@@ -626,7 +634,7 @@ header,
   -webkit-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #666;
   background: #666;
   background: linear-gradient(#666, #000);
 }
@@ -939,6 +947,7 @@ div.note.view .view img {
   top: 0.1rem;
 }
 .treeview ul li span {
+  margin-right: 1.5rem;
   /* Create the caret/arrow with a unicode, and style it */
   /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
 }
@@ -967,10 +976,12 @@ div.note.view .view img {
 .treeview ul li a {
   text-decoration: none;
   color: #000;
+  font-weight: normal;
 }
 .treeview ul li a.icon-link {
   position: absolute;
   right: 1rem;
+  top: 0.25rem;
 }
 .treeview ul li a.icon-link i {
   top: 0;
@@ -1035,6 +1046,90 @@ main.board-mode {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
+main.closet-mode {
+  margin-top: 3.55rem;
+  background-color: #000;
+  padding: 0;
+}
+main.closet-mode #mainPanel {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+main.closet-mode #mainPanel .closet-container {
+  height: 88vh;
+}
+main.closet-mode #mainPanel .closet-container .area {
+  overflow: scroll;
+  position: relative;
+}
+main.closet-mode #mainPanel .closet-container .area .slider-bar {
+  position: fixed;
+  width: 100%;
+  display: none;
+  z-index: 5;
+}
+main.closet-mode #mainPanel .closet-container .area .slider-bar .slider {
+  -webkit-appearance: none;
+  width: 99%;
+  height: 16px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+main.closet-mode #mainPanel .closet-container .area .slider-bar .slider:hover {
+  opacity: 1;
+}
+main.closet-mode #mainPanel .closet-container .area .slider-bar .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+main.closet-mode #mainPanel .closet-container .area .slider-bar .slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+main.closet-mode #mainPanel .closet-container .area .clothes {
+  position: relative;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+main.closet-mode #mainPanel .closet-container .area .clothes img {
+  margin: 150px 50px 50px 110px;
+}
+main.closet-mode #mainPanel .closet-container .area .clothes img:last-child {
+  padding-right: 200px;
+}
+main.closet-mode #mainPanel .closet-container .area::-webkit-scrollbar {
+  display: none;
+}
+main.closet-mode #mainPanel .closet-container .area::-webkit-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+main.closet-mode #mainPanel .closet-container.show-area-sliders .slider-area {
+  display: block;
+}
+main.closet-mode #mainPanel .closet-container.show-image-sliders .slider-image {
+  display: block;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area {
+  border-bottom: 1px dashed #fff;
+}
+main.closet-mode #mainPanel .closet-container.hide-bottom [class$="Bottom"] {
+  display: none;
+}
 /* #region NAVIGATION */
 #navPanel {
   height: 100%;
@@ -1062,8 +1157,10 @@ main.board-mode {
 #navPanel ul li a {
   text-decoration: none;
   color: #818181;
-  display: block;
   transition: 0.3s;
+  display: inline-block;
+  margin-right: 1.5rem;
+  position: relative;
 }
 #navPanel ul li a:hover {
   color: #f1f1f1;
@@ -1073,6 +1170,23 @@ main.board-mode {
 }
 #navPanel ul li a.disabled {
   opacity: 0.5;
+}
+#navPanel ul li a.selected::before {
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f00c";
+  padding-right: 5px;
+  font-size: 3rem;
+  position: absolute;
+  top: 0.5rem;
+  color: #fff;
+}
+#navPanel ul li a img {
+  height: 5rem;
 }
 #navPanel .close-btn {
   position: absolute;

@@ -1,75 +1,3 @@
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-Regular.ttf') format('ttf');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-Italic.ttf') format('ttf');
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-Bold.ttf') format('ttf');
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-BoldItalic.ttf') format('ttf');
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-Thin.ttf') format('ttf');
-  font-weight: 100;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-ThinItalic.ttf') format('ttf');
-  font-weight: 100;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-Light.ttf') format('ttf');
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-LightItalic.ttf') format('ttf');
-  font-weight: 300;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-Medium.ttf') format('ttf');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-MediumItalic.ttf') format('ttf');
-  font-weight: 500;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-Black.ttf') format('ttf');
-  font-weight: 900;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('fonts/Roboto-BlackItalic.ttf') format('ttf');
-  font-weight: 900;
-  font-style: italic;
-}
 .button {
   border-radius: 2px;
   background-color: #fff;
@@ -105,6 +33,17 @@
   top: -2px;
   min-width: 1.25rem;
 }
+.img-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.25rem;
+  display: inline-block;
+  padding: 3px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
 /* #region NAVIGATION */
 #navPanel {
   height: 100%;
@@ -132,8 +71,10 @@
 #navPanel ul li a {
   text-decoration: none;
   color: #818181;
-  display: block;
   transition: 0.3s;
+  display: inline-block;
+  margin-right: 1.5rem;
+  position: relative;
 }
 #navPanel ul li a:hover {
   color: #f1f1f1;
@@ -143,6 +84,23 @@
 }
 #navPanel ul li a.disabled {
   opacity: 0.5;
+}
+#navPanel ul li a.selected::before {
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f00c";
+  padding-right: 5px;
+  font-size: 3rem;
+  position: absolute;
+  top: 0.5rem;
+  color: #fff;
+}
+#navPanel ul li a img {
+  height: 5rem;
 }
 #navPanel .close-btn {
   position: absolute;
