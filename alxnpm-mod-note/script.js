@@ -183,7 +183,7 @@ export default class Note extends Module {
 
         let img = this.htmlElement.querySelector(".note form .binary-data");
 
-        if (img.src === 'http:') {
+        if (img.src === 'http:' || img.src === 'file:///' || img.src.length <= 10) {
             savedNote.binaryData = null
         }
         else {
