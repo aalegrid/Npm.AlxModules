@@ -65,9 +65,10 @@ export let data = {
                 <a href="javascript:void(0)"><i class="fal fa-arrow-left"></i></a>
             </li>
             <li class="page-title"></li>
-            <li class="delete-note">
-                <a href="javascript:void(0)"><i class="fal fa-trash"></i></a>
+            <li class="save">
+                <a href="javascript:void(0)"><i class="fal fa-save"></i></a>
             </li>
+
         </ul>
     
     `,
@@ -81,9 +82,9 @@ export let data = {
         <li class="edit">
             <a href="javascript:void(0)"><i class="fal fa-edit"></i></a>
         </li>
-        <li class="camera">
-            <a href="javascript:void(0)"><i class="fal fa-camera"></i></a>
-        </li>  
+        <li class="delete-note disabled">
+            <a href="javascript:void(0)"><i class="fal fa-trash"></i></a>
+        </li>
 
     </ul>
     
