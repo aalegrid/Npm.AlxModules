@@ -39,10 +39,15 @@ export default class Note extends Module {
         
         }, false);
 
-        this.header.querySelector(".page-title").innerHTML = note.name ?  Helper.trim(32, note.name) : "New Note"; 
+        this.header.querySelector(".page-title").innerHTML = note.name ?  Helper.trim(32, note.name) : "Untitled"; 
 
-        this.header.querySelector(".delete-note").addEventListener("click", function () {
-            alert("To do")
+        this.header.querySelector(".save a").addEventListener("click", function (e) {
+            e.preventDefault();
+            _this.htmlElement.querySelector("form button[type='submit']").click();
+        }, false);
+
+        this.footer.querySelector(".delete-note").addEventListener("click", function () {
+           
         }, false);
 
         this.footer.querySelector(".home a").addEventListener("click", function(){
@@ -63,14 +68,26 @@ export default class Note extends Module {
             this.htmlElement.querySelector(".view .value").innerHTML = note.value;
         }
 
+        if(this.htmlElement.querySelector(".note").classList.contains("view")) {
+            this.header.querySelector(".save a").classList.add("disabled")
+        }
+        else {
+            this.header.querySelector(".save a").classList.remove("disabled")
+        }
+
+
         if (note.binaryData) {
             this.htmlElement.querySelector(".binary-data-view").src = note.binaryData;
             this.htmlElement.querySelector(".binary-data").src = note.binaryData;
+
             this.htmlElement.querySelector(".clear-binary").style.display = "block";
             this.htmlElement.querySelector(".image-row").style.display = "block";
         }
 
         else {
+            this.htmlElement.querySelector(".binary-data-view").src = "//";
+            this.htmlElement.querySelector(".binary-data").src = "//";
+
             this.htmlElement.querySelector(".binary-data-view").style.display = "none"; 
             this.htmlElement.querySelector(".clear-binary").style.display = "none"; 
             this.htmlElement.querySelector(".image-row").style.display = "none";
@@ -79,10 +96,10 @@ export default class Note extends Module {
         // Events
 
         if(!note.id) {
-            this.header.querySelector(".delete-note a").classList.add("disabled");
-            _this.htmlElement.querySelector(".note").classList.remove("view");
+            this.footer.querySelector(".delete-note a").classList.add("disabled");
+            this.htmlElement.querySelector(".note").classList.remove("view");
             this.footer.querySelector(".edit a").classList.add("disabled");
-           
+            this.header.querySelector(".save a").classList.remove("disabled");
         }
 
         form.addEventListener("submit", function (e) {           
@@ -102,11 +119,10 @@ export default class Note extends Module {
                 form.value.value = "file";
                 var reader = new FileReader();
                 form.querySelector(".filename").innerHTML = file.name;
-                const binaryData = `${_this.options.appId}_binarydata`;
                 reader.onload = function (e) {
                   var dataUrl = reader.result;
-                  Helper.setLocalStorageData(binaryData, dataUrl);
                   _this.htmlElement.querySelector(".binary-data").src = dataUrl;
+                  _this.htmlElement.querySelector(".binary-data").style.display = "block";
                   _this.htmlElement.querySelector(".clear-binary").style.display = "block";
                   _this.htmlElement.querySelector(".image-row").style.display = "block";
                 }        
@@ -116,10 +132,9 @@ export default class Note extends Module {
 
 
         this.form.querySelector(".clear-binary").addEventListener("click", function (e) {
-            _this.htmlElement.querySelector(".binary-data").src = "";
+            _this.htmlElement.querySelector(".binary-data").src = "//";
+            _this.htmlElement.querySelector(".binary-data").style.display = "none";
             form.querySelector(".filename").innerHTML = "";
-            const binaryDataKey = `${_this.options.appId}_binarydata`;
-            Helper.removeLocalStorageData(binaryDataKey);
             this.style.display = "none";
         });
 
@@ -127,11 +142,16 @@ export default class Note extends Module {
             _this.htmlElement.querySelector(".note").classList.toggle("view");
              this.classList.toggle("fa-edit");
             this.classList.toggle("fa-telescope");
+
+            if(_this.htmlElement.querySelector(".note").classList.contains("view")) {
+                _this.header.querySelector(".save a").classList.add("disabled")
+            }
+
+            else {
+                _this.header.querySelector(".save a").classList.remove("disabled")
+            }
         });
 
-        this.footer.querySelector(".camera a i").addEventListener("click", function (e) {
-            navigator.camera.getPicture(_this.cameraSuccess, _this.cameraError, cameraOptions);
-        });
     }
 
     save(note, itemId) {
@@ -141,9 +161,7 @@ export default class Note extends Module {
             url, 
             method,
             isAdd = typeof note.id === 'undefined',
-            isResponseJson,
-            binaryDataKey = `${this.options.appId}_binarydata`,
-            binaryData = Helper.getLocalStorageData(binaryDataKey);
+            isResponseJson;
 
         //ADD - POST
         if (isAdd) {
@@ -163,10 +181,15 @@ export default class Note extends Module {
         savedNote.name = form.name.value;
         savedNote.value = form.value.value;
 
-        if (binaryData) {
-            note.binaryData = binaryData;
+        let img = this.htmlElement.querySelector(".note form .binary-data");
+
+        if (img.src === 'http:') {
+            savedNote.binaryData = null
         }
-        
+        else {
+            savedNote.binaryData = img.src
+        }
+       
         this.loader.show();
 
         this.api.request(url, method, savedNote, false, true, isResponseJson)
@@ -192,8 +215,6 @@ export default class Note extends Module {
                     let noteIndex = item.metas.findIndex((obj) => parseInt(obj.id) === parseInt(savedNote.id));
                     item.metas[noteIndex] = savedNote;
                 }
-
-                Helper.removeLocalStorageData(binaryDataKey);
 
                 if (item.parentId) {
                     let parent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId);
@@ -222,8 +243,8 @@ export default class Note extends Module {
         // var image = document.getElementById('myImage');
         // image.src = "data:image/jpeg;base64," + imageData;
         this.form.querySelector(".filename").innerHTML = "CameraImage";
-        const binaryData = `${_this.options.appId}_binarydata`;
-          Helper.setLocalStorageData(binaryData, dataUrl);
+        // const binaryData = `${_this.options.appId}_binarydata`;
+        //   Helper.setLocalStorageData(binaryData, dataUrl);
           _this.htmlElement.querySelector(".binary-data").src = imageData;
           _this.htmlElement.querySelector(".clear-binary").style.display = "block";
           _this.htmlElement.querySelector(".image-row").style.display = "block";
