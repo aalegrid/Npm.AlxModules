@@ -85,22 +85,8 @@
 #navPanel ul li a.disabled {
   opacity: 0.5;
 }
-#navPanel ul li a.selected::before {
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font-family: "Font Awesome 5 Pro";
-  font-weight: 300;
-  content: "\f00c";
-  padding-right: 5px;
-  font-size: 3rem;
-  position: absolute;
-  top: 0.5rem;
+#navPanel ul li a.selected {
   color: #fff;
-}
-#navPanel ul li a img {
-  height: 5rem;
 }
 #navPanel .close-btn {
   position: absolute;
@@ -116,6 +102,23 @@
   opacity: 0.95;
 }
 /* #endregion */
+body.app-closet #navPanel ul li a.selected::before {
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f00c";
+  padding-right: 5px;
+  font-size: 3rem;
+  position: absolute;
+  top: 0.5rem;
+  color: #fff;
+}
+body.app-closet #navPanel ul li a img {
+  height: 5rem;
+}
 #mainPanel {
   transition: margin-left 0.5s;
 }

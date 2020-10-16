@@ -72,35 +72,35 @@ class Module {
 
         this.startup(this.options.startup);
 
-        console.log(`Module(${this.moduleId}) CONTENT SET`);
-        console.log(`Content: ${content.length > 50 ? content.replace(/(\r\n|\n|\s|\r)/gm, "").substring(0, 50) + "..." : content.replace(/(\r\n|\n|\r)/gm, "")}`);
+        //console.log(`Module(${this.moduleId}) CONTENT SET`);
+        //console.log(`Content: ${content.length > 50 ? content.replace(/(\r\n|\n|\s|\r)/gm, "").substring(0, 50) + "..." : content.replace(/(\r\n|\n|\r)/gm, "")}`);
         // console.log(`Alert Box: ${this.alertBox}`);
         // console.log(`Form: ${this.form}`);
         // console.log("------------------------------------------------------------------------------")
 
-        const _this = this;
-        if (this.alertBox) {
-            var mutationObserver = new MutationObserver(function (mutations) {
-                mutations.forEach(function (mutation) {
-                    console.log(`Alert from module(${_this.moduleId}): ${mutation.target.innerHTML}`);
-                    if (mutation.target.innerHTML === "401: Unauthorized") {
-                        console.log(`401: Unauthorized detected from Module(${_this.moduleId}) -- invoking exit()`)
-                        console.log(`Module data:`)
-                        console.log(_this);
-                        _this.exit(_this.options.exit);
-                    }
-                });
-            });
+        //const _this = this;
+        // if (this.alertBox) {
+        //     var mutationObserver = new MutationObserver(function (mutations) {
+        //         mutations.forEach(function (mutation) {
+        //             console.log(`Alert from module(${_this.moduleId}): ${mutation.target.innerHTML}`);
+        //             if (mutation.target.innerHTML === "401: Unauthorized") {
+        //                 console.log(`401: Unauthorized detected from Module(${_this.moduleId}) -- invoking exit()`)
+        //                 console.log(`Module data:`)
+        //                 console.log(_this);
+        //                 _this.exit(_this.options.exit);
+        //             }
+        //         });
+        //     });
 
-            mutationObserver.observe(this.alertBox, {
-                attributes: true,
-                characterData: true,
-                childList: true,
-                subtree: true,
-                attributeOldValue: true,
-                characterDataOldValue: true
-            });
-        }
+        //     mutationObserver.observe(this.alertBox, {
+        //         attributes: true,
+        //         characterData: true,
+        //         childList: true,
+        //         subtree: true,
+        //         attributeOldValue: true,
+        //         characterDataOldValue: true
+        //     });
+        // }
 
 
     }
@@ -111,8 +111,8 @@ class Module {
             throw `htmlElement for Module(${this.moduleId}) does not exist.`
         }
 
-        console.log(`Module(${this.moduleId}) INITIALIZED`);
-        console.log(this);
+        // console.log(`Module(${this.moduleId}) INITIALIZED`);
+        // console.log(this);
 
         this.htmlElement.setAttribute("data-behavior", "module");
         this.htmlElement.setAttribute("data-moduleid", this.moduleId);

@@ -4,10 +4,10 @@
   animation-name: animateleft;
   animation-duration: 0.4s;
 }
-.component {
+.slide-component {
   position: relative;
 }
-.component {
+.slide-component {
   -webkit-animation-name: animateleft;
   -webkit-animation-duration: 0.4s;
   animation-name: animateleft;
