@@ -112,3 +112,12 @@ div[class$="-list"] table tr.list-add td:nth-child(4) {
 div[class$="-list"] table.hide {
   display: none;
 }
+.item form .row .source-editor-text {
+  display: none;
+}
+.item form .row.source-editor .source-editor-text {
+  display: block;
+}
+.item form .row.source-editor .ck-editor {
+  display: none;
+}

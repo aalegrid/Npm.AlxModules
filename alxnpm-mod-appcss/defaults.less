@@ -50,9 +50,9 @@ table {
 
     th,
     td {
-      padding: .75rem;
+      padding: 0.75rem;
       text-align: center;
-      
+
       &:last-child {
         text-align: end !important;
       }
@@ -363,10 +363,9 @@ footer,
   background: linear-gradient(#666, #000);
 }
 
-
 body {
   &.app-project {
-    header, 
+    header,
     footer,
     .page-header,
     .page-footer {
@@ -375,7 +374,7 @@ body {
     }
   }
   &.app-note {
-    header, 
+    header,
     footer,
     .page-header,
     .page-footer {
@@ -389,20 +388,16 @@ body {
   }
 
   &.app-list {
-    header, 
+    header,
     footer,
     .page-header,
     .page-footer {
       background: #666;
-      background: linear-gradient(
-        0deg,
-        #000 0%,
-        #666 100%
-      );
+      background: linear-gradient(0deg, #000 0%, #666 100%);
     }
   }
   &.app-board {
-    header, 
+    header,
     footer,
     .page-header,
     .page-footer {
@@ -414,4 +409,34 @@ body {
       );
     }
   }
+
+  &.app-closet {
+    header,
+    footer,
+    .page-header,
+    .page-footer {
+      background: rgb(216,154,163);
+      background: linear-gradient(0deg, rgba(216,154,163,1) 0%, rgba(122,8,20,1) 100%);
+    }
+  }
+
+  &.app-psychograph {
+    header,
+    footer,
+    .page-header,
+    .page-footer {
+      background: rgb(79, 103, 234);
+      background: linear-gradient(
+        0deg,
+        rgba(79, 103, 234, 1) 0%,
+        rgba(8, 35, 89, 1) 100%
+      );
+    }
+  }
+
+
 }
+
+
+
+

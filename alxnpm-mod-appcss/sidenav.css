@@ -44,7 +44,6 @@
   border: 1px solid #ddd;
   border-radius: 2px;
 }
-/* #region NAVIGATION */
 #navPanel {
   height: 100%;
   width: 0;
@@ -67,14 +66,12 @@
   color: #fff;
   padding: 10px;
   border-bottom: 1px dotted #ccc;
+  display: block;
 }
 #navPanel ul li a {
   text-decoration: none;
   color: #818181;
-  transition: 0.3s;
-  display: inline-block;
-  margin-right: 1.5rem;
-  position: relative;
+  display: block;
 }
 #navPanel ul li a:hover {
   color: #f1f1f1;
@@ -100,9 +97,32 @@
 #navPanel.open {
   width: 250px;
   opacity: 0.95;
+  border: 2px solid #ccc;
+  border-left: 0;
 }
-/* #endregion */
-body.app-closet #navPanel ul li a.selected::before {
+#mainPanel,
+.logged-component {
+  transition: margin-left 0.5s;
+}
+#mainPanel .navButton,
+.logged-component .navButton {
+  cursor: pointer;
+  position: relative;
+  top: -0.3rem;
+  padding-right: 0.5rem;
+}
+#mainPanel.nav-open,
+.logged-component.nav-open {
+  opacity: 0.3;
+}
+body.app-closet .logged-component #navPanel ul li.avatar-row {
+  display: flex;
+  justify-content: space-around;
+}
+body.app-closet .logged-component #navPanel ul li.avatar-row a {
+  position: relative;
+}
+body.app-closet .logged-component #navPanel ul li.avatar-row a.selected::before {
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
@@ -116,15 +136,9 @@ body.app-closet #navPanel ul li a.selected::before {
   top: 0.5rem;
   color: #fff;
 }
-body.app-closet #navPanel ul li a img {
+body.app-closet .logged-component #navPanel ul li.avatar-row a img {
   height: 5rem;
 }
-#mainPanel {
-  transition: margin-left 0.5s;
-}
-#mainPanel .navButton {
-  cursor: pointer;
-  position: relative;
-  top: -0.3rem;
-  padding-right: 0.5rem;
+body.app-closet .logged-component.nav-open {
+  opacity: 1 !important;
 }

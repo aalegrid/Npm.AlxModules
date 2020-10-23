@@ -6,7 +6,7 @@ main.closet-mode {
   background-color: @color-black;
   padding: 0;
 
-  #mainPanel {
+  #mainPanel, .logged-component {
     // border: 1px solid red;
     background-size: contain;
     background-repeat: no-repeat;
@@ -15,14 +15,15 @@ main.closet-mode {
     .closet-container {
       height: 88vh;
       .area {
-        overflow: scroll;
-        position: relative;
+        // overflow: scroll;
+        // position: relative;
 
         .slider-bar {
           position: fixed;
           width: 100%;
           display: none;
           z-index: 5;
+          margin-top: 5px;
 
           .slider {
             -webkit-appearance: none;
@@ -57,46 +58,46 @@ main.closet-mode {
         }
 
         .clothes {
-          position: relative;
-          display: flex;
           height: 100%;
-          justify-content: space-between;
-          align-items: center;
-
-          // display: grid;
-          // grid-gap: 0;
-          // grid-template-columns: auto auto auto auto;
-
-          img {
-            margin: 150px 50px 50px 110px;
-            // border: 1px dashed blue;
-
+          overflow-y: scroll;
+          .pinch-zoom-container {
+            img {
+              // padding:150px 75px;
+              padding:150px;
+            }
           }
-          img:last-child{
-            padding-right: 200px;
-          }
-
-          // .clothing-item {
-          //   border: 1px dashed blue;
-          //   background-size: contain;
-          //   background-position: center;
-          //   background-repeat: no-repeat;
-          //   padding: 100px;
-          //   margin: 100px 150px;
-          // }
 
         }
+
+        .clothes::-webkit-scrollbar {
+          -webkit-appearance: none;
+        }
+        
+        .clothes::-webkit-scrollbar:vertical {
+          width: 20px;
+        }
+        
+        .clothes::-webkit-scrollbar:horizontal {
+          height: 20px;
+        }
+        
+        .clothes::-webkit-scrollbar-thumb {
+          background-color: rgba(0, 0, 0, .5);
+          //border-radius: 10px;
+          border: 2px solid #ffffff;
+        }
+        
+        .clothes::-webkit-scrollbar-track {
+          //border-radius: 10px;  
+          background-color: #ffffff; 
+        }
+        
         
       }
 
-      .area::-webkit-scrollbar {
-        display: none;
-      }
+      .C_Top {}
 
-      .area::-webkit-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-      }
+      .D_Bottom {}
 
       &.show-area-sliders {
         .slider-area {
@@ -113,6 +114,10 @@ main.closet-mode {
       &.show-area-lines {
         .area {
           border-bottom: 1px dashed #fff;
+          .pinch-zoom-container {
+            border: 1px dashed #666;
+
+          }
         }
         
       }
@@ -126,6 +131,7 @@ main.closet-mode {
     }
   }
 }
+
 
 
 

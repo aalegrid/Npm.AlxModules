@@ -439,3 +439,17 @@ body.app-board .page-footer {
   background: #2d1241;
   background: linear-gradient(0deg, #2d1241 0%, #721c8a 100%);
 }
+body.app-closet header,
+body.app-closet footer,
+body.app-closet .page-header,
+body.app-closet .page-footer {
+  background: #d89aa3;
+  background: linear-gradient(0deg, #d89aa3 0%, #7a0814 100%);
+}
+body.app-psychograph header,
+body.app-psychograph footer,
+body.app-psychograph .page-header,
+body.app-psychograph .page-footer {
+  background: #4f67ea;
+  background: linear-gradient(0deg, #4f67ea 0%, #082359 100%);
+}

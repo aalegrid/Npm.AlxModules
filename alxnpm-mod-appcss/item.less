@@ -74,6 +74,26 @@ div[class$="-list"] {
   }
 }
 
+.item {
+  form {
+    .row {
+
+      .source-editor-text {
+        display: none;
+      }
+      
+      &.source-editor {
+        .source-editor-text {
+          display: block;
+        }
+        .ck-editor {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
 // .notes-list {
 //   table {
 //     tr {

@@ -129,7 +129,7 @@
   -webkit-transform: rotate(-135deg);
   right: 15px;
   position: absolute;
-  top: -6px;
+  top: -5px;
   background-color: #fff;
 }
 [class$="-object-picker open"] .picker-panel .search input[type="search"] {
@@ -256,6 +256,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 90vh;
 }
 a {
   cursor: pointer;
@@ -677,6 +678,20 @@ body.app-board .page-footer {
   background: #2d1241;
   background: linear-gradient(0deg, #2d1241 0%, #721c8a 100%);
 }
+body.app-closet header,
+body.app-closet footer,
+body.app-closet .page-header,
+body.app-closet .page-footer {
+  background: #d89aa3;
+  background: linear-gradient(0deg, #d89aa3 0%, #7a0814 100%);
+}
+body.app-psychograph header,
+body.app-psychograph footer,
+body.app-psychograph .page-header,
+body.app-psychograph .page-footer {
+  background: #4f67ea;
+  background: linear-gradient(0deg, #4f67ea 0%, #082359 100%);
+}
 .animate {
   -webkit-animation-name: animateleft;
   -webkit-animation-duration: 0.4s;
@@ -875,6 +890,15 @@ div[class$="-list"] table tr.list-add td:nth-child(4) {
 div[class$="-list"] table.hide {
   display: none;
 }
+.item form .row .source-editor-text {
+  display: none;
+}
+.item form .row.source-editor .source-editor-text {
+  display: block;
+}
+.item form .row.source-editor .ck-editor {
+  display: none;
+}
 div.note img {
   padding: 10px;
   line-height: 1.42857143;
@@ -1051,25 +1075,26 @@ main.closet-mode {
   background-color: #000;
   padding: 0;
 }
-main.closet-mode #mainPanel {
+main.closet-mode #mainPanel,
+main.closet-mode .logged-component {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
-main.closet-mode #mainPanel .closet-container {
+main.closet-mode #mainPanel .closet-container,
+main.closet-mode .logged-component .closet-container {
   height: 88vh;
 }
-main.closet-mode #mainPanel .closet-container .area {
-  overflow: scroll;
-  position: relative;
-}
-main.closet-mode #mainPanel .closet-container .area .slider-bar {
+main.closet-mode #mainPanel .closet-container .area .slider-bar,
+main.closet-mode .logged-component .closet-container .area .slider-bar {
   position: fixed;
   width: 100%;
   display: none;
   z-index: 5;
+  margin-top: 5px;
 }
-main.closet-mode #mainPanel .closet-container .area .slider-bar .slider {
+main.closet-mode #mainPanel .closet-container .area .slider-bar .slider,
+main.closet-mode .logged-component .closet-container .area .slider-bar .slider {
   -webkit-appearance: none;
   width: 99%;
   height: 16px;
@@ -1079,10 +1104,12 @@ main.closet-mode #mainPanel .closet-container .area .slider-bar .slider {
   -webkit-transition: 0.2s;
   transition: opacity 0.2s;
 }
-main.closet-mode #mainPanel .closet-container .area .slider-bar .slider:hover {
+main.closet-mode #mainPanel .closet-container .area .slider-bar .slider:hover,
+main.closet-mode .logged-component .closet-container .area .slider-bar .slider:hover {
   opacity: 1;
 }
-main.closet-mode #mainPanel .closet-container .area .slider-bar .slider::-webkit-slider-thumb {
+main.closet-mode #mainPanel .closet-container .area .slider-bar .slider::-webkit-slider-thumb,
+main.closet-mode .logged-component .closet-container .area .slider-bar .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 25px;
@@ -1090,47 +1117,63 @@ main.closet-mode #mainPanel .closet-container .area .slider-bar .slider::-webkit
   background: #4CAF50;
   cursor: pointer;
 }
-main.closet-mode #mainPanel .closet-container .area .slider-bar .slider::-moz-range-thumb {
+main.closet-mode #mainPanel .closet-container .area .slider-bar .slider::-moz-range-thumb,
+main.closet-mode .logged-component .closet-container .area .slider-bar .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
   background: #4CAF50;
   cursor: pointer;
 }
-main.closet-mode #mainPanel .closet-container .area .clothes {
-  position: relative;
-  display: flex;
+main.closet-mode #mainPanel .closet-container .area .clothes,
+main.closet-mode .logged-component .closet-container .area .clothes {
   height: 100%;
-  justify-content: space-between;
-  align-items: center;
+  overflow-y: scroll;
 }
-main.closet-mode #mainPanel .closet-container .area .clothes img {
-  margin: 150px 50px 50px 110px;
+main.closet-mode #mainPanel .closet-container .area .clothes .pinch-zoom-container img,
+main.closet-mode .logged-component .closet-container .area .clothes .pinch-zoom-container img {
+  padding: 150px;
 }
-main.closet-mode #mainPanel .closet-container .area .clothes img:last-child {
-  padding-right: 200px;
+main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar,
+main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar {
+  -webkit-appearance: none;
 }
-main.closet-mode #mainPanel .closet-container .area::-webkit-scrollbar {
-  display: none;
+main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar:vertical,
+main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar:vertical {
+  width: 20px;
 }
-main.closet-mode #mainPanel .closet-container .area::-webkit-scrollbar {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
+main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar:horizontal,
+main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar:horizontal {
+  height: 20px;
 }
-main.closet-mode #mainPanel .closet-container.show-area-sliders .slider-area {
+main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar-thumb,
+main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid #ffffff;
+}
+main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar-track,
+main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+main.closet-mode #mainPanel .closet-container.show-area-sliders .slider-area,
+main.closet-mode .logged-component .closet-container.show-area-sliders .slider-area {
   display: block;
 }
-main.closet-mode #mainPanel .closet-container.show-image-sliders .slider-image {
+main.closet-mode #mainPanel .closet-container.show-image-sliders .slider-image,
+main.closet-mode .logged-component .closet-container.show-image-sliders .slider-image {
   display: block;
 }
-main.closet-mode #mainPanel .closet-container.show-area-lines .area {
+main.closet-mode #mainPanel .closet-container.show-area-lines .area,
+main.closet-mode .logged-component .closet-container.show-area-lines .area {
   border-bottom: 1px dashed #fff;
 }
-main.closet-mode #mainPanel .closet-container.hide-bottom [class$="Bottom"] {
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .pinch-zoom-container,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .pinch-zoom-container {
+  border: 1px dashed #666;
+}
+main.closet-mode #mainPanel .closet-container.hide-bottom [class$="Bottom"],
+main.closet-mode .logged-component .closet-container.hide-bottom [class$="Bottom"] {
   display: none;
 }
-/* #region NAVIGATION */
 #navPanel {
   height: 100%;
   width: 0;
@@ -1153,14 +1196,12 @@ main.closet-mode #mainPanel .closet-container.hide-bottom [class$="Bottom"] {
   color: #fff;
   padding: 10px;
   border-bottom: 1px dotted #ccc;
+  display: block;
 }
 #navPanel ul li a {
   text-decoration: none;
   color: #818181;
-  transition: 0.3s;
-  display: inline-block;
-  margin-right: 1.5rem;
-  position: relative;
+  display: block;
 }
 #navPanel ul li a:hover {
   color: #f1f1f1;
@@ -1186,9 +1227,32 @@ main.closet-mode #mainPanel .closet-container.hide-bottom [class$="Bottom"] {
 #navPanel.open {
   width: 250px;
   opacity: 0.95;
+  border: 2px solid #ccc;
+  border-left: 0;
 }
-/* #endregion */
-body.app-closet #navPanel ul li a.selected::before {
+#mainPanel,
+.logged-component {
+  transition: margin-left 0.5s;
+}
+#mainPanel .navButton,
+.logged-component .navButton {
+  cursor: pointer;
+  position: relative;
+  top: -0.3rem;
+  padding-right: 0.5rem;
+}
+#mainPanel.nav-open,
+.logged-component.nav-open {
+  opacity: 0.3;
+}
+body.app-closet .logged-component #navPanel ul li.avatar-row {
+  display: flex;
+  justify-content: space-around;
+}
+body.app-closet .logged-component #navPanel ul li.avatar-row a {
+  position: relative;
+}
+body.app-closet .logged-component #navPanel ul li.avatar-row a.selected::before {
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
@@ -1202,17 +1266,217 @@ body.app-closet #navPanel ul li a.selected::before {
   top: 0.5rem;
   color: #fff;
 }
-body.app-closet #navPanel ul li a img {
+body.app-closet .logged-component #navPanel ul li.avatar-row a img {
   height: 5rem;
 }
-#mainPanel {
-  transition: margin-left 0.5s;
+body.app-closet .logged-component.nav-open {
+  opacity: 1 !important;
 }
-#mainPanel .navButton {
+.psychograph-test {
+  background: linear-gradient(to bottom, #1b1464 0%, #7db9e8 100%);
+  background-attachment: fixed;
+}
+.psygraph-mode {
+  min-height: 90vh;
+  color: #fff;
+  background-attachment: fixed;
+}
+.psygraph-mode .psygraph-test {
+  padding-bottom: 2rem;
+}
+.psygraph-mode .psygraph-test .heading h2 {
+  font-size: 1.45rem;
+  font-weight: 600;
+  text-align: center;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .lead {
+  font-family: "Caveat", cursive;
+  font-size: 1.25rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .title-card {
+  background-repeat: no-repeat;
+  color: #fff;
+  background-color: #000;
+  border: 0.35rem solid #ebebeb;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  height: 100%;
+  width: 100%;
+  margin: 1rem 0;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .title-card svg {
+  height: inherit;
+  width: inherit;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .title-card h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  opacity: 0.5;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .title-card h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding-top: 1rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .title-card.esteem {
+  background-position: left top;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .title-card.shy {
+  background-position: right top;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .body div {
+  margin: 0.75rem 0;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .body div p {
+  margin: 0.85rem 0;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .body div p.source {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .body div p .total-score {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .body div ul {
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item {
+  padding: 1rem;
+  background-color: #fff;
+  color: #000;
+  opacity: 0.9;
+  -webkit-box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.65);
+  -moz-box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.65);
+  box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.65);
+  -webkit-transition: height 2s;
+  /* Safari */
+  transition: height 2s;
+  display: flex;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .question-index {
+  flex-grow: 1;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .question {
+  flex-grow: 10;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .index {
+  vertical-align: top;
+  padding-right: 16px;
+  padding-top: 2px;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .index .current {
+  display: block;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .index .count {
+  font-size: 18px;
+  font-weight: normal;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .title h5 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  margin-bottom: 0.75rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .options {
+  padding-left: 1rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .options .radio {
+  font-size: 17px;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .options .radio input[type="radio"] {
+  opacity: 0;
+  position: absolute;
   cursor: pointer;
-  position: relative;
-  top: -0.3rem;
-  padding-right: 0.5rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .options .radio input[type="radio"] + span {
+  margin-left: -22px;
+  padding-left: 32px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: 0 -133px;
+  display: inline-block;
+  height: 2rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .question-container .question-item .options .radio input[type="radio"]:checked + span {
+  background-position: 0 -215px;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .psygraph-button-row {
+  display: flex;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .psygraph-button-row button {
+  background: #000;
+  color: #fff;
+  float: none;
+  flex-grow: 1;
+  width: 100%;
+  padding: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 2px;
+  line-height: 1.5rem;
+}
+.psygraph-mode .psygraph-test div[class^="stage-"] .psygraph-button-row button[style*="display: block;"] + button[style*="display: block;"] {
+  margin-left: 1rem;
+}
+.psygraph-mode .psygraph-test .stage-result [class^="range"] h3 {
+  text-align: left;
+}
+.psygraph-mode .psygraph-test .stage-result .highlight {
+  background-color: #000;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+}
+.psygraph-mode .psygraph-test .stage-result .highlight h3::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f00c";
+  padding-right: 5px;
+  font-size: 1.25rem;
+}
+.psygraph-mode .psygraph-test .stage-result .result-container > p:nth-child(1),
+.psygraph-mode .psygraph-test .stage-result .result-container > p:nth-child(2) {
+  text-align: center;
+}
+.psygraph-mode .page-footer li {
+  display: inline-flex;
+}
+.psygraph-mode .page-footer li a {
+  display: inline-block;
+}
+.psygraph-mode .page-footer li a[style*="display: inline-block;"] + a[style*="display: inline-block;"] {
+  margin-left: 1rem;
+}
+.money .chart-info {
+  display: grid;
+  align-items: center;
+  justify-content: space-around;
+}
+.money .chart-info div {
+  padding: 0.25rem;
+  font-size: 0.9rem;
 }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

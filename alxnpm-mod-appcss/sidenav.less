@@ -1,7 +1,5 @@
 @import "variables_mixins.less";
 
-/* #region NAVIGATION */
-
 #navPanel {
   height: 100%;
   width: 0;
@@ -24,15 +22,13 @@
       color: #fff;
       padding: 10px;
       border-bottom: 1px dotted #ccc;
+      display: block;
 
       a {
         text-decoration: none;
         color: #818181;
-        transition: 0.3s;
-        display: inline-block;
-        margin-right: 1.5rem;
-        position: relative;
-    
+        display: block;
+
         &:hover {
           color: #f1f1f1;
         }
@@ -42,12 +38,11 @@
         }
 
         &.disabled {
-          opacity: .5;
+          opacity: 0.5;
         }
         &.selected {
           color: @color-white;
         }
-
       }
     }
   }
@@ -64,46 +59,62 @@
   &.open {
     width: 250px;
     opacity: 0.95;
-  }
-}
-/* #endregion */
-
-
-body.app-closet {
-  #navPanel {
-    ul {
-      li {
-        a {
-          &.selected::before {
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            font-family: "Font Awesome 5 Pro";
-            font-weight: 300;
-            content: "\f00c";
-            padding-right: 5px;
-            font-size: 3rem;
-            position: absolute;
-            top: .5rem;
-            color: @color-white;
-          }
-  
-          img {
-            height: 5rem;
-          }
-        }
-      }
-    }
+    border: 2px solid #ccc;
+    border-left: 0;
   }
 }
 
-#mainPanel {
+#mainPanel,
+.logged-component {
   transition: margin-left 0.5s;
   .navButton {
     cursor: pointer;
     position: relative;
-    top: -.3rem;
-    padding-right: .5rem;
+    top: -0.3rem;
+    padding-right: 0.5rem;
+  }
+
+  &.nav-open {
+    opacity: .3;
+  }
+}
+
+body.app-closet {
+  .logged-component {
+    #navPanel {
+      ul {
+        li.avatar-row {
+          display: flex;
+          justify-content: space-around;
+
+          a {
+            position: relative;
+
+            &.selected::before {
+              font-style: normal;
+              font-variant: normal;
+              text-rendering: auto;
+              -webkit-font-smoothing: antialiased;
+              font-family: "Font Awesome 5 Pro";
+              font-weight: 300;
+              content: "\f00c";
+              padding-right: 5px;
+              font-size: 3rem;
+              position: absolute;
+              top: 0.5rem;
+              color: @color-white;
+            }
+
+            img {
+              height: 5rem;
+            }
+          }
+        }
+      }
+    }
+
+    &.nav-open {
+      opacity: 1 !important;
+    }
   }
 }

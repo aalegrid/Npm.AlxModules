@@ -54,6 +54,14 @@ export default class Helper {
     return `${da}-${mo}-${ye}`;
   }
 
+  static formatDateToLongFormat(date) {
+    const d = new Date(date);
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
+    const mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d)
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
+    return `${da} ${mo} ${ye}`;
+  }
+
   static flattenArray(nodes) {
     let flat = [];
     let flatten = array => {
@@ -108,13 +116,13 @@ export default class Helper {
   static formatAsTreeForMyLists(array, renderColor, renderIcon) {
 
     let html = "<ul>",
-    _this = this;
+      _this = this;
 
     let parseAsTree = data => {
 
       data.forEach(function (value) {
 
-        if(value.tag === "hidden") {
+        if (value.tag === "hidden") {
           return;
         }
 
@@ -256,7 +264,7 @@ export default class Helper {
     }
     return a.icon.localeCompare(b.icon);
   }
-  
+
   static prioritySort(a, b) { return a.priority > b.priority ? 1 : a.priority === b.priority ? 0 : -1 }
 
   static statusSort(a, b) { return a.status > b.status ? 1 : a.status === b.status ? 0 : -1 }
@@ -265,5 +273,39 @@ export default class Helper {
 
   static metaSort(a, b) { return a.metas.length > b.metas.length ? 1 : a.metas.length === b.metas.length ? 0 : -1 }
 
+  static parseStyles(styles) {
+    return styles.split(';')
+      .filter(style => style.split(':')[0] && style.split(':')[1])
+      .map(style => [
+        style.split(':')[0].trim().replace(/-./g, c => c.substr(1).toUpperCase()),
+        style.split(':')[1].trim()
+      ])
+      .reduce((styleObj, style) => ({
+        ...styleObj,
+        [style[0]]: style[1],
+      }), {})
+  }
+
+  static formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+    try {
+      decimalCount = Math.abs(decimalCount);
+      decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+  
+      const negativeSign = amount < 0 ? "-" : "";
+  
+      let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+      let j = (i.length > 3) ? i.length % 3 : 0;
+  
+      return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+    } catch (e) {
+      console.log(e)
+    }
+  };
+
+  static htmlDecode(input){
+    var e = document.createElement('div');
+    e.innerHTML = input;
+    return e.childNodes[0].nodeValue;
+  }
 
 }
