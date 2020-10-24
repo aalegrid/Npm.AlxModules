@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-helper",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "description": "Helper functions",
   "main": "script.js",
   "scripts": {

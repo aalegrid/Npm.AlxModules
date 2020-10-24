@@ -308,4 +308,23 @@ export default class Helper {
     return e.childNodes[0].nodeValue;
   }
 
+  static setAbsoluteImagePath(content, baseUrl) {
+    const div = document.createElement("div");
+    div.innerHTML = content;
+    const images = div.querySelectorAll("img");
+    images.forEach(function (image) {
+      const prefix = `http://${window.location.host}`,
+        imgSrc = image.src.replace(prefix, "")
+        image.src = baseUrl + imgSrc
+    });
+    return div.innerHTML;
+  }
+
+  static stripHtml(html)
+  {
+     let tmp = document.createElement("DIV");
+     tmp.innerHTML = html;
+     return tmp.textContent || tmp.innerText || "";
+  }
+
 }
