@@ -779,29 +779,31 @@ div.list table tr td a.list-item img {
   border-radius: 2px;
 }
 div.list table tr td a.list-item .info {
-  display: block;
-}
-div.list table tr td a.list-item .info .title {
   display: flex;
-  align-items: center;
 }
-div.list table tr td a.list-item .info .meta-data {
-  font-size: 0.8rem;
+div.list table tr td a.list-item .info .title-meta .title {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: fit-content;
+}
+div.list table tr td a.list-item .info .title-meta .meta-data {
+  display: block;
+  font-size: 0.7rem;
   color: #9b9090;
   display: flex;
-  margin-top: 0.25rem;
 }
-div.list table tr td a.list-item .info .meta-data i {
+div.list table tr td a.list-item .info .title-meta .meta-data i {
   margin-right: 0.25rem;
 }
-div.list table tr td a.list-item .info .meta-data .todo-count {
+div.list table tr td a.list-item .info .title-meta .meta-data .todo-count {
   color: #000;
   border-left: 1px solid #9b9090;
   margin-left: 0.25rem;
   padding-left: 0.25rem;
 }
-div.list table tr td a.list-item .info .meta-data .todo-count span {
-  font-weight: 600;
+div.list table tr td a.list-item .info .title-meta .meta-data .todo-count.bold {
+  font-weight: 700;
 }
 div.list table tr td a.list-count {
   display: unset;
@@ -865,6 +867,9 @@ div[class$="-list"] table th:nth-child(2) {
   text-align: left;
   padding-left: 0;
 }
+div[class$="-list"] table td {
+  font-size: 0.85rem;
+}
 div[class$="-list"] table td:first-child,
 div[class$="-list"] table td:nth-child(2) {
   text-align: left;
@@ -874,7 +879,7 @@ div[class$="-list"] table td:last-child {
   padding-right: 0;
 }
 div[class$="-list"] table td [class$="-item"] {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: inline-block;
 }
 div[class$="-list"] table td img.img-icon {
@@ -884,19 +889,24 @@ div[class$="-list"] table td img.img-icon {
 div[class$="-list"] table td .note-icon {
   margin-left: 0.5rem;
 }
+div[class$="-list"] table td .colorbox {
+  width: 8px;
+  height: 8px;
+  margin-right: 3px;
+}
 div[class$="-list"] table tr.list-add td:nth-child(4) {
   text-align: right;
 }
 div[class$="-list"] table.hide {
   display: none;
 }
-.item form .row .source-editor-text {
+.item form .row .editor-preview {
   display: none;
 }
-.item form .row.source-editor .source-editor-text {
+.item form .row.ck-editor-preview .editor-preview {
   display: block;
 }
-.item form .row.source-editor .ck-editor {
+.item form .row.ck-editor-preview .cke {
   display: none;
 }
 div.note img {

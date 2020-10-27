@@ -419,11 +419,12 @@ export default class Item extends Module {
         }
 
         if (this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) {
-            this.htmlElement.querySelector(".nodes-list .collapse i").addEventListener("click", function () {
+            this.htmlElement.querySelector(".nodes-list .collapse").addEventListener("click", function () {
+                const iElem = e.target.closest("h3").querySelector("i")
                 _this.htmlElement.querySelector(".nodes-list table").classList.toggle("hide");
-                this.classList.toggle("fa-minus-square");
-                this.classList.toggle("fa-plus-square");
-                Helper.setLocalStorageData(`${_this.options.appId}_nodeCollapse`, this.classList.value);
+                iElem.classList.toggle("fa-minus-square");
+                iElem.classList.toggle("fa-plus-square");
+                Helper.setLocalStorageData(`${_this.options.appId}_nodeCollapse`, iElem.classList.value);
             }, false);
         }
 
@@ -431,11 +432,12 @@ export default class Item extends Module {
             _this.htmlElement.querySelector(".nodes-list").style.display = "none";
         }
 
-        this.htmlElement.querySelector(".notes-list .collapse i").addEventListener("click", function () {
+        this.htmlElement.querySelector(".notes-list .collapse").addEventListener("click", function () {
+            const iElem = e.target.closest("h3").querySelector("i")
             _this.htmlElement.querySelector(".notes-list table").classList.toggle("hide");
-            this.classList.toggle("fa-minus-square");
-            this.classList.toggle("fa-plus-square");
-            Helper.setLocalStorageData(`${_this.options.appId}_noteCollapse`, this.classList.value);
+            iElem.classList.toggle("fa-minus-square");
+            iElem.classList.toggle("fa-plus-square");
+            Helper.setLocalStorageData(`${_this.options.appId}_noteCollapse`, iElem.classList.value);
         }, false);
 
         /* #endregion */

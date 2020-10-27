@@ -35,7 +35,8 @@ div[class$="-list"] {
       }
     }
 
-    td {      
+    td {
+      font-size: 0.85rem;
       &:first-child,
       &:nth-child(2) {
         text-align: left;
@@ -47,7 +48,7 @@ div[class$="-list"] {
       }
 
       [class$="-item"] {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         display: inline-block;
       }
 
@@ -58,6 +59,13 @@ div[class$="-list"] {
 
       .note-icon {
         margin-left: .5rem;
+      }
+
+      .colorbox {
+        // display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-right: 3px;
       }
     }
 
@@ -78,15 +86,15 @@ div[class$="-list"] {
   form {
     .row {
 
-      .source-editor-text {
+      .editor-preview {
         display: none;
       }
       
-      &.source-editor {
-        .source-editor-text {
+      &.ck-editor-preview {
+        .editor-preview {
           display: block;
         }
-        .ck-editor {
+        .cke {
           display: none;
         }
       }

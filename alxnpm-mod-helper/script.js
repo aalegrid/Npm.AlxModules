@@ -15,6 +15,7 @@ export default class Helper {
   }
 
   static showMessage(element, msg) {
+    console.log(msg)
     element.innerHTML = msg;
     element.parentElement.style.display = "block";
     window.scroll(200, 0);
@@ -48,7 +49,7 @@ export default class Helper {
 
   static formatDate(date) {
     const d = new Date(date);
-    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
+    const ye = new Intl.DateTimeFormat('en', { year: '2-digit' }).format(d)
     const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d)
     const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
     return `${da}-${mo}-${ye}`;
@@ -273,7 +274,22 @@ export default class Helper {
 
   static metaSort(a, b) { return a.metas.length > b.metas.length ? 1 : a.metas.length === b.metas.length ? 0 : -1 }
 
-  static parseStyles(styles) {
+  static todoSort(a, b) {
+
+    const _a = a.nodes.filter((item) => {
+      return parseInt(item.status) === 0;
+    }),
+      aVal = _a ? _a.length : 0,
+      _b = b.nodes.filter((item) => {
+        return parseInt(item.status) === 0;
+      }),
+      bVal = _b ? _b.length : 0
+
+    return aVal > bVal ? 1 : aVal === bVal ? 0 : -1
+
+  }
+
+   static parseStyles(styles) {
     return styles.split(';')
       .filter(style => style.split(':')[0] && style.split(':')[1])
       .map(style => [
@@ -290,19 +306,19 @@ export default class Helper {
     try {
       decimalCount = Math.abs(decimalCount);
       decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
-  
+
       const negativeSign = amount < 0 ? "-" : "";
-  
+
       let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
       let j = (i.length > 3) ? i.length % 3 : 0;
-  
+
       return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
     } catch (e) {
       console.log(e)
     }
   };
 
-  static htmlDecode(input){
+  static htmlDecode(input) {
     var e = document.createElement('div');
     e.innerHTML = input;
     return e.childNodes[0].nodeValue;
@@ -315,16 +331,9 @@ export default class Helper {
     images.forEach(function (image) {
       const prefix = `http://${window.location.host}`,
         imgSrc = image.src.replace(prefix, "")
-        image.src = baseUrl + imgSrc
+      image.src = baseUrl + imgSrc
     });
     return div.innerHTML;
-  }
-
-  static stripHtml(html)
-  {
-     let tmp = document.createElement("DIV");
-     tmp.innerHTML = html;
-     return tmp.textContent || tmp.innerText || "";
   }
 
 }
