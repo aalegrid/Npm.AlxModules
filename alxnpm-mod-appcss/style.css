@@ -303,6 +303,20 @@ textarea {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
+  outline: none;
+  border-radius: 0;
+}
+input[type="search"]:focus,
+input[type="date"]:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
 }
 textarea {
   height: 6rem;
@@ -557,6 +571,7 @@ footer ul,
   justify-content: space-between;
   align-items: center;
   height: 2rem;
+  white-space: nowrap;
 }
 header ul li,
 footer ul li,
@@ -635,9 +650,9 @@ header,
   -webkit-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
-  border-bottom: 1px solid #666;
-  background: #666;
-  background: linear-gradient(#666, #000);
+  border-bottom: 1px solid #000;
+  background: #0054a6;
+  background: linear-gradient(#00aeef, #0054a6);
 }
 footer,
 .page-footer {
@@ -647,8 +662,8 @@ footer,
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   border-top: 1px solid #000;
-  background: #666;
-  background: linear-gradient(#666, #000);
+  background: #0054a6;
+  background: linear-gradient(#00aeef, #0054a6);
 }
 body.app-project header,
 body.app-project footer,
@@ -691,6 +706,22 @@ body.app-psychograph .page-header,
 body.app-psychograph .page-footer {
   background: #4f67ea;
   background: linear-gradient(0deg, #4f67ea 0%, #082359 100%);
+}
+.showinfo-items ul li {
+  display: flex;
+  border-bottom: 1px dotted #666;
+  padding: 0.35rem 0;
+  font-size: 0.85rem;
+}
+.showinfo-items ul li span {
+  display: block;
+}
+.showinfo-items ul li span:first-child {
+  width: 30%;
+}
+.showinfo-items ul li span:last-child {
+  width: 70%;
+  font-weight: 600;
 }
 .animate {
   -webkit-animation-name: animateleft;
@@ -947,7 +978,7 @@ div.note.view .view img {
   border: 1px solid #ccc;
 }
 .treeview > ul > li {
-  padding-bottom: 0 !important;
+  padding-bottom: 0.25rem !important;
 }
 .treeview ul {
   list-style-type: none;
@@ -1234,15 +1265,31 @@ main.closet-mode .logged-component .closet-container.hide-bottom [class$="Bottom
   text-decoration: none;
   color: #fff;
 }
-#navPanel.open {
+body.nav-open {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+body.nav-open header,
+body.nav-open .page-header,
+body.nav-open footer,
+body.nav-open .page-footer {
+  opacity: 0.3;
+}
+body.nav-open .closet-container {
+  height: 88vh;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  background-color: #000;
+}
+body.nav-open #navPanel {
   width: 250px;
   opacity: 0.95;
   border: 2px solid #ccc;
   border-left: 0;
 }
-#mainPanel,
-.logged-component {
-  transition: margin-left 0.5s;
+body.nav-open #mainPanel {
+  opacity: 0.5;
 }
 #mainPanel .navButton,
 .logged-component .navButton {
@@ -1250,10 +1297,6 @@ main.closet-mode .logged-component .closet-container.hide-bottom [class$="Bottom
   position: relative;
   top: -0.3rem;
   padding-right: 0.5rem;
-}
-#mainPanel.nav-open,
-.logged-component.nav-open {
-  opacity: 0.3;
 }
 body.app-closet .logged-component #navPanel ul li.avatar-row {
   display: flex;
@@ -1278,9 +1321,6 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a.selected::before 
 }
 body.app-closet .logged-component #navPanel ul li.avatar-row a img {
   height: 5rem;
-}
-body.app-closet .logged-component.nav-open {
-  opacity: 1 !important;
 }
 .psychograph-test {
   background: linear-gradient(to bottom, #1b1464 0%, #7db9e8 100%);

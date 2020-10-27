@@ -56,26 +56,50 @@
     text-decoration: none;
     color: #fff;
   }
-  &.open {
+ 
+}
+
+body.nav-open {
+
+  background-color: rgba(0, 0, 0, 0.6);
+  
+  header,
+  .page-header,
+  footer,
+  .page-footer {
+    opacity: .3;
+  }
+
+  .closet-container {
+    height: 88vh;
+    opacity: .3;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    background-color: #000;
+  }
+
+  #navPanel {
     width: 250px;
     opacity: 0.95;
     border: 2px solid #ccc;
     border-left: 0;
   }
+
+  #mainPanel {
+    opacity: .5;
+  }
+
+  
 }
 
 #mainPanel,
 .logged-component {
-  transition: margin-left 0.5s;
   .navButton {
     cursor: pointer;
     position: relative;
     top: -0.3rem;
     padding-right: 0.5rem;
-  }
-
-  &.nav-open {
-    opacity: .3;
   }
 }
 
@@ -113,8 +137,5 @@ body.app-closet {
       }
     }
 
-    &.nav-open {
-      opacity: 1 !important;
-    }
   }
 }
