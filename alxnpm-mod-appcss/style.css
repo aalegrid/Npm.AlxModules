@@ -255,7 +255,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 90vh;
 }
 a {
   cursor: pointer;
@@ -286,9 +285,8 @@ h6 {
 body {
   font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-main {
-  margin-top: 3rem;
-  padding: 1.5rem 1.5rem 4rem 1.5rem;
+main .app-component {
+  padding: 4.5rem 1.5rem;
 }
 input[type="search"],
 input[type="date"],
@@ -1068,7 +1066,6 @@ div.note.view .view img {
 }
 main.board-mode {
   background-color: #000;
-  min-height: 90vh;
 }
 .board .board-items {
   display: flex;
@@ -1112,9 +1109,12 @@ main.board-mode {
   transition: all 0.2s ease-in-out;
 }
 main.closet-mode {
-  margin-top: 3.55rem;
   background-color: #000;
   padding: 0;
+}
+main.closet-mode .app-component {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 main.closet-mode #mainPanel,
 main.closet-mode .logged-component {
@@ -1137,7 +1137,7 @@ main.closet-mode .logged-component .closet-container .area .slider-bar {
 main.closet-mode #mainPanel .closet-container .area .slider-bar .slider,
 main.closet-mode .logged-component .closet-container .area .slider-bar .slider {
   -webkit-appearance: none;
-  width: 99%;
+  width: 85%;
   height: 16px;
   background: #d3d3d3;
   outline: none;
@@ -1169,6 +1169,7 @@ main.closet-mode #mainPanel .closet-container .area .clothes,
 main.closet-mode .logged-component .closet-container .area .clothes {
   height: 100%;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 main.closet-mode #mainPanel .closet-container .area .clothes .pinch-zoom-container img,
 main.closet-mode .logged-component .closet-container .area .clothes .pinch-zoom-container img {
@@ -1530,6 +1531,125 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a img {
 }
 /* ----------- Android devices ------------ */
 /* ----------- iOS devices ------------ */
+.ios-fix header,
+.ios-fix .page-header {
+  height: 70px;
+  padding-top: 30px;
+}
+.ios-fix main {
+  height: 100vh;
+}
+.ios-fix main .app-component {
+  padding-top: 5.5rem;
+}
+.ios-fix main.closet-mode .app-component {
+  padding-top: 5rem;
+}
+.ios-fix main.closet-mode .app-component .closet-container {
+  height: 80vh;
+}
+.ios-fix main.closet-mode .app-component .closet-container .area {
+  border-bottom: 0;
+}
+.ios-fix main.closet-mode .app-component .closet-container .area .pinch-zoom-container {
+  width: 92%;
+}
+.ios-fix main.closet-mode .app-component .closet-container .area .pinch-zoom-container img {
+  padding-left: 230px;
+}
+.ios-fix main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
+  width: 95%;
+  border-top: 3px dashed red;
+}
+.ios-fix main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
+  border-left: 3px dashed #666;
+  border-right: 3px dashed #666;
+  border-bottom: 3px dashed #666;
+}
+.ios-fix .input [class^="picker-trigger-"] {
+  height: 32px;
+  margin-top: 2px;
+}
+@supports (-webkit-overflow-scrolling: touch) {
+  header,
+  .page-header {
+    height: 70px;
+    padding-top: 30px;
+  }
+  main {
+    height: 100vh;
+  }
+  main .app-component {
+    padding-top: 5.5rem;
+  }
+  main.closet-mode .app-component {
+    padding-top: 5rem;
+  }
+  main.closet-mode .app-component .closet-container {
+    height: 80vh;
+  }
+  main.closet-mode .app-component .closet-container .area {
+    border-bottom: 0;
+  }
+  main.closet-mode .app-component .closet-container .area .pinch-zoom-container {
+    width: 92%;
+  }
+  main.closet-mode .app-component .closet-container .area .pinch-zoom-container img {
+    padding-left: 230px;
+  }
+  main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
+    width: 95%;
+    border-top: 3px dashed red;
+  }
+  main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
+    border-left: 3px dashed #666;
+    border-right: 3px dashed #666;
+    border-bottom: 3px dashed #666;
+  }
+  .input [class^="picker-trigger-"] {
+    height: 32px;
+    margin-top: 2px;
+  }
+}
+body[data-mode="ios-fix"] header,
+body[data-mode="ios-fix"] .page-header {
+  height: 70px;
+  padding-top: 30px;
+}
+body[data-mode="ios-fix"] main {
+  height: 100vh;
+}
+body[data-mode="ios-fix"] main .app-component {
+  padding-top: 5.5rem;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component {
+  padding-top: 5rem;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container {
+  height: 80vh;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container .area {
+  border-bottom: 0;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container .area .pinch-zoom-container {
+  width: 92%;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container .area .pinch-zoom-container img {
+  padding-left: 230px;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
+  width: 95%;
+  border-top: 3px dashed red;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
+  border-left: 3px dashed #666;
+  border-right: 3px dashed #666;
+  border-bottom: 3px dashed #666;
+}
+body[data-mode="ios-fix"] .input [class^="picker-trigger-"] {
+  height: 32px;
+  margin-top: 2px;
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   #screen:after {

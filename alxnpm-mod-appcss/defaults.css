@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -45,11 +45,10 @@
   border-radius: 2px;
 }
 body {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-main {
-  margin-top: 3rem;
-  padding: 1.5rem 1.5rem 4rem 1.5rem;
+main .app-component {
+  padding: 4.5rem 1.5rem;
 }
 input[type="search"],
 input[type="date"],
@@ -162,7 +161,7 @@ h3 {
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .priority-btn-group a i,
 .status-btn-group a i {
@@ -188,7 +187,7 @@ button {
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 button i {
   font-weight: 500 !important;

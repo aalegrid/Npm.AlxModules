@@ -1,6 +1,69 @@
 /* ----------- iOS devices ------------ */
+
+.ios-fix {
+  header,
+  .page-header {
+    height: 70px;
+    padding-top: 30px;
+  }
+
+  main {
+    height: 100vh;
+    .app-component {
+      padding-top: 5.5rem;
+    }
+
+    &.closet-mode {
+      .app-component {
+        padding-top: 5rem;
+        .closet-container {
+          height: 80vh;
+
+          .area {
+            border-bottom: 0;
+
+            
+            .pinch-zoom-container {
+              width: 92%;
+
+              img {
+                padding-left: 230px;
+              }
+            }
+          }
+
+          &.show-area-lines {
+
+            .ios-lines {
+              width: 95%;
+              border-top: 3px dashed red;
+            }
+
+            .area {
+              .pinch-zoom-container {
+                border-left: 3px dashed #666;
+                border-right: 3px dashed #666;
+                border-bottom: 3px dashed #666;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .input {
+    [class^="picker-trigger-"] {
+      height: 32px;
+      margin-top: 2px;
+    }
+  }
+}
+
 @supports (-webkit-overflow-scrolling: touch) {
+  .ios-fix();
+}
 
-
-
+body[data-mode="ios-fix"] {
+  .ios-fix();
 }

@@ -1,1 +1,120 @@
 /* ----------- iOS devices ------------ */
+.ios-fix header,
+.ios-fix .page-header {
+  height: 70px;
+  padding-top: 30px;
+}
+.ios-fix main {
+  height: 100vh;
+}
+.ios-fix main .app-component {
+  padding-top: 5.5rem;
+}
+.ios-fix main.closet-mode .app-component {
+  padding-top: 5rem;
+}
+.ios-fix main.closet-mode .app-component .closet-container {
+  height: 80vh;
+}
+.ios-fix main.closet-mode .app-component .closet-container .area {
+  border-bottom: 0;
+}
+.ios-fix main.closet-mode .app-component .closet-container .area .pinch-zoom-container {
+  width: 92%;
+}
+.ios-fix main.closet-mode .app-component .closet-container .area .pinch-zoom-container img {
+  padding-left: 230px;
+}
+.ios-fix main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
+  width: 95%;
+  border-top: 3px dashed red;
+}
+.ios-fix main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
+  border-left: 3px dashed #666;
+  border-right: 3px dashed #666;
+  border-bottom: 3px dashed #666;
+}
+.ios-fix .input [class^="picker-trigger-"] {
+  height: 32px;
+  margin-top: 2px;
+}
+@supports (-webkit-overflow-scrolling: touch) {
+  header,
+  .page-header {
+    height: 70px;
+    padding-top: 30px;
+  }
+  main {
+    height: 100vh;
+  }
+  main .app-component {
+    padding-top: 5.5rem;
+  }
+  main.closet-mode .app-component {
+    padding-top: 5rem;
+  }
+  main.closet-mode .app-component .closet-container {
+    height: 80vh;
+  }
+  main.closet-mode .app-component .closet-container .area {
+    border-bottom: 0;
+  }
+  main.closet-mode .app-component .closet-container .area .pinch-zoom-container {
+    width: 92%;
+  }
+  main.closet-mode .app-component .closet-container .area .pinch-zoom-container img {
+    padding-left: 230px;
+  }
+  main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
+    width: 95%;
+    border-top: 3px dashed red;
+  }
+  main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
+    border-left: 3px dashed #666;
+    border-right: 3px dashed #666;
+    border-bottom: 3px dashed #666;
+  }
+  .input [class^="picker-trigger-"] {
+    height: 32px;
+    margin-top: 2px;
+  }
+}
+body[data-mode="ios-fix"] header,
+body[data-mode="ios-fix"] .page-header {
+  height: 70px;
+  padding-top: 30px;
+}
+body[data-mode="ios-fix"] main {
+  height: 100vh;
+}
+body[data-mode="ios-fix"] main .app-component {
+  padding-top: 5.5rem;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component {
+  padding-top: 5rem;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container {
+  height: 80vh;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container .area {
+  border-bottom: 0;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container .area .pinch-zoom-container {
+  width: 92%;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container .area .pinch-zoom-container img {
+  padding-left: 230px;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
+  width: 95%;
+  border-top: 3px dashed red;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
+  border-left: 3px dashed #666;
+  border-right: 3px dashed #666;
+  border-bottom: 3px dashed #666;
+}
+body[data-mode="ios-fix"] .input [class^="picker-trigger-"] {
+  height: 32px;
+  margin-top: 2px;
+}

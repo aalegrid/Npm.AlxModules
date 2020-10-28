@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -45,9 +45,12 @@
   border-radius: 2px;
 }
 main.closet-mode {
-  margin-top: 3.55rem;
   background-color: #000;
   padding: 0;
+}
+main.closet-mode .app-component {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 main.closet-mode #mainPanel,
 main.closet-mode .logged-component {
@@ -70,7 +73,7 @@ main.closet-mode .logged-component .closet-container .area .slider-bar {
 main.closet-mode #mainPanel .closet-container .area .slider-bar .slider,
 main.closet-mode .logged-component .closet-container .area .slider-bar .slider {
   -webkit-appearance: none;
-  width: 99%;
+  width: 85%;
   height: 16px;
   background: #d3d3d3;
   outline: none;
@@ -102,6 +105,7 @@ main.closet-mode #mainPanel .closet-container .area .clothes,
 main.closet-mode .logged-component .closet-container .area .clothes {
   height: 100%;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 main.closet-mode #mainPanel .closet-container .area .clothes .pinch-zoom-container img,
 main.closet-mode .logged-component .closet-container .area .clothes .pinch-zoom-container img {
