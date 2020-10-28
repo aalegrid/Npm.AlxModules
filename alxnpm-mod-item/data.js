@@ -20,16 +20,16 @@ export let data = {
                 <tr>
                     <th></th>
                     <th>
-                        <span data-sort="title">Title</span>
+                        <a data-sort="title">Title</a>
                     </th>
                     <th class="priority">
-                        <span data-sort="priority">Priority</span>
+                        <a data-sort="priority">Priority</a>
                     </th>
                     <th class="status">
-                        <span data-sort="status">Status</span>
+                        <a data-sort="status">Status</a>
                     </th>
                     <th class="nodes">
-                        <span data-sort="nodes">{nodeName}s</span>
+                        <a data-sort="nodes">{nodeName}s</a>
                     </th>
                     <th class="control" style="text-align: right">
                         Control

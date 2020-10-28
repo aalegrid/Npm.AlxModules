@@ -1,4 +1,5 @@
 import Img from './alex.png'
+import List from './script';
 
 
 export let data = {
@@ -15,16 +16,16 @@ export let data = {
             <thead>
                 <tr>
                 <th>
-                    <i data-sort="color" class="fas fa-palette"></i>
+                    <a data-sort="color"><i class="fas fa-palette"></i></a>
                 </th>
                 <th>
-                    <i data-sort="icon" class="far fa-flag"></i>
+                    <a data-sort="icon"><i class="far fa-flag"></i></a>
                 </th>
                 <th style="text-align: left">
-                    <i data-sort="title" class="fal fa-folder"></i>
+                    <a data-sort="title"><i class="fal fa-folder"></i></a>
                 </th>
                 <th>
-                    <span data-sort="node" class="count-sort">Items</span>
+                    <a data-sort="node"><span class="count-sort">Items</span></a>
                 </th>
                 </tr>
             </thead>
@@ -69,6 +70,11 @@ export let data = {
         </li>
     </ul>
     
-    `
+    `,
+    links : {
+        project: [`<li class="sort-todo"><a data-sort="todo"><i class="fal fa-sort-size-up"></i></a></li>`],
+
+
+    }
 
 }

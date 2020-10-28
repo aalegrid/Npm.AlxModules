@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-list",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "",
   "main": "script.js",
   "scripts": {
@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "Dependencies": {
-    "alxnpm-mod-api": "^3.0.0",
-    "alxnpm-mod-loader": "^3.0.0",
-    "alxnpm-mod-helper": "^3.0.0"
+    "alxnpm-mod-api": "^4.0.0",
+    "alxnpm-mod-loader": "^4.0.0",
+    "alxnpm-mod-helper": "^4.0.0"
   }
 }

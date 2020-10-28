@@ -1,7 +1,7 @@
   
 {
   "name": "alxnpm-mod-modal",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Modal",
   "main": "script.js",
   "scripts": {
@@ -10,6 +10,6 @@
   "author": "Alex Alegrid",
   "license": "ISC",
   "Dependencies": {
-    "alxnpm-mod-module": "^3.0.0"
+    "alxnpm-mod-module": "^4.0.0"
   }
 }

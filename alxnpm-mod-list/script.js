@@ -16,7 +16,6 @@ export default class List extends Module {
         this.loader = new Loader();
         this.sortField = "title";
         this._items = [];
-        this.openItems = Helper.getLocalStorageData(`${this.options.appId}_openItems`) || [];
     }
 
     get items() {
@@ -42,7 +41,7 @@ export default class List extends Module {
             let li = document.createElement("li");
             li.classList.add("user-info");
             this.header.querySelector("ul").appendChild(li);
-            li.innerHTML = `Hello <i class="fas fa-user-astronaut"></i> ${user.firstName} ${user.lastName}`
+            li.innerHTML = `Hello <i class="fas fa-user-astronaut"></i> ${user.firstName}`
 
         }
 
@@ -77,6 +76,25 @@ export default class List extends Module {
             }
             else {
                 this.getItems();
+            }
+        }
+
+
+        if (data.links[this.options.appDomain]) {
+            const elem = this.footer.querySelector("ul")
+            if (elem) {
+                data.links[this.options.appDomain].forEach(function (item) {
+                    const ul = document.createElement('ul');
+                    ul.innerHTML = item;
+                    elem.insertBefore(ul.firstChild, elem.firstChild);
+                })
+
+                const sortLinks = this.footer.querySelectorAll("ul [data-sort]")
+
+                if (sortLinks) {
+                    this.addSortLinks(sortLinks)
+                }
+
             }
         }
 
@@ -139,7 +157,7 @@ export default class List extends Module {
                             _this.openItems.splice(index, 1);
                         }
                     }
-                    Helper.setLocalStorageData(`${_this.options.appId}_openItems`, _this.openItems)
+                    Helper.setLocalStorageData(`${this.options.appId}_openItems`, _this.openItems)
                 }, false);
             });
 
@@ -231,7 +249,7 @@ export default class List extends Module {
                 }
                 count = value.nodes.filter(filterTasks).length;
 
-                todoCount = `<span class="todo-count">Todo: <span>${count}</span></span>`
+                todoCount = `<span class="todo-count bold">Todo: <span>${count}</span></span>`
             }
 
             if (value.metas) {
@@ -239,20 +257,21 @@ export default class List extends Module {
                 binaryImage && (image = `<img src="${binaryImage}">`);
             }
 
+
             html += `<tr>
                     <td style="background-color:${value.color}">${index + 1}</td>
                     <td>${icon}</td>
                     <td>
-                    <a href="javascript:void(0)" class="list-item main-item" data-itemid="${value.id}">
+                    <a class="list-item" data-itemid="${value.id}">
                         <span class="info">
-                            <span class="title">
-                            ${image}
-                            <span>${value.title ? value.title : 'Untitled'}</span>
-                            </span>
-                            <span class="meta-data">
+                            <span class="image">${image}</span>
+                            <span class="title-meta">
+                                <span class="title">${value.title ? value.title : 'Untitled'}</span>
+                                <span class="meta-data">
                                 ${statusPrioritySpan}
-                                <span class="last-modified">${value.dateModified ? Helper.formatDate(value.dateModified) : Helper.formatDate(value.dateCreated)}</span>
+                                <span class="date-modified">${value.dateModified ? Helper.formatDate(value.dateModified) : Helper.formatDate(value.dateCreated)}</span>
                                 ${todoCount}
+                                </span>
                             </span>
                         </span>                        
                     </a>
@@ -264,34 +283,28 @@ export default class List extends Module {
         return html;
     }
 
-    addSortLinks() {
-        let _this = this,
-            sortlinks = this.htmlElement.querySelectorAll("table thead [data-sort]");
+    addSortLinks(links) {
 
+        const _this = this,
+            sortlinks = links ? links : this.htmlElement.querySelectorAll("table thead [data-sort]");
         sortlinks.forEach(function (item) {
             item.addEventListener("click", function (e) {
-
-                let clickedItem = this.getAttribute("data-sort");
+                let clickedItem = this.closest("a").getAttribute("data-sort");
                 if (_this.sortField === clickedItem) {
                     sortlinks.forEach(function (elem) {
-
                         if (elem.getAttribute("data-sort") !== clickedItem) {
                             elem.classList.remove("reverse");
                         }
-
                     })
                     this.classList.toggle("reverse");
                 }
-
                 _this.sortField = clickedItem;
                 _this.bind(_this.items);
-
                 let listSort = {
                     sortField: _this.sortField,
                     reverse: this.classList.contains("reverse") ? "reverse" : ""
                 }
                 Helper.setLocalStorageData(`${_this.options.appId}_listSort`, listSort);
-
             }, false);
         });
     }
@@ -301,7 +314,13 @@ export default class List extends Module {
         if (listSort) {
             this.sortField = listSort.sortField;
             if (listSort.reverse) {
-                this.htmlElement.querySelector(`[data-sort='${listSort.sortField}']`).classList.add(listSort.reverse);
+                if (this.htmlElement.querySelector(`[data-sort='${listSort.sortField}']`)) {
+                    this.htmlElement.querySelector(`[data-sort='${listSort.sortField}']`).classList.add(listSort.reverse);
+                }
+
+                else if (this.footer.querySelector(`[data-sort='${listSort.sortField}']`)) {
+                    this.footer.querySelector(`[data-sort='${listSort.sortField}']`).classList.add(listSort.reverse);
+                }
             }
         }
     }
@@ -321,10 +340,15 @@ export default class List extends Module {
                 break;
             case "meta": items.sort(Helper.metaSort);
                 break;
+            case "todo": items.sort(Helper.todoSort);
+                break;
             default: items.sort(Helper.titleSort);
         }
 
-        let sortElem = this.htmlElement.querySelector(`[data-sort='${this.sortField}']`);
+        let sortElem = this.htmlElement.querySelector(`[data-sort='${this.sortField}']`) ?
+            this.htmlElement.querySelector(`[data-sort='${this.sortField}']`) :
+            this.footer.querySelector(`[data-sort='${this.sortField}']`);
+
 
         if (sortElem) {
             if (sortElem.classList.contains("reverse")) {

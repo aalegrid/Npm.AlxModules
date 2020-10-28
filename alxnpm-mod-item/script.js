@@ -91,7 +91,7 @@ export default class Item extends Module {
 
         }, false);
 
-        this.header.querySelector(".page-title").innerHTML = item.title ? Helper.trim(32, item.title) : `New Item`;
+        this.header.querySelector(".page-title").innerHTML = item.title ? Helper.trim(32, item.title) : `Untitled`;
 
         this.header.querySelector(".save a").addEventListener("click", function (e) {
             e.preventDefault();
@@ -273,9 +273,9 @@ export default class Item extends Module {
                 notes.forEach(function (value) {
                     let icon = value.binaryData ? `<img class="img-icon" src=${value.binaryData} />` : `<i class="${_this.options.noteIcon} note-icon"></i>`;
                     notesHtml += `<tr data-noteid="${value.id}">
-                         <td><a href='javascript:void(0)' title='${value.id}' class='note-item' data-noteid="${value.id}">${icon}</a></td>
-                         <td><a href='javascript:void(0)' title='${value.id}' class='note-item' data-noteid="${value.id}">${value.name ? Helper.trim(35, value.name) : 'Untitled'}</a></td>
-                         <td><a href='javascript:void(0)' title='${value.id}' class='delete-note' data-noteid="${value.id}"><i class='far fa-trash'></i></a></td>
+                         <td><a  title='${value.id}' class='note-item' data-noteid="${value.id}">${icon}</a></td>
+                         <td><a  title='${value.id}' class='note-item' data-noteid="${value.id}">${value.name ? Helper.trim(35, value.name) : 'Untitled'}</a></td>
+                         <td><a  title='${value.id}' class='delete-note' data-noteid="${value.id}"><i class='far fa-trash'></i></a></td>
                          </tr>`;
                 });
 
@@ -420,8 +420,8 @@ export default class Item extends Module {
 
         if (this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) {
             this.htmlElement.querySelector(".nodes-list .collapse").addEventListener("click", function () {
-                const iElem = e.target.closest("h3").querySelector("i")
                 _this.htmlElement.querySelector(".nodes-list table").classList.toggle("hide");
+                const iElem = this.querySelector("i")
                 iElem.classList.toggle("fa-minus-square");
                 iElem.classList.toggle("fa-plus-square");
                 Helper.setLocalStorageData(`${_this.options.appId}_nodeCollapse`, iElem.classList.value);
@@ -433,8 +433,8 @@ export default class Item extends Module {
         }
 
         this.htmlElement.querySelector(".notes-list .collapse").addEventListener("click", function () {
-            const iElem = e.target.closest("h3").querySelector("i")
             _this.htmlElement.querySelector(".notes-list table").classList.toggle("hide");
+            const iElem = this.querySelector("i")
             iElem.classList.toggle("fa-minus-square");
             iElem.classList.toggle("fa-plus-square");
             Helper.setLocalStorageData(`${_this.options.appId}_noteCollapse`, iElem.classList.value);
@@ -466,16 +466,19 @@ export default class Item extends Module {
                     }
                     let statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
                         priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle"),
-                        iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` :   `<i class="${_this.options.nodeIcon}"></i>`;
+                        iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` :   `<i class="${value.icon ? value.icon : _this.options.nodeIcon}"></i>`;
  
                     nodesHtml += `<tr data-nodeid="${value.id}">
                         <td>${iconOrCheckBox}</td>
-                        <td><a href='javascript:void(0)' class='node-item' data-nodeid="${value.id}">${value.title}</a></td>`;
+                        <td>
+                        <span class="colorbox" style="background-color:${value.color ? value.color : ''}; display:${value.color ? 'inline-block' : ''}"></span>
+                            <a class='node-item' data-nodeid="${value.id}">${value.title}</a>
+                        </td>`;
                     if (_this.options.fields.includes("priority")) {
-                        nodesHtml += `<td><a href='javascript:void(0)' class='node-priority-click' data-nodeid="${value.id}" data-nodepriority="${value.priority}"><i class="fal fa-${priorityIcon}"></i></a></td>`;
+                        nodesHtml += `<td><a class='node-priority-click' data-nodeid="${value.id}" data-nodepriority="${value.priority}"><i class="fal fa-${priorityIcon}"></i></a></td>`;
                     }
                     if (_this.options.fields.includes("status")) {
-                        nodesHtml += `<td><a href='javascript:void(0)' class='node-status-click' data-nodeid="${value.id}" data-nodestatus="${value.status}"><i class="far fa-${statusIcon}"></i></a></td>`;
+                        nodesHtml += `<td><a  class='node-status-click' data-nodeid="${value.id}" data-nodestatus="${value.status}"><i class="far fa-${statusIcon}"></i></a></td>`;
 
                     }
                     if (_this.options.nodeCount) {
@@ -485,7 +488,7 @@ export default class Item extends Module {
                     if (_this.options.appDomain === "list" && item.tag && item.tag.includes("list-add")) {
                         nodesHtml += `<td style="text-align:right">${value.control}</td>`;
                     }
-                    nodesHtml += `<td><a href='javascript:void(0)' class='delete-node' data-nodeid="${value.id}"><i class='far fa-trash'></i></a></td>
+                    nodesHtml += `<td><a  class='delete-node' data-nodeid="${value.id}"><i class='far fa-trash'></i></a></td>
                             </tr>`;
                 });
 
@@ -841,7 +844,7 @@ export default class Item extends Module {
         if (sortLinks) {
             sortLinks.forEach(function (item) {
                 item.addEventListener("click", function (e) {
-                    let clickedItem = this.getAttribute("data-sort");
+                    let clickedItem = this.closest("a").getAttribute("data-sort");
                     if (_this.sortField === clickedItem) {
                         sortLinks.forEach(function (elem) {
                             if (elem.getAttribute("data-sort") !== clickedItem) {
