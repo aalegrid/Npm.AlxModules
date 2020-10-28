@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -99,7 +99,6 @@
   display: flex;
 }
 .input [class^="picker-trigger-"] {
-  height: 2.25rem;
   border: 1px solid #9b9090;
   border-left: 0;
   padding: 0.5rem;
@@ -282,9 +281,10 @@ h4,
 h5,
 h6 {
   font-weight: 500;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 body {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 main {
   margin-top: 3rem;
@@ -401,7 +401,7 @@ h3 {
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .priority-btn-group a i,
 .status-btn-group a i {
@@ -427,7 +427,7 @@ button {
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 button i {
   font-weight: 500 !important;
@@ -1528,6 +1528,8 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a img {
   padding: 0.25rem;
   font-size: 0.9rem;
 }
+/* ----------- Android devices ------------ */
+/* ----------- iOS devices ------------ */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   #screen:after {
