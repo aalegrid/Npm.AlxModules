@@ -1,16 +1,25 @@
 /* ----------- iOS devices ------------ */
 
 .ios-fix {
+  .ios-statusbar {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 22px;
+    background-color: #000;
+    z-index: 3;
+  }
   header,
   .page-header {
-    height: 70px;
-    padding-top: 30px;
+    height: 80px;
+    padding-top: 36px;
   }
 
   main {
     height: 100vh;
     .app-component {
-      padding-top: 5.5rem;
+      padding-top: 6rem;
     }
 
     &.closet-mode {
@@ -36,14 +45,14 @@
 
             .ios-lines {
               width: 95%;
-              border-top: 3px dashed red;
+              border-top: 1px dashed red;
             }
 
             .area {
               .pinch-zoom-container {
-                border-left: 3px dashed #666;
-                border-right: 3px dashed #666;
-                border-bottom: 3px dashed #666;
+                border-left: 1px dashed #666;
+                border-right: 1px dashed #666;
+                border-bottom: 1px dashed #666;
               }
             }
           }
@@ -52,12 +61,12 @@
     }
   }
 
-  .input {
-    [class^="picker-trigger-"] {
-      height: 32px;
-      margin-top: 2px;
-    }
-  }
+  // .input {
+  //   [class^="picker-trigger-"] {
+  //     height: 32px;
+  //     margin-top: 2px;
+  //   }
+  // }
 }
 
 @supports (-webkit-overflow-scrolling: touch) {

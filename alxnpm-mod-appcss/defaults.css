@@ -56,8 +56,10 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-  border-width: 1px;
+  height: 36px;
+  line-height: 36px;
   padding: 0.5rem;
+  font-size: 14px;
   border: 1px solid #9b9090;
   -webkit-appearance: none;
   -moz-appearance: none;

@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -49,12 +49,14 @@
   width: 0;
   position: fixed;
   z-index: 2;
-  top: 0;
+  top: 22px;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  border: 1px solid #ccc;
+  border-left: 0;
 }
 #navPanel ul {
   width: 250px;
@@ -113,9 +115,6 @@ body.nav-open .closet-container {
 }
 body.nav-open #navPanel {
   width: 250px;
-  opacity: 0.95;
-  border: 2px solid #ccc;
-  border-left: 0;
 }
 body.nav-open #mainPanel {
   opacity: 0.5;

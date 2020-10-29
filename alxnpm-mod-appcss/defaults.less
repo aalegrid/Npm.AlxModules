@@ -18,8 +18,10 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-  border-width: 1px;
+  height: 36px;
+  line-height: 36px;
   padding: 0.5rem;
+  font-size: 14px;
   border: 1px solid @color-gray;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -27,8 +29,7 @@ textarea {
   width: 100%;
   outline: none;
   border-radius: 0;
-  //We want to keep the outline that shows when input is clicked
-  // outline: none;
+
 
   &:focus {
     border-radius: 0;

@@ -1,14 +1,23 @@
 /* ----------- iOS devices ------------ */
+.ios-fix .ios-statusbar {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 22px;
+  background-color: #000;
+  z-index: 3;
+}
 .ios-fix header,
 .ios-fix .page-header {
-  height: 70px;
-  padding-top: 30px;
+  height: 80px;
+  padding-top: 36px;
 }
 .ios-fix main {
   height: 100vh;
 }
 .ios-fix main .app-component {
-  padding-top: 5.5rem;
+  padding-top: 6rem;
 }
 .ios-fix main.closet-mode .app-component {
   padding-top: 5rem;
@@ -27,28 +36,33 @@
 }
 .ios-fix main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
   width: 95%;
-  border-top: 3px dashed red;
+  border-top: 1px dashed red;
 }
 .ios-fix main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-  border-left: 3px dashed #666;
-  border-right: 3px dashed #666;
-  border-bottom: 3px dashed #666;
-}
-.ios-fix .input [class^="picker-trigger-"] {
-  height: 32px;
-  margin-top: 2px;
+  border-left: 1px dashed #666;
+  border-right: 1px dashed #666;
+  border-bottom: 1px dashed #666;
 }
 @supports (-webkit-overflow-scrolling: touch) {
+  .ios-statusbar {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 22px;
+    background-color: #000;
+    z-index: 3;
+  }
   header,
   .page-header {
-    height: 70px;
-    padding-top: 30px;
+    height: 80px;
+    padding-top: 36px;
   }
   main {
     height: 100vh;
   }
   main .app-component {
-    padding-top: 5.5rem;
+    padding-top: 6rem;
   }
   main.closet-mode .app-component {
     padding-top: 5rem;
@@ -67,28 +81,33 @@
   }
   main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
     width: 95%;
-    border-top: 3px dashed red;
+    border-top: 1px dashed red;
   }
   main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-    border-left: 3px dashed #666;
-    border-right: 3px dashed #666;
-    border-bottom: 3px dashed #666;
+    border-left: 1px dashed #666;
+    border-right: 1px dashed #666;
+    border-bottom: 1px dashed #666;
   }
-  .input [class^="picker-trigger-"] {
-    height: 32px;
-    margin-top: 2px;
-  }
+}
+body[data-mode="ios-fix"] .ios-statusbar {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 22px;
+  background-color: #000;
+  z-index: 3;
 }
 body[data-mode="ios-fix"] header,
 body[data-mode="ios-fix"] .page-header {
-  height: 70px;
-  padding-top: 30px;
+  height: 80px;
+  padding-top: 36px;
 }
 body[data-mode="ios-fix"] main {
   height: 100vh;
 }
 body[data-mode="ios-fix"] main .app-component {
-  padding-top: 5.5rem;
+  padding-top: 6rem;
 }
 body[data-mode="ios-fix"] main.closet-mode .app-component {
   padding-top: 5rem;
@@ -107,14 +126,10 @@ body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container .are
 }
 body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .ios-lines {
   width: 95%;
-  border-top: 3px dashed red;
+  border-top: 1px dashed red;
 }
 body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-  border-left: 3px dashed #666;
-  border-right: 3px dashed #666;
-  border-bottom: 3px dashed #666;
-}
-body[data-mode="ios-fix"] .input [class^="picker-trigger-"] {
-  height: 32px;
-  margin-top: 2px;
+  border-left: 1px dashed #666;
+  border-right: 1px dashed #666;
+  border-bottom: 1px dashed #666;
 }

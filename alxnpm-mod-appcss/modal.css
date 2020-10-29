@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -32,6 +32,17 @@
   position: relative;
   top: -2px;
   min-width: 1.25rem;
+}
+.img-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.25rem;
+  display: inline-block;
+  padding: 3px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
 }
 .modal-module {
   position: fixed;
@@ -68,7 +79,7 @@
   animation-duration: 0.6s;
 }
 .modal-module .modal .header {
-  background-color: #7d7d7d;
+  background-color: #666666;
   color: #fff;
   padding: 10px;
 }
