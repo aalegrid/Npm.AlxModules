@@ -25,31 +25,37 @@ div[class$="-list"] {
     }
   }
   table {
-    th {
-      font-size: 0.75rem;
+    border: none;
+    border-top: 1px dotted #7d7d7d;
+    border-bottom: 1px dotted #7d7d7d;
+    font-size: .8rem;
 
-      &:first-child,
-      &:nth-child(2) {
+    th {
+      border-right: none;
+      &:first-child {
         text-align: left;
         padding-left: 0;
+      }
+      a {
+        font-weight: bold;
       }
     }
 
     td {
-      font-size: 0.85rem;
+      border-right: none;
       &:first-child,
       &:nth-child(2) {
         text-align: left;
         padding-left: 0;
       }
 
-      &:last-child {
-        padding-right: 0;
+      &:nth-child(2) {
+        display: flex;
+        align-items: center;
       }
 
-      [class$="-item"] {
-        font-size: 0.85rem;
-        display: inline-block;
+      &:last-child {
+        padding-right: 0;
       }
 
       img.img-icon {
@@ -58,19 +64,25 @@ div[class$="-list"] {
       }
 
       .note-icon {
-        margin-left: .5rem;
+        margin-left: 0.5rem;
+      }
+
+      [class$="-item"] {
+        font-size: 0.85rem;
+        width: fit-content;
       }
 
       .colorbox {
-        // display: inline-block;
-        width: 8px;
-        height: 8px;
-        margin-right: 3px;
+        display: block;
+        width: 12px;
+        height: 12px;
+        margin-right: 5px;
+        border: 1px solid #ccc;
       }
     }
 
     tr.list-add {
-      td:nth-child(4){
+      td:nth-child(4) {
         text-align: right;
       }
     }
@@ -80,16 +92,24 @@ div[class$="-list"] {
     }
     margin-bottom: 1.5rem;
   }
+
+  &.notes-list {
+    td:nth-child(2) {
+      display: table-cell;
+    }
+    td:last-child {
+      text-align: right;
+    }
+  }
 }
 
 .item {
   form {
     .row {
-
       .editor-preview {
         display: none;
       }
-      
+
       &.ck-editor-preview {
         .editor-preview {
           display: block;
@@ -102,13 +122,3 @@ div[class$="-list"] {
   }
 }
 
-// .notes-list {
-//   table {
-//     tr {
-//       display: flex;
-//       justify-content: space-between;
-//       align-items: center;
-//       height: 3rem;
-//     }
-//   }
-// }

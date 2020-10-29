@@ -39,9 +39,16 @@
   border-top: 1px dashed red;
 }
 .ios-fix main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-  border-left: 1px dashed #666;
-  border-right: 1px dashed #666;
-  border-bottom: 1px dashed #666;
+  border: 0 !important;
+  border-left: 1px dashed #666 !important;
+  border-right: 1px dashed #666 !important;
+  border-bottom: 1px dashed #666 !important;
+}
+.ios-fix main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container:last-child {
+  border-bottom: 0 !important;
+}
+.ios-fix #navPanel {
+  top: 22px;
 }
 @supports (-webkit-overflow-scrolling: touch) {
   .ios-statusbar {
@@ -84,9 +91,16 @@
     border-top: 1px dashed red;
   }
   main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-    border-left: 1px dashed #666;
-    border-right: 1px dashed #666;
-    border-bottom: 1px dashed #666;
+    border: 0 !important;
+    border-left: 1px dashed #666 !important;
+    border-right: 1px dashed #666 !important;
+    border-bottom: 1px dashed #666 !important;
+  }
+  main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container:last-child {
+    border-bottom: 0 !important;
+  }
+  #navPanel {
+    top: 22px;
   }
 }
 body[data-mode="ios-fix"] .ios-statusbar {
@@ -129,7 +143,14 @@ body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show
   border-top: 1px dashed red;
 }
 body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-  border-left: 1px dashed #666;
-  border-right: 1px dashed #666;
-  border-bottom: 1px dashed #666;
+  border: 0 !important;
+  border-left: 1px dashed #666 !important;
+  border-right: 1px dashed #666 !important;
+  border-bottom: 1px dashed #666 !important;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container:last-child {
+  border-bottom: 0 !important;
+}
+body[data-mode="ios-fix"] #navPanel {
+  top: 22px;
 }

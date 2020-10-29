@@ -1,104 +1,93 @@
 @import "variables_mixins.less";
 
 div.list {
-    table {
-      thead {
-        tr {
-          background-color: #ebebeb;
-          th {
-            i {
-              cursor: pointer;
-              display: block;
-            }
-
-            border-right: 1px dotted @color-gray;
-
-            &:last-child {
-              border-right: none;
-            }
-          }
-        }
-      }
+  table {
+    thead {
       tr {
-        td:first-child,
-        td:nth-child(2),
-        td:last-child,
-        th:first-child,
-        th:nth-child(2),
-        th:last-child {
-          text-align: center;
-        }
-
-        td:nth-child(3),
-        th:nth-child(3) {
-          text-align: left;
-        }
-
-        td {
-          // vertical-align: top;
-          a.list-item {
-            display: inline-flex;
-            text-decoration: none;
-            color: @color-black;
-            width: 100%;
-
-            img {
-              .img-icon();
-            }
-
-            .info {
-              display: flex;
-              
-              .image {
-
-              }
-
-              .title-meta {
-                  .title {
-                    display: block;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    width: fit-content;
-                    white-space: nowrap;                   
-                  }
-
-                  .meta-data {
-                    white-space: nowrap;   
-                    display:block;
-                    font-size: 0.7rem;
-                    color: @color-gray;
-                    display: flex;                   
-                    i {
-                      margin-right: 0.25rem;
-                    }
-    
-                    .todo-count {
-                      color: @color-black;
-                      border-left: 1px solid @color-gray;
-                      margin-left: .25rem;
-                      padding-left: .25rem;
-                      
-                      &.bold {
-                        font-weight: 700;
-                        // font-size: .8rem;
-                      }
-    
-                    }
-                  }
-              }
-
-              
-            }
-          }
-
-          a.list-count {
-            display: unset;
-          }
-          .count {
-            .badge();
+        background-color: #ebebeb;
+        th {
+          i {
+            cursor: pointer;
+            display: block;
           }
         }
       }
     }
-
+    tr {
+      td {
+        border-right: 1px dotted @color-gray;
+        &:nth-child(3) {
+          text-align: left;
+          
+          .list-item {
+            display: inline-flex;
+            text-decoration: none;
+            color: @color-black;
+            width: 100%;
+  
+            span.image {
+              display: flex;
+              width: 36px;
+              height: 36px;
+              border: 1px solid #ccc;
+              justify-content: center;
+              align-items: center;
+              margin-right: 5px;
+              img {
+                width: 24px;
+                height: 24px;
+              }
+            }
+  
+            .info {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+  
+              .title-meta {
+                .title {
+                  display: block;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  font-family: @font-secondary;
+                  font-size: 0.9rem;
+                }
+  
+                .meta-data {
+                  white-space: nowrap;
+                  display: block;
+                  font-size: 0.7rem;
+                  color: @color-gray;
+                  display: flex;
+                  i {
+                    margin-right: 0.25rem;
+                  }
+  
+                  span {
+                    display: block;
+                  }
+                  .todo-count {
+                    color: @color-black;
+                    border-left: 1px solid @color-gray;
+                    margin-left: 0.25rem;
+                    padding-left: 0.25rem;
+  
+                    &.bold {
+                      font-weight: 700;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        &:last-child {
+          border-right: none;
+        }
+        .count {
+          .badge();
+        }
+      }
+    }
   }
+}

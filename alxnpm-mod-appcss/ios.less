@@ -31,7 +31,6 @@
           .area {
             border-bottom: 0;
 
-            
             .pinch-zoom-container {
               width: 92%;
 
@@ -42,7 +41,6 @@
           }
 
           &.show-area-lines {
-
             .ios-lines {
               width: 95%;
               border-top: 1px dashed red;
@@ -50,9 +48,14 @@
 
             .area {
               .pinch-zoom-container {
-                border-left: 1px dashed #666;
-                border-right: 1px dashed #666;
-                border-bottom: 1px dashed #666;
+                border: 0 !important;
+                border-left: 1px dashed #666 !important;
+                border-right: 1px dashed #666 !important;
+                border-bottom: 1px dashed #666 !important;
+              }
+
+              .pinch-zoom-container:last-child {
+                border-bottom: 0 !important;
               }
             }
           }
@@ -61,12 +64,9 @@
     }
   }
 
-  // .input {
-  //   [class^="picker-trigger-"] {
-  //     height: 32px;
-  //     margin-top: 2px;
-  //   }
-  // }
+  #navPanel {
+    top: 22px;
+  }
 }
 
 @supports (-webkit-overflow-scrolling: touch) {

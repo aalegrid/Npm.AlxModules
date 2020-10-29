@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -77,30 +77,36 @@ div[class$="-list"] [class$="-header"] a {
   color: #000;
 }
 div[class$="-list"] table {
+  border: none;
+  border-top: 1px dotted #7d7d7d;
+  border-bottom: 1px dotted #7d7d7d;
+  font-size: 0.8rem;
   margin-bottom: 1.5rem;
 }
 div[class$="-list"] table th {
-  font-size: 0.75rem;
+  border-right: none;
 }
-div[class$="-list"] table th:first-child,
-div[class$="-list"] table th:nth-child(2) {
+div[class$="-list"] table th:first-child {
   text-align: left;
   padding-left: 0;
 }
+div[class$="-list"] table th a {
+  font-weight: bold;
+}
 div[class$="-list"] table td {
-  font-size: 0.85rem;
+  border-right: none;
 }
 div[class$="-list"] table td:first-child,
 div[class$="-list"] table td:nth-child(2) {
   text-align: left;
   padding-left: 0;
 }
+div[class$="-list"] table td:nth-child(2) {
+  display: flex;
+  align-items: center;
+}
 div[class$="-list"] table td:last-child {
   padding-right: 0;
-}
-div[class$="-list"] table td [class$="-item"] {
-  font-size: 0.85rem;
-  display: inline-block;
 }
 div[class$="-list"] table td img.img-icon {
   position: relative;
@@ -109,16 +115,28 @@ div[class$="-list"] table td img.img-icon {
 div[class$="-list"] table td .note-icon {
   margin-left: 0.5rem;
 }
+div[class$="-list"] table td [class$="-item"] {
+  font-size: 0.85rem;
+  width: fit-content;
+}
 div[class$="-list"] table td .colorbox {
-  width: 8px;
-  height: 8px;
-  margin-right: 3px;
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
 }
 div[class$="-list"] table tr.list-add td:nth-child(4) {
   text-align: right;
 }
 div[class$="-list"] table.hide {
   display: none;
+}
+div[class$="-list"].notes-list td:nth-child(2) {
+  display: table-cell;
+}
+div[class$="-list"].notes-list td:last-child {
+  text-align: right;
 }
 .item form .row .editor-preview {
   display: none;

@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -47,74 +47,71 @@
 div.list table thead tr {
   background-color: #ebebeb;
 }
-div.list table thead tr th {
-  border-right: 1px dotted #9b9090;
-}
 div.list table thead tr th i {
   cursor: pointer;
   display: block;
 }
-div.list table thead tr th:last-child {
-  border-right: none;
+div.list table tr td {
+  border-right: 1px dotted #9b9090;
 }
-div.list table tr td:first-child,
-div.list table tr td:nth-child(2),
-div.list table tr td:last-child,
-div.list table tr th:first-child,
-div.list table tr th:nth-child(2),
-div.list table tr th:last-child {
-  text-align: center;
-}
-div.list table tr td:nth-child(3),
-div.list table tr th:nth-child(3) {
+div.list table tr td:nth-child(3) {
   text-align: left;
 }
-div.list table tr td a.list-item {
+div.list table tr td:nth-child(3) .list-item {
   display: inline-flex;
   text-decoration: none;
   color: #000;
   width: 100%;
 }
-div.list table tr td a.list-item img {
-  width: 2rem;
-  height: 2rem;
-  margin-right: 0.25rem;
-  display: inline-block;
-  padding: 3px;
-  line-height: 1.42857143;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-}
-div.list table tr td a.list-item .info {
+div.list table tr td:nth-child(3) .list-item span.image {
   display: flex;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ccc;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
 }
-div.list table tr td a.list-item .info .title-meta .title {
+div.list table tr td:nth-child(3) .list-item span.image img {
+  width: 24px;
+  height: 24px;
+}
+div.list table tr td:nth-child(3) .list-item .info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.list table tr td:nth-child(3) .list-item .info .title-meta .title {
   display: block;
   overflow: hidden;
   white-space: nowrap;
-  width: fit-content;
+  font-family: "Roboto", "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
 }
-div.list table tr td a.list-item .info .title-meta .meta-data {
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data {
+  white-space: nowrap;
   display: block;
   font-size: 0.7rem;
   color: #9b9090;
   display: flex;
 }
-div.list table tr td a.list-item .info .title-meta .meta-data i {
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data i {
   margin-right: 0.25rem;
 }
-div.list table tr td a.list-item .info .title-meta .meta-data .todo-count {
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data span {
+  display: block;
+}
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-count {
   color: #000;
   border-left: 1px solid #9b9090;
   margin-left: 0.25rem;
   padding-left: 0.25rem;
 }
-div.list table tr td a.list-item .info .title-meta .meta-data .todo-count.bold {
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-count.bold {
   font-weight: 700;
 }
-div.list table tr td a.list-count {
-  display: unset;
+div.list table tr td:last-child {
+  border-right: none;
 }
 div.list table tr td .count {
   color: #fff;

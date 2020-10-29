@@ -49,14 +49,12 @@
   width: 0;
   position: fixed;
   z-index: 2;
-  top: 22px;
+  top: 0;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
-  border: 1px solid #ccc;
-  border-left: 0;
 }
 #navPanel ul {
   width: 250px;
@@ -115,6 +113,8 @@ body.nav-open .closet-container {
 }
 body.nav-open #navPanel {
   width: 250px;
+  border: 1px solid #ccc;
+  border-left: 0;
 }
 body.nav-open #mainPanel {
   opacity: 0.5;

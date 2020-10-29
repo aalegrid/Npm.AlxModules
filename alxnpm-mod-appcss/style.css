@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -262,6 +262,7 @@ a {
   color: unset;
   text-decoration: none;
   font-weight: 500;
+  display: inline-block;
 }
 h1,
 h2,
@@ -284,7 +285,7 @@ h6 {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 body {
-  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 main .app-component {
   padding: 4.5rem 1.5rem;
@@ -330,30 +331,25 @@ table {
   width: 100%;
   background-color: transparent;
   border-collapse: collapse;
+  border: 1px dotted #7d7d7d;
 }
 table tr {
   border-bottom: 1px dotted #7d7d7d;
 }
 table tr th {
   font-weight: bold;
+  border-right: 1px dotted #9b9090;
+}
+table tr th:last-child {
+  border-right: none;
 }
 table tr th,
 table tr td {
   padding: 0.75rem;
   text-align: center;
 }
-table tr th:last-child,
-table tr td:last-child {
-  text-align: end !important;
-}
-table tr th a,
-table tr td a {
-  display: block;
-  text-decoration: none;
-  color: #000;
-}
-table tr:first-child {
-  border-top: 1px dotted #7d7d7d;
+table tbody tr:last-child {
+  border-bottom: 0;
 }
 h3 {
   padding: 0.25rem 0;
@@ -402,7 +398,7 @@ h3 {
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .priority-btn-group a i,
 .status-btn-group a i {
@@ -428,7 +424,7 @@ button {
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 button i {
   font-weight: 500 !important;
@@ -771,75 +767,71 @@ body.app-psychograph .page-footer {
 div.list table thead tr {
   background-color: #ebebeb;
 }
-div.list table thead tr th {
-  border-right: 1px dotted #9b9090;
-}
 div.list table thead tr th i {
   cursor: pointer;
   display: block;
 }
-div.list table thead tr th:last-child {
-  border-right: none;
+div.list table tr td {
+  border-right: 1px dotted #9b9090;
 }
-div.list table tr td:first-child,
-div.list table tr td:nth-child(2),
-div.list table tr td:last-child,
-div.list table tr th:first-child,
-div.list table tr th:nth-child(2),
-div.list table tr th:last-child {
-  text-align: center;
-}
-div.list table tr td:nth-child(3),
-div.list table tr th:nth-child(3) {
+div.list table tr td:nth-child(3) {
   text-align: left;
 }
-div.list table tr td a.list-item {
+div.list table tr td:nth-child(3) .list-item {
   display: inline-flex;
   text-decoration: none;
   color: #000;
   width: 100%;
 }
-div.list table tr td a.list-item img {
-  width: 2rem;
-  height: 2rem;
-  margin-right: 0.25rem;
-  display: inline-block;
-  padding: 3px;
-  line-height: 1.42857143;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-}
-div.list table tr td a.list-item .info {
+div.list table tr td:nth-child(3) .list-item span.image {
   display: flex;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ccc;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
 }
-div.list table tr td a.list-item .info .title-meta .title {
+div.list table tr td:nth-child(3) .list-item span.image img {
+  width: 24px;
+  height: 24px;
+}
+div.list table tr td:nth-child(3) .list-item .info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.list table tr td:nth-child(3) .list-item .info .title-meta .title {
   display: block;
   overflow: hidden;
-  width: fit-content;
   white-space: nowrap;
+  font-family: "Roboto", "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
 }
-div.list table tr td a.list-item .info .title-meta .meta-data {
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data {
   white-space: nowrap;
   display: block;
   font-size: 0.7rem;
   color: #9b9090;
   display: flex;
 }
-div.list table tr td a.list-item .info .title-meta .meta-data i {
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data i {
   margin-right: 0.25rem;
 }
-div.list table tr td a.list-item .info .title-meta .meta-data .todo-count {
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data span {
+  display: block;
+}
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-count {
   color: #000;
   border-left: 1px solid #9b9090;
   margin-left: 0.25rem;
   padding-left: 0.25rem;
 }
-div.list table tr td a.list-item .info .title-meta .meta-data .todo-count.bold {
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-count.bold {
   font-weight: 700;
 }
-div.list table tr td a.list-count {
-  display: unset;
+div.list table tr td:last-child {
+  border-right: none;
 }
 div.list table tr td .count {
   color: #fff;
@@ -890,30 +882,36 @@ div[class$="-list"] [class$="-header"] a {
   color: #000;
 }
 div[class$="-list"] table {
+  border: none;
+  border-top: 1px dotted #7d7d7d;
+  border-bottom: 1px dotted #7d7d7d;
+  font-size: 0.8rem;
   margin-bottom: 1.5rem;
 }
 div[class$="-list"] table th {
-  font-size: 0.75rem;
+  border-right: none;
 }
-div[class$="-list"] table th:first-child,
-div[class$="-list"] table th:nth-child(2) {
+div[class$="-list"] table th:first-child {
   text-align: left;
   padding-left: 0;
 }
+div[class$="-list"] table th a {
+  font-weight: bold;
+}
 div[class$="-list"] table td {
-  font-size: 0.85rem;
+  border-right: none;
 }
 div[class$="-list"] table td:first-child,
 div[class$="-list"] table td:nth-child(2) {
   text-align: left;
   padding-left: 0;
 }
+div[class$="-list"] table td:nth-child(2) {
+  display: flex;
+  align-items: center;
+}
 div[class$="-list"] table td:last-child {
   padding-right: 0;
-}
-div[class$="-list"] table td [class$="-item"] {
-  font-size: 0.85rem;
-  display: inline-block;
 }
 div[class$="-list"] table td img.img-icon {
   position: relative;
@@ -922,16 +920,28 @@ div[class$="-list"] table td img.img-icon {
 div[class$="-list"] table td .note-icon {
   margin-left: 0.5rem;
 }
+div[class$="-list"] table td [class$="-item"] {
+  font-size: 0.85rem;
+  width: fit-content;
+}
 div[class$="-list"] table td .colorbox {
-  width: 8px;
-  height: 8px;
-  margin-right: 3px;
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
 }
 div[class$="-list"] table tr.list-add td:nth-child(4) {
   text-align: right;
 }
 div[class$="-list"] table.hide {
   display: none;
+}
+div[class$="-list"].notes-list td:nth-child(2) {
+  display: table-cell;
+}
+div[class$="-list"].notes-list td:last-child {
+  text-align: right;
 }
 .item form .row .editor-preview {
   display: none;
@@ -1225,14 +1235,12 @@ main.closet-mode .logged-component .closet-container.hide-bottom [class$="Bottom
   width: 0;
   position: fixed;
   z-index: 2;
-  top: 22px;
+  top: 0;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
-  border: 1px solid #ccc;
-  border-left: 0;
 }
 #navPanel ul {
   width: 250px;
@@ -1291,6 +1299,8 @@ body.nav-open .closet-container {
 }
 body.nav-open #navPanel {
   width: 250px;
+  border: 1px solid #ccc;
+  border-left: 0;
 }
 body.nav-open #mainPanel {
   opacity: 0.5;
@@ -1574,9 +1584,16 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a img {
   border-top: 1px dashed red;
 }
 .ios-fix main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-  border-left: 1px dashed #666;
-  border-right: 1px dashed #666;
-  border-bottom: 1px dashed #666;
+  border: 0 !important;
+  border-left: 1px dashed #666 !important;
+  border-right: 1px dashed #666 !important;
+  border-bottom: 1px dashed #666 !important;
+}
+.ios-fix main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container:last-child {
+  border-bottom: 0 !important;
+}
+.ios-fix #navPanel {
+  top: 22px;
 }
 @supports (-webkit-overflow-scrolling: touch) {
   .ios-statusbar {
@@ -1619,9 +1636,16 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a img {
     border-top: 1px dashed red;
   }
   main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-    border-left: 1px dashed #666;
-    border-right: 1px dashed #666;
-    border-bottom: 1px dashed #666;
+    border: 0 !important;
+    border-left: 1px dashed #666 !important;
+    border-right: 1px dashed #666 !important;
+    border-bottom: 1px dashed #666 !important;
+  }
+  main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container:last-child {
+    border-bottom: 0 !important;
+  }
+  #navPanel {
+    top: 22px;
   }
 }
 body[data-mode="ios-fix"] .ios-statusbar {
@@ -1664,9 +1688,16 @@ body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show
   border-top: 1px dashed red;
 }
 body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container {
-  border-left: 1px dashed #666;
-  border-right: 1px dashed #666;
-  border-bottom: 1px dashed #666;
+  border: 0 !important;
+  border-left: 1px dashed #666 !important;
+  border-right: 1px dashed #666 !important;
+  border-bottom: 1px dashed #666 !important;
+}
+body[data-mode="ios-fix"] main.closet-mode .app-component .closet-container.show-area-lines .area .pinch-zoom-container:last-child {
+  border-bottom: 0 !important;
+}
+body[data-mode="ios-fix"] #navPanel {
+  top: 22px;
 }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
