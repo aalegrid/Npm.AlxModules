@@ -33,7 +33,7 @@ export let data = {
                     <label for="value">Value</label>
                 </div>
                 <div class="col-75">
-                    <textarea name="value" id="value" rows="6"></textarea>
+                    <textarea name="value" id="value" rows="8" style="height:unset;"></textarea>
                 </div>
             </div>
 
@@ -62,11 +62,11 @@ export let data = {
     
         <ul>
             <li class="back">
-                <a href="javascript:void(0)"><i class="fal fa-arrow-left"></i></a>
+                <a><i class="fal fa-arrow-left"></i></a>
             </li>
             <li class="page-title"></li>
             <li class="save">
-                <a href="javascript:void(0)"><i class="fal fa-save"></i></a>
+                <a><i class="fal fa-save"></i></a>
             </li>
 
         </ul>
@@ -77,13 +77,13 @@ export let data = {
     
     <ul>
         <li class="home">
-            <a href="javascript:void(0)"><i class="fal fa-house-user"></i></a>
+            <a><i class="fal fa-house-user"></i></a>
         </li>
         <li class="edit">
-            <a href="javascript:void(0)"><i class="fal fa-edit"></i></a>
+            <a><i class="fal fa-edit"></i></a>
         </li>
-        <li class="delete-note disabled">
-            <a href="javascript:void(0)"><i class="fal fa-trash"></i></a>
+        <li class="delete-note">
+            <a><i class="fal fa-trash"></i></a>
         </li>
 
     </ul>

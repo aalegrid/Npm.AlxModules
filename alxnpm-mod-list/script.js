@@ -218,15 +218,18 @@ export default class List extends Module {
     }
 
     formatList(items) {
-        let html = "",
-            _this = this;
+
+        const _this = this;
+        let html = "", counter = 0;
+            
 
         items.forEach(function (value, index) {
 
-
-            if (value.tag === "hidden") {
+            if (value.tag && (value.tag.includes("hidden") || value.tag.includes("hide") || value.tag.includes("archive"))) {
                 return;
             }
+
+            counter++;
 
             let icon = value.icon ? `<i class="${value.icon}">` : '',
                 image = "",
@@ -249,7 +252,7 @@ export default class List extends Module {
                 }
                 count = value.nodes.filter(filterTasks).length;
 
-                todoCount = `<span class="todo-count bold">Todo: <span>${count}</span></span>`
+                todoCount = `<span class="todo-count ${count ? 'bold' : ''}"><i class="${count ? 'fal fa-square' : 'fal fa-check-square'}"></i>${count}</span>`
             }
 
             if (value.metas) {
@@ -259,16 +262,16 @@ export default class List extends Module {
 
 
             html += `<tr>
-                    <td style="background-color:${value.color}">${index + 1}</td>
+                    <td style="background-color:${value.color}">${counter}</td>
                     <td>${icon}</td>
                     <td>
                     <a class="list-item" data-itemid="${value.id}">
                         <span class="info">
                             <span class="image">${image}</span>
                             <span class="title-meta">
-                                <span class="title">${value.title ? value.title : 'Untitled'}</span>
+                                <span class="title">${value.title ? (value.title.length > 20 ? Helper.trim(20, value.title) : value.title) : 'Untitled'}</span>
                                 <span class="meta-data">
-                                ${statusPrioritySpan}
+                                <span>${priority}</span>
                                 <span class="date-modified">${value.dateModified ? Helper.formatDate(value.dateModified) : Helper.formatDate(value.dateCreated)}</span>
                                 ${todoCount}
                                 </span>

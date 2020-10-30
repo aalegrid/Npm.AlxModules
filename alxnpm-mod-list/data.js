@@ -16,16 +16,16 @@ export let data = {
             <thead>
                 <tr>
                 <th>
-                    <a data-sort="color"><i class="fas fa-palette"></i></a>
+                    <a data-sort="color"><i class="fas fa-palette reverse"></i></a>
                 </th>
                 <th>
-                    <a data-sort="icon"><i class="far fa-flag"></i></a>
+                    <a data-sort="icon"><i class="fab fa-font-awesome-flag"></i></a>
                 </th>
                 <th style="text-align: left">
-                    <a data-sort="title"><i class="fal fa-folder"></i></a>
+                    <a data-sort="title"><i class="fas fa-folder"></i></a>
                 </th>
                 <th>
-                    <a data-sort="node"><span class="count-sort">Items</span></a>
+                    <a data-sort="node"><i class="fad fa-copy"></i></a>
                 </th>
                 </tr>
             </thead>

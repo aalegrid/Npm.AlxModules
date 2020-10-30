@@ -13,11 +13,6 @@ export default class Note extends Module {
         this.api = new API(this.options.apiUrl);
         this.loader = new Loader();
 
-        // ------------ Options Format -------------
-        // options = {
-        //     itemModule: Module,
-        //     listModule: Module
-        // }
     }
 
     render(note, itemId) {
@@ -70,9 +65,12 @@ export default class Note extends Module {
 
         if(this.htmlElement.querySelector(".note").classList.contains("view")) {
             this.header.querySelector(".save a").classList.add("disabled")
+            this.footer.querySelector(".delete-note a").classList.add("disabled")
+            
         }
         else {
             this.header.querySelector(".save a").classList.remove("disabled")
+            this.footer.querySelector(".delete-note a").classList.remove("disabled")
         }
 
 
@@ -141,16 +139,62 @@ export default class Note extends Module {
         this.footer.querySelector(".edit a i").addEventListener("click", function (e) {
             _this.htmlElement.querySelector(".note").classList.toggle("view");
              this.classList.toggle("fa-edit");
-            this.classList.toggle("fa-telescope");
+            this.classList.toggle("fa-file-search");
 
             if(_this.htmlElement.querySelector(".note").classList.contains("view")) {
                 _this.header.querySelector(".save a").classList.add("disabled")
+                _this.footer.querySelector(".delete-note a").classList.add("disabled")
             }
 
             else {
                 _this.header.querySelector(".save a").classList.remove("disabled")
+                _this.footer.querySelector(".delete-note a").classList.remove("disabled")
             }
         });
+
+
+        this.footer.querySelector(".delete-note a").addEventListener("click", function () {
+            _this.options.modalModule.header = "Delete";
+            _this.options.modalModule.body = `Are you sure you want to delete '${note.name}'?`;
+
+            let itemDeleteAction = function (id) {
+                // Delete action
+                _this.deleteNote(note.id, itemId);
+                // End delete action
+                _this.options.modalModule.hide();
+                _this.options.modalModule.removeConfirmAction(itemDeleteAction);
+            }
+
+            _this.options.modalModule.setConfirmAction(itemDeleteAction);
+            _this.options.modalModule.show();
+        }, false);
+
+    }
+    
+
+    deleteNote(id, itemId) {
+        this.loader.show();
+        //request(url, method, body, isTokenRequest, isBodyStringify, isResponseJson)
+        this.api.request(`/api/Metas/${id}`, "delete", {}, false, false, false)
+            .then((response) => {
+                this.loader.hide();
+                if (response.status >= 400) {
+                    Helper.showMessage(this.alertBox, `${response.status}: ${response.statusText}`);
+                    return;
+                }
+                const item = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), itemId)
+                item.metas = Helper.removeById(item.metas, "id", id)
+                const _items = Helper.updateTree(this.options.listModule.items, item.id, item);
+                this.options.listModule.items = _items;
+                this.hide()
+                this.options.itemModule.render(item);
+                this.options.itemModule.show();
+
+            })
+            .catch((error) => {
+                this.loader.hide();
+                Helper.showMessage(this.alertBox, error);
+            });
 
     }
 

@@ -4,6 +4,7 @@ import Loader from 'alxnpm-mod-loader';
 import Helper from 'alxnpm-mod-helper';
 import ObjectPicker from 'alxnpm-mod-object-picker';
 import ModuleSwitcher from 'alxnpm-mod-module-switcher';
+import Chart from 'chart.js'
 
 let Module = require('alxnpm-mod-module')
 
@@ -64,9 +65,10 @@ export default class Item extends Module {
         }
         else {
             this.htmlElement.querySelector(".nodes-list").style.display = "none";
+            this.htmlElement.querySelector(".page-chart").style.display = "none";
             this.footer.querySelector(".add-node").style.display = "none";
-        }
-   
+         }
+
         let form = this.form;
 
         this.setNoteCollapse();
@@ -91,7 +93,7 @@ export default class Item extends Module {
 
         }, false);
 
-        this.header.querySelector(".page-title").innerHTML = item.title ? Helper.trim(32, item.title) : `Untitled`;
+        this.header.querySelector(".page-title").innerHTML = item.title ? Helper.trim(25, item.title) : 'Untitled';
 
         this.header.querySelector(".save a").addEventListener("click", function (e) {
             e.preventDefault();
@@ -219,12 +221,12 @@ export default class Item extends Module {
 
         /* #region ADD */
         if (isAdd) {
-            this.footer.querySelector(".add-note").classList.add("disabled"); 
-            this.footer.querySelector(".add-node").classList.add("disabled"); 
-            this.footer.querySelector(".delete-item").classList.add("disabled"); 
-            
+            this.footer.querySelector(".add-note").classList.add("disabled");
+            this.footer.querySelector(".add-node").classList.add("disabled");
+            this.footer.querySelector(".delete-item").classList.add("disabled");
             this.htmlElement.querySelector(".notes-list").style.display = "none";
             this.htmlElement.querySelector(".nodes-list").style.display = "none";
+            this.htmlElement.querySelector('.page-chart').style.display = "none";
         }
 
         /* #endregion */
@@ -452,6 +454,7 @@ export default class Item extends Module {
 
         if (!item.nodes || !item.nodes.length) {
             this.htmlElement.querySelector(".nodes-header .collapse i").style.display = "none";
+            this.htmlElement.querySelector('.page-chart').style.display = "none";
         }
 
         if (item.nodes.length) {
@@ -464,14 +467,15 @@ export default class Item extends Module {
                     if (value.tag === "hidden") {
                         return;
                     }
-                    let statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
+                    const statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
                         priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle"),
-                        iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` :   `<i class="${value.icon ? value.icon : _this.options.nodeIcon}"></i>`;
- 
+                        iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` : `<i class="${value.icon ? value.icon : _this.options.nodeIcon}"></i>`,
+                        colorBox = value.color ? `<span class="colorbox" style="background-color:${value.color}"></span>` : '';
+
                     nodesHtml += `<tr data-nodeid="${value.id}">
                         <td>${iconOrCheckBox}</td>
                         <td>
-                        <span class="colorbox" style="background-color:${value.color ? value.color : ''}; display:${value.color ? 'inline-block' : ''}"></span>
+                            ${colorBox}
                             <a class='node-item' data-nodeid="${value.id}">${value.title}</a>
                         </td>`;
                     if (_this.options.fields.includes("priority")) {
@@ -486,7 +490,7 @@ export default class Item extends Module {
                     }
 
                     if (_this.options.appDomain === "list" && item.tag && item.tag.includes("list-add")) {
-                        nodesHtml += `<td style="text-align:right">${value.control}</td>`;
+                        nodesHtml += `<td style="text-align:right">${Helper.formatMoney(value.control)}</td>`;
                     }
                     nodesHtml += `<td><a  class='delete-node' data-nodeid="${value.id}"><i class='far fa-trash'></i></a></td>
                             </tr>`;
@@ -500,13 +504,95 @@ export default class Item extends Module {
                             <td></td>
                             <td></td>
                             <td>Total</td>
-                            <td>${total}</td>
+                            <td>${Helper.formatMoney(total)}</td>
                             <td></td>
                             </tr>`
 
                 }
 
                 nodesTbody.innerHTML = nodesHtml;
+
+                if (this.options.appDomain === "project") {
+
+                    const getCount = (value, field, array) => {
+                            const filtered = array.filter((item) => {
+                                return parseInt(item[field]) === parseInt(value);
+                            });
+                            return filtered ? filtered.length : 0
+                        },
+                        chartData = {
+                            type: 'bar',
+                            data: {
+                                labels: [],
+                                datasets: [{
+                                    // barPercentage: 1,
+                                    // categoryPercentage: 1,
+                                    label: 'Project Status',
+                                    data: [],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(153, 102, 255, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            //max: 100,
+                                            min: 0,
+                                            //stepSize: 10
+                                        }
+                                    }]
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Project Status'
+                                },
+                                legend: {
+                                    display: false,
+
+                                }
+                            }
+                        },
+                        fields = ["Todo", "Started", "Done", "Low", "Medium", "High"],
+                        items = item.nodes
+
+                    fields.forEach(function (item, index) {
+                        const field = index < 3 ? "status" : "priority",
+                            value = index < 3 ? index : index - 3,
+                            color = index < 3 ? "#0072bc" : "#f7941d",
+                            count = getCount(value, field, items)
+                        chartData.data.labels.push(item)
+                        chartData.data.datasets[0].data.push(count)
+                    });
+
+                    const maxTick = Math.max.apply(Math, chartData.data.datasets[0].data);
+                    chartData.options.scales.yAxes[0].ticks.stepSize = Math.round(maxTick/4) || 1
+                
+                    const ctx = this.htmlElement.querySelector('#itemChart').getContext('2d'),
+                    chartJs = new Chart(ctx, chartData);
+
+                    if(this.htmlElement.querySelector('#itemChart').getAttribute("height") === "0") {
+                        this.htmlElement.querySelector('#itemChart').setAttribute("height","190");
+                        this.htmlElement.querySelector('#itemChart').style.height = "150px";
+                    }                 
+                }
             }
 
             //Priority
