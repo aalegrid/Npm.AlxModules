@@ -8,7 +8,7 @@
 
     > li {
       // border-bottom: 1px dotted#ccc;
-      padding-bottom: .25rem !important;
+      padding-bottom: 0.25rem !important;
     }
   }
 
@@ -16,7 +16,7 @@
     list-style-type: none;
 
     li {
-      padding: 0.3rem 0 0.3rem 1.1rem;
+      padding: 0.3rem 0 0 1.1rem;
       position: relative;
       border-top: 1px dotted#ccc;
 
@@ -69,7 +69,7 @@
         &.icon-link {
           position: absolute;
           right: 1rem;
-          top: .25rem;
+          top: 0.25rem;
 
           i {
             top: 0;
@@ -83,7 +83,10 @@
             display: inline-block;
           }
         }
-        
+      }
+
+      &.no-parent {
+        padding-bottom: .3rem;
       }
     }
     /* Hide the nested list */
@@ -98,13 +101,82 @@
     &.open {
       display: block;
 
-      > li {
-        &:last-child {
-        }
-      }
+      // > li.treeviewitem-component {
+      //   padding-bottom: .3rem;
+      // }
     }
   }
 }
 
+.parentitem-component {
 
+  .parentid-tree {
+    padding: 0 .5rem .25rem .5rem;
+    list-style-type: none;
+    li {
+      padding: 3px 0 3px 10px;
+      list-style-type: none;
+      border-bottom: 1px dotted #ccc;
+      .parent::before {
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 900;
+        content: "\f0fe";
+        padding-right: 5px;
+      }
+      .parent.open::before {
+        content: "\f146";
+      }
+  
+      .parent.open + a {
+        padding-bottom: 3px;
+      }
+  
+      .nodes {
+        display: none;
+        padding-left: 0;
+      }
+  
+      .nodes.open {
+        display: block;
+        border-top: 1px dotted #ccc;
+  
+      }
+  
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+  
+    > li {
+      padding-left: 0;
+    }
+  }
+  
+  .parent-dd {
+    margin: 1rem 0;
+    display: none;
+    &.false {
+      display: none;
+    }
+    &.true {
+      border: 1px solid #ccc;
+      display: block;
+      max-height: 16rem;
+      overflow-y: auto;
+    }
+  }
 
+  .picker-trigger {
+    height: 36px;
+    padding: 0.5rem;
+    border: 1px solid #9b9090;
+    border-left: 0;
+    color: #000;
+  }
+}

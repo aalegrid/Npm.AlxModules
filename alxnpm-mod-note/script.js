@@ -5,7 +5,7 @@ import Helper from 'alxnpm-mod-helper';
 
 let Module = require('alxnpm-mod-module')
 
-import {data} from './data.js';
+import { data } from './data.js';
 
 export default class Note extends Module {
     constructor(moduleId, className, htmlElement, options) {
@@ -28,13 +28,13 @@ export default class Note extends Module {
             _this.hide();
 
             let flatArray = Helper.flattenArray(_this.options.listModule.items),
-            item = Helper.findItemById(flatArray, itemId);
-             _this.options.itemModule.render(item);
+                item = Helper.findItemById(flatArray, itemId);
+            _this.options.itemModule.render(item);
             _this.options.itemModule.show();
-        
+
         }, false);
 
-        this.header.querySelector(".page-title").innerHTML = note.name ?  Helper.trim(32, note.name) : "Untitled"; 
+        this.header.querySelector(".page-title").innerHTML = note.name ? Helper.trim(32, note.name) : "Untitled";
 
         this.header.querySelector(".save a").addEventListener("click", function (e) {
             e.preventDefault();
@@ -42,10 +42,10 @@ export default class Note extends Module {
         }, false);
 
         this.footer.querySelector(".delete-note").addEventListener("click", function () {
-           
+
         }, false);
 
-        this.footer.querySelector(".home a").addEventListener("click", function(){
+        this.footer.querySelector(".home a").addEventListener("click", function () {
             _this.hide();
             _this.options.listModule.render(_this.options.listModule.items);
             _this.options.listModule.show();
@@ -53,20 +53,20 @@ export default class Note extends Module {
 
         let form = this.form;
 
-        if(note.name) {
+        if (note.name) {
             form.name.value = note.name;
             this.htmlElement.querySelector(".view .name").innerHTML = note.name;
         }
 
-        if(note.value) {
+        if (note.value) {
             form.value.value = note.value;
             this.htmlElement.querySelector(".view .value").innerHTML = note.value;
         }
 
-        if(this.htmlElement.querySelector(".note").classList.contains("view")) {
+        if (this.htmlElement.querySelector(".note").classList.contains("view")) {
             this.header.querySelector(".save a").classList.add("disabled")
             this.footer.querySelector(".delete-note a").classList.add("disabled")
-            
+
         }
         else {
             this.header.querySelector(".save a").classList.remove("disabled")
@@ -86,21 +86,21 @@ export default class Note extends Module {
             this.htmlElement.querySelector(".binary-data-view").src = "//";
             this.htmlElement.querySelector(".binary-data").src = "//";
 
-            this.htmlElement.querySelector(".binary-data-view").style.display = "none"; 
-            this.htmlElement.querySelector(".clear-binary").style.display = "none"; 
+            this.htmlElement.querySelector(".binary-data-view").style.display = "none";
+            this.htmlElement.querySelector(".clear-binary").style.display = "none";
             this.htmlElement.querySelector(".image-row").style.display = "none";
         }
 
         // Events
 
-        if(!note.id) {
+        if (!note.id) {
             this.footer.querySelector(".delete-note a").classList.add("disabled");
             this.htmlElement.querySelector(".note").classList.remove("view");
             this.footer.querySelector(".edit a").classList.add("disabled");
             this.header.querySelector(".save a").classList.remove("disabled");
         }
 
-        form.addEventListener("submit", function (e) {           
+        form.addEventListener("submit", function (e) {
             e.preventDefault();
             if (!form.name.value || !form.value.value) {
                 Helper.showMessage(_this.alertBox, "Name and value are required");
@@ -118,14 +118,14 @@ export default class Note extends Module {
                 var reader = new FileReader();
                 form.querySelector(".filename").innerHTML = file.name;
                 reader.onload = function (e) {
-                  var dataUrl = reader.result;
-                  _this.htmlElement.querySelector(".binary-data").src = dataUrl;
-                  _this.htmlElement.querySelector(".binary-data").style.display = "block";
-                  _this.htmlElement.querySelector(".clear-binary").style.display = "block";
-                  _this.htmlElement.querySelector(".image-row").style.display = "block";
-                }        
+                    var dataUrl = reader.result;
+                    _this.htmlElement.querySelector(".binary-data").src = dataUrl;
+                    _this.htmlElement.querySelector(".binary-data").style.display = "block";
+                    _this.htmlElement.querySelector(".clear-binary").style.display = "block";
+                    _this.htmlElement.querySelector(".image-row").style.display = "block";
+                }
                 reader.readAsDataURL(file);
-              }
+            }
         });
 
 
@@ -138,10 +138,10 @@ export default class Note extends Module {
 
         this.footer.querySelector(".edit a i").addEventListener("click", function (e) {
             _this.htmlElement.querySelector(".note").classList.toggle("view");
-             this.classList.toggle("fa-edit");
+            this.classList.toggle("fa-edit");
             this.classList.toggle("fa-file-search");
 
-            if(_this.htmlElement.querySelector(".note").classList.contains("view")) {
+            if (_this.htmlElement.querySelector(".note").classList.contains("view")) {
                 _this.header.querySelector(".save a").classList.add("disabled")
                 _this.footer.querySelector(".delete-note a").classList.add("disabled")
             }
@@ -151,7 +151,6 @@ export default class Note extends Module {
                 _this.footer.querySelector(".delete-note a").classList.remove("disabled")
             }
         });
-
 
         this.footer.querySelector(".delete-note a").addEventListener("click", function () {
             _this.options.modalModule.header = "Delete";
@@ -169,8 +168,59 @@ export default class Note extends Module {
             _this.options.modalModule.show();
         }, false);
 
+        // parent chooser
+        const div = document.createElement("div")
+
+        div.setAttribute("class", "row parentitem-component");
+        div.innerHTML = data.itemChooser
+        form.insertBefore(div, form.children[form.childElementCount - 1]);
+
+        const tree = Helper.formatAsTree(this.options.listModule.items, this.options.nodes, "note", note.itemId),
+            ddElem = form.querySelector(".parent-dd"),
+            parentInput = form.querySelector("#item"),
+            parentId = form.querySelector("#itemId"),
+            parentItem = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), note.itemId)
+
+        ddElem.innerHTML = tree;
+        parentInput.value = parentItem.title;
+        parentId.value = note.itemId
+        
+        form.querySelector(".input-group").addEventListener("click", function (e) {
+            e.preventDefault();
+            form.querySelector(".parent-dd").classList.toggle("true")
+        }, false)
+
+        const liItems = form.querySelectorAll(".parentid-tree li a")
+
+        if (liItems && liItems.length) {
+            liItems.forEach(function (item) {
+                item.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const id = parseInt(this.closest("a").getAttribute("data-id"));
+                    parentInput.value = this.innerText
+                    parentId.value = id
+                }, false)
+            })
+        }
+
+
+        const parentItems = form.querySelectorAll(".parentid-tree li .parent")
+
+        if (parentItems && parentItems.length) {
+            parentItems.forEach(function (item) {
+                item.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const el = e.target;
+                    el.classList.toggle("open")
+                    el.nextSibling.nextSibling.classList.toggle("open");
+                }, false)
+            })
+        }
+
+
+
+
     }
-    
 
     deleteNote(id, itemId) {
         this.loader.show();
@@ -201,18 +251,20 @@ export default class Note extends Module {
     save(note, itemId) {
 
         let form = this.form,
-            savedNote = note, 
-            url, 
+            savedNote = note,
+            url,
             method,
             isAdd = typeof note.id === 'undefined',
-            isResponseJson;
+            isResponseJson,
+            itemMoved,
+            oldItemId
 
         //ADD - POST
         if (isAdd) {
             url = `/api/Metas`;
             method = "post";
             isResponseJson = true,
-            note.itemId = itemId;
+                note.itemId = itemId;
         }
 
         //UPDATE - PUT
@@ -220,6 +272,12 @@ export default class Note extends Module {
             url = `/api/Metas/${savedNote.id}`;
             method = "put";
             isResponseJson = false;
+
+            if ((parseInt(savedNote.itemId) !== parseInt(form.itemId.value))) {
+                itemMoved = true;
+                oldItemId = parseInt(itemId); 
+                savedNote.itemId = parseInt(form.itemId.value);                 
+            }            
         }
 
         savedNote.name = form.name.value;
@@ -233,7 +291,7 @@ export default class Note extends Module {
         else {
             savedNote.binaryData = img.src
         }
-       
+
         this.loader.show();
 
         this.api.request(url, method, savedNote, false, true, isResponseJson)
@@ -245,31 +303,40 @@ export default class Note extends Module {
                 }
 
                 let flatArray = Helper.flattenArray(this.options.listModule.items);
-                let item = Helper.findItemById(flatArray, itemId);
+                let item = Helper.findItemById(flatArray, savedNote.itemId);
 
                 this.loader.hide();
 
                 if (isAdd) {
                     Helper.showMessage(this.alertBox, "Note added");
                     // Add new note to note.metas array
-                    item.metas.push(response);                    
+                    item.metas.push(response);
                 } else {
                     Helper.showMessage(this.alertBox, "Note saved");
                     // Update items
+
+                    if(itemMoved) {
+                        // Item is being moved another to new item
+                        const oldItem = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), oldItemId);
+                        oldItem.metas = Helper.removeById(oldItem.metas, "id", savedNote.id);
+                        const items = Helper.updateTree(this.options.listModule.items, oldItemId, oldItem);
+                        item.metas.push(savedNote)
+                    }
+
                     let noteIndex = item.metas.findIndex((obj) => parseInt(obj.id) === parseInt(savedNote.id));
                     item.metas[noteIndex] = savedNote;
                 }
 
                 if (item.parentId) {
-                    let parent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId);
-                    let childIndex = parent.nodes.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
+                    const parent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId),
+                    childIndex = parent.nodes.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
                     parent.nodes[childIndex] = item;
-                    let _items = Helper.updateTree(this.options.listModule.items, item.parentId, parent);
-                    this.options.listModule.items = _items;
+                    const items = Helper.updateTree(this.options.listModule.items, item.parentId, parent);
+                    this.options.listModule.items = items;
                 }
 
                 else {
-                    let index = this.options.listModule.items.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
+                    const index = this.options.listModule.items.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
                     this.options.listModule.items[index] = item;
                     this.options.listModule.items = this.options.listModule.items;
                 }
@@ -289,10 +356,10 @@ export default class Note extends Module {
         this.form.querySelector(".filename").innerHTML = "CameraImage";
         // const binaryData = `${_this.options.appId}_binarydata`;
         //   Helper.setLocalStorageData(binaryData, dataUrl);
-          _this.htmlElement.querySelector(".binary-data").src = imageData;
-          _this.htmlElement.querySelector(".clear-binary").style.display = "block";
-          _this.htmlElement.querySelector(".image-row").style.display = "block";
-     
+        _this.htmlElement.querySelector(".binary-data").src = imageData;
+        _this.htmlElement.querySelector(".clear-binary").style.display = "block";
+        _this.htmlElement.querySelector(".image-row").style.display = "block";
+
     }
 
     cameraError(message) {

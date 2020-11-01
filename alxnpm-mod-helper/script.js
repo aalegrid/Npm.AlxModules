@@ -76,26 +76,26 @@ export default class Helper {
     return flat;
   }
 
-  static formatAsTree(array) {
+  static formatAsTree(array, nodes, mode, itemId) {
 
-    let html = "<ul>";
+    let html = `<ul class="parentid-tree">`;
+
+    if(nodes === "all" && mode === "item") {
+      html += ` <li><a data-id="0">Root</a></li>`
+    }
 
     let parseAsTree = data => {
 
       data.forEach(function (value) {
 
-        if (value.title) {
+        const disabledClass = parseInt(itemId) === parseInt(value.id) ? "disabled" : ""
 
-          let link = `<a href="javascript:void(0)" class="list-item" data-itemid="${value.id}">${value.title}</a>`;
+        if ((nodes === "all" && value.nodes.length) || (mode === "note" && value.nodes.length)) {
+          html += `<li><span class="parent"></span><a  class="${disabledClass}" data-id="${value.id}">${value.title}</a>`;
+        }
 
-          if (value.nodes.length) {
-            html += `<li><span class="parent">${link}</span>`;
-          }
-
-          else {
-            //html += '<li>' + item + '</li>';
-            html += `<li>${link}</li>`;
-          }
+        else {
+          html += `<li><a  class="${disabledClass}" data-id="${value.id}">${value.title}</a>`;
         }
 
         if (value.nodes.length) {
@@ -132,7 +132,7 @@ export default class Helper {
           let icon = "",
             color = "",
             image = "",
-            link = `<a href="javascript:void(0)" class="list-item icon-link" data-itemid="${value.id}"><i class="fal fa-edit"></i></a>`;
+            link = `<a class="list-item icon-link" data-itemid="${value.id}"><i class="fal fa-edit"></i></a>`;
 
           icon = renderIcon ? (value.icon ? `<i class="${value.icon}"></i>` : "") : "";
           color = renderColor ? (value.color ? ` style="background-color:${value.color}"` : "") : "";
@@ -148,8 +148,7 @@ export default class Helper {
           }
 
           else {
-            //html += '<li>' + item + '</li>';
-            html += `<li${color}><a href="javascript:void(0)" class="list-item text-link" data-itemid="${value.id}">${image ? image : icon}<span class="title">${value.title}</span></a>${link}</li>`;
+            html += `<li class="no-parent" ${color}><a class="list-item text-link" data-itemid="${value.id}">${image ? image : icon}<span class="title">${value.title}</span></a>${link}</li>`;
           }
         }
 
@@ -213,10 +212,22 @@ export default class Helper {
     let image = null,
       _metas = metas.sort((a, b) => a.name.localeCompare(b.name));
     _metas.every(function (meta) {
+      if (meta.binaryData && meta.value.includes("list-image")) {
+        image = meta.binaryData;
+        return false;
+      }
+      else return true;
+    });
+
+    if(image) {
+      return image;
+    }
+    _metas.every(function (meta) {
       if (meta.binaryData) {
         image = meta.binaryData;
         return false;
       }
+
       else return true;
     });
     return image;
@@ -289,7 +300,7 @@ export default class Helper {
 
   }
 
-   static parseStyles(styles) {
+  static parseStyles(styles) {
     return styles.split(';')
       .filter(style => style.split(':')[0] && style.split(':')[1])
       .map(style => [

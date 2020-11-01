@@ -65,11 +65,23 @@ export default class Item extends Module {
         }
         else {
             this.htmlElement.querySelector(".nodes-list").style.display = "none";
-            this.htmlElement.querySelector(".page-chart").style.display = "none";
             this.footer.querySelector(".add-node").style.display = "none";
-         }
+        }
 
-        let form = this.form;
+        if (this.options.appDomain === "project") {
+            if (this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) {
+                this.htmlElement.querySelector(".page-chart").style.display = "block";
+            }
+            else {
+                this.htmlElement.querySelector(".page-chart").style.display = "none";
+            }   
+        }
+        else {
+            this.htmlElement.querySelector(".page-chart").style.display = "none";
+        }
+        
+
+        const form = this.form;
 
         this.setNoteCollapse();
 
@@ -212,6 +224,25 @@ export default class Item extends Module {
             this.htmlElement.querySelector("table thead .control").style.display = "none";
         }
 
+        if (this.options.appDomain === "project") {
+            this.htmlElement.querySelector(".filter-done").style.display = "block";
+            const filterDone = Helper.getLocalStorageData(`${this.options.appId}_filterDone`);
+
+            if (filterDone) {
+                this.htmlElement.querySelector(".filter-done a").classList.add("on")
+            }
+
+            this.htmlElement.querySelector(".filter-done a").addEventListener("click", function () {
+                const el = this.closest("a");
+                el.classList.toggle("on");
+                Helper.setLocalStorageData(`${_this.options.appId}_filterDone`, el.classList.contains("on"));
+                _this.bindNodes(item, el.classList.contains("on"));
+            }, false);
+        }
+        else {
+            this.htmlElement.querySelector(".filter-done").style.display = "none";
+        }
+
         item.icon && (form.icon.value = item.icon);
         item.color && (form.color.value = item.color);
         item.icon && form.querySelector(".picker-trigger-icon").firstChild.setAttribute("class", item.icon);
@@ -250,19 +281,76 @@ export default class Item extends Module {
 
                 // Render Nodes
                 if (item.nodes) {
-                    this.bindNodes(item);
+                    if (this.options.appDomain === "project") {
+                        const filterDone = Helper.getLocalStorageData(`${this.options.appId}_filterDone`);
+                        this.bindNodes(item, filterDone);
+                    } else {
+                        this.bindNodes(item);
+                    }
+
                 }
             }
 
+            // parent chooser
+            if ((this.options.nodes === "single" && item.parentId) || this.options.nodes === "all") {
+                const div = document.createElement("div");
 
+                div.setAttribute("class", "row parentitem-component");
+                div.innerHTML = data.parentChooser
+                form.insertBefore(div, form.children[form.childElementCount - 1]);
+
+                const tree = Helper.formatAsTree(this.options.listModule.items, this.options.nodes, "item", item.id),
+                    ddElem = form.querySelector(".parent-dd"),
+                    parentInput = form.querySelector("#parent"),
+                    parentId = form.querySelector("#parentId"),
+                    parentItem = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId)
+
+                ddElem.innerHTML = tree;
+                parentInput.value = parentItem ? parentItem.title : "Root";
+                parentId.value = item.parentId
+
+                form.querySelector(".input-group").addEventListener("click", function (e) {
+                    e.preventDefault();
+                    form.querySelector(".parent-dd").classList.toggle("true")
+                }, false)
+
+                const liItems = form.querySelectorAll(".parentid-tree li a")
+
+                if (liItems && liItems.length) {
+                    liItems.forEach(function (item) {
+                        item.addEventListener("click", function (e) {
+                            e.preventDefault();
+                            const id = parseInt(this.closest("a").getAttribute("data-id"));
+                            parentInput.value = this.innerText
+                            parentId.value = id
+                        }, false)
+                    })
+                }
+
+
+                const parentItems = form.querySelectorAll(".parentid-tree li .parent")
+
+                if (parentItems && parentItems.length) {
+                    parentItems.forEach(function (item) {
+                        item.addEventListener("click", function (e) {
+                            e.preventDefault();
+                            const el = e.target;
+                            el.classList.toggle("open")
+                            el.nextSibling.nextSibling.classList.toggle("open");
+                        }, false)
+                    })
+                }
+
+
+            }
+
+            
             // Render Notes
-
             this.htmlElement.querySelector(".notes-count").innerHTML = item.metas ? item.metas.length : "0";
 
             if (!item.metas || !item.metas.length) {
                 this.htmlElement.querySelector(".notes-header .collapse i").style.display = "none";
             }
-
 
             let notes = item.metas.sort(function (a, b) {
                 return a.name.localeCompare(b.name);
@@ -446,24 +534,24 @@ export default class Item extends Module {
 
     }
 
-    bindNodes(item) {
+    bindNodes(item, filterDone) {
 
-        let _this = this;
-
-        this.htmlElement.querySelector(".nodes-count").innerHTML = item.nodes ? item.nodes.length : "0";
-
+        let _this = this, nodes;
+        if (this.options.appDomain === "project") {
+            nodes = filterDone ? this.sortItems(item.nodes.filter((item) => parseInt(item.status) !== 2)) : this.sortItems(item.nodes)
+        } else {
+            nodes = item.nodes;
+        }
+        this.htmlElement.querySelector(".nodes-count").innerHTML = nodes ? nodes.length : "0";
         if (!item.nodes || !item.nodes.length) {
             this.htmlElement.querySelector(".nodes-header .collapse i").style.display = "none";
             this.htmlElement.querySelector('.page-chart').style.display = "none";
         }
-
         if (item.nodes.length) {
             let nodesHtml = "",
-                nodesTbody = this.htmlElement.querySelector(".nodes-list table tbody"),
-                nodes = this.sortItems(item.nodes);
+                nodesTbody = this.htmlElement.querySelector(".nodes-list table tbody");
             if (nodes) {
                 nodes.forEach(function (value) {
-
                     if (value.tag === "hidden") {
                         return;
                     }
@@ -515,11 +603,11 @@ export default class Item extends Module {
                 if (this.options.appDomain === "project") {
 
                     const getCount = (value, field, array) => {
-                            const filtered = array.filter((item) => {
-                                return parseInt(item[field]) === parseInt(value);
-                            });
-                            return filtered ? filtered.length : 0
-                        },
+                        const filtered = array.filter((item) => {
+                            return parseInt(item[field]) === parseInt(value);
+                        });
+                        return filtered ? filtered.length : 0
+                    },
                         chartData = {
                             type: 'bar',
                             data: {
@@ -583,15 +671,15 @@ export default class Item extends Module {
                     });
 
                     const maxTick = Math.max.apply(Math, chartData.data.datasets[0].data);
-                    chartData.options.scales.yAxes[0].ticks.stepSize = Math.round(maxTick/4) || 1
-                
-                    const ctx = this.htmlElement.querySelector('#itemChart').getContext('2d'),
-                    chartJs = new Chart(ctx, chartData);
+                    chartData.options.scales.yAxes[0].ticks.stepSize = Math.round(maxTick / 4) || 1
 
-                    if(this.htmlElement.querySelector('#itemChart').getAttribute("height") === "0") {
-                        this.htmlElement.querySelector('#itemChart').setAttribute("height","190");
+                    const ctx = this.htmlElement.querySelector('#itemChart').getContext('2d'),
+                        chartJs = new Chart(ctx, chartData);
+
+                    if (this.htmlElement.querySelector('#itemChart').getAttribute("height") === "0") {
+                        this.htmlElement.querySelector('#itemChart').setAttribute("height", "190");
                         this.htmlElement.querySelector('#itemChart').style.height = "150px";
-                    }                 
+                    }
                 }
             }
 
@@ -725,12 +813,15 @@ export default class Item extends Module {
             });
     }
 
+    // _save
     save(item) {
         let form = this.form,
             savedItem = item, url, method,
             isAdd = typeof item.id === 'undefined',
             isResponseJson,
-            user = Helper.getUser(this.options.appId);
+            user = Helper.getUser(this.options.appId),
+            parentMoved,
+            oldParentId;
 
         //ADD - POST
         if (isAdd) {
@@ -758,6 +849,11 @@ export default class Item extends Module {
                 savedItem.modifiedBy = user.id;
             }
             savedItem.dateModified = new Date();
+            if (form.parentId && (parseInt(savedItem.parentId) !== parseInt(form.parentId.value))) {
+                parentMoved = true;
+                oldParentId = savedItem.parentId;
+                savedItem.parentId = parseInt(form.parentId.value);
+            }
         }
 
         savedItem.title = form.title.value;
@@ -811,6 +907,7 @@ export default class Item extends Module {
                         this.options.listModule.items = _items;
                     }
                     else {
+                        
                         let _items = this.options.listModule.items;
                         _items.push(response);
                         this.options.listModule.items = _items;
@@ -819,17 +916,50 @@ export default class Item extends Module {
                 } else {
                     Helper.showMessage(this.alertBox, "Item saved");
 
+
+                    if (parentMoved) {
+
+                        // Remove from previous parent
+                        if(parseInt(oldParentId)) {
+                            const oldParent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), oldParentId);
+                            oldParent.nodes = Helper.removeById(oldParent.nodes, "id", savedItem.id);
+                            const items = Helper.updateTree(this.options.listModule.items, oldParentId, oldParent);
+                            this.options.listModule.items = items;
+                        }
+
+                        else {
+                            const items = Helper.removeById(this.options.listModule.items, "id", savedItem.id);
+                            this.options.listModule.items = items;
+                        }
+
+                        //Add to new parent
+                        if(parseInt(savedItem.parentId)) {
+                            const newParent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), savedItem.parentId);
+                            newParent.nodes.push(savedItem);
+                            const items = Helper.updateTree(this.options.listModule.items, oldParentId, newParent);
+                            this.options.listModule.items = items;
+                        }
+
+                        else {
+                            const items = this.options.listModule.items;
+                            items.push(savedItem);
+                            this.options.listModule.items = items;
+                        }
+                        
+                       
+                    }
+
                     //Update parent
                     if (item.parentId) {
-                        let parent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId);
-                        let childIndex = parent.nodes.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
+                        const parent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId),
+                        childIndex = parent.nodes.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
                         parent.nodes[childIndex] = savedItem;
-                        let _items = Helper.updateTree(this.options.listModule.items, item.parentId, parent);
-                        this.options.listModule.items = _items;
+                        const items = Helper.updateTree(this.options.listModule.items, item.parentId, parent);
+                        this.options.listModule.items = items;
                     }
 
                     else {
-                        let index = this.options.listModule.items.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
+                        const index = this.options.listModule.items.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
                         this.options.listModule.items[index] = savedItem;
                         this.options.listModule.items = this.options.listModule.items;
                     }

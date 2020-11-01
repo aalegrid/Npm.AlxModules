@@ -73,6 +73,12 @@ div[class$="-list"] [class$="-header"] .collapse i {
   font-weight: 400;
   padding-right: 0.25rem;
 }
+div[class$="-list"] [class$="-header"] .filter-done a i {
+  color: #000;
+}
+div[class$="-list"] [class$="-header"] .filter-done a.on i {
+  color: #9b9090;
+}
 div[class$="-list"] [class$="-header"] a {
   color: #000;
 }

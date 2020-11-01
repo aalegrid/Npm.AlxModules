@@ -796,6 +796,17 @@ div.list table tr td:nth-child(3) .list-item span.image img {
   width: 24px;
   height: 24px;
 }
+div.list table tr td:nth-child(3) .list-item span.image .letter {
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Roboto", "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: block;
+  height: 25px;
+  width: 25px;
+  line-height: 18px;
+  padding: 3px;
+  text-align: center;
+}
 div.list table tr td:nth-child(3) .list-item .info {
   display: flex;
   justify-content: center;
@@ -877,6 +888,12 @@ div[class$="-list"] [class$="-header"] .collapse i {
   font-size: 0.85rem;
   font-weight: 400;
   padding-right: 0.25rem;
+}
+div[class$="-list"] [class$="-header"] .filter-done a i {
+  color: #000;
+}
+div[class$="-list"] [class$="-header"] .filter-done a.on i {
+  color: #9b9090;
 }
 div[class$="-list"] [class$="-header"] a {
   color: #000;
@@ -998,7 +1015,7 @@ div.note.view .view img {
   /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
 }
 .treeview ul li {
-  padding: 0.3rem 0 0.3rem 1.1rem;
+  padding: 0.3rem 0 0 1.1rem;
   position: relative;
   border-top: 1px dotted #ccc;
 }
@@ -1068,6 +1085,9 @@ div.note.view .view img {
   padding-right: 3rem;
   display: inline-block;
 }
+.treeview ul li.no-parent {
+  padding-bottom: 0.3rem;
+}
 .treeview ul.nodes {
   display: none;
   padding-left: 0;
@@ -1077,6 +1097,67 @@ div.note.view .view img {
 }
 .treeview ul.open {
   display: block;
+}
+.parentitem-component .parentid-tree {
+  padding: 0 0.5rem 0.25rem 0.5rem;
+  list-style-type: none;
+}
+.parentitem-component .parentid-tree li {
+  padding: 3px 0 3px 10px;
+  list-style-type: none;
+  border-bottom: 1px dotted #ccc;
+}
+.parentitem-component .parentid-tree li .parent::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  content: "\f0fe";
+  padding-right: 5px;
+}
+.parentitem-component .parentid-tree li .parent.open::before {
+  content: "\f146";
+}
+.parentitem-component .parentid-tree li .parent.open + a {
+  padding-bottom: 3px;
+}
+.parentitem-component .parentid-tree li .nodes {
+  display: none;
+  padding-left: 0;
+}
+.parentitem-component .parentid-tree li .nodes.open {
+  display: block;
+  border-top: 1px dotted #ccc;
+}
+.parentitem-component .parentid-tree li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.parentitem-component .parentid-tree > li {
+  padding-left: 0;
+}
+.parentitem-component .parent-dd {
+  margin: 1rem 0;
+  display: none;
+}
+.parentitem-component .parent-dd.false {
+  display: none;
+}
+.parentitem-component .parent-dd.true {
+  border: 1px solid #ccc;
+  display: block;
+  max-height: 16rem;
+  overflow-y: auto;
+}
+.parentitem-component .picker-trigger {
+  height: 36px;
+  padding: 0.5rem;
+  border: 1px solid #9b9090;
+  border-left: 0;
+  color: #000;
 }
 main.board-mode {
   background-color: #000;

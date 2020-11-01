@@ -132,11 +132,11 @@ export default class List extends Module {
         this.items = items;
         let _this = this,
             list = this.sortItems(items),
-            container = this.options.appDomain === "list" ? this.htmlElement.querySelector(".treeview")
-                : this.htmlElement.querySelector("table tbody");
+            container = this.options.listMode === "tree" ? this.htmlElement.querySelector(".treeview")  : this.htmlElement.querySelector("table tbody"),
+            openItems =    Helper.getLocalStorageData(`${this.options.appId}_openItems`) || []
 
         // ---------------- TREEVIEW -----------------------
-        if (this.options.appDomain === "list") {
+        if (this.options.listMode === "tree") {
             container.innerHTML = Helper.formatAsTreeForMyLists(list, true, true);
 
             let parents = this.htmlElement.querySelectorAll(".treeview .parent");
@@ -147,17 +147,17 @@ export default class List extends Module {
                     this.classList.toggle("open");
                     this.nextSibling.nextSibling.classList.toggle("open");
                     if (this.classList.contains("open")) {
-                        if (_this.openItems.indexOf(id) === -1) {
-                            _this.openItems.push(id)
+                        if (openItems.indexOf(id) === -1) {
+                            openItems.push(id)
                         }
                     }
                     else {
-                        let index = _this.openItems.indexOf(id);
+                        let index = openItems.indexOf(id);
                         if (index > -1) {
-                            _this.openItems.splice(index, 1);
+                            openItems.splice(index, 1);
                         }
                     }
-                    Helper.setLocalStorageData(`${this.options.appId}_openItems`, _this.openItems)
+                    Helper.setLocalStorageData(`${_this.options.appId}_openItems`, openItems)
                 }, false);
             });
 
@@ -173,8 +173,8 @@ export default class List extends Module {
                 }, false);
             });
 
-            if (this.openItems && this.openItems.length) {
-                this.openItems.forEach(function (item) {
+            if (openItems && openItems.length) {
+                openItems.forEach(function (item) {
                     let e = _this.htmlElement.querySelector(`.parent[data-itemid="${item}"]`);
                     if (e) {
                         e.classList.add("open");
@@ -220,16 +220,14 @@ export default class List extends Module {
     formatList(items) {
 
         const _this = this;
-        let html = "", counter = 0;
+        let html = "";
             
 
         items.forEach(function (value, index) {
 
-            if (value.tag && (value.tag.includes("hidden") || value.tag.includes("hide") || value.tag.includes("archive"))) {
-                return;
-            }
-
-            counter++;
+            //if (value.tag && (value.tag.includes("hidden") || value.tag.includes("hide") || value.tag.includes("archive"))) {
+            //    return;
+            //}
 
             let icon = value.icon ? `<i class="${value.icon}">` : '',
                 image = "",
@@ -260,9 +258,13 @@ export default class List extends Module {
                 binaryImage && (image = `<img src="${binaryImage}">`);
             }
 
+            if(!image) {
+                image = `<span class='letter' ${value.color ? 'style=background-color:' + value.color : ''}>${value.title.charAt(0).toUpperCase()}</span>`
+            }
+
 
             html += `<tr>
-                    <td style="background-color:${value.color}">${counter}</td>
+                    <td style="background-color:${value.color}">${index}</td>
                     <td>${icon}</td>
                     <td>
                     <a class="list-item" data-itemid="${value.id}">
