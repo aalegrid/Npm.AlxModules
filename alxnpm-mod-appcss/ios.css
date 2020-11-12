@@ -13,9 +13,6 @@
   height: 80px;
   padding-top: 36px;
 }
-.ios-fix main {
-  height: 100vh;
-}
 .ios-fix main .app-component {
   padding-top: 6rem;
 }
@@ -65,9 +62,6 @@
     height: 80px;
     padding-top: 36px;
   }
-  main {
-    height: 100vh;
-  }
   main .app-component {
     padding-top: 6rem;
   }
@@ -116,9 +110,6 @@ body[data-mode="ios-fix"] header,
 body[data-mode="ios-fix"] .page-header {
   height: 80px;
   padding-top: 36px;
-}
-body[data-mode="ios-fix"] main {
-  height: 100vh;
 }
 body[data-mode="ios-fix"] main .app-component {
   padding-top: 6rem;

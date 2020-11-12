@@ -25,7 +25,7 @@ export let data = {
                     <a data-sort="title"><i class="fas fa-folder"></i></a>
                 </th>
                 <th>
-                    <a data-sort="node"><i class="fad fa-copy"></i></a>
+                    <a class="count-sort" data-sort="node"><i class="fad fa-copy"></i></a>
                 </th>
                 </tr>
             </thead>
@@ -51,7 +51,7 @@ export let data = {
     header: `
     
     <ul>
-        <li class="page-title"><span class="img"><img src="${Img}"/></span><span class="app-name">{appName}</span></li>
+        <li class="page-title"><span class="app-name">{appName}</span></li>
     </ul>
     
     `,

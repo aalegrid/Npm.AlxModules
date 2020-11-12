@@ -13,7 +13,12 @@ export let data = {
     <div class="page-chart"><canvas id="itemChart" height="150"></canvas></div>
     <div class="nodes-list">
         <div class="nodes-header">
-            <h3 class="collapse"><i class="fal fa-minus-square"></i> {nodeName}s <span class="nodes-count"></span></h3>
+            <h3 class="collapse">
+                <a><i class="fal fa-minus-square"></i> {nodeName}s <span class="nodes-count"></span></a>
+            </h3>
+            <h3 class="filter-done" style="width:55%;text-align:right">
+                <a><i class="fas fa-check-square"></i></a>
+            </h3>           
             <h3 class="add-node"><a><i class="far fa-plus"></i></a></h3>
         </div>
         <table>
@@ -43,7 +48,9 @@ export let data = {
     </div>
     <div class="notes-list">
         <div class="notes-header">
-            <h3 class="collapse"><i class="fal fa-minus-square"></i> Notes <span class="notes-count"></span></h3>
+            <h3 class="collapse">
+                <a><i class="fal fa-minus-square"></i> Notes <span class="notes-count"></span></a>
+            </h3>
             <h3 class="add-note"><a><i class="far fa-plus"></i></a></h3>
         </div>
         <table>
@@ -64,7 +71,7 @@ export let data = {
                 <label for="description">Description</label>
             </div>
             <div class="col-75">
-                <textarea name="description" id="description" rows="6"></textarea>
+                <textarea name="description" id="description" rows="4"></textarea>
             </div>
         </div>
         <div class="row row-content">
@@ -72,7 +79,7 @@ export let data = {
                 <label for="content">Content</label>
             </div>
             <div class="col-75">
-                <textarea name="content" id="content" rows="6"></textarea>
+                <textarea name="content" id="content" rows="10"></textarea>
             </div>
         </div>
         <div class="row row-datedue">
@@ -114,8 +121,7 @@ export let data = {
             <div class="col-75">
                 <div class="input">
                     <input type="search" name="icon" id="icon" />
-                    <a href="javascript:void(0);" class="picker-trigger-icon" data-domain="icon"><i
-                            class="fal fa-flag"></i></a>
+                    <a class="picker-trigger-icon" data-domain="icon"><i class="fal fa-flag"></i></a>
                 </div>
                 <div id="iconPicker" style="display:none;"></div>
             </div>
@@ -127,8 +133,7 @@ export let data = {
             <div class="col-75">
                 <div class="input">
                     <input type="search" name="color" id="color" />
-                    <a href="javascript:void(0);" class="picker-trigger-color" data-domain="color"><span
-                            style="background-color: white;"></span></a>
+                    <a class="picker-trigger-color" data-domain="color"><span style="background-color: white;"></span></a>
                 </div>
                 <div id="colorPicker" style="display:none;"></div>
             </div>
@@ -149,6 +154,7 @@ export let data = {
                 <input type="text" name="tag" id="tag" />
             </div>
         </div>
+
         <div class="row">
             <button type="submit"><i class="fal fa-check"></i> Save</button>
         </div>
@@ -156,7 +162,23 @@ export let data = {
 </div>
     `,
 
-    header : `
+    parentChooser: `
+    
+
+    <div class="col-25"><label>Parent</label></div>
+    <div class="col-75" style="margin-bottom: 1rem;">
+        <input type="hidden" name="parentId" id="parentId" value="">
+        <div class="input-group" style="display: flex;">
+                <input type="text" name="parent" id="parent" readonly="" value="">
+                <a class="picker-trigger"><i class="fal fa-folder-tree"></i></a>
+        </div>
+        <div class="parent-dd"></div>
+    </div>
+ 
+    
+    `,
+
+    header: `
     
         <ul>
             <li class="back">
@@ -170,7 +192,7 @@ export let data = {
     
     `,
 
-    footer : `
+    footer: `
     
     <ul>
         <li class="home">
@@ -189,7 +211,7 @@ export let data = {
     
     `,
 
-    floatingmenu : `
+    floatingmenu: `
         <div class="floating-save-menu"><a><i class="fal fa-house-user"></i></a></div>
     
     `

@@ -287,6 +287,9 @@ h6 {
 body {
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+main {
+  min-height: 100vh;
+}
 main .app-component {
   padding: 4.5rem 1.5rem;
 }
@@ -296,8 +299,6 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-  height: 36px;
-  line-height: 36px;
   padding: 0.5rem;
   font-size: 14px;
   border: 1px solid #9b9090;
@@ -320,8 +321,13 @@ textarea:focus {
   appearance: none;
   outline: none;
 }
-textarea {
-  height: 6rem;
+input[type="search"],
+input[type="date"],
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  line-height: 36px;
+  height: 36px;
 }
 label {
   display: block;
@@ -433,15 +439,23 @@ button:hover {
   border-color: #000;
   color: #000;
 }
-button[type="submit"] {
+button[type="submit"],
+.signup-button,
+.signin-button {
   background: #000;
   color: #fff;
   float: right;
   border: 0;
 }
-button[type="submit"]:hover {
+button[type="submit"]:hover,
+.signup-button:hover,
+.signin-button:hover {
   background: #666666;
   color: #fff;
+}
+.signup-button,
+.signin-button {
+  width: 100%;
 }
 .button-row {
   display: flex;
@@ -601,7 +615,6 @@ footer ul li.page-title .app-name,
 .page-header ul li.page-title .app-name,
 .page-footer ul li.page-title .app-name {
   position: relative;
-  top: -6px;
   padding-left: 0.3rem;
 }
 header ul li.page-title.align-left,
@@ -720,6 +733,22 @@ body.app-psychograph .page-footer {
   width: 70%;
   font-weight: 600;
 }
+.sort-todo a.selected::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0de";
+  padding-left: 3px;
+}
+.sort-todo a.selected.reverse::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0dd";
+  padding-left: 3px;
+}
+.signup,
+.signin {
+  font-size: 0.9rem;
+}
 .animate {
   -webkit-animation-name: animateleft;
   -webkit-animation-duration: 0.4s;
@@ -767,9 +796,17 @@ body.app-psychograph .page-footer {
 div.list table thead tr {
   background-color: #ebebeb;
 }
-div.list table thead tr th i {
-  cursor: pointer;
-  display: block;
+div.list table thead tr th a.selected::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0de";
+  padding-left: 3px;
+}
+div.list table thead tr th a.selected.reverse::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0dd";
+  padding-left: 3px;
 }
 div.list table tr td {
   border-right: 1px dotted #9b9090;
@@ -892,7 +929,7 @@ div[class$="-list"] [class$="-header"] .collapse i {
 div[class$="-list"] [class$="-header"] .filter-done a i {
   color: #000;
 }
-div[class$="-list"] [class$="-header"] .filter-done a.on i {
+div[class$="-list"] [class$="-header"] .filter-done a.true i {
   color: #9b9090;
 }
 div[class$="-list"] [class$="-header"] a {
@@ -914,6 +951,18 @@ div[class$="-list"] table th:first-child {
 }
 div[class$="-list"] table th a {
   font-weight: bold;
+}
+div[class$="-list"] table th a.selected::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0de";
+  padding-left: 3px;
+}
+div[class$="-list"] table th a.selected.reverse::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0dd";
+  padding-left: 3px;
 }
 div[class$="-list"] table td {
   border-right: none;
@@ -1067,6 +1116,16 @@ div.note.view .view img {
 .treeview ul li span.open::before {
   content: "\f146";
 }
+.treeview ul li .note-count {
+  font-size: 10px;
+  color: #666;
+  margin-right: 3px;
+  position: relative;
+  top: -2px;
+}
+.treeview ul li .note-count i {
+  width: 15px;
+}
 .treeview ul li a {
   text-decoration: none;
   color: #000;
@@ -1097,6 +1156,9 @@ div.note.view .view img {
 }
 .treeview ul.open {
   display: block;
+}
+.treeview ul:empty {
+  border: 0 !important;
 }
 .parentitem-component .parentid-tree {
   padding: 0 0.5rem 0.25rem 0.5rem;
@@ -1272,24 +1334,7 @@ main.closet-mode .logged-component .closet-container .area .clothes .pinch-zoom-
 }
 main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar,
 main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar {
-  -webkit-appearance: none;
-}
-main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar:vertical,
-main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar:vertical {
-  width: 20px;
-}
-main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar:horizontal,
-main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar:horizontal {
-  height: 20px;
-}
-main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar-thumb,
-main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 2px solid #ffffff;
-}
-main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar-track,
-main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar-track {
-  background-color: #ffffff;
+  display: none;
 }
 main.closet-mode #mainPanel .closet-container.show-area-sliders .slider-area,
 main.closet-mode .logged-component .closet-container.show-area-sliders .slider-area {
@@ -1303,9 +1348,30 @@ main.closet-mode #mainPanel .closet-container.show-area-lines .area,
 main.closet-mode .logged-component .closet-container.show-area-lines .area {
   border-bottom: 1px dashed #fff;
 }
-main.closet-mode #mainPanel .closet-container.show-area-lines .area .pinch-zoom-container,
-main.closet-mode .logged-component .closet-container.show-area-lines .area .pinch-zoom-container {
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes .pinch-zoom-container,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes .pinch-zoom-container {
   border: 1px dashed #666;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar {
+  display: unset;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar:vertical,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar:vertical {
+  width: 20px;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar:horizontal,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar:horizontal {
+  height: 20px;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar-thumb,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid #ffffff;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar-track,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar-track {
+  background-color: #ffffff;
 }
 main.closet-mode #mainPanel .closet-container.hide-bottom [class$="Bottom"],
 main.closet-mode .logged-component .closet-container.hide-bottom [class$="Bottom"] {
@@ -1639,9 +1705,6 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a img {
   height: 80px;
   padding-top: 36px;
 }
-.ios-fix main {
-  height: 100vh;
-}
 .ios-fix main .app-component {
   padding-top: 6rem;
 }
@@ -1691,9 +1754,6 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a img {
     height: 80px;
     padding-top: 36px;
   }
-  main {
-    height: 100vh;
-  }
   main .app-component {
     padding-top: 6rem;
   }
@@ -1742,9 +1802,6 @@ body[data-mode="ios-fix"] header,
 body[data-mode="ios-fix"] .page-header {
   height: 80px;
   padding-top: 36px;
-}
-body[data-mode="ios-fix"] main {
-  height: 100vh;
 }
 body[data-mode="ios-fix"] main .app-component {
   padding-top: 6rem;

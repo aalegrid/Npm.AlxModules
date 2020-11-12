@@ -47,6 +47,9 @@
 body {
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+main {
+  min-height: 100vh;
+}
 main .app-component {
   padding: 4.5rem 1.5rem;
 }
@@ -56,8 +59,6 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-  height: 36px;
-  line-height: 36px;
   padding: 0.5rem;
   font-size: 14px;
   border: 1px solid #9b9090;
@@ -80,8 +81,13 @@ textarea:focus {
   appearance: none;
   outline: none;
 }
-textarea {
-  height: 6rem;
+input[type="search"],
+input[type="date"],
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  line-height: 36px;
+  height: 36px;
 }
 label {
   display: block;
@@ -193,15 +199,23 @@ button:hover {
   border-color: #000;
   color: #000;
 }
-button[type="submit"] {
+button[type="submit"],
+.signup-button,
+.signin-button {
   background: #000;
   color: #fff;
   float: right;
   border: 0;
 }
-button[type="submit"]:hover {
+button[type="submit"]:hover,
+.signup-button:hover,
+.signin-button:hover {
   background: #666666;
   color: #fff;
+}
+.signup-button,
+.signin-button {
+  width: 100%;
 }
 .button-row {
   display: flex;
@@ -361,7 +375,6 @@ footer ul li.page-title .app-name,
 .page-header ul li.page-title .app-name,
 .page-footer ul li.page-title .app-name {
   position: relative;
-  top: -6px;
   padding-left: 0.3rem;
 }
 header ul li.page-title.align-left,
@@ -479,4 +492,20 @@ body.app-psychograph .page-footer {
 .showinfo-items ul li span:last-child {
   width: 70%;
   font-weight: 600;
+}
+.sort-todo a.selected::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0de";
+  padding-left: 3px;
+}
+.sort-todo a.selected.reverse::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0dd";
+  padding-left: 3px;
+}
+.signup,
+.signin {
+  font-size: 0.9rem;
 }

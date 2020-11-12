@@ -1,4 +1,3 @@
-//import { Module } from 'alxnpm-mod-module'
 import API from 'alxnpm-mod-api';
 import Loader from 'alxnpm-mod-loader';
 import Helper from 'alxnpm-mod-helper';
@@ -14,7 +13,8 @@ export default class List extends Module {
         this.api = new API(this.options.apiUrl);
         this.switcher = new ModuleSwitcher();
         this.loader = new Loader();
-        this.sortField = "title";
+        this.sortListCol = "title";
+        this.sortListColReverse = false;
         this._items = [];
     }
 
@@ -24,18 +24,19 @@ export default class List extends Module {
     set items(items) {
         this._items = items;
         if (this.options.cache) {
-            Helper.setLocalStorageData(`${this.options.appId}_items`, items);
+            //Helper.setLocalStorageData(`${this.options.appId}_items`, items);
+            Helper.setPrefItem(this.options.appId, "items", items)
         }
 
     }
 
     render() {
 
-        let _this = this;
+        const _this = this;
 
         this.header = data.header.replace(/{appName}/g, this.options.appName);
 
-        let user = Helper.getLocalStorageData(`${this.options.appId}_user`);
+        const user = Helper.getPrefItem(this.options.appId, "user")
 
         if (user) {
             let li = document.createElement("li");
@@ -45,11 +46,16 @@ export default class List extends Module {
 
         }
 
+
         this.footer = data.footer;
-        // domain = list is treeview
-        this.wrapperContent = this.options.appDomain === "list" ? data.templateTreeView : data.templateList;
+
+        this.wrapperContent = this.options.listMode === "tree" ? data.templateTreeView : data.templateList;
 
         document.querySelector("main").classList.remove("board-mode");
+
+        if (this.options.children === "meta") {
+            this.htmlElement.querySelector(".count-sort").setAttribute("data-sort", "meta");
+        }
 
         this.footer.querySelector(".logout a").addEventListener("click", function () {
             _this.exit(_this.options.exit);
@@ -66,11 +72,8 @@ export default class List extends Module {
             _this.getItems();
         }, false);
 
-        this.setListSort();
-        this.addSortLinks();
-
         if (this.options.cache) {
-            let items = Helper.getLocalStorageData(`${this.options.appId}_items`);
+            const items = Helper.getPrefItem(this.options.appId, "items")
             if (items) {
                 this.bind(items);
             }
@@ -78,7 +81,6 @@ export default class List extends Module {
                 this.getItems();
             }
         }
-
 
         if (data.links[this.options.appDomain]) {
             const elem = this.footer.querySelector("ul")
@@ -88,20 +90,26 @@ export default class List extends Module {
                     ul.innerHTML = item;
                     elem.insertBefore(ul.firstChild, elem.firstChild);
                 })
-
                 const sortLinks = this.footer.querySelectorAll("ul [data-sort]")
-
                 if (sortLinks) {
                     this.addSortLinks(sortLinks)
                 }
-
             }
         }
 
+        if (this.options.listMode === "list") {
+            this.setListSort();
+            this.addSortLinks();
+        }
     }
 
     getItems() {
 
+        const user = Helper.getPrefItem(this.options.appId, "user")
+
+        if(user) {
+            this.options.param.UserId = user.id
+        }
         this.loader.show();
 
         this.api.request(this.options.listRoute, "post", this.options.param, false, true, true)
@@ -111,9 +119,6 @@ export default class List extends Module {
                         Helper.showMessage(this.alertBox, `${response.status}: ${response.statusText}`);
                         return;
                     }
-                    // Success
-                    // console.log(response);
-                    //this.items = response;
                     this.bind(response);
                     this.loader.hide();
                 } else {
@@ -130,16 +135,18 @@ export default class List extends Module {
     bind(items) {
 
         this.items = items;
-        let _this = this,
+        const _this = this,
             list = this.sortItems(items),
-            container = this.options.listMode === "tree" ? this.htmlElement.querySelector(".treeview")  : this.htmlElement.querySelector("table tbody"),
-            openItems =    Helper.getLocalStorageData(`${this.options.appId}_openItems`) || []
+            container = this.options.listMode === "tree" ? this.htmlElement.querySelector(".treeview") : this.htmlElement.querySelector("table tbody");
+
 
         // ---------------- TREEVIEW -----------------------
         if (this.options.listMode === "tree") {
+
             container.innerHTML = Helper.formatAsTreeForMyLists(list, true, true);
 
-            let parents = this.htmlElement.querySelectorAll(".treeview .parent");
+            const openItems = Helper.getPrefItem(this.options.appId, "treeViewOpenNodes") || [],
+                parents = this.htmlElement.querySelectorAll(".treeview .parent");
 
             parents.forEach(function (item) {
                 item.addEventListener("click", function (e) {
@@ -157,15 +164,16 @@ export default class List extends Module {
                             openItems.splice(index, 1);
                         }
                     }
-                    Helper.setLocalStorageData(`${_this.options.appId}_openItems`, openItems)
+                    //Helper.setLocalStorageData(`${_this.options.appId}_openItems`, openItems)
+                    Helper.setPrefItem(_this.options.appId, "treeViewOpenNodes", openItems)
                 }, false);
             });
 
-            let links = this.htmlElement.querySelectorAll(".treeview .list-item");
+            const links = this.htmlElement.querySelectorAll(".treeview .list-item");
 
             links.forEach(function (item) {
                 item.addEventListener("click", function (e) {
-                    let id = this.getAttribute("data-itemid"),
+                    const id = this.getAttribute("data-itemid"),
                         item = Helper.findItemById(Helper.flattenArray(items), id);
                     _this.hide();
                     _this.options.itemModule.render(item);
@@ -175,7 +183,7 @@ export default class List extends Module {
 
             if (openItems && openItems.length) {
                 openItems.forEach(function (item) {
-                    let e = _this.htmlElement.querySelector(`.parent[data-itemid="${item}"]`);
+                    const e = _this.htmlElement.querySelector(`.parent[data-itemid="${item}"]`);
                     if (e) {
                         e.classList.add("open");
                         e.nextSibling.nextSibling.classList.add("open");
@@ -185,10 +193,10 @@ export default class List extends Module {
         }
         else {
             container.innerHTML = this.formatList(list);
-            let links = this.htmlElement.querySelectorAll(".list-item");
+            const links = this.htmlElement.querySelectorAll(".list-item");
             links.forEach(function (item) {
                 item.addEventListener("click", function () {
-                    let id = this.getAttribute("data-itemid"),
+                    const id = this.getAttribute("data-itemid"),
                         item = Helper.findItemById(items, id);
                     _this.hide();
                     _this.options.itemModule.render(item);
@@ -197,11 +205,10 @@ export default class List extends Module {
             });
 
             if (this.options.appDomain === "board") {
-                let boards = this.htmlElement.querySelectorAll(".board-item");
-
+                const boards = this.htmlElement.querySelectorAll(".board-item");
                 boards.forEach(function (item) {
                     item.addEventListener("click", function () {
-                        let id = this.getAttribute("data-itemid"),
+                        const id = this.getAttribute("data-itemid"),
                             item = Helper.findItemById(items, id);
                         _this.hide();
                         _this.options.boardModule.render(item);
@@ -211,35 +218,27 @@ export default class List extends Module {
             }
         }
 
-        if (this.options.appDomain === "note" || this.options.appDomain === "board") {
-            this.htmlElement.querySelector(".count-sort").setAttribute("data-sort", "meta");
-        }
-
     }
 
     formatList(items) {
 
         const _this = this;
         let html = "";
-            
 
         items.forEach(function (value, index) {
-
-            //if (value.tag && (value.tag.includes("hidden") || value.tag.includes("hide") || value.tag.includes("archive"))) {
-            //    return;
-            //}
-
             let icon = value.icon ? `<i class="${value.icon}">` : '',
                 image = "",
                 status = "",
                 priority = "",
-                statusPrioritySpan = "",
                 todoCount = "",
-                children = _this.options.children === "nodes" ? value.nodes : value.metas,
-                countLink = `<a href="javascript:void(0)" class="${_this.options.appDomain === 'board' ? 'board' : 'list'}-item list-count" data-itemid="${value.id}"><span class="count">${children ? children.length : "0"}</span></a>`;
+                statusPrioritySpan = "",
+                children = _this.options.children === "node" ? value.nodes : value.metas,
+                countLink = `<a class="${_this.options.appDomain === 'board' ? 'board' : 'list'}-item list-count" data-itemid="${value.id}"><span class="count">${children ? children.length : "0"}
+                </span> ${_this.options.appDomain === 'board' ? '<i style="font-size:.8rem" class="fal fa-arrow-circle-right"></i>' : ''}</a>`,
+                notes = _this.options.children === "meta" ? "" : ` <i class="fal fa-comment-alt"></i>${value.metas.length}`
 
             if (_this.options.appDomain === "project") {
-                let statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
+                const statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
                     priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle");
                 status = `<i class="fal fa-${statusIcon}"></i>`;
                 priority = `<i class="fal fa-${priorityIcon}"></i>`;
@@ -258,13 +257,12 @@ export default class List extends Module {
                 binaryImage && (image = `<img src="${binaryImage}">`);
             }
 
-            if(!image) {
+            if (!image) {
                 image = `<span class='letter' ${value.color ? 'style=background-color:' + value.color : ''}>${value.title.charAt(0).toUpperCase()}</span>`
             }
 
-
             html += `<tr>
-                    <td style="background-color:${value.color}">${index}</td>
+                    <td style="background-color:${value.color}">${index + 1}</td>
                     <td>${icon}</td>
                     <td>
                     <a class="list-item" data-itemid="${value.id}">
@@ -274,7 +272,7 @@ export default class List extends Module {
                                 <span class="title">${value.title ? (value.title.length > 20 ? Helper.trim(20, value.title) : value.title) : 'Untitled'}</span>
                                 <span class="meta-data">
                                 <span>${priority}</span>
-                                <span class="date-modified">${value.dateModified ? Helper.formatDate(value.dateModified) : Helper.formatDate(value.dateCreated)}</span>
+                                <span class="date-modified">${value.dateModified ? Helper.formatDate(value.dateModified) : Helper.formatDate(value.dateCreated)}${notes}</span>
                                 ${todoCount}
                                 </span>
                             </span>
@@ -291,50 +289,65 @@ export default class List extends Module {
     addSortLinks(links) {
 
         const _this = this,
-            sortlinks = links ? links : this.htmlElement.querySelectorAll("table thead [data-sort]");
-        sortlinks.forEach(function (item) {
+            sortLinks = links ? links : this.htmlElement.querySelectorAll("table thead [data-sort]"),
+            headerSortLinks = this.htmlElement.querySelectorAll("table thead [data-sort]");
+
+        sortLinks.forEach(function (item) {
             item.addEventListener("click", function (e) {
-                let clickedItem = this.closest("a").getAttribute("data-sort");
-                if (_this.sortField === clickedItem) {
-                    sortlinks.forEach(function (elem) {
+                const clickedItem = this.closest("a").getAttribute("data-sort");
+
+                
+                if (_this.sortListCol === clickedItem) {
+                    sortLinks.forEach(function (elem) {
                         if (elem.getAttribute("data-sort") !== clickedItem) {
                             elem.classList.remove("reverse");
                         }
                     })
                     this.classList.toggle("reverse");
                 }
-                _this.sortField = clickedItem;
-                _this.bind(_this.items);
-                let listSort = {
-                    sortField: _this.sortField,
-                    reverse: this.classList.contains("reverse") ? "reverse" : ""
+                
+                sortLinks.forEach(elem => elem.classList.remove("selected"))
+
+                if(clickedItem === "todo") {
+                    headerSortLinks.forEach(elem => elem.classList.remove("selected"))
+                } else {
+                    if(_this.footer.querySelector(`a[data-sort='todo']`)) {
+                        _this.footer.querySelector(`a[data-sort='todo']`).classList.remove("selected")
+                    } 
                 }
-                Helper.setLocalStorageData(`${_this.options.appId}_listSort`, listSort);
+
+                this.classList.add("selected")
+                _this.sortListCol = clickedItem;
+                _this.sortListColReverse = this.classList.contains("reverse");
+                _this.bind(_this.items);
+                Helper.setPrefItem(_this.options.appId, "sortListCol", _this.sortListCol)
+                Helper.setPrefItem(_this.options.appId, "sortListColReverse", _this.sortListColReverse)
             }, false);
         });
     }
 
     setListSort() {
-        let listSort = Helper.getLocalStorageData(`${this.options.appId}_listSort`);
-        if (listSort) {
-            this.sortField = listSort.sortField;
-            if (listSort.reverse) {
-                if (this.htmlElement.querySelector(`[data-sort='${listSort.sortField}']`)) {
-                    this.htmlElement.querySelector(`[data-sort='${listSort.sortField}']`).classList.add(listSort.reverse);
-                }
+        const sortListCol = Helper.getPrefItem(this.options.appId, "sortListCol") || 'title',
+            sortListColReverse = Helper.getPrefItem(this.options.appId, "sortListColReverse") || false,
+            sortElem = this.htmlElement.querySelector(`.list table thead tr th a[data-sort='${sortListCol}']`) || this.footer.querySelector(`a[data-sort='${sortListCol}']`)
 
-                else if (this.footer.querySelector(`[data-sort='${listSort.sortField}']`)) {
-                    this.footer.querySelector(`[data-sort='${listSort.sortField}']`).classList.add(listSort.reverse);
-                }
+        this.sortListCol = sortListCol
+        this.sortListColReverse = sortListColReverse
+
+        if (sortElem) {
+            sortElem.classList.add("selected");
+            if (sortListColReverse) {
+                sortElem.classList.add("reverse");
             }
         }
+
     }
 
     sortItems(list) {
 
         let items = list.sort(Helper.titleSort);
 
-        switch (this.sortField) {
+        switch (this.sortListCol) {
             case "title": items.sort(Helper.titleSort);
                 break;
             case "color": items.sort(Helper.colorSort);
@@ -350,15 +363,8 @@ export default class List extends Module {
             default: items.sort(Helper.titleSort);
         }
 
-        let sortElem = this.htmlElement.querySelector(`[data-sort='${this.sortField}']`) ?
-            this.htmlElement.querySelector(`[data-sort='${this.sortField}']`) :
-            this.footer.querySelector(`[data-sort='${this.sortField}']`);
-
-
-        if (sortElem) {
-            if (sortElem.classList.contains("reverse")) {
-                items.sort().reverse();
-            }
+        if (this.sortListColReverse) {
+            items.sort().reverse();
         }
 
         return items;

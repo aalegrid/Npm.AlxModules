@@ -1,4 +1,3 @@
-//import { Module } from 'alxnpm-mod-module';
 import API from 'alxnpm-mod-api';
 import Loader from 'alxnpm-mod-loader';
 import Helper from 'alxnpm-mod-helper';
@@ -10,14 +9,14 @@ let Module = require('alxnpm-mod-module')
 
 import { data } from './data.js';
 
-
 export default class Item extends Module {
     constructor(moduleId, className, htmlElement, options) {
         super(moduleId, className, htmlElement, options);
         this.api = new API(this.options.apiUrl);
         this.switcher = new ModuleSwitcher();
         this.loader = new Loader();
-        this.sortField;
+        this.sortNodesCol = "title";
+        this.sortNodesColReverse = false;
         this.options.fields = options.fields || [];
         this.options.nodeName = options.nodeName || "Node";
         this.options.nodeIcon = options.nodeIcon || "fal fa-file";
@@ -74,12 +73,11 @@ export default class Item extends Module {
             }
             else {
                 this.htmlElement.querySelector(".page-chart").style.display = "none";
-            }   
+            }
         }
         else {
             this.htmlElement.querySelector(".page-chart").style.display = "none";
         }
-        
 
         const form = this.form;
 
@@ -118,7 +116,7 @@ export default class Item extends Module {
 
             let itemDeleteAction = function (id) {
                 // Delete action
-                _this.deleteItem(item.id);
+                _this.postDeleteItem(item.id);
                 // End delete action
                 _this.options.modalModule.hide();
                 _this.options.modalModule.removeConfirmAction(itemDeleteAction);
@@ -144,7 +142,7 @@ export default class Item extends Module {
 
         /* #region Object Pickers */
 
-        let iconPicker = new ObjectPicker("iconPicker", "icon-object-picker", form.querySelector("#iconPicker"), {
+        const iconPicker = new ObjectPicker("iconPicker", "icon-object-picker", form.querySelector("#iconPicker"), {
             type: "icon",
             itemClickHandler: this.iconOnClick,
             animation: "none",
@@ -224,19 +222,20 @@ export default class Item extends Module {
             this.htmlElement.querySelector("table thead .control").style.display = "none";
         }
 
-        if (this.options.appDomain === "project") {
+        if (this.options.appDomain === "project" && item.nodes && item.nodes.length) {
             this.htmlElement.querySelector(".filter-done").style.display = "block";
-            const filterDone = Helper.getLocalStorageData(`${this.options.appId}_filterDone`);
+            const hideDone = Helper.getPrefItem(this.options.appId, "hideDone")
 
-            if (filterDone) {
-                this.htmlElement.querySelector(".filter-done a").classList.add("on")
+            if (hideDone) {
+                this.htmlElement.querySelector(".filter-done a").classList.add("true")
             }
 
             this.htmlElement.querySelector(".filter-done a").addEventListener("click", function () {
                 const el = this.closest("a");
-                el.classList.toggle("on");
-                Helper.setLocalStorageData(`${_this.options.appId}_filterDone`, el.classList.contains("on"));
-                _this.bindNodes(item, el.classList.contains("on"));
+                el.classList.toggle("true");
+                //Helper.setLocalStorageData(`${_this.options.appId}_hideDone`, el.classList.contains("on"));
+                Helper.setPrefItem(_this.options.appId, "hideDone", el.classList.contains("true"))
+                _this.bindNodes(item, el.classList.contains("true"));
             }, false);
         }
         else {
@@ -282,8 +281,8 @@ export default class Item extends Module {
                 // Render Nodes
                 if (item.nodes) {
                     if (this.options.appDomain === "project") {
-                        const filterDone = Helper.getLocalStorageData(`${this.options.appId}_filterDone`);
-                        this.bindNodes(item, filterDone);
+                        const hideDone = Helper.getPrefItem(this.options.appId, "hideDone")
+                        this.bindNodes(item, hideDone);
                     } else {
                         this.bindNodes(item);
                     }
@@ -340,11 +339,8 @@ export default class Item extends Module {
                         }, false)
                     })
                 }
-
-
             }
 
-            
             // Render Notes
             this.htmlElement.querySelector(".notes-count").innerHTML = item.metas ? item.metas.length : "0";
 
@@ -371,8 +367,6 @@ export default class Item extends Module {
 
                 notesTbody.innerHTML = notesHtml;
             }
-
-
         }
 
         /* #endregion */
@@ -460,7 +454,7 @@ export default class Item extends Module {
                         note = Helper.findItemById(item.metas, id);
 
                     _this.options.modalModule.header = "Delete";
-                    _this.options.modalModule.body = `Are you sure you want to delete note '${note.name}'?`;
+                    _this.options.modalModule.body = `Are you sure you want to delete '${note.name}'?`;
 
                     let deleteNoteAction = function () {
                         // Delete action
@@ -476,7 +470,6 @@ export default class Item extends Module {
                 }, false);
             });
         }
-
 
         if (this.options.fields.includes("priority")) {
             let priorityLinks = this.htmlElement.querySelectorAll(".priority-btn-group a");
@@ -509,12 +502,13 @@ export default class Item extends Module {
         }
 
         if (this.options.nodes === "all" || (this.options.nodes === "single" && parseInt(item.parentId) === 0)) {
-            this.htmlElement.querySelector(".nodes-list .collapse").addEventListener("click", function () {
+            this.htmlElement.querySelector(".nodes-list .collapse").addEventListener("click", function (e) {
+                const iElem = e.target.closest("a").querySelector("i")
                 _this.htmlElement.querySelector(".nodes-list table").classList.toggle("hide");
-                const iElem = this.querySelector("i")
                 iElem.classList.toggle("fa-minus-square");
                 iElem.classList.toggle("fa-plus-square");
-                Helper.setLocalStorageData(`${_this.options.appId}_nodeCollapse`, iElem.classList.value);
+                Helper.setPrefItem(_this.options.appId, "nodeCollapse",
+                    _this.htmlElement.querySelector(".nodes-list table").classList.contains("hide"))
             }, false);
         }
 
@@ -522,23 +516,42 @@ export default class Item extends Module {
             _this.htmlElement.querySelector(".nodes-list").style.display = "none";
         }
 
-        this.htmlElement.querySelector(".notes-list .collapse").addEventListener("click", function () {
-            _this.htmlElement.querySelector(".notes-list table").classList.toggle("hide");
-            const iElem = this.querySelector("i")
-            iElem.classList.toggle("fa-minus-square");
-            iElem.classList.toggle("fa-plus-square");
-            Helper.setLocalStorageData(`${_this.options.appId}_noteCollapse`, iElem.classList.value);
+        this.htmlElement.querySelector(".notes-list .collapse").addEventListener("click", function (e) {
+            const iElem = e.target.closest("a").querySelector("i")
+                _this.htmlElement.querySelector(".notes-list table").classList.toggle("hide");
+                iElem.classList.toggle("fa-minus-square");
+                iElem.classList.toggle("fa-plus-square");
+                Helper.setPrefItem(_this.options.appId, "noteCollapse",
+                    _this.htmlElement.querySelector(".notes-list table").classList.contains("hide"))
         }, false);
+
+
+        this.htmlElement.querySelector("#icon").addEventListener('search', function () {
+            if (!this.value) {
+                const iElem = this.closest(".input").querySelector("a")
+                iElem.firstChild.setAttribute("class", "fal fa-flag");
+            }
+        });
+
+        this.htmlElement.querySelector("#color").addEventListener('search', function () {
+            if (!this.value) {
+                const iElem = this.closest(".input").querySelector("a")
+                iElem.firstChild.style.backgroundColor = "#fff";
+            }
+        });
+
+
 
         /* #endregion */
 
     }
 
-    bindNodes(item, filterDone) {
+    bindNodes(item, hideDone) {
 
-        let _this = this, nodes;
+        const _this = this;
+        let nodes;
         if (this.options.appDomain === "project") {
-            nodes = filterDone ? this.sortItems(item.nodes.filter((item) => parseInt(item.status) !== 2)) : this.sortItems(item.nodes)
+            nodes = hideDone ? this.sortItems(item.nodes.filter((item) => parseInt(item.status) !== 2)) : this.sortItems(item.nodes)
         } else {
             nodes = item.nodes;
         }
@@ -558,13 +571,14 @@ export default class Item extends Module {
                     const statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
                         priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle"),
                         iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` : `<i class="${value.icon ? value.icon : _this.options.nodeIcon}"></i>`,
-                        colorBox = value.color ? `<span class="colorbox" style="background-color:${value.color}"></span>` : '';
+                        colorBox = value.color ? `<span class="colorbox" style="background-color:${value.color}"></span>` : '',
+                        notes = value.metas ? (value.metas.length ? `<span style="font-size:10px; color: #666"><i class="fal fa-comment-alt"></i> ${value.metas.length}</span>` : "") : "";
 
                     nodesHtml += `<tr data-nodeid="${value.id}">
                         <td>${iconOrCheckBox}</td>
                         <td>
                             ${colorBox}
-                            <a class='node-item' data-nodeid="${value.id}">${value.title}</a>
+                            <a class='node-item' data-nodeid="${value.id}">${value.title} ${notes}</a>
                         </td>`;
                     if (_this.options.fields.includes("priority")) {
                         nodesHtml += `<td><a class='node-priority-click' data-nodeid="${value.id}" data-nodepriority="${value.priority}"><i class="fal fa-${priorityIcon}"></i></a></td>`;
@@ -592,7 +606,7 @@ export default class Item extends Module {
                             <td></td>
                             <td></td>
                             <td>Total</td>
-                            <td>${Helper.formatMoney(total)}</td>
+                            <td><strong>$${Helper.formatMoney(total)}</strong></td>
                             <td></td>
                             </tr>`
 
@@ -730,10 +744,10 @@ export default class Item extends Module {
                         let id = this.getAttribute("data-nodeid"),
                             node = Helper.findItemById(item.nodes, id);
                         _this.options.modalModule.header = "Delete";
-                        _this.options.modalModule.body = `Are you sure you want to delete note '${node.title}'?`;
+                        _this.options.modalModule.body = `Are you sure you want to delete '${node.title}'?`;
                         let deleteNodeAction = function () {
                             // Delete action
-                            _this.deleteItem(id);
+                            _this.postDeleteItem(id);
                             // End delete action
                             _this.options.modalModule.hide();
                             _this.options.modalModule.removeConfirmAction(deleteNodeAction);
@@ -752,32 +766,44 @@ export default class Item extends Module {
     }
 
     setNodeSort() {
-        let nodeSort = Helper.getLocalStorageData(`${this.options.appId}_nodeSort`);
-        if (nodeSort) {
-            this.sortField = nodeSort.sortField;
-            if (nodeSort.reverse) {
-                this.htmlElement.querySelector(`[data-sort='${nodeSort.sortField}']`).classList.add(nodeSort.reverse);
-            }
+        const sortNodesCol = Helper.getPrefItem(this.options.appId, "sortNodesCol") || 'title',
+            sortNodesColReverse = Helper.getPrefItem(this.options.appId, "sortNodesColReverse") || false,
+            sortElem = this.htmlElement.querySelector(`.nodes-list table thead tr th a[data-sort='${sortNodesCol}']`);
+        this.sortNodesCol = sortNodesCol
+        this.sortNodesColReverse = sortNodesColReverse
+        sortElem.classList.add("selected");
+        if (sortNodesColReverse) {
+            sortElem.classList.add("reverse");
         }
     }
 
     setNodeCollapse() {
-        let collapse = Helper.getLocalStorageData(`${this.options.appId}_nodeCollapse`);
+        const collapse = Helper.getPrefItem(this.options.appId, "nodeCollapse")
         if (collapse) {
-            this.htmlElement.querySelector(".nodes-list .collapse i").classList = collapse;
-            if (collapse === "fal fa-plus-square") {
-                this.htmlElement.querySelector(".nodes-list table").classList.toggle("hide");
+            if (document.querySelector(".item .nodes-list table")) {
+                document.querySelector(".item .nodes-list table").classList.add("hide");
             }
+            const e = document.querySelector(".item .nodes-list .collapse i")
+            if (e) {
+                e.classList.remove("fa-minus-square")
+                e.classList.add("fa-plus-square")
+            }
+
         }
     }
 
     setNoteCollapse() {
-        let collapse = Helper.getLocalStorageData(`${this.options.appId}_noteCollapse`);
+        const collapse = Helper.getPrefItem(this.options.appId, "noteCollapse")
         if (collapse) {
-            this.htmlElement.querySelector(".notes-list .collapse i").classList = collapse;
-            if (collapse === "fal fa-plus-square") {
-                this.htmlElement.querySelector(".notes-list table").classList.toggle("hide");
+            if (document.querySelector(".item .notes-list table")) {
+                document.querySelector(".item .notes-list table").classList.add("hide");
             }
+            const e = document.querySelector(".item .notes-list .collapse i")
+            if (e) {
+                e.classList.remove("fa-minus-square")
+                e.classList.add("fa-plus-square")
+            }
+
         }
     }
 
@@ -790,10 +816,10 @@ export default class Item extends Module {
         savedItem.dateModified = new Date();
 
         this.loader.show();
-        //request(url, method, body, isTokenRequest, isBodyStringify, isResponseJson)
+
         this.api.request(`/api/Items/${savedItem.id}`, "put", savedItem, false, true, false)
             .then((response) => {
-                //console.log(response);
+
                 this.loader.hide();
                 if (response.status >= 400) {
                     Helper.showMessage(this.alertBox, `${response.status}: ${response.statusText}`);
@@ -819,7 +845,7 @@ export default class Item extends Module {
             savedItem = item, url, method,
             isAdd = typeof item.id === 'undefined',
             isResponseJson,
-            user = Helper.getUser(this.options.appId),
+            user = Helper.getPrefItem(this.options.appId, "user"),
             parentMoved,
             oldParentId;
 
@@ -837,7 +863,7 @@ export default class Item extends Module {
             if (item.parentId) {
                 savedItem.parentId = item.parentId;
             }
-            item.nodes = [];
+            savedItem.nodes = [];
         }
 
         //UPDATE - PUT
@@ -881,8 +907,11 @@ export default class Item extends Module {
             savedItem.control = form.control.value;
         }
 
+        // console.log(savedItem);
+        // return;
+
         this.loader.show();
-        //request(url, method, body, isTokenRequest, isBodyStringify, isResponseJson)
+
         this.api.request(url, method, savedItem, false, true, isResponseJson)
             .then((response) => {
 
@@ -907,7 +936,7 @@ export default class Item extends Module {
                         this.options.listModule.items = _items;
                     }
                     else {
-                        
+
                         let _items = this.options.listModule.items;
                         _items.push(response);
                         this.options.listModule.items = _items;
@@ -916,11 +945,9 @@ export default class Item extends Module {
                 } else {
                     Helper.showMessage(this.alertBox, "Item saved");
 
-
                     if (parentMoved) {
 
-                        // Remove from previous parent
-                        if(parseInt(oldParentId)) {
+                        if (parseInt(oldParentId)) {
                             const oldParent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), oldParentId);
                             oldParent.nodes = Helper.removeById(oldParent.nodes, "id", savedItem.id);
                             const items = Helper.updateTree(this.options.listModule.items, oldParentId, oldParent);
@@ -933,7 +960,7 @@ export default class Item extends Module {
                         }
 
                         //Add to new parent
-                        if(parseInt(savedItem.parentId)) {
+                        if (parseInt(savedItem.parentId)) {
                             const newParent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), savedItem.parentId);
                             newParent.nodes.push(savedItem);
                             const items = Helper.updateTree(this.options.listModule.items, oldParentId, newParent);
@@ -945,14 +972,14 @@ export default class Item extends Module {
                             items.push(savedItem);
                             this.options.listModule.items = items;
                         }
-                        
-                       
+
+
                     }
 
                     //Update parent
                     if (item.parentId) {
                         const parent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId),
-                        childIndex = parent.nodes.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
+                            childIndex = parent.nodes.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
                         parent.nodes[childIndex] = savedItem;
                         const items = Helper.updateTree(this.options.listModule.items, item.parentId, parent);
                         this.options.listModule.items = items;
@@ -971,6 +998,53 @@ export default class Item extends Module {
                 this.loader.hide();
                 Helper.showMessage(this.alertBox, error);
             });
+    }
+
+
+    postDeleteItem(id) {
+        const user = Helper.getPrefItem(this.options.appId, "user"),
+        data = {
+            UserId: user.id,
+            Id: id,
+            Item: {}
+        }
+        //console.log(data)
+        this.loader.show();
+        //request(url, method, body, isTokenRequest, isBodyStringify, isResponseJson)
+        this.api.request(`/api/Items/DeleteItem`, "post", data, false, true, false)
+            .then((response) => {
+                //console.log(response);
+                this.loader.hide();
+                if (response.status >= 400) {
+                    Helper.showMessage(this.alertBox, `${response.status}: ${response.statusText}`);
+                    return;
+                }
+
+                let item = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), id);
+
+                if (item.parentId) {
+                    let parent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId);
+                    parent.nodes = Helper.removeById(parent.nodes, "id", id);
+                    let _items = Helper.updateTree(this.options.listModule.items, item.parentId, parent);
+                    this.options.listModule.items = _items;
+                    this.render(parent);
+                    this.show();
+                }
+                else {
+                    this.hide();
+                    let _items = Helper.removeById(this.options.listModule.items, "id", id);
+                    this.options.listModule.items = _items;
+                    this.options.listModule.render();
+                    this.options.listModule.bind(_items);
+                    this.options.listModule.show();
+                }
+
+            })
+            .catch((error) => {
+                this.loader.hide();
+                Helper.showMessage(this.alertBox, error);
+            });
+
     }
 
     deleteItem(id) {
@@ -1014,7 +1088,6 @@ export default class Item extends Module {
 
     deleteNote(id, item) {
         this.loader.show();
-        //request(url, method, body, isTokenRequest, isBodyStringify, isResponseJson)
         this.api.request(`/api/Metas/${id}`, "delete", {}, false, false, false)
             .then((response) => {
                 this.loader.hide();
@@ -1055,13 +1128,13 @@ export default class Item extends Module {
     }
 
     addNodeSortLinks(data) {
-        let _this = this,
+        const _this = this,
             sortLinks = this.htmlElement.querySelectorAll(".nodes-list table thead [data-sort]");
         if (sortLinks) {
             sortLinks.forEach(function (item) {
                 item.addEventListener("click", function (e) {
-                    let clickedItem = this.closest("a").getAttribute("data-sort");
-                    if (_this.sortField === clickedItem) {
+                    const clickedItem = this.closest("a").getAttribute("data-sort");
+                    if (_this.sortNodesCol === clickedItem) {
                         sortLinks.forEach(function (elem) {
                             if (elem.getAttribute("data-sort") !== clickedItem) {
                                 elem.classList.remove("reverse");
@@ -1069,13 +1142,13 @@ export default class Item extends Module {
                         })
                         this.classList.toggle("reverse");
                     }
-                    _this.sortField = clickedItem;
+                    sortLinks.forEach(elem => elem.classList.remove("selected"))
+                    this.classList.add("selected")
+                    _this.sortNodesCol = clickedItem;
+                    _this.sortNodesColReverse = this.classList.contains("reverse")
                     _this.bindNodes(data);
-                    let nodeSort = {
-                        sortField: _this.sortField,
-                        reverse: this.classList.contains("reverse") ? "reverse" : ""
-                    }
-                    Helper.setLocalStorageData(`${_this.options.appId}_nodeSort`, nodeSort);
+                    Helper.setPrefItem(_this.options.appId, "sortNodesCol", _this.sortNodesCol)
+                    Helper.setPrefItem(_this.options.appId, "sortNodesColReverse", _this.sortNodesColReverse)
                 }, false);
             });
         }
@@ -1084,7 +1157,7 @@ export default class Item extends Module {
 
     sortItems(items) {
 
-        switch (this.sortField) {
+        switch (this.sortNodesCol) {
             case "title": items.sort(Helper.titleSort);
                 break;
             case "status": items.sort(Helper.statusSort);
@@ -1096,16 +1169,11 @@ export default class Item extends Module {
             default: items.sort(Helper.titleSort);
         }
 
-        let sortElem = this.htmlElement.querySelector(`[data-sort='${this.sortField}']`);
-
-        if (sortElem) {
-            if (sortElem.classList.contains("reverse")) {
-                items.sort().reverse();
-            }
+        if (this.sortListColReverse) {
+            items.sort().reverse();
         }
 
         return items;
     };
-
 
 }

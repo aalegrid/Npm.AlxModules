@@ -76,7 +76,7 @@ div[class$="-list"] [class$="-header"] .collapse i {
 div[class$="-list"] [class$="-header"] .filter-done a i {
   color: #000;
 }
-div[class$="-list"] [class$="-header"] .filter-done a.on i {
+div[class$="-list"] [class$="-header"] .filter-done a.true i {
   color: #9b9090;
 }
 div[class$="-list"] [class$="-header"] a {
@@ -98,6 +98,18 @@ div[class$="-list"] table th:first-child {
 }
 div[class$="-list"] table th a {
   font-weight: bold;
+}
+div[class$="-list"] table th a.selected::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0de";
+  padding-left: 3px;
+}
+div[class$="-list"] table th a.selected.reverse::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0dd";
+  padding-left: 3px;
 }
 div[class$="-list"] table td {
   border-right: none;

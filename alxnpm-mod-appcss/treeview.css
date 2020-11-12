@@ -110,6 +110,16 @@
 .treeview ul li span.open::before {
   content: "\f146";
 }
+.treeview ul li .note-count {
+  font-size: 10px;
+  color: #666;
+  margin-right: 3px;
+  position: relative;
+  top: -2px;
+}
+.treeview ul li .note-count i {
+  width: 15px;
+}
 .treeview ul li a {
   text-decoration: none;
   color: #000;
@@ -140,6 +150,9 @@
 }
 .treeview ul.open {
   display: block;
+}
+.treeview ul:empty {
+  border: 0 !important;
 }
 .parentitem-component .parentid-tree {
   padding: 0 0.5rem 0.25rem 0.5rem;

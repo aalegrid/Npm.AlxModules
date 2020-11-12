@@ -80,7 +80,7 @@ export default class Helper {
 
     let html = `<ul class="parentid-tree">`;
 
-    if(nodes === "all" && mode === "item") {
+    if (nodes === "all" && mode === "item") {
       html += ` <li><a data-id="0">Root</a></li>`
     }
 
@@ -132,10 +132,12 @@ export default class Helper {
           let icon = "",
             color = "",
             image = "",
-            link = `<a class="list-item icon-link" data-itemid="${value.id}"><i class="fal fa-edit"></i></a>`;
+            notes = "",
+            link = `<a class="list-item icon-link" data-itemid="${value.id}"><i class="fal fa-pen-alt"></i></a>`;
 
           icon = renderIcon ? (value.icon ? `<i class="${value.icon}"></i>` : "") : "";
           color = renderColor ? (value.color ? ` style="background-color:${value.color}"` : "") : "";
+          notes = value.metas ? (value.metas.length ? `<span class="note-count"><i class="fal fa-comment-alt"></i>${value.metas.length}</span>` : "") : "";
 
           if (value.metas) {
             const binaryImage = _this.getItemMetaImage(value.metas);
@@ -144,11 +146,11 @@ export default class Helper {
 
           if (value.nodes.length) {
 
-            html += `<li${color}><span class="parent" data-itemid="${value.id}">${image ? image : icon}<span class="title">${value.title}</span></span>${link}`;
+            html += `<li${color}><span class="parent" data-itemid="${value.id}">${image ? image : icon}${notes}${value.title}</span>${link}`;
           }
 
           else {
-            html += `<li class="no-parent" ${color}><a class="list-item text-link" data-itemid="${value.id}">${image ? image : icon}<span class="title">${value.title}</span></a>${link}</li>`;
+            html += `<li class="no-parent" ${color}><a class="list-item text-link" data-itemid="${value.id}">${image ? image : icon}${notes}${value.title}</a>${link}</li>`;
           }
         }
 
@@ -219,7 +221,7 @@ export default class Helper {
       else return true;
     });
 
-    if(image) {
+    if (image) {
       return image;
     }
     _metas.every(function (meta) {
@@ -345,6 +347,50 @@ export default class Helper {
       image.src = baseUrl + imgSrc
     });
     return div.innerHTML;
+  }
+
+  static getPrefItem(appId, key) {
+    const prefs = this.getLocalStorageData(`${appId}_prefs`);
+    if (prefs && prefs[key]) {
+      return prefs[key]
+    } else {
+      return null
+    }
+  }
+
+  static setPrefItem(appId, key, data) {
+    let prefs = this.getLocalStorageData(`${appId}_prefs`);
+    if (prefs) {
+      prefs[key] = data
+    } else {
+      prefs = {
+        [key]: data
+      }
+    }
+    this.setLocalStorageData(`${appId}_prefs`, prefs);
+  }
+
+  static removePrefItem(appId, key) {
+    const prefs = this.getLocalStorageData(`${appId}_prefs`);
+    delete prefs[key]
+    this.setLocalStorageData(`${appId}_prefs`, prefs);
+  }
+
+  static react401Logout() {
+    sessionStorage.removeItem("token");
+    //window.location.reload();
+    let url = window.location.href;
+    if (url.indexOf('?') > -1) {
+      url += '&401=true'
+    } else {
+      url += '?401=true'
+    }
+    window.location.href = url;
+  }
+
+  static validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
 }

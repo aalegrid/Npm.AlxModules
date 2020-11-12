@@ -8,7 +8,7 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
@@ -113,24 +113,7 @@ main.closet-mode .logged-component .closet-container .area .clothes .pinch-zoom-
 }
 main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar,
 main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar {
-  -webkit-appearance: none;
-}
-main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar:vertical,
-main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar:vertical {
-  width: 20px;
-}
-main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar:horizontal,
-main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar:horizontal {
-  height: 20px;
-}
-main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar-thumb,
-main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 2px solid #ffffff;
-}
-main.closet-mode #mainPanel .closet-container .area .clothes::-webkit-scrollbar-track,
-main.closet-mode .logged-component .closet-container .area .clothes::-webkit-scrollbar-track {
-  background-color: #ffffff;
+  display: none;
 }
 main.closet-mode #mainPanel .closet-container.show-area-sliders .slider-area,
 main.closet-mode .logged-component .closet-container.show-area-sliders .slider-area {
@@ -144,9 +127,30 @@ main.closet-mode #mainPanel .closet-container.show-area-lines .area,
 main.closet-mode .logged-component .closet-container.show-area-lines .area {
   border-bottom: 1px dashed #fff;
 }
-main.closet-mode #mainPanel .closet-container.show-area-lines .area .pinch-zoom-container,
-main.closet-mode .logged-component .closet-container.show-area-lines .area .pinch-zoom-container {
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes .pinch-zoom-container,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes .pinch-zoom-container {
   border: 1px dashed #666;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar {
+  display: unset;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar:vertical,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar:vertical {
+  width: 20px;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar:horizontal,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar:horizontal {
+  height: 20px;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar-thumb,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid #ffffff;
+}
+main.closet-mode #mainPanel .closet-container.show-area-lines .area .clothes::-webkit-scrollbar-track,
+main.closet-mode .logged-component .closet-container.show-area-lines .area .clothes::-webkit-scrollbar-track {
+  background-color: #ffffff;
 }
 main.closet-mode #mainPanel .closet-container.hide-bottom [class$="Bottom"],
 main.closet-mode .logged-component .closet-container.hide-bottom [class$="Bottom"] {

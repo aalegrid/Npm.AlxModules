@@ -6,9 +6,20 @@ div.list {
       tr {
         background-color: #ebebeb;
         th {
-          i {
-            cursor: pointer;
-            display: block;
+          a {
+            &.selected::after {
+              font-family: "Font Awesome 5 Pro";
+              font-weight: 300;
+              content: "\f0de";
+              padding-left: 3px;
+            }
+            &.selected.reverse::after {
+              font-family: "Font Awesome 5 Pro";
+              font-weight: 300;
+              content: "\f0dd";
+              padding-left: 3px;
+    
+            }
           }
         }
       }

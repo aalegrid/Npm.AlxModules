@@ -47,9 +47,17 @@
 div.list table thead tr {
   background-color: #ebebeb;
 }
-div.list table thead tr th i {
-  cursor: pointer;
-  display: block;
+div.list table thead tr th a.selected::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0de";
+  padding-left: 3px;
+}
+div.list table thead tr th a.selected.reverse::after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  content: "\f0dd";
+  padding-left: 3px;
 }
 div.list table tr td {
   border-right: 1px dotted #9b9090;

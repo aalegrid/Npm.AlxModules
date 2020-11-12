@@ -5,6 +5,7 @@ body {
 }
 
 main {
+  min-height: 100vh;
   //margin-top: 3rem;
   //padding: 1.5rem 1.5rem 4rem 1.5rem;
   .app-component {
@@ -18,8 +19,6 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-  height: 36px;
-  line-height: 36px;
   padding: 0.5rem;
   font-size: 14px;
   border: 1px solid @color-gray;
@@ -39,8 +38,13 @@ textarea {
   }
 }
 
-textarea {
-  height: 6rem;
+input[type="search"],
+input[type="date"],
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  line-height: 36px;
+  height: 36px;
 }
 
 label {
@@ -141,7 +145,9 @@ button {
   }
 }
 
-button[type="submit"] {
+button[type="submit"],
+.signup-button,
+.signin-button {
   background: @color-hue;
   color: @color-white;
   float: right;
@@ -150,6 +156,11 @@ button[type="submit"] {
     background: @dark-hue;
     color: @color-white;
   }
+}
+
+.signup-button,
+.signin-button {
+  width: 100%;
 }
 
 .button-row {
@@ -311,7 +322,7 @@ footer,
 
         .app-name {
           position: relative;
-          top: -6px;
+          // top: -6px;
           padding-left: 0.3rem;
         }
 
@@ -470,4 +481,26 @@ body {
       }
     }
   }
+}
+
+.sort-todo {
+  a {
+    &.selected::after {
+      font-family: "Font Awesome 5 Pro";
+      font-weight: 300;
+      content: "\f0de";
+      padding-left: 3px;
+    }
+    &.selected.reverse::after {
+      font-family: "Font Awesome 5 Pro";
+      font-weight: 300;
+      content: "\f0dd";
+      padding-left: 3px;
+    }
+  }
+}
+
+.signup,
+.signin {
+  font-size: .9rem;
 }

@@ -67,42 +67,14 @@ main.closet-mode {
           -webkit-overflow-scrolling: touch;
           .pinch-zoom-container {
             img {
-              // padding:150px 75px;
               padding:150px;
             }
           }
-
-        }
-
-        .clothes::-webkit-scrollbar {
-          -webkit-appearance: none;
-        }
-        
-        .clothes::-webkit-scrollbar:vertical {
-          width: 20px;
-        }
-        
-        .clothes::-webkit-scrollbar:horizontal {
-          height: 20px;
-        }
-        
-        .clothes::-webkit-scrollbar-thumb {
-          background-color: rgba(0, 0, 0, .5);
-          //border-radius: 10px;
-          border: 2px solid #ffffff;
-        }
-        
-        .clothes::-webkit-scrollbar-track {
-          //border-radius: 10px;  
-          background-color: #ffffff; 
-        }
-        
-        
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }      
       }
-
-      .C_Top {}
-
-      .D_Bottom {}
 
       &.show-area-sliders {
         .slider-area {
@@ -119,10 +91,28 @@ main.closet-mode {
       &.show-area-lines {
         .area {
           border-bottom: 1px dashed #fff;
-          .pinch-zoom-container {
-            border: 1px dashed #666;
-
-          }
+          .clothes {
+            .pinch-zoom-container {
+              border: 1px dashed #666;
+            }
+            &::-webkit-scrollbar {
+              display: unset;
+            }
+            &::-webkit-scrollbar:vertical {
+              width: 20px;
+            }
+            &::-webkit-scrollbar:horizontal {
+              height: 20px;
+            }
+            &::-webkit-scrollbar-thumb {
+              background-color: rgba(0, 0, 0, .5);
+              border: 2px solid #ffffff;
+            }
+            &::-webkit-scrollbar-track {
+              background-color: #ffffff; 
+            }
+          }      
+          
         }
         
       }
