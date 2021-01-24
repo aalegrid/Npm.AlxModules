@@ -38,7 +38,7 @@ export let data = {
                         <a data-sort="nodes">{nodeName}s</a>
                     </th>
                     <th class="control" style="text-align: right">
-                        Control
+                        <a data-sort="value">Value</a>
                     </th>
                     <th></th>
                 </tr>
@@ -140,7 +140,7 @@ export let data = {
         </div>
         <div class="row row-control">
             <div class="col-25">
-                <label for="control">Control</label>
+                <label for="control">Value</label>
             </div>
             <div class="col-75">
                 <input type="text" name="control" id="control" />
@@ -148,7 +148,10 @@ export let data = {
         </div>
         <div class="row row-tag">
             <div class="col-25">
-                <label for="tag">Tag</label>
+                <label for="tag">Tag <a class="tag-help"><i class="fal fa-question-square"></i></a></label>
+                <div class="tooltip hide" style="font-size: .8rem; padding-bottom: .5rem">
+                    Tags add features to nodes in a list. Available tags: (1) list-add adds all values of nodes (2) list-checkbox adds a checkbox on each node. Tags will take effect after list is saved.
+                </div>
             </div>
             <div class="col-75">
                 <input type="text" name="tag" id="tag" />

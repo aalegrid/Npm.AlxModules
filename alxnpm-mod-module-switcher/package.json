@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-module-switcher",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Module Switcher",
   "main": "script.js",
   "scripts": {

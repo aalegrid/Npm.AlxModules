@@ -1,9 +1,22 @@
 @color-gray: #9b9090;
-@color-hue: #000;
-@dark-hue: #666666;
+@color-hue:#666666;
+@color-dark: #000;
+@dark-hue: #000;
 @color-black: #000;
 @color-white: #fff;
-@color-orange: #fdba41;
+
+@orange-light: #fbaf5d;
+@orange-dark: #f7941d;
+
+@blue-light: #00aeef;
+@blue-dark: #0054a6;
+
+@gray-light: #b7b7b7;
+@gray-dark: #7d7d7d;
+
+@violet-light: #5e61b1;
+@violet-dark: #141871;
+
 //@font-default: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-default: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-secondary: "Roboto", "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -14,9 +27,9 @@
 
 .button {
   border-radius: 2px;
-  background-color: @color-white;
+  background-color: @color-black;
   border: 1px solid @color-gray;
-  color: @color-gray;
+  color: @color-white;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -30,8 +43,8 @@
 }
 
 .button:hover {
-  border-color: @color-black;
-  color: @color-black;
+  background-color: @color-hue;
+  //color: @color-hue;
 }
 
 .badge {

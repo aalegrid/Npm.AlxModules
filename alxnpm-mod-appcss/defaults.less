@@ -124,15 +124,21 @@ h3 {
     flex: 1 1 0px;
     text-align: center;
     .button();
+    background-color: @color-white;
+    color: @color-hue;
 
     &:nth-child(2) {
       margin: 0 0.3rem;
     }
 
     &.selected {
-      background-color: @color-hue;
+      background-color: @color-black;
       color: @color-white;
       border: 0;
+    }
+    &:hover {
+      background-color: @color-hue;
+      color: @color-white;
     }
   }
 }
@@ -140,26 +146,28 @@ h3 {
 button {
   .button();
   &:hover {
-    border-color: @color-black;
-    color: @color-black;
+    background: @color-hue;
+    //color: @color-hue;
   }
 }
 
 button[type="submit"],
 .signup-button,
-.signin-button {
-  background: @color-hue;
+.signin-button,
+.reset-button {
+  background: @color-black;
   color: @color-white;
   float: right;
   border: 0;
   &:hover {
-    background: @dark-hue;
-    color: @color-white;
+    background: @color-hue;
+    // color: @color-hue;
   }
 }
 
 .signup-button,
-.signin-button {
+.signin-button,
+.reset-button {
   width: 100%;
 }
 
@@ -365,7 +373,7 @@ header,
   -webkit-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
-  border-bottom: 1px solid @color-black;
+  border-bottom: 1px solid @color-gray;
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
@@ -377,55 +385,282 @@ footer,
   -webkit-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
-  border-top: 1px solid @color-black;
+  border-top: 1px solid @color-gray;
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
 
 body {
+
+  // Project
   &.app-project {
     header,
     footer,
     .page-header,
-    .page-footer {
-      background: #0054a6;
-      background: linear-gradient(#00aeef, #0054a6);
+    .page-footer,
+    .modal-module .modal .header {
+      background: @blue-dark;
+      background: linear-gradient(@blue-light, @blue-dark);
     }
-  }
-  &.app-note {
-    header,
-    footer,
-    .page-header,
-    .page-footer {
-      background: rgb(159, 191, 20);
-      background: linear-gradient(
-        0deg,
-        rgba(159, 191, 20, 1) 49%,
-        rgba(0, 255, 67, 1) 100%
-      );
+
+    .button {
+      background-color: @blue-dark;
+      border: 1px solid @color-gray;
+    }
+    
+    .button:hover {
+      background-color: @blue-light;
+    }
+    
+    .priority-btn-group,
+    .status-btn-group {
+      a {
+        background-color: @color-white;
+        color: @color-black;
+    
+        &.selected {
+          background-color: @blue-dark;
+          color: @color-white;
+        }
+        &:hover {
+          background-color: @blue-dark;
+          color: @color-white;
+        }
+      }
+    }
+    
+    button {
+      .button();
+      &:hover {
+        background: @blue-light;
+      }
+    }
+    
+    button[type="submit"],
+    .signup-button,
+    .signin-button,
+    .reset-button {
+      background: @blue-dark;
+      &:hover {
+        background: @blue-light;
+      }
+    }
+    
+    .button-row {
+      a,
+      button,
+      .custom-file-upload {
+        background: @blue-dark;
+        border: 1px solid @color-gray;
+        &:hover {
+          background: @blue-light;
+        }
+      }
+    
     }
   }
 
+  // List
   &.app-list {
     header,
     footer,
     .page-header,
-    .page-footer {
-      background: #666;
-      background: linear-gradient(0deg, #000 0%, #666 100%);
+    .page-footer,
+    .modal-module .modal .header {
+      background: @orange-dark;
+      background: linear-gradient(@orange-light, @orange-dark);
+    }
+
+    .button {
+      background-color: @orange-dark;
+      border: 1px solid @color-gray;
+    }
+    
+    .button:hover {
+      background-color: @orange-light;
+    }
+    
+    .priority-btn-group,
+    .status-btn-group {
+      a {
+        background-color: @color-white;
+        color: @color-black;
+    
+        &.selected {
+          background-color: @orange-dark;
+          color: @color-white;
+        }
+        &:hover {
+          background-color: @orange-dark;
+          color: @color-white;
+        }
+      }
+    }
+    
+    button {
+      .button();
+      &:hover {
+        background: @orange-light;
+      }
+    }
+    
+    button[type="submit"],
+    .signup-button,
+    .signin-button,
+    .reset-button {
+      background: @orange-dark;
+      &:hover {
+        background: @orange-light;
+      }
+    }
+    
+    .button-row {
+      a,
+      button,
+      .custom-file-upload {
+        background: @orange-dark;
+        border: 1px solid @color-gray;
+        &:hover {
+          background: @orange-light;
+        }
+      }
+    
     }
   }
+
+  // Note
+  &.app-note {
+    header,
+    footer,
+    .page-header,
+    .page-footer,
+    .modal-module .modal .header {
+      background: @gray-dark;
+      background: linear-gradient(@gray-light, @gray-dark);
+    }
+
+    .button {
+      background-color: @gray-dark;
+      border: 1px solid @color-gray;
+    }
+    
+    .button:hover {
+      background-color: @gray-light;
+    }
+    
+    .priority-btn-group,
+    .status-btn-group {
+      a {
+        background-color: @color-white;
+        color: @color-black;
+    
+        &.selected {
+          background-color: @gray-dark;
+          color: @color-white;
+        }
+        &:hover {
+          background-color: @gray-dark;
+          color: @color-white;
+        }
+      }
+    }
+    
+    button {
+      .button();
+      &:hover {
+        background: @gray-light;
+      }
+    }
+    
+    button[type="submit"],
+    .signup-button,
+    .signin-button,
+    .reset-button {
+      background: @gray-dark;
+      &:hover {
+        background: @gray-light;
+      }
+    }
+    
+    .button-row {
+      a,
+      button,
+      .custom-file-upload {
+        background: @gray-dark;
+        border: 1px solid @color-gray;
+        &:hover {
+          background: @gray-light;
+        }
+      }
+    
+    }
+  }
+
+  // Board
   &.app-board {
     header,
     footer,
     .page-header,
-    .page-footer {
-      background: rgb(45, 18, 65);
-      background: linear-gradient(
-        0deg,
-        rgba(45, 18, 65, 1) 0%,
-        rgba(114, 28, 138, 1) 100%
-      );
+    .page-footer,
+    .modal-module .modal .header {
+      background: @violet-dark;
+      background: linear-gradient(@violet-light, @violet-dark);
+    }
+
+    .button {
+      background-color: @violet-dark;
+      border: 1px solid @color-gray;
+    }
+    
+    .button:hover {
+      background-color: @violet-light;
+    }
+    
+    .priority-btn-group,
+    .status-btn-group {
+      a {
+        background-color: @color-white;
+        color: @color-black;
+    
+        &.selected {
+          background-color: @violet-dark;
+          color: @color-white;
+        }
+        &:hover {
+          background-color: @violet-dark;
+          color: @color-white;
+        }
+      }
+    }
+    
+    button {
+      .button();
+      &:hover {
+        background: @violet-light;
+      }
+    }
+    
+    button[type="submit"],
+    .signup-button,
+    .signin-button,
+    .reset-button {
+      background: @violet-dark;
+      &:hover {
+        background: @violet-light;
+      }
+    }
+    
+    .button-row {
+      a,
+      button,
+      .custom-file-upload {
+        background: @violet-dark;
+        border: 1px solid @color-gray;
+        &:hover {
+          background: @violet-light;
+        }
+      }
+    
     }
   }
 
@@ -433,14 +668,7 @@ body {
     header,
     footer,
     .page-header,
-    .page-footer {
-      background: rgb(216, 154, 163);
-      background: linear-gradient(
-        0deg,
-        rgba(216, 154, 163, 1) 0%,
-        rgba(122, 8, 20, 1) 100%
-      );
-    }
+    .page-footer { background: linear-gradient(#b7b7b7,#7d7d7d); }
   }
 
   &.app-psychograph {
@@ -501,6 +729,11 @@ body {
 }
 
 .signup,
-.signin {
+.signin,
+.reset {
   font-size: .9rem;
+}
+
+.hide {
+  display: none;
 }

@@ -1,8 +1,8 @@
 .button {
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #000;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -14,8 +14,7 @@
   font-weight: 500 !important;
 }
 .button:hover {
-  border-color: #000;
-  color: #000;
+  background-color: #666666;
 }
 .badge {
   color: #fff;
@@ -156,15 +155,17 @@ h3 {
   flex: 1 1 0px;
   text-align: center;
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #000;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fff;
+  color: #666666;
 }
 .priority-btn-group a i,
 .status-btn-group a i {
@@ -180,11 +181,16 @@ h3 {
   color: #fff;
   border: 0;
 }
+.priority-btn-group a:hover,
+.status-btn-group a:hover {
+  background-color: #666666;
+  color: #fff;
+}
 button {
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #000;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -196,12 +202,12 @@ button i {
   font-weight: 500 !important;
 }
 button:hover {
-  border-color: #000;
-  color: #000;
+  background: #666666;
 }
 button[type="submit"],
 .signup-button,
-.signin-button {
+.signin-button,
+.reset-button {
   background: #000;
   color: #fff;
   float: right;
@@ -209,12 +215,13 @@ button[type="submit"],
 }
 button[type="submit"]:hover,
 .signup-button:hover,
-.signin-button:hover {
+.signin-button:hover,
+.reset-button:hover {
   background: #666666;
-  color: #fff;
 }
 .signup-button,
-.signin-button {
+.signin-button,
+.reset-button {
   width: 100%;
 }
 .button-row {
@@ -223,7 +230,7 @@ button[type="submit"]:hover,
 .button-row a,
 .button-row button,
 .button-row .custom-file-upload {
-  background: #000;
+  background: #666666;
   color: #fff;
   float: none;
   flex-grow: 1;
@@ -242,7 +249,7 @@ button[type="submit"]:hover,
 .button-row a:hover,
 .button-row button:hover,
 .button-row .custom-file-upload:hover {
-  background: #666666;
+  background: #000;
   color: #fff;
   border-color: #000;
 }
@@ -420,7 +427,7 @@ header,
   -webkit-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #9b9090;
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
@@ -431,44 +438,255 @@ footer,
   -webkit-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
-  border-top: 1px solid #000;
+  border-top: 1px solid #9b9090;
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
 body.app-project header,
 body.app-project footer,
 body.app-project .page-header,
-body.app-project .page-footer {
+body.app-project .page-footer,
+body.app-project .modal-module .modal .header {
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
-body.app-note header,
-body.app-note footer,
-body.app-note .page-header,
-body.app-note .page-footer {
-  background: #9fbf14;
-  background: linear-gradient(0deg, #9fbf14 49%, #00ff43 100%);
+body.app-project .button {
+  background-color: #0054a6;
+  border: 1px solid #9b9090;
+}
+body.app-project .button:hover {
+  background-color: #00aeef;
+}
+body.app-project .priority-btn-group a,
+body.app-project .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-project .priority-btn-group a.selected,
+body.app-project .status-btn-group a.selected {
+  background-color: #0054a6;
+  color: #fff;
+}
+body.app-project .priority-btn-group a:hover,
+body.app-project .status-btn-group a:hover {
+  background-color: #0054a6;
+  color: #fff;
+}
+body.app-project button {
+  background-color: #0054a6;
+  border: 1px solid #9b9090;
+}
+body.app-project button:hover {
+  background: #00aeef;
+}
+body.app-project button[type="submit"],
+body.app-project .signup-button,
+body.app-project .signin-button,
+body.app-project .reset-button {
+  background: #0054a6;
+}
+body.app-project button[type="submit"]:hover,
+body.app-project .signup-button:hover,
+body.app-project .signin-button:hover,
+body.app-project .reset-button:hover {
+  background: #00aeef;
+}
+body.app-project .button-row a,
+body.app-project .button-row button,
+body.app-project .button-row .custom-file-upload {
+  background: #0054a6;
+  border: 1px solid #9b9090;
+}
+body.app-project .button-row a:hover,
+body.app-project .button-row button:hover,
+body.app-project .button-row .custom-file-upload:hover {
+  background: #00aeef;
 }
 body.app-list header,
 body.app-list footer,
 body.app-list .page-header,
-body.app-list .page-footer {
-  background: #666;
-  background: linear-gradient(0deg, #000 0%, #666 100%);
+body.app-list .page-footer,
+body.app-list .modal-module .modal .header {
+  background: #f7941d;
+  background: linear-gradient(#fbaf5d, #f7941d);
+}
+body.app-list .button {
+  background-color: #f7941d;
+  border: 1px solid #9b9090;
+}
+body.app-list .button:hover {
+  background-color: #fbaf5d;
+}
+body.app-list .priority-btn-group a,
+body.app-list .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-list .priority-btn-group a.selected,
+body.app-list .status-btn-group a.selected {
+  background-color: #f7941d;
+  color: #fff;
+}
+body.app-list .priority-btn-group a:hover,
+body.app-list .status-btn-group a:hover {
+  background-color: #f7941d;
+  color: #fff;
+}
+body.app-list button {
+  background-color: #f7941d;
+  border: 1px solid #9b9090;
+}
+body.app-list button:hover {
+  background: #fbaf5d;
+}
+body.app-list button[type="submit"],
+body.app-list .signup-button,
+body.app-list .signin-button,
+body.app-list .reset-button {
+  background: #f7941d;
+}
+body.app-list button[type="submit"]:hover,
+body.app-list .signup-button:hover,
+body.app-list .signin-button:hover,
+body.app-list .reset-button:hover {
+  background: #fbaf5d;
+}
+body.app-list .button-row a,
+body.app-list .button-row button,
+body.app-list .button-row .custom-file-upload {
+  background: #f7941d;
+  border: 1px solid #9b9090;
+}
+body.app-list .button-row a:hover,
+body.app-list .button-row button:hover,
+body.app-list .button-row .custom-file-upload:hover {
+  background: #fbaf5d;
+}
+body.app-note header,
+body.app-note footer,
+body.app-note .page-header,
+body.app-note .page-footer,
+body.app-note .modal-module .modal .header {
+  background: #7d7d7d;
+  background: linear-gradient(#b7b7b7, #7d7d7d);
+}
+body.app-note .button {
+  background-color: #7d7d7d;
+  border: 1px solid #9b9090;
+}
+body.app-note .button:hover {
+  background-color: #b7b7b7;
+}
+body.app-note .priority-btn-group a,
+body.app-note .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-note .priority-btn-group a.selected,
+body.app-note .status-btn-group a.selected {
+  background-color: #7d7d7d;
+  color: #fff;
+}
+body.app-note .priority-btn-group a:hover,
+body.app-note .status-btn-group a:hover {
+  background-color: #7d7d7d;
+  color: #fff;
+}
+body.app-note button {
+  background-color: #7d7d7d;
+  border: 1px solid #9b9090;
+}
+body.app-note button:hover {
+  background: #b7b7b7;
+}
+body.app-note button[type="submit"],
+body.app-note .signup-button,
+body.app-note .signin-button,
+body.app-note .reset-button {
+  background: #7d7d7d;
+}
+body.app-note button[type="submit"]:hover,
+body.app-note .signup-button:hover,
+body.app-note .signin-button:hover,
+body.app-note .reset-button:hover {
+  background: #b7b7b7;
+}
+body.app-note .button-row a,
+body.app-note .button-row button,
+body.app-note .button-row .custom-file-upload {
+  background: #7d7d7d;
+  border: 1px solid #9b9090;
+}
+body.app-note .button-row a:hover,
+body.app-note .button-row button:hover,
+body.app-note .button-row .custom-file-upload:hover {
+  background: #b7b7b7;
 }
 body.app-board header,
 body.app-board footer,
 body.app-board .page-header,
-body.app-board .page-footer {
-  background: #2d1241;
-  background: linear-gradient(0deg, #2d1241 0%, #721c8a 100%);
+body.app-board .page-footer,
+body.app-board .modal-module .modal .header {
+  background: #141871;
+  background: linear-gradient(#5e61b1, #141871);
+}
+body.app-board .button {
+  background-color: #141871;
+  border: 1px solid #9b9090;
+}
+body.app-board .button:hover {
+  background-color: #5e61b1;
+}
+body.app-board .priority-btn-group a,
+body.app-board .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-board .priority-btn-group a.selected,
+body.app-board .status-btn-group a.selected {
+  background-color: #141871;
+  color: #fff;
+}
+body.app-board .priority-btn-group a:hover,
+body.app-board .status-btn-group a:hover {
+  background-color: #141871;
+  color: #fff;
+}
+body.app-board button {
+  background-color: #141871;
+  border: 1px solid #9b9090;
+}
+body.app-board button:hover {
+  background: #5e61b1;
+}
+body.app-board button[type="submit"],
+body.app-board .signup-button,
+body.app-board .signin-button,
+body.app-board .reset-button {
+  background: #141871;
+}
+body.app-board button[type="submit"]:hover,
+body.app-board .signup-button:hover,
+body.app-board .signin-button:hover,
+body.app-board .reset-button:hover {
+  background: #5e61b1;
+}
+body.app-board .button-row a,
+body.app-board .button-row button,
+body.app-board .button-row .custom-file-upload {
+  background: #141871;
+  border: 1px solid #9b9090;
+}
+body.app-board .button-row a:hover,
+body.app-board .button-row button:hover,
+body.app-board .button-row .custom-file-upload:hover {
+  background: #5e61b1;
 }
 body.app-closet header,
 body.app-closet footer,
 body.app-closet .page-header,
 body.app-closet .page-footer {
-  background: #d89aa3;
-  background: linear-gradient(0deg, #d89aa3 0%, #7a0814 100%);
+  background: linear-gradient(#b7b7b7, #7d7d7d);
 }
 body.app-psychograph header,
 body.app-psychograph footer,
@@ -506,6 +724,10 @@ body.app-psychograph .page-footer {
   padding-left: 3px;
 }
 .signup,
-.signin {
+.signin,
+.reset {
   font-size: 0.9rem;
+}
+.hide {
+  display: none;
 }

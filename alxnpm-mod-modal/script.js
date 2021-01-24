@@ -88,5 +88,20 @@ export default class Modal extends Module {
         ok.removeEventListener('click', action, false);
     }
 
+    show(action) {
+        super.show();
+        if (typeof (action) === 'function') {
+            action();
+        }
+    }
+
+
+    hide(action) {
+        super.hide();
+        if (typeof (action) === 'function') {
+            action();
+        }
+    }
+
 
 }

@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-note",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Note",
   "main": "script.js",
   "scripts": {
@@ -9,10 +9,10 @@
   "author": "Alex Alegrid",
   "license": "ISC",
   "Dependencies": {
-    "alxnpm-mod-module": "^4.0.0",
-    "alxnpm-mod-api": "^4.0.0",
-    "alxnpm-mod-loader": "^4.0.0",
-    "alxnpm-mod-helper": "^4.0.0"
+    "alxnpm-mod-module": "^5.0.0",
+    "alxnpm-mod-api": "^5.0.0",
+    "alxnpm-mod-loader": "^5.0.0",
+    "alxnpm-mod-helper": "^5.0.0"
   }
 
 }

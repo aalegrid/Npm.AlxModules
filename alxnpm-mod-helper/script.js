@@ -15,7 +15,7 @@ export default class Helper {
   }
 
   static showMessage(element, msg) {
-    console.log(msg)
+    //console.log(msg)
     element.innerHTML = msg;
     element.parentElement.style.display = "block";
     window.scroll(200, 0);
@@ -214,7 +214,8 @@ export default class Helper {
     let image = null,
       _metas = metas.sort((a, b) => a.name.localeCompare(b.name));
     _metas.every(function (meta) {
-      if (meta.binaryData && meta.value.includes("list-image")) {
+      //console.log(meta.id);
+      if (meta.binaryData && Helper.getMetaType(meta.binaryData) === "image" && meta.value.includes("list-image")) {
         image = meta.binaryData;
         return false;
       }
@@ -225,7 +226,7 @@ export default class Helper {
       return image;
     }
     _metas.every(function (meta) {
-      if (meta.binaryData) {
+      if (meta.binaryData && Helper.getMetaType(meta.binaryData) === "image") {
         image = meta.binaryData;
         return false;
       }
@@ -286,6 +287,10 @@ export default class Helper {
   static nodeSort(a, b) { return a.nodes.length > b.nodes.length ? 1 : a.nodes.length === b.nodes.length ? 0 : -1 }
 
   static metaSort(a, b) { return a.metas.length > b.metas.length ? 1 : a.metas.length === b.metas.length ? 0 : -1 }
+
+  //static valueSort(a, b) { return parseInt(a.control) - parseInt(b.control) }
+
+  static valueSort(a, b) { return parseInt(a.control) > parseInt(b.control) ? 1 : parseInt(a.control) === parseInt(b.control) ? 0 : -1 }
 
   static todoSort(a, b) {
 
@@ -391,6 +396,17 @@ export default class Helper {
   static validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+  }
+
+
+  static getMetaType(meta) {
+    const mimeType = meta.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+    return mimeType.split("/")[0];
+  }
+
+  static getMetaMimeType(meta) {
+    const mimeType = meta.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+    return mimeType;
   }
 
 }

@@ -16,6 +16,8 @@ export default class List extends Module {
         this.sortListCol = "title";
         this.sortListColReverse = false;
         this._items = [];
+        this.user = {};
+        this.appInfo = {};
     }
 
     get items() {
@@ -33,16 +35,15 @@ export default class List extends Module {
     render() {
 
         const _this = this;
-
         this.header = data.header.replace(/{appName}/g, this.options.appName);
 
-        const user = Helper.getPrefItem(this.options.appId, "user")
+        this.user = Helper.getPrefItem(this.options.appId, "user") || {};
 
-        if (user) {
+        if (this.user) {
             let li = document.createElement("li");
             li.classList.add("user-info");
             this.header.querySelector("ul").appendChild(li);
-            li.innerHTML = `Hello <i class="fas fa-user-astronaut"></i> ${user.firstName}`
+            li.innerHTML = `Hello <i class="fas fa-user-astronaut"></i> ${this.user.firstName}`
 
         }
 
@@ -97,6 +98,52 @@ export default class List extends Module {
             }
         }
 
+        if (typeof cordova !== 'undefined') {
+            cordova.getAppVersion.getVersionNumber(function (version) {
+                _this.appInfo.version = version;
+            });
+            cordova.getAppVersion.getAppName(function (name) {
+                _this.appInfo.name = name;
+            });
+        }
+
+        this.header.querySelector(".user-info").addEventListener("click", function () {
+
+            _this.options.modalModule.header = "About";
+            _this.options.modalModule.body =
+                _this.options.modalModule.body =
+                `<div style="font-size:.9rem">
+                <p>User: <strong>${_this.user.firstName} ${_this.user.lastName}</strong></p>
+            <p>Account email: <strong>${_this.user.email}</strong></p>
+            <p>App: <strong>${_this.appInfo && _this.appInfo.name ? _this.appInfo.name : "Unavailable"}</strong></p>
+            <p>App Version: <strong>${_this.appInfo && _this.appInfo.version ? _this.appInfo.version : "Unavailable"}</strong></p>
+            <p>Platform: <strong>${window.mobileDevice && window.mobileDevice.platform ? window.mobileDevice.platform : "Unavailable"}</strong></p>
+            <p>Platform Version: <strong>${window.mobileDevice && window.mobileDevice.version ? window.mobileDevice.version : "Unavailable"}</strong></p>
+            <p>Cordova Version: <strong>${window.mobileDevice && window.mobileDevice.cordova ? window.mobileDevice.cordova : "Unavailable"}</strong></p>
+            </div>`;
+
+            _this.options.modalModule.htmlElement.querySelector(".cancel").style.display = "none";
+            _this.options.modalModule.htmlElement.querySelector(".header a").style.display = "none";
+
+            let confirmAction = function () {
+                _this.options.modalModule.hide(function () {
+                    _this.options.modalModule.htmlElement.querySelector(".modal").removeAttribute("style");
+                    _this.options.modalModule.htmlElement.querySelector(".cancel").removeAttribute("style");
+                    _this.options.modalModule.htmlElement.querySelector(".header a").removeAttribute("style");
+                });
+            }
+
+            _this.options.modalModule.setConfirmAction(confirmAction);
+
+            _this.options.modalModule.show(function () {
+                // const bodyHeight = document.body.clientHeight,
+                //     modalHeight = _this.options.modalModule.htmlElement.querySelector(".modal").clientHeight;
+                // _this.options.modalModule.htmlElement.querySelector(".modal").style.top = (bodyHeight - modalHeight) / 2 + "px";
+            });
+
+        }, false);
+
+
         if (this.options.listMode === "list") {
             this.setListSort();
             this.addSortLinks();
@@ -105,10 +152,8 @@ export default class List extends Module {
 
     getItems() {
 
-        const user = Helper.getPrefItem(this.options.appId, "user")
-
-        if(user) {
-            this.options.param.UserId = user.id
+        if (this.user) {
+            this.options.param.UserId = this.user.id
         }
         this.loader.show();
 
@@ -296,7 +341,7 @@ export default class List extends Module {
             item.addEventListener("click", function (e) {
                 const clickedItem = this.closest("a").getAttribute("data-sort");
 
-                
+
                 if (_this.sortListCol === clickedItem) {
                     sortLinks.forEach(function (elem) {
                         if (elem.getAttribute("data-sort") !== clickedItem) {
@@ -305,15 +350,15 @@ export default class List extends Module {
                     })
                     this.classList.toggle("reverse");
                 }
-                
+
                 sortLinks.forEach(elem => elem.classList.remove("selected"))
 
-                if(clickedItem === "todo") {
+                if (clickedItem === "todo") {
                     headerSortLinks.forEach(elem => elem.classList.remove("selected"))
                 } else {
-                    if(_this.footer.querySelector(`a[data-sort='todo']`)) {
+                    if (_this.footer.querySelector(`a[data-sort='todo']`)) {
                         _this.footer.querySelector(`a[data-sort='todo']`).classList.remove("selected")
-                    } 
+                    }
                 }
 
                 this.classList.add("selected")

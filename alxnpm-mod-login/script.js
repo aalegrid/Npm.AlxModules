@@ -32,11 +32,24 @@ export default class Login extends Module {
             e.preventDefault();
         }, false);
 
-        this.htmlElement.querySelector(".signup a").addEventListener("click", function (e) {
+        this.htmlElement.querySelector(".reset-button").addEventListener("click", function (e) {
+            _this.resetPassword();
+            e.preventDefault();
+        }, false);
+
+        this.htmlElement.querySelector(".signup a[data-button='signup']").addEventListener("click", function (e) {
             _this.signup()
         });
 
-        this.htmlElement.querySelector(".signin a").addEventListener("click", function (e) {
+        this.htmlElement.querySelector(".signup a[data-button='reset']").addEventListener("click", function (e) {
+            _this.reset()
+        });
+
+        this.htmlElement.querySelector(".signin .signin-link").addEventListener("click", function (e) {
+            _this.signin()
+        });
+
+        this.htmlElement.querySelector(".reset a").addEventListener("click", function (e) {
             _this.signin()
         });
 
@@ -133,12 +146,12 @@ export default class Login extends Module {
             return;
         }
 
-        if(!Helper.validateEmail(form.email.value)) {
+        if (!Helper.validateEmail(form.email.value)) {
             Helper.showMessage(this.alertBox, "Please use a valid email");
             return;
         }
 
-        if(form.password.value.length < 6) {
+        if (form.password.value.length < 6) {
             Helper.showMessage(this.alertBox, "Password should be at least 6 characters");
             return;
         }
@@ -154,7 +167,8 @@ export default class Login extends Module {
             Password: form.password.value,
             ConfirmPassword: form.confirmpassword.value,
             FirstName: form.firstname.value,
-            LastName: form.lastname.value
+            LastName: form.lastname.value,
+            AppDomain: this.options.appName
         }
 
         this.loader.show();
@@ -162,7 +176,8 @@ export default class Login extends Module {
         // request(url, method, body, isTokenRequest, isBodyStringify, isResponseJson)
         this.api.request("/api/Account/Register", "post", body, false, true, true)
             .then((response) => {
-                
+
+                console.log(response);
                 //console.log(response.modelState);
                 if (response.status >= 400) {
                     this.loader.hide();
@@ -177,7 +192,7 @@ export default class Login extends Module {
                 if (response.modelState) {
                     let msg
                     this.loader.hide();
-                    if(response.modelState["userModel.Password"]) {
+                    if (response.modelState["userModel.Password"]) {
                         msg = response.modelState["userModel.Password"][0]
                     }
                     else {
@@ -188,7 +203,12 @@ export default class Login extends Module {
 
                 // Successful login
                 else {
-                    this.login();
+                    //this.login();
+                    this.loader.hide();
+                    this.signin();
+                    form.email.value = ""
+                    form.password.value = ""
+                    Helper.showMessage(this.alertBox, "A confirmation has been sent to your email address. Please click on the verification link.");
                 }
 
             }).catch((error) => {
@@ -198,26 +218,134 @@ export default class Login extends Module {
 
     }
 
+    resetPassword() {
+        const _this = this,
+            form = this.form
+
+        if (!form.email.value) {
+            Helper.showMessage(this.alertBox, "Please type your email");
+            return;
+        }
+
+        if (!Helper.validateEmail(form.email.value)) {
+            Helper.showMessage(this.alertBox, "Please use a valid email");
+            return;
+        }
+
+        const body = {
+            Username: form.email.value,
+            Email: form.email.value,
+            Password: form.password.value,
+            ConfirmPassword: form.confirmpassword.value,
+            FirstName: form.firstname.value,
+            LastName: form.lastname.value
+        }
+
+        this.loader.show();
+
+        // request(url, method, body, isTokenRequest, isBodyStringify, isResponseJson)
+        this.api.request("/api/Account/ResetPassword", "post", body, false, true, true)
+            .then((response) => {
+
+                console.log(response);
+                //console.log(response.modelState);
+                if (response.status >= 400) {
+                    this.loader.hide();
+                    Helper.showMessage(this.alertBox, `${response.status}: ${response.statusText}`);
+                }
+
+                if (response.error) {
+                    this.loader.hide();
+                    Helper.showMessage(this.alertBox, response.error_description);
+                }
+
+                if (response.modelState) {
+                    let msg
+                    this.loader.hide();
+                    if (response.modelState["userModel.Password"]) {
+                        msg = response.modelState["userModel.Password"][0]
+                    }
+                    else if (response.modelState.error) {
+                        msg = response.modelState.error
+                    }
+                    else {
+                        msg = JSON.stringify(response.modelState).replace(/[^\w@. ]/g, '')
+                    }
+                    Helper.showMessage(this.alertBox, msg);
+                }
+
+                // Successful login
+                else {
+                    //this.login();
+                    this.loader.hide();
+                    Helper.showMessage(this.alertBox, "A password reset link has been sent to your email address. Please click on the link to reset your password.");
+                }
+
+            }).catch((error) => {
+                this.loader.hide();
+                Helper.showMessage(this.alertBox, error);
+            });
+
+    }
+
+    reset() {
+        this.htmlElement.querySelector(".signup-fields").style.display = "none"
+        this.htmlElement.querySelector(".row-password").style.display = "none"
+        this.htmlElement.querySelector(".signup").style.display = "none"
+        this.htmlElement.querySelector(".signin").style.display = "none"
+        this.htmlElement.querySelector(".reset").style.display = "block"
+    }
+
     signup() {
         this.htmlElement.querySelector(".signup-fields").style.display = "block"
+        this.htmlElement.querySelector(".row-password").style.display = "block"
         this.htmlElement.querySelector(".signup").style.display = "none"
         this.htmlElement.querySelector(".signin").style.display = "block"
+        this.htmlElement.querySelector(".reset").style.display = "none"
     }
 
     signin() {
         this.htmlElement.querySelector(".signup-fields").style.display = "none"
+        this.htmlElement.querySelector(".row-password").style.display = "block"
         this.htmlElement.querySelector(".signup").style.display = "block"
         this.htmlElement.querySelector(".signin").style.display = "none"
+        this.htmlElement.querySelector(".reset").style.display = "none"
     }
 
     logout() {
-        document.querySelectorAll('[data-behavior="module"]').forEach(function (module) {
-            module.style.display = "none";
+
+        this.loader.show();
+        this.api.request("/api/Account/Logout", "post", {}, false, false, false)
+        .then((response) => {
+
+            if (response.status >= 400) {
+                this.loader.hide();
+                Helper.showMessage(this.alertBox, `${response.status}: ${response.statusText}`)
+            }
+
+            else if (response.error) {
+                this.loader.hide();
+                Helper.showMessage(this.alertBox, response.error_description)
+            }
+
+            // Success
+            else {
+                // document.querySelectorAll('[data-behavior="module"]').forEach(function (module) {
+                //     module.style.display = "none";
+                // });
+                this.loader.hide();
+                Helper.removeLocalStorageData(`${this.options.appId}_prefs`);
+                sessionStorage.removeItem("token");
+                this.render();
+                this.show();            
+            }
+
+        }).catch((error) => {
+            this.loader.hide();
+            console.log(error);
+            Helper.showMessage(this.alertBox, error.message)
         });
-        Helper.removeLocalStorageData(`${this.options.appId}_prefs`);
-        sessionStorage.removeItem("token");
-        this.render();
-        this.show();
+
     }
 
     start(startup) {

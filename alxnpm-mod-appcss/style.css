@@ -1,8 +1,8 @@
 .button {
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #000;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -14,8 +14,7 @@
   font-weight: 500 !important;
 }
 .button:hover {
-  border-color: #000;
-  color: #000;
+  background-color: #666666;
 }
 .badge {
   color: #fff;
@@ -181,7 +180,7 @@
 }
 .modal-module .modal {
   position: fixed;
-  top: 40%;
+  top: 20%;
   left: 10%;
   background-color: #fefefe;
   margin: auto;
@@ -194,7 +193,8 @@
   animation-duration: 0.6s;
 }
 .modal-module .modal .header {
-  background-color: #666666;
+  background-color: #000;
+  background: linear-gradient(#000, #666666);
   color: #fff;
   padding: 10px;
 }
@@ -230,7 +230,7 @@
   }
   to {
     position: fixed;
-    top: 40%;
+    top: 20%;
     left: 10%;
     opacity: 1;
   }
@@ -244,7 +244,7 @@
   }
   to {
     position: fixed;
-    top: 40%;
+    top: 20%;
     left: 10%;
     opacity: 1;
   }
@@ -396,15 +396,17 @@ h3 {
   flex: 1 1 0px;
   text-align: center;
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #000;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fff;
+  color: #666666;
 }
 .priority-btn-group a i,
 .status-btn-group a i {
@@ -420,11 +422,16 @@ h3 {
   color: #fff;
   border: 0;
 }
+.priority-btn-group a:hover,
+.status-btn-group a:hover {
+  background-color: #666666;
+  color: #fff;
+}
 button {
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #000;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -436,12 +443,12 @@ button i {
   font-weight: 500 !important;
 }
 button:hover {
-  border-color: #000;
-  color: #000;
+  background: #666666;
 }
 button[type="submit"],
 .signup-button,
-.signin-button {
+.signin-button,
+.reset-button {
   background: #000;
   color: #fff;
   float: right;
@@ -449,12 +456,13 @@ button[type="submit"],
 }
 button[type="submit"]:hover,
 .signup-button:hover,
-.signin-button:hover {
+.signin-button:hover,
+.reset-button:hover {
   background: #666666;
-  color: #fff;
 }
 .signup-button,
-.signin-button {
+.signin-button,
+.reset-button {
   width: 100%;
 }
 .button-row {
@@ -463,7 +471,7 @@ button[type="submit"]:hover,
 .button-row a,
 .button-row button,
 .button-row .custom-file-upload {
-  background: #000;
+  background: #666666;
   color: #fff;
   float: none;
   flex-grow: 1;
@@ -482,7 +490,7 @@ button[type="submit"]:hover,
 .button-row a:hover,
 .button-row button:hover,
 .button-row .custom-file-upload:hover {
-  background: #666666;
+  background: #000;
   color: #fff;
   border-color: #000;
 }
@@ -660,7 +668,7 @@ header,
   -webkit-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #9b9090;
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
@@ -671,30 +679,136 @@ footer,
   -webkit-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
-  border-top: 1px solid #000;
+  border-top: 1px solid #9b9090;
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
 body.app-project header,
 body.app-project footer,
 body.app-project .page-header,
-body.app-project .page-footer {
+body.app-project .page-footer,
+body.app-project .modal-module .modal .header {
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
+}
+body.app-project .button {
+  background-color: #0054a6;
+  border: 1px solid #9b9090;
+}
+body.app-project .button:hover {
+  background-color: #00aeef;
+}
+body.app-project .priority-btn-group a,
+body.app-project .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-project .priority-btn-group a.selected,
+body.app-project .status-btn-group a.selected {
+  background-color: #0054a6;
+  color: #fff;
+}
+body.app-project .priority-btn-group a:hover,
+body.app-project .status-btn-group a:hover {
+  background-color: #0054a6;
+  color: #fff;
+}
+body.app-project button {
+  background-color: #0054a6;
+  border: 1px solid #9b9090;
+}
+body.app-project button:hover {
+  background: #00aeef;
+}
+body.app-project button[type="submit"],
+body.app-project .signup-button,
+body.app-project .signin-button,
+body.app-project .reset-button {
+  background: #0054a6;
+}
+body.app-project button[type="submit"]:hover,
+body.app-project .signup-button:hover,
+body.app-project .signin-button:hover,
+body.app-project .reset-button:hover {
+  background: #00aeef;
+}
+body.app-project .button-row a,
+body.app-project .button-row button,
+body.app-project .button-row .custom-file-upload {
+  background: #0054a6;
+  border: 1px solid #9b9090;
+}
+body.app-project .button-row a:hover,
+body.app-project .button-row button:hover,
+body.app-project .button-row .custom-file-upload:hover {
+  background: #00aeef;
+}
+body.app-list header,
+body.app-list footer,
+body.app-list .page-header,
+body.app-list .page-footer,
+body.app-list .modal-module .modal .header {
+  background: #f7941d;
+  background: linear-gradient(#fbaf5d, #f7941d);
+}
+body.app-list .button {
+  background-color: #f7941d;
+  border: 1px solid #9b9090;
+}
+body.app-list .button:hover {
+  background-color: #fbaf5d;
+}
+body.app-list .priority-btn-group a,
+body.app-list .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-list .priority-btn-group a.selected,
+body.app-list .status-btn-group a.selected {
+  background-color: #f7941d;
+  color: #fff;
+}
+body.app-list .priority-btn-group a:hover,
+body.app-list .status-btn-group a:hover {
+  background-color: #f7941d;
+  color: #fff;
+}
+body.app-list button {
+  background-color: #f7941d;
+  border: 1px solid #9b9090;
+}
+body.app-list button:hover {
+  background: #fbaf5d;
+}
+body.app-list button[type="submit"],
+body.app-list .signup-button,
+body.app-list .signin-button,
+body.app-list .reset-button {
+  background: #f7941d;
+}
+body.app-list button[type="submit"]:hover,
+body.app-list .signup-button:hover,
+body.app-list .signin-button:hover,
+body.app-list .reset-button:hover {
+  background: #fbaf5d;
+}
+body.app-list .button-row a,
+body.app-list .button-row button,
+body.app-list .button-row .custom-file-upload {
+  background: #f7941d;
+  border: 1px solid #9b9090;
+}
+body.app-list .button-row a:hover,
+body.app-list .button-row button:hover,
+body.app-list .button-row .custom-file-upload:hover {
+  background: #fbaf5d;
 }
 body.app-note header,
 body.app-note footer,
 body.app-note .page-header,
 body.app-note .page-footer {
   background: #9fbf14;
-  background: linear-gradient(0deg, #9fbf14 49%, #00ff43 100%);
-}
-body.app-list header,
-body.app-list footer,
-body.app-list .page-header,
-body.app-list .page-footer {
-  background: #666;
-  background: linear-gradient(0deg, #000 0%, #666 100%);
+  background: linear-gradient(#b7b7b7, #7d7d7d);
 }
 body.app-board header,
 body.app-board footer,
@@ -707,8 +821,7 @@ body.app-closet header,
 body.app-closet footer,
 body.app-closet .page-header,
 body.app-closet .page-footer {
-  background: #d89aa3;
-  background: linear-gradient(0deg, #d89aa3 0%, #7a0814 100%);
+  background: linear-gradient(#b7b7b7, #7d7d7d);
 }
 body.app-psychograph header,
 body.app-psychograph footer,
@@ -746,8 +859,12 @@ body.app-psychograph .page-footer {
   padding-left: 3px;
 }
 .signup,
-.signin {
+.signin,
+.reset {
   font-size: 0.9rem;
+}
+.hide {
+  display: none;
 }
 .animate {
   -webkit-animation-name: animateleft;
@@ -971,6 +1088,10 @@ div[class$="-list"] table td:first-child,
 div[class$="-list"] table td:nth-child(2) {
   text-align: left;
   padding-left: 0;
+}
+div[class$="-list"] table td:first-child .checked,
+div[class$="-list"] table td:nth-child(2) .checked {
+  text-decoration: line-through;
 }
 div[class$="-list"] table td:nth-child(2) {
   display: flex;
@@ -1456,7 +1577,6 @@ body.nav-open #mainPanel {
 .logged-component .navButton {
   cursor: pointer;
   position: relative;
-  top: -0.3rem;
   padding-right: 0.5rem;
 }
 body.app-closet .logged-component #navPanel ul li.avatar-row {
@@ -1700,14 +1820,6 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a img {
   background-color: #000;
   z-index: 3;
 }
-.ios-fix header,
-.ios-fix .page-header {
-  height: 80px;
-  padding-top: 36px;
-}
-.ios-fix main .app-component {
-  padding-top: 6rem;
-}
 .ios-fix main.closet-mode .app-component {
   padding-top: 5rem;
 }
@@ -1749,14 +1861,6 @@ body.app-closet .logged-component #navPanel ul li.avatar-row a img {
     background-color: #000;
     z-index: 3;
   }
-  header,
-  .page-header {
-    height: 80px;
-    padding-top: 36px;
-  }
-  main .app-component {
-    padding-top: 6rem;
-  }
   main.closet-mode .app-component {
     padding-top: 5rem;
   }
@@ -1797,14 +1901,6 @@ body[data-mode="ios-fix"] .ios-statusbar {
   height: 22px;
   background-color: #000;
   z-index: 3;
-}
-body[data-mode="ios-fix"] header,
-body[data-mode="ios-fix"] .page-header {
-  height: 80px;
-  padding-top: 36px;
-}
-body[data-mode="ios-fix"] main .app-component {
-  padding-top: 6rem;
 }
 body[data-mode="ios-fix"] main.closet-mode .app-component {
   padding-top: 5rem;

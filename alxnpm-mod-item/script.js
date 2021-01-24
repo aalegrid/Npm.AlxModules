@@ -23,6 +23,7 @@ export default class Item extends Module {
         this.options.noteIcon = options.noteIcon || "fal fa-comment-alt";
         this.options.nodeAddIcon = options.nodeAddIcon || "fal fa-file-plus";
         this.options.noteAddIcon = options.noteAddIcon || "fal fa-comment-alt-plus";
+        this.user = Helper.getPrefItem(this.options.appId, "user")
 
     }
 
@@ -209,6 +210,10 @@ export default class Item extends Module {
 
         if (this.options.fields.includes("tag")) {
             item.tag && (form.tag.value = item.tag);
+            this.htmlElement.querySelector(".row-tag .col-25 label .tag-help").addEventListener("click", function () {
+                _this.htmlElement.querySelector(".row-tag .col-25 .tooltip").classList.toggle("hide");
+            }, false);
+
         }
 
         else {
@@ -357,7 +362,11 @@ export default class Item extends Module {
                     notesTbody = this.htmlElement.querySelector(".notes-list table tbody");
 
                 notes.forEach(function (value) {
-                    let icon = value.binaryData ? `<img class="img-icon" src=${value.binaryData} />` : `<i class="${_this.options.noteIcon} note-icon"></i>`;
+                    //let icon = value.binaryData ? `<img class="img-icon" src=${value.binaryData} />` : `<i class="${_this.options.noteIcon} note-icon"></i>`;
+                    
+                    let icon = value.binaryData && Helper.getMetaType(value.binaryData) === "image" ? `<img class="img-icon" src=${value.binaryData} />` : ( value.binaryData && Helper.getMetaType(value.binaryData) === "video" ? `<i class="fal fa-video note-icon"></i>` : `<i class="${_this.options.noteIcon} note-icon"></i>`);
+ 
+                    
                     notesHtml += `<tr data-noteid="${value.id}">
                          <td><a  title='${value.id}' class='note-item' data-noteid="${value.id}">${icon}</a></td>
                          <td><a  title='${value.id}' class='note-item' data-noteid="${value.id}">${value.name ? Helper.trim(35, value.name) : 'Untitled'}</a></td>
@@ -553,7 +562,8 @@ export default class Item extends Module {
         if (this.options.appDomain === "project") {
             nodes = hideDone ? this.sortItems(item.nodes.filter((item) => parseInt(item.status) !== 2)) : this.sortItems(item.nodes)
         } else {
-            nodes = item.nodes;
+            //nodes = item.nodes;
+            nodes = this.sortItems(item.nodes);
         }
         this.htmlElement.querySelector(".nodes-count").innerHTML = nodes ? nodes.length : "0";
         if (!item.nodes || !item.nodes.length) {
@@ -569,8 +579,9 @@ export default class Item extends Module {
                         return;
                     }
                     const statusIcon = parseInt(value.status) === 0 ? "square" : (parseInt(value.status) === 1 ? "clock" : "check-square"),
+                        checkedClass = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") && value.status === 1 ? " checked" : "",
                         priorityIcon = parseInt(value.priority) === 0 ? "info-circle" : (parseInt(value.priority) === 1 ? "smile" : "exclamation-triangle"),
-                        iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}"/>` : `<i class="${value.icon ? value.icon : _this.options.nodeIcon}"></i>`,
+                        iconOrCheckBox = _this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox") ? `<input type="checkbox" name="checkbox_${value.id}" ${checkedClass}/>` : `<i class="${value.icon ? value.icon : _this.options.nodeIcon}"></i>`,
                         colorBox = value.color ? `<span class="colorbox" style="background-color:${value.color}"></span>` : '',
                         notes = value.metas ? (value.metas.length ? `<span style="font-size:10px; color: #666"><i class="fal fa-comment-alt"></i> ${value.metas.length}</span>` : "") : "";
 
@@ -578,7 +589,7 @@ export default class Item extends Module {
                         <td>${iconOrCheckBox}</td>
                         <td>
                             ${colorBox}
-                            <a class='node-item' data-nodeid="${value.id}">${value.title} ${notes}</a>
+                            <a class="node-item${checkedClass}" data-nodeid="${value.id}">${value.title} ${notes}</a>
                         </td>`;
                     if (_this.options.fields.includes("priority")) {
                         nodesHtml += `<td><a class='node-priority-click' data-nodeid="${value.id}" data-nodepriority="${value.priority}"><i class="fal fa-${priorityIcon}"></i></a></td>`;
@@ -716,7 +727,7 @@ export default class Item extends Module {
                 }
             }
 
-
+            // Status
             if (this.options.fields.includes("status")) {
                 let statusClickLinks = this.htmlElement.querySelectorAll(".node-status-click");
                 if (statusClickLinks) {
@@ -729,6 +740,23 @@ export default class Item extends Module {
                             p === 2 ? p = 0 : p++;
                             _item.status = p;
 
+                            _this.saveQuick(_item);
+                        }, false);
+                    });
+                }
+            }
+
+            // Checked
+            if(this.options.appDomain === "list" && item.tag && item.tag.includes("list-checkbox")) {
+                let checkBoxes = this.htmlElement.querySelectorAll("[name^='checkbox_']");
+                if (checkBoxes) {
+                    checkBoxes.forEach(function (value) {
+                        value.addEventListener("click", function () {
+                            let name = this.getAttribute("name"),
+                                id = parseInt(name.split("_")[1]),
+                                flatArray = Helper.flattenArray(_this.options.listModule.items),
+                                _item = Helper.findItemById(flatArray, id);
+                            _item.status = this.checked ? 1 : 0;
                             _this.saveQuick(_item);
                         }, false);
                     });
@@ -808,10 +836,9 @@ export default class Item extends Module {
     }
 
     saveQuick(item) {
-        let savedItem = item,
-            user = Helper.getUser(this.options.appId);
-        if (user) {
-            savedItem.modifiedBy = user.id;
+        let savedItem = item;
+        if (this.user) {
+            savedItem.modifiedBy = this.user.id;
         }
         savedItem.dateModified = new Date();
 
@@ -854,8 +881,8 @@ export default class Item extends Module {
             url = `/api/Items`;
             method = "post";
             isResponseJson = true;
-            if (user) {
-                savedItem.createdBy = user.id;
+            if (this.user) {
+                savedItem.createdBy = this.user.id;
             }
             savedItem.dateCreated = new Date();
             savedItem.metas = [];
@@ -871,8 +898,8 @@ export default class Item extends Module {
             url = `/api/Items/${savedItem.id}`;
             method = "put";
             isResponseJson = false;
-            if (user) {
-                savedItem.modifiedBy = user.id;
+            if (this.user) {
+                savedItem.modifiedBy = this.user.id;
             }
             savedItem.dateModified = new Date();
             if (form.parentId && (parseInt(savedItem.parentId) !== parseInt(form.parentId.value))) {
@@ -993,6 +1020,8 @@ export default class Item extends Module {
 
                 }
 
+                this.render(savedItem);
+
             })
             .catch((error) => {
                 this.loader.hide();
@@ -1004,7 +1033,7 @@ export default class Item extends Module {
     postDeleteItem(id) {
         const user = Helper.getPrefItem(this.options.appId, "user"),
         data = {
-            UserId: user.id,
+            UserId: this.user.id,
             Id: id,
             Item: {}
         }
@@ -1156,8 +1185,8 @@ export default class Item extends Module {
     }
 
     sortItems(items) {
-
-        switch (this.sortNodesCol) {
+        
+            switch (this.sortNodesCol) {
             case "title": items.sort(Helper.titleSort);
                 break;
             case "status": items.sort(Helper.statusSort);
@@ -1166,12 +1195,16 @@ export default class Item extends Module {
                 break;
             case "nodes": items.sort(Helper.nodeSort);
                 break;
+            case "value": items.sort(Helper.valueSort);
+                break;
             default: items.sort(Helper.titleSort);
         }
 
-        if (this.sortListColReverse) {
+        if (this.sortNodesColReverse) {
             items.sort().reverse();
         }
+
+        //console.log(items)
 
         return items;
     };

@@ -1,6 +1,6 @@
 {
   "name": "alxnpm-mod-api",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Fetch call",
   "main": "script.js",
   "scripts": {

@@ -34,7 +34,7 @@ export default class Note extends Module {
 
         }, false);
 
-        this.header.querySelector(".page-title").innerHTML = note.name ? Helper.trim(32, note.name) : "Untitled";
+        this.header.querySelector(".page-title").innerHTML = note.name ? Helper.trim(25, note.name) : "Untitled";
 
         this.header.querySelector(".save a").addEventListener("click", function (e) {
             e.preventDefault();
@@ -66,29 +66,35 @@ export default class Note extends Module {
         if (this.htmlElement.querySelector(".note").classList.contains("view")) {
             this.header.querySelector(".save a").classList.add("disabled")
             this.footer.querySelector(".delete-note a").classList.add("disabled")
+            this.footer.querySelector(".camera a").classList.add("disabled")
+            //this.footer.querySelector(".video a").classList.add("disabled")
 
         }
         else {
             this.header.querySelector(".save a").classList.remove("disabled")
             this.footer.querySelector(".delete-note a").classList.remove("disabled")
+            this.footer.querySelector(".camera a").classList.remove("disabled")
+            //this.footer.querySelector(".video a").classList.remove("disabled")
         }
 
+        let html;
 
         if (note.binaryData) {
-            this.htmlElement.querySelector(".binary-data-view").src = note.binaryData;
-            this.htmlElement.querySelector(".binary-data").src = note.binaryData;
-
+            if (Helper.getMetaType(note.binaryData) === "image") {
+                html = `<img class="img-responsive meta-image" src="${note.binaryData}" />`
+            }
+            else {
+                html = `<video width="100%" controls class="meta-video"><source src="${note.binaryData}" type="${Helper.getMetaMimeType(note.binaryData)}"></video>`
+            }
+            this.htmlElement.querySelector(".meta-media-view").innerHTML = html;
+            this.htmlElement.querySelector(".meta-media-form").innerHTML = html;
             this.htmlElement.querySelector(".clear-binary").style.display = "block";
-            this.htmlElement.querySelector(".image-row").style.display = "block";
+            this.htmlElement.querySelector(".media-row").style.display = "block";
         }
 
         else {
-            this.htmlElement.querySelector(".binary-data-view").src = "//";
-            this.htmlElement.querySelector(".binary-data").src = "//";
-
-            this.htmlElement.querySelector(".binary-data-view").style.display = "none";
             this.htmlElement.querySelector(".clear-binary").style.display = "none";
-            this.htmlElement.querySelector(".image-row").style.display = "none";
+            this.htmlElement.querySelector(".media-row").style.display = "none";
         }
 
         // Events
@@ -98,6 +104,8 @@ export default class Note extends Module {
             this.htmlElement.querySelector(".note").classList.remove("view");
             this.footer.querySelector(".edit a").classList.add("disabled");
             this.header.querySelector(".save a").classList.remove("disabled");
+            this.footer.querySelector(".camera a").classList.remove("disabled");
+            //this.footer.querySelector(".video a").classList.remove("disabled");
         }
 
         form.addEventListener("submit", function (e) {
@@ -119,10 +127,21 @@ export default class Note extends Module {
                 form.querySelector(".filename").innerHTML = file.name;
                 reader.onload = function (e) {
                     var dataUrl = reader.result;
-                    _this.htmlElement.querySelector(".binary-data").src = dataUrl;
-                    _this.htmlElement.querySelector(".binary-data").style.display = "block";
+
+                    //_this.htmlElement.querySelector(".binary-data").src = dataUrl;
+                    //_this.htmlElement.querySelector(".binary-data").style.display = "block";
+
+                    let html;
+
+                    if (Helper.getMetaType(dataUrl) === "image") {
+                        html = `<img class="img-responsive meta-image" src="${dataUrl}" />`
+                    }
+                    else {
+                        html = `<video width="100%" controls class="meta-video"><source src="${dataUrl}" type="${Helper.getMetaMimeType(dataUrl)}"></video>`
+                    }
+                    _this.htmlElement.querySelector(".meta-media-form").innerHTML = html;
                     _this.htmlElement.querySelector(".clear-binary").style.display = "block";
-                    _this.htmlElement.querySelector(".image-row").style.display = "block";
+                    _this.htmlElement.querySelector(".media-row").style.display = "block";
                 }
                 reader.readAsDataURL(file);
             }
@@ -130,8 +149,18 @@ export default class Note extends Module {
 
 
         this.form.querySelector(".clear-binary").addEventListener("click", function (e) {
-            _this.htmlElement.querySelector(".binary-data").src = "//";
-            _this.htmlElement.querySelector(".binary-data").style.display = "none";
+
+            const media = _this.htmlElement.querySelector(".meta-media-form").firstElementChild;
+
+            if (media.tagName === "VIDEO") {
+                media.firstElementChild.src = "//"
+            }
+            else {
+                media.src = "//"
+            }
+
+            _this.htmlElement.querySelector(".media-row").style.display = "none";
+
             form.querySelector(".filename").innerHTML = "";
             this.style.display = "none";
         });
@@ -144,11 +173,15 @@ export default class Note extends Module {
             if (_this.htmlElement.querySelector(".note").classList.contains("view")) {
                 _this.header.querySelector(".save a").classList.add("disabled")
                 _this.footer.querySelector(".delete-note a").classList.add("disabled")
+                _this.footer.querySelector(".camera a").classList.add("disabled")
+                //_this.footer.querySelector(".video a").classList.add("disabled")
             }
 
             else {
                 _this.header.querySelector(".save a").classList.remove("disabled")
                 _this.footer.querySelector(".delete-note a").classList.remove("disabled")
+                _this.footer.querySelector(".camera a").classList.remove("disabled")
+                //_this.footer.querySelector(".video a").classList.remove("disabled")
             }
         });
 
@@ -168,56 +201,116 @@ export default class Note extends Module {
             _this.options.modalModule.show();
         }, false);
 
-        // parent chooser
-        const div = document.createElement("div")
 
-        div.setAttribute("class", "row parentitem-component");
-        div.innerHTML = data.itemChooser
-        form.insertBefore(div, form.children[form.childElementCount - 1]);
+        this.footer.querySelector(".camera a").addEventListener("click", function () {
 
-        const tree = Helper.formatAsTree(this.options.listModule.items, this.options.nodes, "note", note.itemId),
-            ddElem = form.querySelector(".parent-dd"),
-            parentInput = form.querySelector("#item"),
-            parentId = form.querySelector("#itemId"),
-            parentItem = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), note.itemId)
+            if (typeof navigator === 'undefined' || typeof navigator.camera === 'undefined') {
+                return
+            }
 
-        ddElem.innerHTML = tree;
-        parentInput.value = parentItem.title;
-        parentId.value = note.itemId
-        
-        form.querySelector(".input-group").addEventListener("click", function (e) {
-            e.preventDefault();
-            form.querySelector(".parent-dd").classList.toggle("true")
-        }, false)
+            function cameraSuccess(binaryData) {
+                form.name.value = "Camera Image";
+                form.value.value = "file";
+                _this.form.querySelector(".filename").innerHTML = "Camera Image";
+                _this.htmlElement.querySelector(".meta-media-form").innerHTML = `<img class="img-responsive meta-image" src="data:image/jpeg;base64,${binaryData}" />`;
+                _this.htmlElement.querySelector(".clear-binary").style.display = "block";
+                _this.htmlElement.querySelector(".media-row").style.display = "block";
+            }
 
-        const liItems = form.querySelectorAll(".parentid-tree li a")
+            function cameraError(message) {
+                Helper.showMessage(_this.alertBox, `${message}`);
+            }
 
-        if (liItems && liItems.length) {
-            liItems.forEach(function (item) {
-                item.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    const id = parseInt(this.closest("a").getAttribute("data-id"));
-                    parentInput.value = this.innerText
-                    parentId.value = id
-                }, false)
-            })
+            navigator.camera.getPicture(cameraSuccess, cameraError, {
+                quality: 25,
+                destinationType: Camera.DestinationType.DATA_URL,
+                encodingType: Camera.EncodingType.JPEG,
+                mediaType: Camera.MediaType.ALLMEDIA,
+                targetWidth: 600,
+                correctOrientation: true
+            });
+
+        }, false);
+
+
+        /*
+        this.footer.querySelector(".video a").addEventListener("click", function () {
+
+            if (typeof navigator === 'undefined'
+                || typeof navigator.device === 'undefined'
+                || typeof navigator.device.capture === 'undefined') {
+                return
+            }
+
+            function captureSuccess(mediaFiles) {
+                form.name.value = "Video";
+                form.value.value = "file";
+                _this.htmlElement.querySelector(".meta-media-form").innerHTML = `<video width="100%" controls class="meta-video"><source src="${mediaFiles[0].fullPath}"></video>`
+                _this.form.querySelector(".filename").innerHTML = "Video";
+                 _this.htmlElement.querySelector(".clear-binary").style.display = "block";
+                _this.htmlElement.querySelector(".media-row").style.display = "block";
+            }
+
+            function captureError(message) {
+                Helper.showMessage(_this.alertBox, `${message}`);
+            }
+
+            navigator.device.capture.captureVideo(captureSuccess, captureError, {limit:1});
+
+        }, false);
+
+        */
+
+        if (note.id) {
+            // parent chooser
+            const div = document.createElement("div")
+
+            div.setAttribute("class", "row parentitem-component");
+            div.innerHTML = data.itemChooser
+            form.insertBefore(div, form.children[form.childElementCount - 1]);
+
+            const tree = Helper.formatAsTree(this.options.listModule.items, this.options.nodes, "note", note.itemId),
+                ddElem = form.querySelector(".parent-dd"),
+                parentInput = form.querySelector("#item"),
+                parentId = form.querySelector("#itemId"),
+                parentItem = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), note.itemId)
+
+            ddElem.innerHTML = tree;
+            parentInput.value = parentItem.title;
+            parentId.value = note.itemId
+
+            form.querySelector(".input-group").addEventListener("click", function (e) {
+                e.preventDefault();
+                form.querySelector(".parent-dd").classList.toggle("true")
+            }, false)
+
+            const liItems = form.querySelectorAll(".parentid-tree li a")
+
+            if (liItems && liItems.length) {
+                liItems.forEach(function (item) {
+                    item.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const id = parseInt(this.closest("a").getAttribute("data-id"));
+                        parentInput.value = this.innerText
+                        parentId.value = id
+                    }, false)
+                })
+            }
+
+
+            const parentItems = form.querySelectorAll(".parentid-tree li .parent")
+
+            if (parentItems && parentItems.length) {
+                parentItems.forEach(function (item) {
+                    item.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const el = e.target;
+                        el.classList.toggle("open")
+                        el.nextSibling.nextSibling.classList.toggle("open");
+                    }, false)
+                })
+            }
         }
-
-
-        const parentItems = form.querySelectorAll(".parentid-tree li .parent")
-
-        if (parentItems && parentItems.length) {
-            parentItems.forEach(function (item) {
-                item.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    const el = e.target;
-                    el.classList.toggle("open")
-                    el.nextSibling.nextSibling.classList.toggle("open");
-                }, false)
-            })
-        }
-
-
 
 
     }
@@ -275,22 +368,40 @@ export default class Note extends Module {
 
             if ((parseInt(savedNote.itemId) !== parseInt(form.itemId.value))) {
                 itemMoved = true;
-                oldItemId = parseInt(itemId); 
-                savedNote.itemId = parseInt(form.itemId.value);                 
-            }            
+                oldItemId = parseInt(itemId);
+                savedNote.itemId = parseInt(form.itemId.value);
+            }
         }
 
         savedNote.name = form.name.value;
         savedNote.value = form.value.value;
 
-        let img = this.htmlElement.querySelector(".note form .binary-data");
+        const media = this.htmlElement.querySelector(".meta-media-form").firstElementChild;
+        let binaryData = null,
+            src;
 
-        if (img.src === 'http:' || img.src === 'file:///' || img.src.length <= 10) {
-            savedNote.binaryData = null
+        if (media) {
+            if (media.tagName === "VIDEO") {
+                src = media.firstElementChild.src;
+            }
+            else {
+                src = media.src;
+            }
+
+            if (src === 'http:' || src === 'file:///' || src.length <= 10) {
+                savedNote.binaryData = null
+            }
+            else {
+                savedNote.binaryData = src
+            }
+
         }
         else {
-            savedNote.binaryData = img.src
+            savedNote.binaryData = null
         }
+
+        // console.log(savedNote);
+        // return;
 
         this.loader.show();
 
@@ -315,7 +426,7 @@ export default class Note extends Module {
                     Helper.showMessage(this.alertBox, "Note saved");
                     // Update items
 
-                    if(itemMoved) {
+                    if (itemMoved) {
                         // Item is being moved another to new item
                         const oldItem = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), oldItemId);
                         oldItem.metas = Helper.removeById(oldItem.metas, "id", savedNote.id);
@@ -329,7 +440,7 @@ export default class Note extends Module {
 
                 if (item.parentId) {
                     const parent = Helper.findItemById(Helper.flattenArray(this.options.listModule.items), item.parentId),
-                    childIndex = parent.nodes.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
+                        childIndex = parent.nodes.findIndex((obj) => parseInt(obj.id) === parseInt(item.id))
                     parent.nodes[childIndex] = item;
                     const items = Helper.updateTree(this.options.listModule.items, item.parentId, parent);
                     this.options.listModule.items = items;
@@ -349,21 +460,5 @@ export default class Note extends Module {
             });
     }
 
-    cameraSuccess(imageData) {
-        let _this = this;
-        // var image = document.getElementById('myImage');
-        // image.src = "data:image/jpeg;base64," + imageData;
-        this.form.querySelector(".filename").innerHTML = "CameraImage";
-        // const binaryData = `${_this.options.appId}_binarydata`;
-        //   Helper.setLocalStorageData(binaryData, dataUrl);
-        _this.htmlElement.querySelector(".binary-data").src = imageData;
-        _this.htmlElement.querySelector(".clear-binary").style.display = "block";
-        _this.htmlElement.querySelector(".image-row").style.display = "block";
-
-    }
-
-    cameraError(message) {
-        Helper.showMessage(this.alertBox, `${message}`);
-    }
 
 }

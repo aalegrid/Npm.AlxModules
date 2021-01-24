@@ -8,14 +8,6 @@
   background-color: #000;
   z-index: 3;
 }
-.ios-fix header,
-.ios-fix .page-header {
-  height: 80px;
-  padding-top: 36px;
-}
-.ios-fix main .app-component {
-  padding-top: 6rem;
-}
 .ios-fix main.closet-mode .app-component {
   padding-top: 5rem;
 }
@@ -57,14 +49,6 @@
     background-color: #000;
     z-index: 3;
   }
-  header,
-  .page-header {
-    height: 80px;
-    padding-top: 36px;
-  }
-  main .app-component {
-    padding-top: 6rem;
-  }
   main.closet-mode .app-component {
     padding-top: 5rem;
   }
@@ -105,14 +89,6 @@ body[data-mode="ios-fix"] .ios-statusbar {
   height: 22px;
   background-color: #000;
   z-index: 3;
-}
-body[data-mode="ios-fix"] header,
-body[data-mode="ios-fix"] .page-header {
-  height: 80px;
-  padding-top: 36px;
-}
-body[data-mode="ios-fix"] main .app-component {
-  padding-top: 6rem;
 }
 body[data-mode="ios-fix"] main.closet-mode .app-component {
   padding-top: 5rem;

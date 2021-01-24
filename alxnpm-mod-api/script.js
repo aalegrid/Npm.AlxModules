@@ -51,9 +51,10 @@ export default class API {
         }
 
         const response = await fetch(`${this.baseUrl}${url}`, options);
-        
         // parses JSON response into native JavaScript objects
         return isResponseJson ? response.json() : response;
+
+        
 
     }
 

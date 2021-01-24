@@ -1,21 +1,20 @@
 .button {
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #000;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .button i {
   font-weight: 500 !important;
 }
 .button:hover {
-  border-color: #000;
-  color: #000;
+  background-color: #666666;
 }
 .badge {
   color: #fff;
@@ -66,7 +65,7 @@
 }
 .modal-module .modal {
   position: fixed;
-  top: 40%;
+  top: 20%;
   left: 10%;
   background-color: #fefefe;
   margin: auto;
@@ -79,7 +78,8 @@
   animation-duration: 0.6s;
 }
 .modal-module .modal .header {
-  background-color: #666666;
+  background-color: #000;
+  background: linear-gradient(#000, #666666);
   color: #fff;
   padding: 10px;
 }
@@ -115,7 +115,7 @@
   }
   to {
     position: fixed;
-    top: 40%;
+    top: 20%;
     left: 10%;
     opacity: 1;
   }
@@ -129,7 +129,7 @@
   }
   to {
     position: fixed;
-    top: 40%;
+    top: 20%;
     left: 10%;
     opacity: 1;
   }
