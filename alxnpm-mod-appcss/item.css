@@ -1,6 +1,6 @@
 .button {
   border-radius: 2px;
-  background-color: #000;
+  background-color: #0054a6;
   border: 1px solid #9b9090;
   color: #fff;
   padding: 0.75rem;
@@ -10,11 +10,14 @@
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.button.small {
+  padding: 0.35rem;
+}
 .button i {
   font-weight: 500 !important;
 }
 .button:hover {
-  background-color: #666666;
+  background-color: #00aeef;
 }
 .badge {
   color: #fff;
@@ -86,7 +89,7 @@ div[class$="-list"] table {
   border-top: 1px dotted #7d7d7d;
   border-bottom: 1px dotted #7d7d7d;
   font-size: 0.8rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 div[class$="-list"] table th {
   border-right: none;
@@ -153,11 +156,17 @@ div[class$="-list"] table tr.list-add td:nth-child(4) {
 div[class$="-list"] table.hide {
   display: none;
 }
+div[class$="-list"] .list-buttons:not(:empty) {
+  margin-bottom: 0.5rem;
+}
 div[class$="-list"].notes-list td:nth-child(2) {
   display: table-cell;
 }
 div[class$="-list"].notes-list td:last-child {
   text-align: right;
+}
+div[class$="-list"].notes-list .size {
+  white-space: nowrap;
 }
 .item form .row .editor-preview {
   display: none;

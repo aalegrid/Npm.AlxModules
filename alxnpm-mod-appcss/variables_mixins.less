@@ -17,6 +17,15 @@
 @violet-light: #5e61b1;
 @violet-dark: #141871;
 
+@red-light: #ea7376;
+@red-dark: #9e0b0f;
+
+@green-light: #63df9d;
+@green-dark: #007236;
+
+@cyan-light: #7ac5f6;
+@cyan-dark: #016f98;
+
 //@font-default: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-default: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-secondary: "Roboto", "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -27,7 +36,7 @@
 
 .button {
   border-radius: 2px;
-  background-color: @color-black;
+  background-color: @blue-dark;
   border: 1px solid @color-gray;
   color: @color-white;
   padding: 0.75rem;
@@ -37,13 +46,17 @@
   text-decoration: none;
   font-family: @font-default;
 
+  &.small {
+    padding: 0.35rem;
+  }
+
   i {
     font-weight: 500 !important;
   }
 }
 
 .button:hover {
-  background-color: @color-hue;
+  background-color: @blue-light;
   //color: @color-hue;
 }
 

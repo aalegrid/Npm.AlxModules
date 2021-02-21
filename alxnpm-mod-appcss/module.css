@@ -6,8 +6,6 @@
 }
 .slide-component {
   position: relative;
-}
-.slide-component {
   -webkit-animation-name: animateleft;
   -webkit-animation-duration: 0.4s;
   animation-name: animateleft;

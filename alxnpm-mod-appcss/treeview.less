@@ -37,6 +37,10 @@
 
       span {
         margin-right: 1.5rem;
+
+        &.checked {
+          text-decoration: line-through;
+        }
         &.parent {
           cursor: pointer;
           user-select: none; /* Prevent text selection */
@@ -175,7 +179,7 @@
   }
   
   .parent-dd {
-    margin: 1rem 0;
+    margin: 0 0 1rem 0;
     display: none;
     &.false {
       display: none;

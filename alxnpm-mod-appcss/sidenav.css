@@ -1,8 +1,8 @@
 .button {
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #000;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -14,8 +14,7 @@
   font-weight: 500 !important;
 }
 .button:hover {
-  border-color: #000;
-  color: #000;
+  background-color: #666666;
 }
 .badge {
   color: #fff;

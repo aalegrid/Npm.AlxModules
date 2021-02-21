@@ -1,5 +1,82 @@
 @import "variables_mixins.less";
 
+.slidefromtop {
+  -webkit-animation-name: slidefromtop;
+  -webkit-animation-duration: 0.6s;
+  animation-name: slidefromtop;
+  animation-duration: 0.6s;
+  transition-timing-function: linear;
+}
+
+@-webkit-keyframes slidefromtop {
+  from {
+    // position: fixed;
+    top: -300px;
+    left: 0;
+    opacity: 0;
+  }
+  to {
+    //position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+  }
+}
+
+
+
+@keyframes slidefromtop {
+  from {
+    //position: fixed;
+    left: 0;
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    //position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.slidetotop {
+  -webkit-animation-name: slidetotop;
+  -webkit-animation-duration: 0.6s;
+  animation-name: slidetotop;
+  animation-duration: 0.6s;
+  transition-timing-function: linear;
+}
+
+@-webkit-keyframes slidetotop {
+  from {
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  to {
+    //position: fixed;
+    top: -300px;
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slidetotop {
+  from {
+    //position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    //position: fixed;
+    left: 0;
+    top: -300px;
+    opacity: 1;
+  }
+}
+
 body {
   font-family: @font-default;
 }
@@ -125,19 +202,19 @@ h3 {
     text-align: center;
     .button();
     background-color: @color-white;
-    color: @color-hue;
+    color: @color-black;
 
     &:nth-child(2) {
       margin: 0 0.3rem;
     }
 
     &.selected {
-      background-color: @color-black;
+      background-color: @blue-dark;
       color: @color-white;
       border: 0;
     }
     &:hover {
-      background-color: @color-hue;
+      background-color: @blue-dark;
       color: @color-white;
     }
   }
@@ -146,7 +223,7 @@ h3 {
 button {
   .button();
   &:hover {
-    background: @color-hue;
+    background: @blue-light;
     //color: @color-hue;
   }
 }
@@ -155,12 +232,12 @@ button[type="submit"],
 .signup-button,
 .signin-button,
 .reset-button {
-  background: @color-black;
+  background: @blue-dark;
   color: @color-white;
   float: right;
   border: 0;
   &:hover {
-    background: @color-hue;
+    background: @blue-light;
     // color: @color-hue;
   }
 }
@@ -177,7 +254,7 @@ button[type="submit"],
   a,
   button,
   .custom-file-upload {
-    background: @color-hue;
+    background: @blue-dark;
     color: @color-white;
     float: none;
     flex-grow: 1;
@@ -187,14 +264,14 @@ button[type="submit"],
     font-size: 0.85rem;
     text-align: center;
     border-radius: 2px;
+    border: 1px solid @color-gray;
 
     &:first-child {
       margin-right: 1rem;
     }
     &:hover {
-      background: @dark-hue;
+      background: @blue-light;
       color: @color-white;
-      border-color: @color-black;
     }
   }
 
@@ -215,10 +292,10 @@ button[type="submit"],
 }
 
 .disabled {
-  color: #666;
+  color: #ccc;
   pointer-events: none;
   a {
-    color: #666;
+    color: #ccc;
     pointer-events: none;
   }
 }
@@ -229,16 +306,30 @@ button[type="submit"],
   background-color: beige;
   margin-bottom: 1rem;
   position: relative;
-
-  a {
+  -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.30);
+  -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.30);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.30);
+  
+  .close {
     float: right;
     margin-top: -0.55rem;
     color: @color-black;
   }
 
+  .add-node-link {
+    text-decoration: underline;
+    padding-left: .35rem;
+  }
+
+  .resend-confirmation {
+    text-decoration: underline;
+  }
+
   p {
     font-size: 0.85rem;
     font-weight: 500;
+    padding-top: .5rem;
+    padding-bottom: .25rem;
   }
 
   .arrow-down {
@@ -253,6 +344,10 @@ button[type="submit"],
     background-color: beige;
   }
 }
+
+// .alert-box {
+//   .slidefromtop()
+// }
 
 .floating-save-menu {
   position: fixed;
@@ -291,6 +386,12 @@ button[type="submit"],
         font-weight: 500;
       }
     }
+  }
+
+  .toggle-password {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
   }
 }
 
@@ -374,8 +475,8 @@ header,
   -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.39);
   border-bottom: 1px solid @color-gray;
-  background: #0054a6;
-  background: linear-gradient(#00aeef, #0054a6);
+  background: @blue-dark;
+  background: linear-gradient(@blue-light, @blue-dark);
 }
 
 footer,
@@ -386,8 +487,13 @@ footer,
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   border-top: 1px solid @color-gray;
-  background: #0054a6;
-  background: linear-gradient(#00aeef, #0054a6);
+  background: @blue-dark;
+  background: linear-gradient(@blue-light, @blue-dark);
+}
+
+.modal-module .modal .header {
+  background: @blue-dark;
+  background: linear-gradient(@blue-light, @blue-dark);
 }
 
 body {
@@ -664,24 +770,207 @@ body {
     }
   }
 
+  // Closet
   &.app-closet {
     header,
     footer,
     .page-header,
-    .page-footer { background: linear-gradient(#b7b7b7,#7d7d7d); }
+    .page-footer,
+    .modal-module .modal .header {
+      background: @red-dark;
+      background: linear-gradient(@red-light, @red-dark);
+    }
+
+    .button {
+      background-color: @red-dark;
+      border: 1px solid @color-gray;
+    }
+    
+    .button:hover {
+      background-color: @red-light;
+    }
+    
+    .priority-btn-group,
+    .status-btn-group {
+      a {
+        background-color: @color-white;
+        color: @color-black;
+    
+        &.selected {
+          background-color: @red-dark;
+          color: @color-white;
+        }
+        &:hover {
+          background-color: @red-dark;
+          color: @color-white;
+        }
+      }
+    }
+    
+    button {
+      .button();
+      &:hover {
+        background: @red-light;
+      }
+    }
+    
+    button[type="submit"],
+    .signup-button,
+    .signin-button,
+    .reset-button {
+      background: @red-dark;
+      &:hover {
+        background: @red-light;
+      }
+    }
+    
+    .button-row {
+      a,
+      button,
+      .custom-file-upload {
+        background: @red-dark;
+        border: 1px solid @color-gray;
+        &:hover {
+          background: @red-light;
+        }
+      }
+    
+    }
   }
 
-  &.app-psychograph {
+  // Money
+  &.app-money {
     header,
     footer,
     .page-header,
-    .page-footer {
-      background: rgb(79, 103, 234);
-      background: linear-gradient(
-        0deg,
-        rgba(79, 103, 234, 1) 0%,
-        rgba(8, 35, 89, 1) 100%
-      );
+    .page-footer,
+    .modal-module .modal .header {
+      background: @green-dark;
+      background: linear-gradient(@green-light, @green-dark);
+    }
+
+    .button {
+      background-color: @green-dark;
+      border: 1px solid @color-gray;
+    }
+    
+    .button:hover {
+      background-color: @green-light;
+    }
+    
+    .priority-btn-group,
+    .status-btn-group {
+      a {
+        background-color: @color-white;
+        color: @color-black;
+    
+        &.selected {
+          background-color: @green-dark;
+          color: @color-white;
+        }
+        &:hover {
+          background-color: @green-dark;
+          color: @color-white;
+        }
+      }
+    }
+    
+    button {
+      .button();
+      &:hover {
+        background: @green-light;
+      }
+    }
+    
+    button[type="submit"],
+    .signup-button,
+    .signin-button,
+    .reset-button {
+      background: @green-dark;
+      &:hover {
+        background: @green-light;
+      }
+    }
+    
+    .button-row {
+      a,
+      button,
+      .custom-file-upload {
+        background: @green-dark;
+        border: 1px solid @color-gray;
+        &:hover {
+          background: @green-light;
+        }
+      }
+    
+    }
+  }
+
+  //Psygraph
+  &.app-pychograph {
+    header,
+    footer,
+    .page-header,
+    .page-footer,
+    .modal-module .modal .header {
+      background: @cyan-dark;
+      background: linear-gradient(@cyan-light, @cyan-dark);
+    }
+
+    .button {
+      background-color: @cyan-dark;
+      border: 1px solid @color-gray;
+    }
+    
+    .button:hover {
+      background-color: @cyan-light;
+    }
+    
+    .priority-btn-group,
+    .status-btn-group {
+      a {
+        background-color: @color-white;
+        color: @color-black;
+    
+        &.selected {
+          background-color: @cyan-dark;
+          color: @color-white;
+        }
+        &:hover {
+          background-color: @cyan-dark;
+          color: @color-white;
+        }
+      }
+    }
+    
+    button {
+      .button();
+      &:hover {
+        background: @cyan-light;
+      }
+    }
+    
+    button[type="submit"],
+    .signup-button,
+    .signin-button,
+    .reset-button {
+      background: @cyan-dark;
+      &:hover {
+        background: @cyan-light;
+      }
+    }
+    
+    .button-row {
+      a,
+      button,
+      .custom-file-upload {
+        background: @cyan-dark;
+        border: 1px solid @color-gray;
+        &:hover {
+          background: @cyan-light;
+        }
+      }
+    
     }
   }
 }
@@ -736,4 +1025,65 @@ body {
 
 .hide {
   display: none;
+}
+
+
+.separator-right {
+  border-right: 1px solid #ccc;
+  padding-right: 3px;
+}
+
+.separator-left {
+  border-left: 1px solid #ccc;
+  padding-left: 3px;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.project-summary {
+  .header-info {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .column {
+      &.collapse {
+        i {
+          font-size: 0.85rem;
+          font-weight: 400;
+          padding-right: 0.25rem;
+        }
+      }
+      &.info {
+        .text {
+          font-size: .8rem;
+        }
+        
+      }
+    }
+
+
+  }
+  
+
+  .count {
+    .badge();
+  }
+}
+
+
+
+.priority-btn-group,
+.status-btn-group {
+
+  a:not(.selected) {
+
+    &:hover {
+      background-color: @color-white !important;
+      color: @color-black !important;
+    }
+  }
 }

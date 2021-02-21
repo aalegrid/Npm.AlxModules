@@ -1,6 +1,6 @@
 .button {
   border-radius: 2px;
-  background-color: #000;
+  background-color: #0054a6;
   border: 1px solid #9b9090;
   color: #fff;
   padding: 0.75rem;
@@ -10,11 +10,14 @@
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.button.small {
+  padding: 0.35rem;
+}
 .button i {
   font-weight: 500 !important;
 }
 .button:hover {
-  background-color: #666666;
+  background-color: #00aeef;
 }
 .badge {
   color: #fff;

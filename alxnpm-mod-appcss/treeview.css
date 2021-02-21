@@ -1,8 +1,8 @@
 .button {
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #0054a6;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -14,8 +14,7 @@
   font-weight: 500 !important;
 }
 .button:hover {
-  border-color: #000;
-  color: #000;
+  background-color: #00aeef;
 }
 .badge {
   color: #fff;
@@ -87,6 +86,9 @@
   margin-right: 1.5rem;
   /* Create the caret/arrow with a unicode, and style it */
   /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+}
+.treeview ul li span.checked {
+  text-decoration: line-through;
 }
 .treeview ul li span.parent {
   cursor: pointer;
@@ -196,7 +198,7 @@
   padding-left: 0;
 }
 .parentitem-component .parent-dd {
-  margin: 1rem 0;
+  margin: 0 0 1rem 0;
   display: none;
 }
 .parentitem-component .parent-dd.false {

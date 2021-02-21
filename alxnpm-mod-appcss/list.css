@@ -1,8 +1,8 @@
 .button {
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #0054a6;
   border: 1px solid #9b9090;
-  color: #9b9090;
+  color: #fff;
   padding: 0.75rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -14,8 +14,7 @@
   font-weight: 500 !important;
 }
 .button:hover {
-  border-color: #000;
-  color: #000;
+  background-color: #00aeef;
 }
 .badge {
   color: #fff;
@@ -120,6 +119,12 @@ div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data i {
 div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data span {
   display: block;
 }
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .comments {
+  display: inline;
+  border-left: 1px solid #9b9090;
+  margin-left: 0.25rem;
+  padding-left: 0.25rem;
+}
 div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-count {
   color: #000;
   border-left: 1px solid #9b9090;
@@ -128,6 +133,7 @@ div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-
 }
 div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-count.bold {
   font-weight: 700;
+  color: red;
 }
 div.list table tr td:last-child {
   border-right: none;

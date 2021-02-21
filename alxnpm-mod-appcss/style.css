@@ -1,6 +1,6 @@
 .button {
   border-radius: 2px;
-  background-color: #000;
+  background-color: #0054a6;
   border: 1px solid #9b9090;
   color: #fff;
   padding: 0.75rem;
@@ -10,11 +10,14 @@
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.button.small {
+  padding: 0.35rem;
+}
 .button i {
   font-weight: 500 !important;
 }
 .button:hover {
-  background-color: #666666;
+  background-color: #00aeef;
 }
 .badge {
   color: #fff;
@@ -284,6 +287,68 @@ h6 {
   font-weight: 500;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.slidefromtop {
+  -webkit-animation-name: slidefromtop;
+  -webkit-animation-duration: 0.6s;
+  animation-name: slidefromtop;
+  animation-duration: 0.6s;
+  transition-timing-function: linear;
+}
+@-webkit-keyframes slidefromtop {
+  from {
+    top: -300px;
+    left: 0;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    left: 0;
+    opacity: 1;
+  }
+}
+@keyframes slidefromtop {
+  from {
+    left: 0;
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    top: 0;
+    opacity: 1;
+  }
+}
+.slidetotop {
+  -webkit-animation-name: slidetotop;
+  -webkit-animation-duration: 0.6s;
+  animation-name: slidetotop;
+  animation-duration: 0.6s;
+  transition-timing-function: linear;
+}
+@-webkit-keyframes slidetotop {
+  from {
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  to {
+    top: -300px;
+    left: 0;
+    opacity: 1;
+  }
+}
+@keyframes slidetotop {
+  from {
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    top: -300px;
+    opacity: 1;
+  }
+}
 body {
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -396,7 +461,7 @@ h3 {
   flex: 1 1 0px;
   text-align: center;
   border-radius: 2px;
-  background-color: #000;
+  background-color: #0054a6;
   border: 1px solid #9b9090;
   color: #fff;
   padding: 0.75rem;
@@ -406,7 +471,11 @@ h3 {
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #fff;
-  color: #666666;
+  color: #000;
+}
+.priority-btn-group a.small,
+.status-btn-group a.small {
+  padding: 0.35rem;
 }
 .priority-btn-group a i,
 .status-btn-group a i {
@@ -418,18 +487,18 @@ h3 {
 }
 .priority-btn-group a.selected,
 .status-btn-group a.selected {
-  background-color: #000;
+  background-color: #0054a6;
   color: #fff;
   border: 0;
 }
 .priority-btn-group a:hover,
 .status-btn-group a:hover {
-  background-color: #666666;
+  background-color: #0054a6;
   color: #fff;
 }
 button {
   border-radius: 2px;
-  background-color: #000;
+  background-color: #0054a6;
   border: 1px solid #9b9090;
   color: #fff;
   padding: 0.75rem;
@@ -439,17 +508,20 @@ button {
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+button.small {
+  padding: 0.35rem;
+}
 button i {
   font-weight: 500 !important;
 }
 button:hover {
-  background: #666666;
+  background: #00aeef;
 }
 button[type="submit"],
 .signup-button,
 .signin-button,
 .reset-button {
-  background: #000;
+  background: #0054a6;
   color: #fff;
   float: right;
   border: 0;
@@ -458,7 +530,7 @@ button[type="submit"]:hover,
 .signup-button:hover,
 .signin-button:hover,
 .reset-button:hover {
-  background: #666666;
+  background: #00aeef;
 }
 .signup-button,
 .signin-button,
@@ -471,7 +543,7 @@ button[type="submit"]:hover,
 .button-row a,
 .button-row button,
 .button-row .custom-file-upload {
-  background: #666666;
+  background: #0054a6;
   color: #fff;
   float: none;
   flex-grow: 1;
@@ -481,6 +553,7 @@ button[type="submit"]:hover,
   font-size: 0.85rem;
   text-align: center;
   border-radius: 2px;
+  border: 1px solid #9b9090;
 }
 .button-row a:first-child,
 .button-row button:first-child,
@@ -490,9 +563,8 @@ button[type="submit"]:hover,
 .button-row a:hover,
 .button-row button:hover,
 .button-row .custom-file-upload:hover {
-  background: #000;
+  background: #00aeef;
   color: #fff;
-  border-color: #000;
 }
 .button-row .custom-file-upload {
   margin-right: 1rem;
@@ -506,11 +578,11 @@ button[type="submit"]:hover,
   display: block;
 }
 .disabled {
-  color: #666;
+  color: #ccc;
   pointer-events: none;
 }
 .disabled a {
-  color: #666;
+  color: #ccc;
   pointer-events: none;
 }
 .alert-box {
@@ -519,15 +591,27 @@ button[type="submit"]:hover,
   background-color: beige;
   margin-bottom: 1rem;
   position: relative;
+  -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
 }
-.alert-box a {
+.alert-box .close {
   float: right;
   margin-top: -0.55rem;
   color: #000;
 }
+.alert-box .add-node-link {
+  text-decoration: underline;
+  padding-left: 0.35rem;
+}
+.alert-box .resend-confirmation {
+  text-decoration: underline;
+}
 .alert-box p {
   font-size: 0.85rem;
   font-weight: 500;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
 }
 .alert-box .arrow-down {
   border: solid #9b9090;
@@ -570,6 +654,11 @@ button[type="submit"]:hover,
 }
 .login .user-info a i {
   font-weight: 500;
+}
+.login .toggle-password {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 header,
 footer,
@@ -680,6 +769,10 @@ footer,
   -moz-box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.39);
   border-top: 1px solid #9b9090;
+  background: #0054a6;
+  background: linear-gradient(#00aeef, #0054a6);
+}
+.modal-module .modal .header {
   background: #0054a6;
   background: linear-gradient(#00aeef, #0054a6);
 }
@@ -806,29 +899,302 @@ body.app-list .button-row .custom-file-upload:hover {
 body.app-note header,
 body.app-note footer,
 body.app-note .page-header,
-body.app-note .page-footer {
-  background: #9fbf14;
+body.app-note .page-footer,
+body.app-note .modal-module .modal .header {
+  background: #7d7d7d;
   background: linear-gradient(#b7b7b7, #7d7d7d);
+}
+body.app-note .button {
+  background-color: #7d7d7d;
+  border: 1px solid #9b9090;
+}
+body.app-note .button:hover {
+  background-color: #b7b7b7;
+}
+body.app-note .priority-btn-group a,
+body.app-note .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-note .priority-btn-group a.selected,
+body.app-note .status-btn-group a.selected {
+  background-color: #7d7d7d;
+  color: #fff;
+}
+body.app-note .priority-btn-group a:hover,
+body.app-note .status-btn-group a:hover {
+  background-color: #7d7d7d;
+  color: #fff;
+}
+body.app-note button {
+  background-color: #7d7d7d;
+  border: 1px solid #9b9090;
+}
+body.app-note button:hover {
+  background: #b7b7b7;
+}
+body.app-note button[type="submit"],
+body.app-note .signup-button,
+body.app-note .signin-button,
+body.app-note .reset-button {
+  background: #7d7d7d;
+}
+body.app-note button[type="submit"]:hover,
+body.app-note .signup-button:hover,
+body.app-note .signin-button:hover,
+body.app-note .reset-button:hover {
+  background: #b7b7b7;
+}
+body.app-note .button-row a,
+body.app-note .button-row button,
+body.app-note .button-row .custom-file-upload {
+  background: #7d7d7d;
+  border: 1px solid #9b9090;
+}
+body.app-note .button-row a:hover,
+body.app-note .button-row button:hover,
+body.app-note .button-row .custom-file-upload:hover {
+  background: #b7b7b7;
 }
 body.app-board header,
 body.app-board footer,
 body.app-board .page-header,
-body.app-board .page-footer {
-  background: #2d1241;
-  background: linear-gradient(0deg, #2d1241 0%, #721c8a 100%);
+body.app-board .page-footer,
+body.app-board .modal-module .modal .header {
+  background: #141871;
+  background: linear-gradient(#5e61b1, #141871);
+}
+body.app-board .button {
+  background-color: #141871;
+  border: 1px solid #9b9090;
+}
+body.app-board .button:hover {
+  background-color: #5e61b1;
+}
+body.app-board .priority-btn-group a,
+body.app-board .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-board .priority-btn-group a.selected,
+body.app-board .status-btn-group a.selected {
+  background-color: #141871;
+  color: #fff;
+}
+body.app-board .priority-btn-group a:hover,
+body.app-board .status-btn-group a:hover {
+  background-color: #141871;
+  color: #fff;
+}
+body.app-board button {
+  background-color: #141871;
+  border: 1px solid #9b9090;
+}
+body.app-board button:hover {
+  background: #5e61b1;
+}
+body.app-board button[type="submit"],
+body.app-board .signup-button,
+body.app-board .signin-button,
+body.app-board .reset-button {
+  background: #141871;
+}
+body.app-board button[type="submit"]:hover,
+body.app-board .signup-button:hover,
+body.app-board .signin-button:hover,
+body.app-board .reset-button:hover {
+  background: #5e61b1;
+}
+body.app-board .button-row a,
+body.app-board .button-row button,
+body.app-board .button-row .custom-file-upload {
+  background: #141871;
+  border: 1px solid #9b9090;
+}
+body.app-board .button-row a:hover,
+body.app-board .button-row button:hover,
+body.app-board .button-row .custom-file-upload:hover {
+  background: #5e61b1;
 }
 body.app-closet header,
 body.app-closet footer,
 body.app-closet .page-header,
-body.app-closet .page-footer {
-  background: linear-gradient(#b7b7b7, #7d7d7d);
+body.app-closet .page-footer,
+body.app-closet .modal-module .modal .header {
+  background: #9e0b0f;
+  background: linear-gradient(#ea7376, #9e0b0f);
 }
-body.app-psychograph header,
-body.app-psychograph footer,
-body.app-psychograph .page-header,
-body.app-psychograph .page-footer {
-  background: #4f67ea;
-  background: linear-gradient(0deg, #4f67ea 0%, #082359 100%);
+body.app-closet .button {
+  background-color: #9e0b0f;
+  border: 1px solid #9b9090;
+}
+body.app-closet .button:hover {
+  background-color: #ea7376;
+}
+body.app-closet .priority-btn-group a,
+body.app-closet .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-closet .priority-btn-group a.selected,
+body.app-closet .status-btn-group a.selected {
+  background-color: #9e0b0f;
+  color: #fff;
+}
+body.app-closet .priority-btn-group a:hover,
+body.app-closet .status-btn-group a:hover {
+  background-color: #9e0b0f;
+  color: #fff;
+}
+body.app-closet button {
+  background-color: #9e0b0f;
+  border: 1px solid #9b9090;
+}
+body.app-closet button:hover {
+  background: #ea7376;
+}
+body.app-closet button[type="submit"],
+body.app-closet .signup-button,
+body.app-closet .signin-button,
+body.app-closet .reset-button {
+  background: #9e0b0f;
+}
+body.app-closet button[type="submit"]:hover,
+body.app-closet .signup-button:hover,
+body.app-closet .signin-button:hover,
+body.app-closet .reset-button:hover {
+  background: #ea7376;
+}
+body.app-closet .button-row a,
+body.app-closet .button-row button,
+body.app-closet .button-row .custom-file-upload {
+  background: #9e0b0f;
+  border: 1px solid #9b9090;
+}
+body.app-closet .button-row a:hover,
+body.app-closet .button-row button:hover,
+body.app-closet .button-row .custom-file-upload:hover {
+  background: #ea7376;
+}
+body.app-money header,
+body.app-money footer,
+body.app-money .page-header,
+body.app-money .page-footer,
+body.app-money .modal-module .modal .header {
+  background: #007236;
+  background: linear-gradient(#63df9d, #007236);
+}
+body.app-money .button {
+  background-color: #007236;
+  border: 1px solid #9b9090;
+}
+body.app-money .button:hover {
+  background-color: #63df9d;
+}
+body.app-money .priority-btn-group a,
+body.app-money .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-money .priority-btn-group a.selected,
+body.app-money .status-btn-group a.selected {
+  background-color: #007236;
+  color: #fff;
+}
+body.app-money .priority-btn-group a:hover,
+body.app-money .status-btn-group a:hover {
+  background-color: #007236;
+  color: #fff;
+}
+body.app-money button {
+  background-color: #007236;
+  border: 1px solid #9b9090;
+}
+body.app-money button:hover {
+  background: #63df9d;
+}
+body.app-money button[type="submit"],
+body.app-money .signup-button,
+body.app-money .signin-button,
+body.app-money .reset-button {
+  background: #007236;
+}
+body.app-money button[type="submit"]:hover,
+body.app-money .signup-button:hover,
+body.app-money .signin-button:hover,
+body.app-money .reset-button:hover {
+  background: #63df9d;
+}
+body.app-money .button-row a,
+body.app-money .button-row button,
+body.app-money .button-row .custom-file-upload {
+  background: #007236;
+  border: 1px solid #9b9090;
+}
+body.app-money .button-row a:hover,
+body.app-money .button-row button:hover,
+body.app-money .button-row .custom-file-upload:hover {
+  background: #63df9d;
+}
+body.app-pychograph header,
+body.app-pychograph footer,
+body.app-pychograph .page-header,
+body.app-pychograph .page-footer,
+body.app-pychograph .modal-module .modal .header {
+  background: #016f98;
+  background: linear-gradient(#7ac5f6, #016f98);
+}
+body.app-pychograph .button {
+  background-color: #016f98;
+  border: 1px solid #9b9090;
+}
+body.app-pychograph .button:hover {
+  background-color: #7ac5f6;
+}
+body.app-pychograph .priority-btn-group a,
+body.app-pychograph .status-btn-group a {
+  background-color: #fff;
+  color: #000;
+}
+body.app-pychograph .priority-btn-group a.selected,
+body.app-pychograph .status-btn-group a.selected {
+  background-color: #016f98;
+  color: #fff;
+}
+body.app-pychograph .priority-btn-group a:hover,
+body.app-pychograph .status-btn-group a:hover {
+  background-color: #016f98;
+  color: #fff;
+}
+body.app-pychograph button {
+  background-color: #016f98;
+  border: 1px solid #9b9090;
+}
+body.app-pychograph button:hover {
+  background: #7ac5f6;
+}
+body.app-pychograph button[type="submit"],
+body.app-pychograph .signup-button,
+body.app-pychograph .signin-button,
+body.app-pychograph .reset-button {
+  background: #016f98;
+}
+body.app-pychograph button[type="submit"]:hover,
+body.app-pychograph .signup-button:hover,
+body.app-pychograph .signin-button:hover,
+body.app-pychograph .reset-button:hover {
+  background: #7ac5f6;
+}
+body.app-pychograph .button-row a,
+body.app-pychograph .button-row button,
+body.app-pychograph .button-row .custom-file-upload {
+  background: #016f98;
+  border: 1px solid #9b9090;
+}
+body.app-pychograph .button-row a:hover,
+body.app-pychograph .button-row button:hover,
+body.app-pychograph .button-row .custom-file-upload:hover {
+  background: #7ac5f6;
 }
 .showinfo-items ul li {
   display: flex;
@@ -866,6 +1232,51 @@ body.app-psychograph .page-footer {
 .hide {
   display: none;
 }
+.separator-right {
+  border-right: 1px solid #ccc;
+  padding-right: 3px;
+}
+.separator-left {
+  border-left: 1px solid #ccc;
+  padding-left: 3px;
+}
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.project-summary .header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.project-summary .header-info .column.collapse i {
+  font-size: 0.85rem;
+  font-weight: 400;
+  padding-right: 0.25rem;
+}
+.project-summary .header-info .column.info .text {
+  font-size: 0.8rem;
+}
+.project-summary .count {
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 0.2rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.35rem;
+  position: relative;
+  top: -2px;
+  min-width: 1.25rem;
+}
+.priority-btn-group a:not(.selected):hover,
+.status-btn-group a:not(.selected):hover {
+  background-color: #fff !important;
+  color: #000 !important;
+}
 .animate {
   -webkit-animation-name: animateleft;
   -webkit-animation-duration: 0.4s;
@@ -874,8 +1285,6 @@ body.app-psychograph .page-footer {
 }
 .slide-component {
   position: relative;
-}
-.slide-component {
   -webkit-animation-name: animateleft;
   -webkit-animation-duration: 0.4s;
   animation-name: animateleft;
@@ -986,6 +1395,12 @@ div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data i {
 div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data span {
   display: block;
 }
+div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .comments {
+  display: inline;
+  border-left: 1px solid #9b9090;
+  margin-left: 0.25rem;
+  padding-left: 0.25rem;
+}
 div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-count {
   color: #000;
   border-left: 1px solid #9b9090;
@@ -994,6 +1409,7 @@ div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-
 }
 div.list table tr td:nth-child(3) .list-item .info .title-meta .meta-data .todo-count.bold {
   font-weight: 700;
+  color: red;
 }
 div.list table tr td:last-child {
   border-right: none;
@@ -1057,7 +1473,7 @@ div[class$="-list"] table {
   border-top: 1px dotted #7d7d7d;
   border-bottom: 1px dotted #7d7d7d;
   font-size: 0.8rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 div[class$="-list"] table th {
   border-right: none;
@@ -1124,11 +1540,17 @@ div[class$="-list"] table tr.list-add td:nth-child(4) {
 div[class$="-list"] table.hide {
   display: none;
 }
+div[class$="-list"] .list-buttons:not(:empty) {
+  margin-bottom: 0.5rem;
+}
 div[class$="-list"].notes-list td:nth-child(2) {
   display: table-cell;
 }
 div[class$="-list"].notes-list td:last-child {
   text-align: right;
+}
+div[class$="-list"].notes-list .size {
+  white-space: nowrap;
 }
 .item form .row .editor-preview {
   display: none;
@@ -1214,6 +1636,9 @@ div.note.view .view img {
   margin-right: 1.5rem;
   /* Create the caret/arrow with a unicode, and style it */
   /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+}
+.treeview ul li span.checked {
+  text-decoration: line-through;
 }
 .treeview ul li span.parent {
   cursor: pointer;
@@ -1323,7 +1748,7 @@ div.note.view .view img {
   padding-left: 0;
 }
 .parentitem-component .parent-dd {
-  margin: 1rem 0;
+  margin: 0 0 1rem 0;
   display: none;
 }
 .parentitem-component .parent-dd.false {

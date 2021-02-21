@@ -119,7 +119,11 @@ div[class$="-list"] {
     &.hide {
       display: none;
     }
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .list-buttons:not(:empty) {
+    margin-bottom: .5rem;
   }
 
   &.notes-list {
@@ -128,6 +132,10 @@ div[class$="-list"] {
     }
     td:last-child {
       text-align: right;
+    }
+
+    .size {
+      white-space: nowrap;
     }
   }
 }

@@ -31,11 +31,6 @@ export default class Helper {
     return this.getLocalStorageData(`${appId}_user`);
   }
 
-  static findItemById(array, id) {
-    return array.find((item) => {
-      return parseInt(item.id) === parseInt(id);
-    });
-  }
 
   static removeById(array, key, value) {
     return array.filter(function (obj) {
@@ -63,11 +58,18 @@ export default class Helper {
     return `${da} ${mo} ${ye}`;
   }
 
-  static flattenArray(nodes) {
+  static flattenArray(nodes, skipRoot) {
     let flat = [];
     let flatten = array => {
       array.forEach(function (value) {
-        flat.push(value);
+        if (skipRoot) {
+          if (parseInt(value.parentId) !== 0) {
+            flat.push(value);
+          }
+        } else {
+          flat.push(value);
+        }
+
         value.nodes && flatten(value.nodes);
       });
     };
@@ -171,29 +173,21 @@ export default class Helper {
   }
 
   static updateTree(array, id, item) {
-
-    let items = array;
-
-    let parseAsTree = data => {
-
-      data.every(function (value) {
-
-        if (parseInt(value.id) === parseInt(id)) {
-          value = item;
-          return false;
-        }
-
-
-        if (value.nodes.length) {
-          parseAsTree(value.nodes);
-        }
-
-      });
-    };
+    let items = [...array],
+      parseAsTree = data => {
+        data.some(function (value, index, arr) {
+          if (parseInt(value.id) === parseInt(id)) {
+            value = { ...item };
+            arr[index] = value
+            return true
+          }
+          if (value.nodes.length) {
+            parseAsTree(value.nodes);
+          }
+        });
+      };
     parseAsTree(items);
-
     return items;
-
   }
 
   static clearLocalDataStorage(prefix) {
@@ -241,7 +235,10 @@ export default class Helper {
       total = 0
 
     for (var i = 0; i < nodes.length; i++) {
-      total += nodes[i].control ? parseFloat(nodes[i].control) : 0;  // Iterate over your first array and then grab the second element add the values up
+
+      const value = nodes[i].control ? (isNaN(nodes[i].control) ? 0 : parseFloat(nodes[i].control)) : 0
+
+      total += value;  // Iterate over your first array and then grab the second element add the values up
     }
 
     return total;
@@ -257,7 +254,49 @@ export default class Helper {
       // Change this values if you want to put `null` values at the end of the array
       return +1;
     }
-    return a.title.localeCompare(b.title);
+    //return a.title.localeCompare(b.title);
+
+    return a.title.localeCompare(b.title, 'en', { numeric: true })
+  }
+
+
+  static metaNameSort(a, b) {
+    if (!a.name) {
+      // Change this values if you want to put `null` values at the end of the array
+      return -1;
+    }
+
+    if (!b.name) {
+      // Change this values if you want to put `null` values at the end of the array
+      return +1;
+    }
+    //return a.title.localeCompare(b.title);
+
+    return a.name.localeCompare(b.name, 'en', { numeric: true })
+  }
+
+  static metaSizeSort(a, b) {
+
+    let compare = {}
+
+    if(a.binaryData) {
+      compare.a = Helper.getBinarySize(a.binaryData).replace(" kb", "")
+    }
+    else {
+      compare.a = Helper.getNoteSize(a.value).replace(" kb", "")
+    }
+
+    if(b.binaryData) {
+      compare.b = Helper.getBinarySize(b.binaryData).replace(" kb", "")
+    }
+    else {
+      compare.b = Helper.getNoteSize(b.value).replace(" kb", "")
+    }
+    
+    //console.log(compare)
+
+     return parseInt(compare.a) > parseInt(compare.b) ? 1 : (parseInt(compare.a) === parseInt(compare.b) ? 0 : -1 )
+
   }
 
   static colorSort(a, b) {
@@ -398,7 +437,6 @@ export default class Helper {
     return re.test(String(email).toLowerCase());
   }
 
-
   static getMetaType(meta) {
     const mimeType = meta.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
     return mimeType.split("/")[0];
@@ -409,4 +447,112 @@ export default class Helper {
     return mimeType;
   }
 
+  static checkIfParentIsListCheckbox(array, id) {
+    const mimeType = meta.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+    return mimeType;
+  }
+
+  static checkIfParentIsListCheckbox(array, id) {
+    let item = Helper.findItemById(array, id);
+    if (item) {
+      return item.tag.includes("list-checkbox")
+    }
+    return false;
+  }
+
+  static friendlyDate(item) {
+
+    let dates = [];
+    dates.push(new Date(item.dateModified ? item.dateModified : item.dateCreated))
+    if (item.nodes) {
+      item.nodes.forEach(function (node) {
+        dates.push(new Date(node.dateModified ? node.dateModified : node.dateCreated))
+      });
+    }
+    //console.log(dates);
+    const maxDate = new Date(Math.max.apply(null, dates)),
+      oneDay = 24 * 60 * 60 * 1000, // hours*minutes*seconds*milliseconds
+      today = new Date(),
+      diffDays = Math.round(Math.abs((today - maxDate) / oneDay));
+
+    let friendlyDate;
+
+    if (diffDays === 0) {
+      friendlyDate = "Today"
+    }
+    else if (diffDays === 1) {
+      friendlyDate = "1 day"
+    }
+
+    else if (diffDays < 6) {
+      friendlyDate = `${diffDays} days`
+    }
+    else {
+      friendlyDate = Helper.formatDate(maxDate)
+    }
+
+    return friendlyDate;
+  }
+
+  static isItemDescendant(id, item) {
+    const node = Helper.findItemById(item, id)
+    //console.log(`Is Descendant: ${node !== null}`)
+    //return node !== null
+    return node
+  }
+
+  static hideStatusBar() {
+    if (typeof StatusBar !== 'undefined' && window.mobileDevice && window.mobileDevice.platform && window.mobileDevice.platform === 'iOS' && StatusBar.isVisible) {
+      StatusBar.hide();
+    }
+  }
+
+  static showStatusBar() {
+    if (typeof StatusBar !== 'undefined' && window.mobileDevice && window.mobileDevice.platform && window.mobileDevice.platform === 'iOS' && !StatusBar.isVisible) {
+      StatusBar.show();
+    }
+  }
+
+  static getCount(value, field, array) {
+    const filtered = array.filter((item) => {
+      return parseInt(item[field]) === parseInt(value);
+    });
+    return filtered ? filtered.length : 0
+  }
+
+  static getDefaultApp(obj) {
+    const apps = Object.keys(obj).map((key) => {
+      return obj[key]
+    });
+
+    const defaultApp = apps.find((item) => {
+      return item.isDefault;
+    });
+
+    return defaultApp
+  }
+
+  static getBinarySize(base64String) {
+    var stringLength = base64String.length - 'data:image/png;base64,'.length;
+    var sizeInBytes = 4 * Math.ceil((stringLength / 3)) * 0.5624896334383812;
+    var sizeInKb = sizeInBytes / 1000;
+    return (Math.round(sizeInKb * 100) / 100).toFixed(2) + " kb";
+  }
+
+  static getNoteSize(str) {
+    // Matches only the 10.. bytes that are non-initial characters in a multi-byte sequence.
+    var m = encodeURIComponent(str).match(/%[89ABab]/g);
+    var sizeInBytes = str.length + (m ? m.length : 0);
+    var sizeInKb = sizeInBytes / 1000;
+    return (Math.round(sizeInKb * 100) / 100).toFixed(2) + " kb";
+  }
+
+  static isUploadedNoteValid(inputFile){
+    const valid ="xbm tif pjp svgz jpg jpeg ico tiff gif svg jfif webp png bmp pjpeg avif ogm wmv mpg webm ogv mov asx mpeg mp4 m4v avi",
+    ext = inputFile.split('.')[1].toLowerCase()
+    return valid.includes(ext)
+  }
+
+
 }
+
