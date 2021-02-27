@@ -10,11 +10,8 @@
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.button i {
-  font-weight: 500 !important;
-}
-.button:hover {
-  background-color: #00aeef;
+.button.small {
+  padding: 0.35rem;
 }
 .badge {
   color: #fff;
@@ -83,7 +80,8 @@
   top: 0.1rem;
 }
 .treeview ul li span {
-  margin-right: 1.5rem;
+  margin-right: 3rem;
+  display: inline-block;
   /* Create the caret/arrow with a unicode, and style it */
   /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
 }

@@ -10,11 +10,11 @@
   text-decoration: none;
   font-family: "Quicksand", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.button.small {
+  padding: 0.35rem;
+}
 .button i {
   font-weight: 500 !important;
-}
-.button:hover {
-  background-color: #00aeef;
 }
 .badge {
   color: #fff;

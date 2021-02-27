@@ -16,9 +16,6 @@
 .button i {
   font-weight: 500 !important;
 }
-.button:hover {
-  background-color: #00aeef;
-}
 .badge {
   color: #fff;
   background-color: #000;
@@ -142,6 +139,7 @@ div[class$="-list"] table td .note-icon {
 div[class$="-list"] table td [class$="-item"] {
   font-size: 0.85rem;
   width: fit-content;
+  word-break: break-word;
 }
 div[class$="-list"] table td .colorbox {
   display: block;

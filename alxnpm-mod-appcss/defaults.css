@@ -13,12 +13,6 @@
 .button.small {
   padding: 0.35rem;
 }
-.button i {
-  font-weight: 500 !important;
-}
-.button:hover {
-  background-color: #00aeef;
-}
 .badge {
   color: #fff;
   background-color: #000;
@@ -236,10 +230,6 @@ h3 {
 .status-btn-group a.small {
   padding: 0.35rem;
 }
-.priority-btn-group a i,
-.status-btn-group a i {
-  font-weight: 500 !important;
-}
 .priority-btn-group a:nth-child(2),
 .status-btn-group a:nth-child(2) {
   margin: 0 0.3rem;
@@ -249,11 +239,6 @@ h3 {
   background-color: #0054a6;
   color: #fff;
   border: 0;
-}
-.priority-btn-group a:hover,
-.status-btn-group a:hover {
-  background-color: #0054a6;
-  color: #fff;
 }
 button {
   border-radius: 2px;
@@ -270,12 +255,6 @@ button {
 button.small {
   padding: 0.35rem;
 }
-button i {
-  font-weight: 500 !important;
-}
-button:hover {
-  background: #00aeef;
-}
 button[type="submit"],
 .signup-button,
 .signin-button,
@@ -284,12 +263,6 @@ button[type="submit"],
   color: #fff;
   float: right;
   border: 0;
-}
-button[type="submit"]:hover,
-.signup-button:hover,
-.signin-button:hover,
-.reset-button:hover {
-  background: #00aeef;
 }
 .signup-button,
 .signin-button,
@@ -313,17 +286,12 @@ button[type="submit"]:hover,
   text-align: center;
   border-radius: 2px;
   border: 1px solid #9b9090;
+  cursor: pointer;
 }
 .button-row a:first-child,
 .button-row button:first-child,
 .button-row .custom-file-upload:first-child {
   margin-right: 1rem;
-}
-.button-row a:hover,
-.button-row button:hover,
-.button-row .custom-file-upload:hover {
-  background: #00aeef;
-  color: #fff;
 }
 .button-row .custom-file-upload {
   margin-right: 1rem;
@@ -416,7 +384,7 @@ button[type="submit"]:hover,
 }
 .login .toggle-password {
   position: absolute;
-  top: 0.5rem;
+  top: 0.65rem;
   right: 0.5rem;
 }
 header,
@@ -488,12 +456,6 @@ footer ul li.user-info,
   height: 2rem;
   line-height: 2rem;
 }
-header ul li a i,
-footer ul li a i,
-.page-header ul li a i,
-.page-footer ul li a i {
-  font-weight: 400 !important;
-}
 header a,
 footer a,
 .page-header a,
@@ -545,10 +507,6 @@ body.app-project .modal-module .modal .header {
 }
 body.app-project .button {
   background-color: #0054a6;
-  border: 1px solid #9b9090;
-}
-body.app-project .button:hover {
-  background-color: #00aeef;
 }
 body.app-project .priority-btn-group a,
 body.app-project .status-btn-group a {
@@ -560,17 +518,8 @@ body.app-project .status-btn-group a.selected {
   background-color: #0054a6;
   color: #fff;
 }
-body.app-project .priority-btn-group a:hover,
-body.app-project .status-btn-group a:hover {
-  background-color: #0054a6;
-  color: #fff;
-}
 body.app-project button {
   background-color: #0054a6;
-  border: 1px solid #9b9090;
-}
-body.app-project button:hover {
-  background: #00aeef;
 }
 body.app-project button[type="submit"],
 body.app-project .signup-button,
@@ -578,22 +527,10 @@ body.app-project .signin-button,
 body.app-project .reset-button {
   background: #0054a6;
 }
-body.app-project button[type="submit"]:hover,
-body.app-project .signup-button:hover,
-body.app-project .signin-button:hover,
-body.app-project .reset-button:hover {
-  background: #00aeef;
-}
 body.app-project .button-row a,
 body.app-project .button-row button,
 body.app-project .button-row .custom-file-upload {
   background: #0054a6;
-  border: 1px solid #9b9090;
-}
-body.app-project .button-row a:hover,
-body.app-project .button-row button:hover,
-body.app-project .button-row .custom-file-upload:hover {
-  background: #00aeef;
 }
 body.app-list header,
 body.app-list footer,
@@ -605,10 +542,6 @@ body.app-list .modal-module .modal .header {
 }
 body.app-list .button {
   background-color: #f7941d;
-  border: 1px solid #9b9090;
-}
-body.app-list .button:hover {
-  background-color: #fbaf5d;
 }
 body.app-list .priority-btn-group a,
 body.app-list .status-btn-group a {
@@ -620,17 +553,8 @@ body.app-list .status-btn-group a.selected {
   background-color: #f7941d;
   color: #fff;
 }
-body.app-list .priority-btn-group a:hover,
-body.app-list .status-btn-group a:hover {
-  background-color: #f7941d;
-  color: #fff;
-}
 body.app-list button {
   background-color: #f7941d;
-  border: 1px solid #9b9090;
-}
-body.app-list button:hover {
-  background: #fbaf5d;
 }
 body.app-list button[type="submit"],
 body.app-list .signup-button,
@@ -638,22 +562,10 @@ body.app-list .signin-button,
 body.app-list .reset-button {
   background: #f7941d;
 }
-body.app-list button[type="submit"]:hover,
-body.app-list .signup-button:hover,
-body.app-list .signin-button:hover,
-body.app-list .reset-button:hover {
-  background: #fbaf5d;
-}
 body.app-list .button-row a,
 body.app-list .button-row button,
 body.app-list .button-row .custom-file-upload {
   background: #f7941d;
-  border: 1px solid #9b9090;
-}
-body.app-list .button-row a:hover,
-body.app-list .button-row button:hover,
-body.app-list .button-row .custom-file-upload:hover {
-  background: #fbaf5d;
 }
 body.app-note header,
 body.app-note footer,
@@ -665,10 +577,6 @@ body.app-note .modal-module .modal .header {
 }
 body.app-note .button {
   background-color: #7d7d7d;
-  border: 1px solid #9b9090;
-}
-body.app-note .button:hover {
-  background-color: #b7b7b7;
 }
 body.app-note .priority-btn-group a,
 body.app-note .status-btn-group a {
@@ -680,17 +588,8 @@ body.app-note .status-btn-group a.selected {
   background-color: #7d7d7d;
   color: #fff;
 }
-body.app-note .priority-btn-group a:hover,
-body.app-note .status-btn-group a:hover {
-  background-color: #7d7d7d;
-  color: #fff;
-}
 body.app-note button {
   background-color: #7d7d7d;
-  border: 1px solid #9b9090;
-}
-body.app-note button:hover {
-  background: #b7b7b7;
 }
 body.app-note button[type="submit"],
 body.app-note .signup-button,
@@ -698,22 +597,10 @@ body.app-note .signin-button,
 body.app-note .reset-button {
   background: #7d7d7d;
 }
-body.app-note button[type="submit"]:hover,
-body.app-note .signup-button:hover,
-body.app-note .signin-button:hover,
-body.app-note .reset-button:hover {
-  background: #b7b7b7;
-}
 body.app-note .button-row a,
 body.app-note .button-row button,
 body.app-note .button-row .custom-file-upload {
   background: #7d7d7d;
-  border: 1px solid #9b9090;
-}
-body.app-note .button-row a:hover,
-body.app-note .button-row button:hover,
-body.app-note .button-row .custom-file-upload:hover {
-  background: #b7b7b7;
 }
 body.app-board header,
 body.app-board footer,
@@ -725,7 +612,6 @@ body.app-board .modal-module .modal .header {
 }
 body.app-board .button {
   background-color: #141871;
-  border: 1px solid #9b9090;
 }
 body.app-board .button:hover {
   background-color: #5e61b1;
@@ -740,17 +626,8 @@ body.app-board .status-btn-group a.selected {
   background-color: #141871;
   color: #fff;
 }
-body.app-board .priority-btn-group a:hover,
-body.app-board .status-btn-group a:hover {
-  background-color: #141871;
-  color: #fff;
-}
 body.app-board button {
   background-color: #141871;
-  border: 1px solid #9b9090;
-}
-body.app-board button:hover {
-  background: #5e61b1;
 }
 body.app-board button[type="submit"],
 body.app-board .signup-button,
@@ -758,22 +635,10 @@ body.app-board .signin-button,
 body.app-board .reset-button {
   background: #141871;
 }
-body.app-board button[type="submit"]:hover,
-body.app-board .signup-button:hover,
-body.app-board .signin-button:hover,
-body.app-board .reset-button:hover {
-  background: #5e61b1;
-}
 body.app-board .button-row a,
 body.app-board .button-row button,
 body.app-board .button-row .custom-file-upload {
   background: #141871;
-  border: 1px solid #9b9090;
-}
-body.app-board .button-row a:hover,
-body.app-board .button-row button:hover,
-body.app-board .button-row .custom-file-upload:hover {
-  background: #5e61b1;
 }
 body.app-closet header,
 body.app-closet footer,
@@ -785,7 +650,6 @@ body.app-closet .modal-module .modal .header {
 }
 body.app-closet .button {
   background-color: #9e0b0f;
-  border: 1px solid #9b9090;
 }
 body.app-closet .button:hover {
   background-color: #ea7376;
@@ -800,17 +664,8 @@ body.app-closet .status-btn-group a.selected {
   background-color: #9e0b0f;
   color: #fff;
 }
-body.app-closet .priority-btn-group a:hover,
-body.app-closet .status-btn-group a:hover {
-  background-color: #9e0b0f;
-  color: #fff;
-}
 body.app-closet button {
   background-color: #9e0b0f;
-  border: 1px solid #9b9090;
-}
-body.app-closet button:hover {
-  background: #ea7376;
 }
 body.app-closet button[type="submit"],
 body.app-closet .signup-button,
@@ -818,22 +673,10 @@ body.app-closet .signin-button,
 body.app-closet .reset-button {
   background: #9e0b0f;
 }
-body.app-closet button[type="submit"]:hover,
-body.app-closet .signup-button:hover,
-body.app-closet .signin-button:hover,
-body.app-closet .reset-button:hover {
-  background: #ea7376;
-}
 body.app-closet .button-row a,
 body.app-closet .button-row button,
 body.app-closet .button-row .custom-file-upload {
   background: #9e0b0f;
-  border: 1px solid #9b9090;
-}
-body.app-closet .button-row a:hover,
-body.app-closet .button-row button:hover,
-body.app-closet .button-row .custom-file-upload:hover {
-  background: #ea7376;
 }
 body.app-money header,
 body.app-money footer,
@@ -847,9 +690,6 @@ body.app-money .button {
   background-color: #007236;
   border: 1px solid #9b9090;
 }
-body.app-money .button:hover {
-  background-color: #63df9d;
-}
 body.app-money .priority-btn-group a,
 body.app-money .status-btn-group a {
   background-color: #fff;
@@ -860,17 +700,9 @@ body.app-money .status-btn-group a.selected {
   background-color: #007236;
   color: #fff;
 }
-body.app-money .priority-btn-group a:hover,
-body.app-money .status-btn-group a:hover {
-  background-color: #007236;
-  color: #fff;
-}
 body.app-money button {
   background-color: #007236;
   border: 1px solid #9b9090;
-}
-body.app-money button:hover {
-  background: #63df9d;
 }
 body.app-money button[type="submit"],
 body.app-money .signup-button,
@@ -878,22 +710,10 @@ body.app-money .signin-button,
 body.app-money .reset-button {
   background: #007236;
 }
-body.app-money button[type="submit"]:hover,
-body.app-money .signup-button:hover,
-body.app-money .signin-button:hover,
-body.app-money .reset-button:hover {
-  background: #63df9d;
-}
 body.app-money .button-row a,
 body.app-money .button-row button,
 body.app-money .button-row .custom-file-upload {
   background: #007236;
-  border: 1px solid #9b9090;
-}
-body.app-money .button-row a:hover,
-body.app-money .button-row button:hover,
-body.app-money .button-row .custom-file-upload:hover {
-  background: #63df9d;
 }
 body.app-pychograph header,
 body.app-pychograph footer,
@@ -905,10 +725,6 @@ body.app-pychograph .modal-module .modal .header {
 }
 body.app-pychograph .button {
   background-color: #016f98;
-  border: 1px solid #9b9090;
-}
-body.app-pychograph .button:hover {
-  background-color: #7ac5f6;
 }
 body.app-pychograph .priority-btn-group a,
 body.app-pychograph .status-btn-group a {
@@ -920,17 +736,8 @@ body.app-pychograph .status-btn-group a.selected {
   background-color: #016f98;
   color: #fff;
 }
-body.app-pychograph .priority-btn-group a:hover,
-body.app-pychograph .status-btn-group a:hover {
-  background-color: #016f98;
-  color: #fff;
-}
 body.app-pychograph button {
   background-color: #016f98;
-  border: 1px solid #9b9090;
-}
-body.app-pychograph button:hover {
-  background: #7ac5f6;
 }
 body.app-pychograph button[type="submit"],
 body.app-pychograph .signup-button,
@@ -938,22 +745,10 @@ body.app-pychograph .signin-button,
 body.app-pychograph .reset-button {
   background: #016f98;
 }
-body.app-pychograph button[type="submit"]:hover,
-body.app-pychograph .signup-button:hover,
-body.app-pychograph .signin-button:hover,
-body.app-pychograph .reset-button:hover {
-  background: #7ac5f6;
-}
 body.app-pychograph .button-row a,
 body.app-pychograph .button-row button,
 body.app-pychograph .button-row .custom-file-upload {
   background: #016f98;
-  border: 1px solid #9b9090;
-}
-body.app-pychograph .button-row a:hover,
-body.app-pychograph .button-row button:hover,
-body.app-pychograph .button-row .custom-file-upload:hover {
-  background: #7ac5f6;
 }
 .showinfo-items ul li {
   display: flex;
@@ -1031,8 +826,12 @@ body.app-pychograph .button-row .custom-file-upload:hover {
   top: -2px;
   min-width: 1.25rem;
 }
-.priority-btn-group a:not(.selected):hover,
-.status-btn-group a:not(.selected):hover {
-  background-color: #fff !important;
-  color: #000 !important;
+.lightgreen {
+  color: lightgreen;
+}
+.orange {
+  color: orange;
+}
+.red {
+  color: red;
 }
